@@ -24029,7 +24029,6 @@ var registerServiceWorker = (function() {
             // The updatefound event implies that reg.installing is set; see
             // https://w3c.github.io/ServiceWorker/#service-worker-registration-updatefound-event
             var installingWorker = reg.installing;
-
             installingWorker.onstatechange = function() {
               switch (installingWorker.state) {
                 case "installed":
@@ -29915,7 +29914,7 @@ var spellsData = (function() {
             return mached;
           };
         } else {
-          return false
+          return false;
         };
       } else if (options.index) {
         return _get_spellsObject({
@@ -30212,9 +30211,8 @@ var spellsData = (function() {
       _all_spellsObject.forEach(function(arrayItem) {
         _cleanUpSpellObject(arrayItem);
       });
-      // console.log("spell data loaded");
     };
-    helper.loadCsv("../db/spells.csv", function(data) {
+    helper.loadCsv("db/spells.csv", function(data) {
       _get_allSpells(data);
     });
   };
@@ -30719,6 +30717,8 @@ var tip = (function() {
     if (options.state == "focus") {
       tip.addEventListener("focus", function() {
         render(tip);
+        clearTimeout(destroyTimer);
+        destroyTimer = setTimeout(destroy, 3000, this);
       }, false);
       tip.addEventListener("blur", function() {
         destroy();
