@@ -4,10 +4,10 @@ var spellsData = (function() {
 
   function get(options) {
     var defaultOptions = {
-      all: false,
-      name: false,
-      index: false,
-      full: false
+      all: null,
+      name: null,
+      index: null,
+      full: null
     };
     if (options) {
       var defaultOptions = helper.applyOptions(defaultOptions, options);
@@ -2847,6 +2847,8 @@ var spellsData = (function() {
         if (arrayItem.toLowerCase().includes(options.name.toLowerCase())) {
           var object = {
             index: index,
+            description: _all_spellsObject[index].description.short,
+            school: _all_spellsObject[index].school.base,
             name: arrayItem
           };
           mached.push(object);
@@ -2882,8 +2884,8 @@ var spellsData = (function() {
 
   function _get_spellsObject(options) {
     var defaultOptions = {
-      array: false,
-      index: false
+      array: null,
+      index: null
     };
     if (options) {
       var defaultOptions = helper.applyOptions(defaultOptions, options);
