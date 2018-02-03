@@ -545,7 +545,7 @@ var autoSuggest = (function() {
     if (input) {
       input.addEventListener("input", function() {
         clearTimeout(_timer_autoSuggest);
-        _timer_autoSuggest = setTimeout(_delayRender, 150, this);
+        _timer_autoSuggest = setTimeout(_delayRender, 200, this);
       }, false);
       input.addEventListener("keydown", function(event) {
         if (event.keyCode == 13) {
@@ -650,12 +650,11 @@ var autoSuggest = (function() {
           anchor.setAttribute("data-spells-data", "index:#" + arrayItem.index);
           anchor.addEventListener("click", function() {
             if (autoSuggestOptions.type == "spells") {
-              spells.add(_cuurentInput, spellsData.get({
-                index: helper.makeObject(this.dataset.spellsData).index
-              }));
+              spells.add(_cuurentInput, arrayItem.index);
             };
             destroy();
             sheet.store();
+            _cuurentInput.focus();
           }, false);
 
           var string = arrayItem.name;
@@ -2127,6 +2126,10 @@ var blank = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "",
       per_day: {
         level_0: "",
@@ -2548,7 +2551,7 @@ var izlara = (function() {
       feats: "Improved Initiative, Combat Casting, Craft Wondrous Item, Spell Focus (Conjuration), Extend Spell, Quicken Spell, Spell Penetration, Eschew materials",
       traits: "Reactionary, Magical Lineage (Overland Flight)",
       languages: "Abyssal, Aklo, Aquan, Auran, Celestial, Common, Druidic, Dwarven, Elven, Giant, Goblin, Gnoll, Halfling, Ignan, Infernal, Orc, Sylvan, Terran, Undercommon",
-      special_abilities: "Low-Light Vision, Elven Immunities, Elven Magic, Keen Senses, Weapon Familiarity, Arcane bond (Rat), Arcane School (Divination [Foresight]), Opposition Arcane School: Enchantment, Necromancy, Cantrips, Scribe scroll, Forewarned, Prescience, Foretell",
+      special_abilities: "Low-Light Vision, Elven Immunities, Elven Magic, Keen Senses, Weapon Familiarity, Arcane bond (Rat), Arcane School, Cantrips, Scribe scroll, Forewarned, Prescience, Foretell",
       power: [{
         name: "Prescience",
         current: 6,
@@ -3786,6 +3789,10 @@ var izlara = (function() {
           half_level: false
         }
       },
+      school: "Divination - Foresight",
+      opposition: "Enchantment, Necromancy",
+      domains: "",
+      bloodline: "",
       spell_notes: "+2 on caster level checks to overcome spell resistance.",
       per_day: {
         level_0: 4,
@@ -4028,2020 +4035,130 @@ var izlara = (function() {
       book: [{
         level_0: [{
           name: "Acid Splash",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Acid Splash",
-            descriptor: {
-              acid: true,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "acid"
-            },
-            school: {
-              base: "conjuration",
-              subschool: "creation"
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "one missile of acid",
-              short: "Orb deals 1d3 acid damage.",
-              plain: "You fire a small orb of acid at the target. You must succeed on a ranged touch attack to hit your target. The orb deals 1d3 points of acid damage. This acid disappears after 1 round.",
-              formated: "<p>You fire a small orb of acid at the target. You must succeed on a ranged touch attack to hit your target. The orb deals 1d3 points of acid damage. This acid disappears after 1 round.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: null,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: null,
-              inquisitor: 0,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: null,
-              medium: null,
-              mesmerist: null,
-              occultist: null,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "sorcerer/wizard 0, summoner 0, inquisitor 0, magus 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 23
         }, {
           name: "Arcane Mark",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Arcane Mark",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "universal",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "one personal rune or mark, all of which must fit within 1 sq. ft.",
-              short: "Inscribes a personal rune on an object or creature (visible or invisible).",
-              plain: "This spell allows you to inscribe your personal rune or mark, which can consist of no more than six characters. The writing can be visible or invisible. An arcane mark spell enables you to etch the rune upon any substance without harm to the material upon which it is placed. If an invisible mark is made, a detect magic spell causes it to glow and be visible, though not necessarily understandable. See invisibility, true seeing, a gem of seeing, or a robe of eyes likewise allows the user to see an invisible arcane mark. A read magic spell reveals the words, if any. The mark cannot be dispelled, but it can be removed by the caster or by an erase spell. If an arcane mark is placed on a living being, the effect gradually fades in about a month. Arcane mark must be cast on an object prior to casting instant summons on the same object (see that spell DESCRIPTION for details).",
-              formated: "<p>This spell allows you to inscribe your personal rune or mark, which can consist of no more than six characters. The writing can be visible or invisible. An <i>arcane mark</i> spell enables you to etch the rune upon any substance without harm to the material upon which it is placed. If an invisible mark is made, a <i>detect magic</i> spell causes it to glow and be visible, though not necessarily understandable.</p><p><i>See invisibility</i>, <i>true seeing</i>, a <i>gem of seeing</i>, or a <i>robe of eyes</i> likewise allows the user to see an invisible <i>arcane mark</i>. A <i>read magic</i> spell reveals the words, if any. The mark cannot be dispelled, but it can be removed by the caster or by an <i>erase</i> spell.</p><p>If an <i>arcane mark</i> is placed on a living being, the effect gradually fades in about a month.</p><p><i>Arcane mark</i> must be cast on an object prior to casting <i>instant summons</i> on the same object (see that spell description for details).</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: null,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: null,
-              occultist: null,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "sorcerer/wizard 0, summoner 0, magus 0, shaman 0, psychic 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "",
-              time: "1 standard action",
-              range: "touch",
-              area: "",
-              duration: "permanent"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 135
         }, {
           name: "Dancing Lights",
+          prepared: 1,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Dancing Lights",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: true,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "light"
-            },
-            school: {
-              base: "evocation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "Up to four lights, all within a 10-ft.-radius area",
-              short: "Creates torches or other lights.",
-              plain: "Depending on the version selected, you create up to four lights that resemble lanterns or torches (and cast that amount of light), or up to four glowing spheres of light (which look like will-o'-wisps), or one faintly glowing, vaguely humanoid shape. The dancing lights must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire (no concentration required): forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell's range. You can only have one dancing lights spell active at any one time. If you cast this spell while another casting is still in effect, the previous casting is dispelled. If you make this spell permanent, it does not count against this limit. Dancing lights can be made permanent with a permanency spell.",
-              formated: "<p>Depending on the version selected, you create up to four lights that resemble lanterns or torches (and cast that amount of light), or up to four glowing spheres of light (which look like will-o'-wisps), or one faintly glowing, vaguely humanoid shape. The <i>dancing lights</i> must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire (no concentration required): forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell's range.</p><p>You can only have one <i>dancing lights</i> spell active at any one time. If you cast this spell while another casting is still in effect, the previous casting is dispelled. If you make this spell permanent, it does not count against this limit.</p><p><i>Dancing lights</i> can be made permanent with a <i>permanency</i> spell.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: 0,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, sorcerer/wizard 0, witch 0, magus 0, shaman 0, occultist 0, psychic 0, mesmerist 0"
-            },
-            casting: {
-              dismissible: true,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "",
-              time: "1 standard action",
-              range: "medium (100 ft. + 10 ft./level)",
-              area: "",
-              duration: "1 minute"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 608
         }, {
           name: "Detect Magic",
+          prepared: 1,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 1,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Detect Magic",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "divination",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "",
-              short: "Detects spells and magic items within 60 ft.",
-              plain: "You detect magical auras. The amount of information revealed depends on how long you study a particular area or subject. 1st Round: Presence or absence of magical auras. 2nd Round: Number of different magical auras and the power of the most potent aura. 3rd Round: The strength and location of each aura. If the items or creatures bearing the auras are in line of sight, you can make Knowledge (arcana) skill checks to determine the school of magic involved in each. (Make one check per aura: DC 15 + spell level, or 15 + 1/2 caster level for a nonspell effect.) If the aura emanates from a magic item, you can attempt to identify its properties (see Spellcraft). Magical areas, multiple types of magic, or strong local magical emanations may distort or conceal weaker auras. Aura Strength: An aura's power depends on a spell's functioning spell level or an item's caster level; see the accompanying table. If an aura falls into more than one category, detect magic indicates the stronger of the two. Spell or Object Aura Power Faint Moderate Strong Overwhelming Functioning spell (spell level) 3rd or lower 4th-6th 7th-9th 10th+ (deity-level) Magic item (caster level) 5th or lower 6th-11th 12th-20th 21st+ (artifact) Lingering Aura: A magical aura lingers after its original source dissipates (in the case of a spell) or is destroyed (in the case of a magic item). If detect magic is cast and directed at such a location, the spell indicates an aura strength of dim (even weaker than a faint aura). How long the aura lingers at this dim level depends on its original power: Original Strength Duration of Lingering Aura Faint 1d6 rounds Moderate 1d6 minutes Strong 1d6x10 minutes Overwhelming 1d6 days Outsiders and elementals are not magical in themselves, but if they are summoned, the conjuration spell registers. Each round, you can turn to detect magic in a new area. The spell can penetrate barriers, but 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt blocks it. Detect magic can be made permanent with a permanency spell.",
-              formated: "<p>You detect magical auras. The amount of information revealed depends on how long you study a particular area or subject.</p><p><i>1st Round</i>: Presence or absence of magical auras.</p><p><i>2nd Round</i>: Number of different magical auras and the power of the most potent aura.</p><p><i>3rd Round</i>: The strength and location of each aura. If the items or creatures bearing the auras are in line of sight, you can make Knowledge (arcana) skill checks to determine the school of magic involved in each. (Make one check per aura: DC 15 + spell level, or 15 + 1/2 caster level for a nonspell effect.) If the aura emanates from a magic item, you can attempt to identify its properties (see Spellcraft).</p><p>Magical areas, multiple types of magic, or strong local magical emanations may distort or conceal weaker auras.</p><p><i>Aura Strength</i>: An aura's power depends on a spell's functioning spell level or an item's caster level; see the accompanying table. If an aura falls into more than one category, detect magic indicates the stronger of the two.</p><p><table><tr><th rowspan=\"2\">Spell or Object</th><th colspan=\"4\" style=\"text-align:center\">Aura Power</th></tr> <tr><th>Faint</th><th>Moderate</th><th>Strong</th><th>Overwhelming</th></tr> <tr><td>Functioning spell (spell level)</td><td>3rd or lower</td><td>4th-6th</td><td>7th-9th</td><td>10th+ (deity-level)</td></tr> <tr><td>Magic item (caster level)</td><td>5th or lower</td><td>6th-11th</td><td>12th-20th</td><td>21st+ (artifact)</td></tr></table> <i>Lingering Aura</i>: A magical aura lingers after its original source dissipates (in the case of a spell) or is destroyed (in the case of a magic item). If <i>detect magic</i> is cast and directed at such a location, the spell indicates an aura strength of dim (even weaker than a faint aura). How long the aura lingers at this dim level depends on its original power: <table><tr><th>Original Strength</th><th>Duration of Lingering Aura</th></tr> <tr><td>Faint</td><td>1d6 rounds</td></tr> <tr><td>Moderate</td><td>1d6 minutes</td></tr> <tr><td>Strong</td><td>1d6x10 minutes</td></tr> <tr><td>Overwhelming</td><td>1d6 days</td></tr></table> Outsiders and elementals are not magical in themselves, but if they are summoned, the conjuration spell registers. Each round, you can turn to detect magic in a new area. The spell can penetrate barriers, but 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt blocks it.</p><p><i>Detect magic</i> can be made permanent with a <i>permanency</i> spell.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: 0,
-              inquisitor: 0,
-              oracle: 0,
-              antipaladin: null,
-              magus: 0,
-              adept: 0,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, cleric/oracle 0, druid 0, sorcerer/wizard 0, summoner 0, witch 0, inquisitor 0, magus 0, shaman 0, occultist 0, psychic 0, mesmerist 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: true,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "",
-              time: "1 standard action",
-              range: "60 ft.",
-              area: "cone-shaped emanation",
-              duration: "concentration, up to 1 min./level"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 691
         }, {
           name: "Detect Poison",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Detect Poison",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "divination",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "",
-              short: "Detects poison in a creature or object.",
-              plain: "You determine whether a creature, object, or area has been poisoned or is poisonous. You can determine the exact type of poison with a DC 20 Wisdom check. A character with the Craft (alchemy) skill may try a DC 20 Craft (alchemy) check if the Wisdom check fails, or may try the Craft (alchemy) check prior to the Wisdom check. The spell can penetrate barriers, but 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt blocks it.",
-              formated: "<p>You determine whether a creature, object, or area has been poisoned or is poisonous. You can determine the exact type of poison with a DC 20 Wisdom check. A character with the Craft (alchemy) skill may try a DC 20 Craft (alchemy) check if the Wisdom check fails, or may try the Craft (alchemy) check prior to the Wisdom check. The spell can penetrate barriers, but 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt blocks it.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: 1,
-              bard: null,
-              paladin: 1,
-              alchemist: null,
-              summoner: null,
-              witch: null,
-              inquisitor: null,
-              oracle: 0,
-              antipaladin: null,
-              magus: null,
-              adept: null,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "cleric/oracle 0, druid 0, paladin 1, ranger 1, sorcerer/wizard 0, shaman 0, occultist 0, psychic 0, mesmerist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "one creature, one object, or a 5-ft. cube",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "one creature, one object, or a 5-ft. cube",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 695
         }, {
           name: "Flare",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 1,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Flare",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: true,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "light"
-            },
-            school: {
-              base: "evocation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: false,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V"
-            },
-            description: {
-              effect: "burst of light",
-              short: "Dazzles one creature (–1 on attack rolls).",
-              plain: "This cantrip creates a burst of light. If you cause the light to burst in front of a single creature, that creature is dazzled for 1 minute unless it makes a successful Fortitude save. Sightless creatures, as well as creatures already dazzled, are not affected by flare.",
-              formated: "<p>This cantrip creates a burst of light. If you cause the light to burst in front of a single creature, that creature is dazzled for 1 minute unless it makes a successful Fortitude save. Sightless creatures, as well as creatures already dazzled, are not affected by flare.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: 0,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, druid 0, sorcerer/wizard 0, magus 0, occultist 0, psychic 0, mesmerist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "Fortitude negates",
-              spell_resistence: "yes",
-              targets: "",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 975
         }, {
           name: "Ghost Sound",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Ghost Sound",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "illusion",
-              subschool: "figment"
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: true,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S, M (a bit of wool or a small lump of wax)"
-            },
-            description: {
-              effect: "illusory sounds",
-              short: "Figment sounds.",
-              plain: "Ghost sound allows you to create a volume of sound that rises, recedes, approaches, or remains at a fixed place. You choose what type of sound ghost sound creates when casting it and cannot thereafter change the sound's basic character. The volume of sound created depends on your level. You can produce as much noise as four normal humans per caster level (maximum 40 humans). Thus, talking, singing, shouting, walking, marching, or running sounds can be created. The noise a ghost sound spell produces can be virtually any type of sound within the volume limit. A horde of rats running and squeaking is about the same volume as eight humans running and shouting. A roaring lion is equal to the noise from 16 humans, while a roaring dragon is equal to the noise from 32 humans. Anyone who hears a ghost sound receives a Will save to disbelieve. Ghost sound can enhance the effectiveness of a silent image spell. Ghost sound can be made permanent with a permanency spell.",
-              formated: "<p><i>Ghost sound</i> allows you to create a volume of sound that rises, recedes, approaches, or remains at a fixed place. You choose what type of sound <i>ghost sound</i> creates when casting it and cannot thereafter change the sound's basic character.</p><p>The volume of sound created depends on your level. You can produce as much noise as four normal humans per caster level (maximum 40 humans). Thus, talking, singing, shouting, walking, marching, or running sounds can be created. The noise a <i>ghost sound</i> spell produces can be virtually any type of sound within the volume limit. A horde of rats running and squeaking is about the same volume as eight humans running and shouting. A roaring lion is equal to the noise from 16 humans, while a roaring dragon is equal to the noise from 32 humans. Anyone who hears a <i>ghost sound</i> receives a Will save to disbelieve.</p><p><i>Ghost sound</i> can enhance the effectiveness of a <i>silent image</i> spell.</p><p><i>Ghost sound</i> can be made permanent with a <i>permanency</i> spell.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: 0,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, sorcerer/wizard 0, magus 0, occultist 0, psychic 0, mesmerist 0"
-            },
-            casting: {
-              dismissible: true,
-              shapeable: false,
-              saving: "Will disbelief",
-              spell_resistence: "no",
-              targets: "",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "1 round/level"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1074
         }, {
           name: "Haunted Fey Aspect",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Haunted Fey Aspect",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "illusion",
-              subschool: "glamer"
-            },
-            components: {
-              verbal: false,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "S"
-            },
-            description: {
-              effect: "",
-              short: "You surround yourself with disturbing illusions.",
-              plain: "You surround yourself with disturbing illusions, making you look and sound like a bizarre, insane fey creature. You gain DR 1/cold iron against a single opponent until the end of the spell, or until you take damage.",
-              formated: "<p>You surround yourself with disturbing illusions, making you look and sound like a bizarre, insane fey creature. You gain DR 1/cold iron against a single opponent until the end of the spell, or until you take damage.</p>"
-            },
-            source: "Ultimate Combat",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: null,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: null,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, sorcerer/wizard 0, psychic 0, mesmerist 0"
-            },
-            casting: {
-              dismissible: true,
-              shapeable: false,
-              saving: "",
-              spell_resistence: "",
-              targets: "You",
-              time: "1 standard action",
-              range: "Personal",
-              area: "",
-              duration: "1 round/level"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1151
         }, {
           name: "Light",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Light",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: true,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "light"
-            },
-            school: {
-              base: "evocation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: false,
-              material: true,
-              focus: false,
-              divine_focus: true,
-              costly: false,
-              cost: 0,
-              string: "V, M/DF (a firefly)"
-            },
-            description: {
-              effect: "",
-              short: "Object shines like a torch.",
-              plain: "This spell causes a touched object to glow like a torch, shedding normal light in a 20-foot radius from the point touched, and increasing the light level for an additional 20 feet by one step, up to normal light (darkness becomes dim light, and dim light becomes normal light). In an area of normal or bright light, this spell has no effect. The effect is immobile, but it can be cast on a movable object. You can only have one light spell active at any one time. If you cast this spell while another casting is still in effect, the previous casting is dispelled. If you make this spell permanent (through permanency or a similar effect), it does not count against this limit. Light can be used to counter or dispel any darkness spell of equal or lower spell level.",
-              formated: "<p>This spell causes a touched object to glow like a torch, shedding normal light in a 20-foot radius from the point touched, and increasing the light level for an additional 20 feet by one step, up to normal light (darkness becomes dim light, and dim light becomes normal light). In an area of normal or bright light, this spell has no effect. The effect is immobile, but it can be cast on a movable object.</p><p>You can only have one light spell active at any one time. If you cast this spell while another casting is still in effect, the previous casting is dispelled. If you make this spell permanent (through permanency or a similar effect), it does not count against this limit. Light can be used to counter or dispel any darkness spell of equal or lower spell level.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: 0,
-              inquisitor: 0,
-              oracle: 0,
-              antipaladin: null,
-              magus: 0,
-              adept: 0,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, cleric/oracle 0, druid 0, inquisitor 0, magus 0, sorcerer/wizard 0, summoner 0, witch 0, shaman 0, occultist 0, psychic 0, mesmerist 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "object touched",
-              time: "1 standard action",
-              range: "touch",
-              area: "",
-              duration: "10 min./level"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1431
         }, {
           name: "Mage Hand",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Mage Hand",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "transmutation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "",
-              short: "5-pound telekinesis.",
-              plain: "You point your finger at an object and can lift it and move it at will from a distance. As a move action, you can propel the object as far as 15 feet in any direction, though the spell ends if the distance between you and the object ever exceeds the spell's range.",
-              formated: "<p>You point your finger at an object and can lift it and move it at will from a distance. As a move action, you can propel the object as far as 15 feet in any direction, though the spell ends if the distance between you and the object ever exceeds the spell's range.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, sorcerer/wizard 0, summoner 0, magus 0, occultist 0, psychic 0, mesmerist 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "one nonmagical, unattended object weighing up to 5 lbs.",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "concentration"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1491
         }, {
           name: "Mending",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Mending",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "transmutation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "",
-              short: "Makes minor repairs on an object.",
-              plain: "This spell repairs damaged objects, restoring 1d4 hit points to the object. If the object has the broken condition, this condition is removed if the object is restored to at least half its original hit points. All of the pieces of an object must be present for this spell to function. Magic items can be repaired by this spell, but you must have a caster level equal to or higher than that of the object. Magic items that are destroyed (at 0 hit points or less) can be repaired with this spell, but this spell does not restore their magic abilities. This spell does not affect creatures (including constructs). This spell has no effect on objects that have been warped or otherwise transmuted, but it can still repair damage done to such items.",
-              formated: "<p>This spell repairs damaged objects, restoring 1d4 hit points to the object. If the object has the broken condition, this condition is removed if the object is restored to at least half its original hit points. All of the pieces of an object must be present for this spell to function. Magic items can be repaired by this spell, but you must have a caster level equal to or higher than that of the object. Magic items that are destroyed (at 0 hit points or less) can be repaired with this spell, but this spell does not restore their magic abilities. This spell does not affect creatures (including constructs). This spell has no effect on objects that have been warped or otherwise transmuted, but it can still repair damage done to such items.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: 0,
-              inquisitor: null,
-              oracle: 0,
-              antipaladin: null,
-              magus: null,
-              adept: 0,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: null,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, cleric/oracle 0, druid 0, sorcerer/wizard 0, summoner 0, witch 0, summoner 0, witch 0, shaman 0, occultist 0, psychic 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "Will negates (harmless, object)",
-              spell_resistence: "yes (harmless, object)",
-              targets: "one object of up to 1 lb./level",
-              time: "10 minutes",
-              range: "10 ft.",
-              area: "",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1564
         }, {
           name: "Message",
+          prepared: 1,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 1,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Message",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: true,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "language-dependent"
-            },
-            school: {
-              base: "transmutation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: true,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S, F (a piece of copper wire)"
-            },
-            description: {
-              effect: "",
-              short: "Whisper conversation at distance.",
-              plain: "You can whisper messages and receive whispered replies. Those nearby can hear these messages with a DC 25 Perception check. You point your finger at each creature you want to receive the message. When you whisper, the whispered message is audible to all targeted creatures within range. Magical silence, 1 foot of stone, 1 inch of common metal (or a thin sheet of lead), or 3 feet of wood or dirt blocks the spell. The message does not have to travel in a straight line. It can circumvent a barrier if there is an open path between you and the subject, and the path's entire length lies within the spell's range. The creatures that receive the message can whisper a reply that you hear. The spell transmits sound, not meaning; it doesn't transcend language barriers. To speak a message, you must mouth the words and whisper.",
-              formated: "<p>You can whisper messages and receive whispered replies.</p><p>Those nearby can hear these messages with a DC 25 Perception check. You point your finger at each creature you want to receive the message. When you whisper, the whispered message is audible to all targeted creatures within range.</p><p>Magical <i>silence,</i> 1 foot of stone, 1 inch of common metal (or a thin sheet of lead), or 3 feet of wood or dirt blocks the spell.</p><p>The message does not have to travel in a straight line. It can circumvent a barrier if there is an open path between you and the subject, and the path's entire length lies within the spell's range. The creatures that receive the message can whisper a reply that you hear. The spell transmits sound, not meaning; it doesn't transcend language barriers. To speak a message, you must mouth the words and whisper.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: 0,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: null,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, sorcerer/wizard 0, summoner 0, witch 0, occultist 0, psychic 0, mesmerist 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "no",
-              targets: "one creature/level",
-              time: "1 standard action",
-              range: "medium (100 ft. + 10 ft./level)",
-              area: "",
-              duration: "10 min./level"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1572
         }, {
           name: "Open/Close",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Open/Close",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "transmutation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: true,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S, F (a brass key)"
-            },
-            description: {
-              effect: "",
-              short: "Opens or closes small or light things.",
-              plain: "You can open or close (your choice) a door, chest, box, window, bag, pouch, bottle, barrel, or other container. If anything resists this activity (such as a bar on a door or a lock on a chest), the spell fails. In addition, the spell can only open and close things weighing 30 pounds or less. Thus, doors, chests, and similar objects sized for enormous creatures may be beyond this spell's ability to affect.",
-              formated: "<p>You can open or close (your choice) a door, chest, box, window, bag, pouch, bottle, barrel, or other container. If anything resists this activity (such as a bar on a door or a lock on a chest), the spell fails. In addition, the spell can only open and close things weighing 30 pounds or less. Thus, doors, chests, and similar objects sized for enormous creatures may be beyond this spell's ability to affect.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: 0,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, sorcerer/wizard 0, summoner 0, magus 0, occultist 0, psychic 0, mesmerist 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "Will negates (object)",
-              spell_resistence: "yes (object)",
-              targets: "object weighing up to 30 lbs. or portal that can be opened or closed",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1696
         }, {
           name: "Prestidigitation",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Prestidigitation",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "universal",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "see text",
-              short: "Performs minor tricks.",
-              plain: "Prestidigitations are minor tricks that novice spellcasters use for practice. Once cast, a prestidigitation spell enables you to perform simple magical effects for 1 hour. The effects are minor and have severe limitations. A prestidigitation can slowly lift 1 pound of material. It can color, clean, or soil items in a 1-foot cube each round. It can chill, warm, or flavor 1 pound of nonliving material. It cannot deal damage or affect the concentration of spellcasters. Prestidigitation can create small objects, but they look crude and artificial. The materials created by a prestidigitation spell are extremely fragile, and they cannot be used as tools, weapons, or spell components. Finally, prestidigitation lacks the power to duplicate any other spell effects. Any actual change to an object (beyond just moving, cleaning, or soiling it) persists only 1 hour.",
-              formated: "<p>Prestidigitations are minor tricks that novice spellcasters use for practice. Once cast, a prestidigitation spell enables you to perform simple magical effects for 1 hour. The effects are minor and have severe limitations. A prestidigitation can slowly lift 1 pound of material. It can color, clean, or soil items in a 1-foot cube each round. It can chill, warm, or flavor 1 pound of nonliving material. It cannot deal damage or affect the concentration of spellcasters. Prestidigitation can create small objects, but they look crude and artificial. The materials created by a prestidigitation spell are extremely fragile, and they cannot be used as tools, weapons, or spell components. Finally, prestidigitation lacks the power to duplicate any other spell effects. Any actual change to an object (beyond just moving, cleaning, or soiling it) persists only 1 hour.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: null,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "bard 0, magus 0, sorcerer/wizard 0, psychic 0, mesmerist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "see text",
-              spell_resistence: "no",
-              targets: "see text",
-              time: "1 standard action",
-              range: "10 ft.",
-              area: "see text",
-              duration: "1 hour"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1835
         }, {
           name: "Ray of Frost",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Ray of Frost",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: true,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "cold"
-            },
-            school: {
-              base: "evocation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S"
-            },
-            description: {
-              effect: "ray",
-              short: "Ray deals 1d3 cold damage.",
-              plain: "A ray of freezing air and ice projects from your pointing finger. You must succeed on a ranged touch attack with the ray to deal damage to a target. The ray deals 1d3 points of cold damage.",
-              formated: "<p>A ray of freezing air and ice projects from your pointing finger.</p><p>You must succeed on a ranged touch attack with the ray to deal damage to a target. The ray deals 1d3 points of cold damage.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: null,
-              druid: null,
-              ranger: null,
-              bard: null,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: null,
-              inquisitor: null,
-              oracle: null,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: null,
-              medium: null,
-              mesmerist: null,
-              occultist: null,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: null,
-              string: "sorcerer/wizard 0, magus 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "none",
-              spell_resistence: "yes",
-              targets: "",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1916
         }, {
           name: "Read Magic",
+          prepared: 1,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Read Magic",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "divination",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: true,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V, S, F (a clear crystal or mineral prism)"
-            },
-            description: {
-              effect: "",
-              short: "Read scrolls and spellbooks.",
-              plain: "You can decipher magical inscriptions on objects-books, scrolls, weapons, and the like-that would otherwise be unintelligible. This deciphering does not normally invoke the magic contained in the writing, although it may do so in the case of a cursed or trapped scroll. Furthermore, once the spell is cast and you have read the magical inscription, you are thereafter able to read that particular writing without recourse to the use of read magic. You can read at the rate of one page (250 words) per minute. The spell allows you to identify a glyph of warding with a DC 13 Spellcraft check, a greater glyph of warding with a DC 16 Spellcraft check, or any symbol spell with a Spellcraft check (DC 10 + spell level). Read magic can be made permanent with a permanency spell.",
-              formated: "<p>You can decipher magical inscriptions on objects-books, scrolls, weapons, and the like-that would otherwise be unintelligible. This deciphering does not normally invoke the magic contained in the writing, although it may do so in the case of a cursed or trapped scroll. Furthermore, once the spell is cast and you have read the magical inscription, you are thereafter able to read that particular writing without recourse to the use of <i>read magic.</i> You can read at the rate of one page (250 words) per minute. The spell allows you to identify a <i>glyph of warding</i> with a DC 13 Spellcraft check, a greater <i>glyph of warding</i> with a DC 16 Spellcraft check, or any <i>symbol</i> spell with a Spellcraft check (DC 10 + spell level).</p><p><i>Read magic</i> can be made permanent with a <i>permanency</i> spell.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: 1,
-              bard: 0,
-              paladin: 1,
-              alchemist: null,
-              summoner: 0,
-              witch: 0,
-              inquisitor: 0,
-              oracle: 0,
-              antipaladin: 1,
-              magus: 0,
-              adept: 0,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: 0,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, cleric/oracle 0, druid 0, paladin 1, ranger 1, sorcerer/wizard 0, summoner 0, witch 0, inquisitor 0, magus 0, shaman 0, occultist 0, psychic 0, mesmerist 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "",
-              spell_resistence: "",
-              targets: "you",
-              time: "1 standard action",
-              range: "personal",
-              area: "",
-              duration: "10 min./level"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1918
         }, {
           name: "Resistance",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 1,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Resistance",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: false,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: ""
-            },
-            school: {
-              base: "abjuration",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: true,
-              focus: false,
-              divine_focus: true,
-              costly: false,
-              cost: 0,
-              string: "V, S, M/DF (a miniature cloak)"
-            },
-            description: {
-              effect: "",
-              short: "Subject gains +1 on saving throws.",
-              plain: "You imbue the subject with magical energy that protects it from harm, granting it a +1 resistance bonus on saves. Resistance can be made permanent with a permanency spell.",
-              formated: "<p>You imbue the subject with magical energy that protects it from harm, granting it a +1 resistance bonus on saves.</p><p><i>Resistance</i> can be made permanent with a <i>permanency</i> spell.</p>"
-            },
-            source: "PFRPG Core",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: null,
-              bard: 0,
-              paladin: 1,
-              alchemist: null,
-              summoner: 0,
-              witch: 0,
-              inquisitor: 0,
-              oracle: 0,
-              antipaladin: null,
-              magus: null,
-              adept: null,
-              bloodrager: null,
-              shaman: 0,
-              psychic: 0,
-              medium: null,
-              mesmerist: null,
-              occultist: 0,
-              spiritualist: 0,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, cleric/oracle 0, druid 0, paladin 1, sorcerer/wizard 0, summoner 0, witch 0, inquisitor 0, shaman 0, occultist 0, psychic 0, spiritualist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "Will negates (harmless)",
-              spell_resistence: "yes (harmless)",
-              targets: "creature touched",
-              time: "1 standard action",
-              range: "touch",
-              area: "",
-              duration: "1 minute"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 1980
         }, {
           name: "Spark",
+          prepared: 0,
+          active: false,
+          cast: 0,
           note: "",
-          state: {
-            prepared: 0,
-            active: false,
-            cast: 0
-          },
-          data: {
-            name: "Spark",
-            descriptor: {
-              acid: false,
-              air: false,
-              chaotic: false,
-              cold: false,
-              curse: false,
-              darkness: false,
-              death: false,
-              disease: false,
-              earth: false,
-              electricity: false,
-              emotion: false,
-              evil: false,
-              fear: false,
-              fire: true,
-              force: false,
-              good: false,
-              language_dependent: false,
-              lawful: false,
-              light: false,
-              mind_affecting: false,
-              pain: false,
-              poison: false,
-              shadow: false,
-              sonic: false,
-              water: false,
-              ruse: false,
-              meditative: false,
-              string: "fire"
-            },
-            school: {
-              base: "evocation",
-              subschool: ""
-            },
-            components: {
-              verbal: true,
-              somatic: true,
-              material: false,
-              focus: false,
-              divine_focus: false,
-              costly: false,
-              cost: 0,
-              string: "V or S"
-            },
-            description: {
-              effect: "",
-              short: "Ignites flammable objects.",
-              plain: "You can make an unattended Fine flammable object catch on fire. This works as if you were using flint and steel except that you can use spark in any sort of weather and it takes much less time to actually ignite an object.",
-              formated: "<p>You can make an unattended Fine flammable object catch on fire. This works as if you were using flint and steel except that you can use <i>spark</i> in any sort of weather and it takes much less time to actually ignite an object.</p>"
-            },
-            source: "APG",
-            mythic: {
-              mythic: false,
-              text: "",
-              augmented: ""
-            },
-            level: {
-              sla: 0,
-              sorcerer: 0,
-              wizard: 0,
-              cleric: 0,
-              druid: 0,
-              ranger: null,
-              bard: 0,
-              paladin: null,
-              alchemist: null,
-              summoner: null,
-              witch: 0,
-              inquisitor: null,
-              oracle: 0,
-              antipaladin: null,
-              magus: 0,
-              adept: null,
-              bloodrager: null,
-              shaman: null,
-              psychic: null,
-              medium: null,
-              mesmerist: null,
-              occultist: 0,
-              spiritualist: null,
-              skald: null,
-              investigator: null,
-              hunter: 0,
-              string: "bard 0, cleric/oracle 0, druid 0, sorcerer/wizard 0, witch 0, magus 0, occultist 0"
-            },
-            casting: {
-              dismissible: false,
-              shapeable: false,
-              saving: "Fortitude negates (object)",
-              spell_resistence: "yes (object)",
-              targets: "one Fine object",
-              time: "1 standard action",
-              range: "close (25 ft. + 5 ft./2 levels)",
-              area: "",
-              duration: "instantaneous"
-            },
-            groups: {
-              domain: "",
-              patron: "",
-              bloodline: ""
-            }
-          }
+          index: 2267
         }]
       }, {
         level_1: [{
@@ -6049,109 +4166,127 @@ var izlara = (function() {
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1851
         }, {
           name: "Protection From Evil",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1855
         }, {
           name: "Protection From Good",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1857
         }, {
           name: "Protection From Law",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1859
         }, {
           name: "Hold Portal",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1208
         }, {
           name: "Grease",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1117
         }, {
           name: "Mage Armor",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1490
         }, {
           name: "Mount",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1630
         }, {
           name: "Obscuring Mist",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1688
         }, {
           name: "Summon Monster I",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2408
         }, {
           name: "Unseen Servant",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2677
         }, {
           name: "Comprehend Languages",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 480
         }, {
           name: "Detect Secret Doors",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 700
         }, {
           name: "Detect Undead",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 704
         }, {
           name: "Color Spray",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 463
         }, {
           name: "Silent Image",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2216
         }, {
           name: "Enlarge Person",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 854
         }, {
           name: "Feather Fall",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 929
         }]
       }, {
         level_2: [{
@@ -6159,97 +4294,113 @@ var izlara = (function() {
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1977
         }, {
           name: "Glitterdust",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1092
         }, {
           name: "Summon Monster II",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2409
         }, {
           name: "Web",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2781
         }, {
           name: "Detect Thoughts",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 703
         }, {
           name: "See Invisibility",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2107
         }, {
           name: "Flaming Sphere",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 973
         }, {
           name: "Invisibility",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1347
         }, {
           name: "Minor Image",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1601
         }, {
           name: "Mirror Image",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1606
         }, {
           name: "Levitate",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1418
         }, {
           name: "Darkvision",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 613
         }, {
           name: "Make Whole",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1526
         }, {
           name: "Pyrotechnics",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1892
         }, {
           name: "Rope Trick",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2028
         }, {
           name: "Create Pit",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 550
         }]
       }, {
         level_3: [{
@@ -6257,109 +4408,127 @@ var izlara = (function() {
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 742
         }, {
           name: "Magic Circle Against Chaos",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1503
         }, {
           name: "Magic Circle Against Evil",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1504
         }, {
           name: "Magic Circle Against Good",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1505
         }, {
           name: "Magic Circle Against Law",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1506
         }, {
           name: "Phantom Steed",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1766
         }, {
           name: "Sleet Storm",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2236
         }, {
           name: "Stinking Cloud",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2344
         }, {
           name: "Summon Monster III",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2410
         }, {
           name: "Tiny Hut",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2563
         }, {
           name: "Wind Wall",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2799
         }, {
           name: "Fireball",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 961
         }, {
           name: "Fly",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 996
         }, {
           name: "Haste",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1150
         }, {
-          name: "Magic Weapon Greater",
+          name: "Magic Weapon, Greater",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1518
         }, {
           name: "Shrink Item",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2204
         }, {
           name: "Slow",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2239
         }, {
           name: "Spiked Pit",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2306
         }]
       }, {
         level_4: [{
@@ -6367,195 +4536,227 @@ var izlara = (function() {
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 714
         }, {
           name: "Black Tentacles",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 241
         }, {
           name: "Dimension Door",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 713
         }, {
           name: "Summon Monster IV",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2411
         }, {
           name: "Arcane Eye",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 133
         }, {
           name: "Confusion",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 488
         }, {
           name: "Resilient Sphere",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1975
         }, {
-          name: "Wall of Fire",
+          name: "Wall Of Fire",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2744
         }, {
-          name: "Wall of Ice",
+          name: "Wall Of Ice",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2746
         }, {
           name: "Enervation",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 852
         }, {
           name: "Stone Shape",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2350
         }, {
           name: "Acid Pit",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 22
         }]
       }, {
         level_5: [{
-          name: "Mages Private Sanctum",
+          name: "Mage's Private Sanctum",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1498
         }, {
-          name: "Planar Binding Lesser",
+          name: "Planar Binding, Lesser",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1791
         }, {
           name: "Secret Chest",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2097
         }, {
           name: "Summon Monster V",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2413
         }, {
           name: "Teleport",
           prepared: 2,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2517
         }, {
-          name: "Wall of Stone",
+          name: "Wall Of Stone",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2754
         }, {
           name: "Contact Other Plane",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 502
         }, {
           name: "Prying Eyes",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1868
         }, {
           name: "Telepathic Bond",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2514
         }, {
-          name: "Wall of Force",
+          name: "Wall Of Force",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2745
         }, {
           name: "Persistent Image",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1748
         }, {
           name: "Sending",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2118
         }, {
           name: "Animal Growth",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 88
         }, {
           name: "Beast Shape III",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 211
         }, {
           name: "Overland Flight",
           prepared: 1,
           active: true,
           cast: 1,
-          note: ""
+          note: "",
+          index: 1706
         }, {
           name: "Polymorph",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1814
         }, {
           name: "Telekinesis",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2504
         }, {
           name: "Transmute Rock to Mud",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2607
         }, {
           name: "Permanency",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1744
         }, {
           name: "Hungry Pit",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1237
         }]
       }, {
         level_6: [{
@@ -6563,49 +4764,57 @@ var izlara = (function() {
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1789
         }, {
           name: "Summon Monster VI",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 2414
         }, {
           name: "Antimagic Field",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 109
         }, {
-          name: "Dispel Magic Greater",
+          name: "Dispel Magic, Greater",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 743
         }, {
           name: "Contingency",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 509
         }, {
           name: "Forceful Hand",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1016
         }, {
           name: "Programmed Image",
           prepared: 0,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1845
         }, {
           name: "Form of the Dragon I",
           prepared: 1,
           active: false,
           cast: 0,
-          note: ""
+          note: "",
+          index: 1025
         }]
       }, {
         level_7: []
@@ -8466,6 +6675,10 @@ var ravich = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "",
       per_day: {
         level_0: "",
@@ -10568,6 +8781,10 @@ var marika = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "",
       per_day: {
         level_0: "",
@@ -12176,6 +10393,10 @@ var nefi = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "",
       per_day: {
         level_0: "",
@@ -12606,7 +10827,7 @@ var nif = (function() {
       feats: "Alertness, Augment Summoning, Craft Wondrous Item, Greater Spell Focus (Conjuration), Scribe Scroll, Spell Focus (Conjuration), Combat Casting",
       traits: "Resilient",
       languages: "Aquan, Auran, Azlanti, Celestial, Common, Draconic, Dwarven, Elven, Giant, Gnome, Goblin, Ignan, Orc, Sylvan, Undercommon",
-      special_abilities: "Arcane bond (Su), Bonus feats, Cantrips, Arcane schools, Teleportation sub school, Opposition arcane school, Elven Immunities (Ex), Elven Magic (Ex), Keen Senses (Ex), Low-Light Vision (Ex), Headband of Vast Intelligence skill (Use Magic Device, Fly), Linguistics Skill (Dwarven, Giant, Undercommon), Shift (Su), Summoner's Charm (Su), Weapon Familiarity (Ex)",
+      special_abilities: "Arcane bond (Su), Bonus feats, Cantrips, Arcane schools, Elven Immunities (Ex), Elven Magic (Ex), Keen Senses (Ex), Low-Light Vision (Ex), Headband of Vast Intelligence skill (Use Magic Device, Fly), Linguistics Skill (Dwarven, Giant, Undercommon), Shift (Su), Summoner's Charm (Su), Weapon Familiarity (Ex)",
       power: [{
         name: "Shift",
         current: "",
@@ -13843,7 +12064,11 @@ var nif = (function() {
           half_level: false
         }
       },
-      spell_notes: "<strong>Arcane school</strong> Conjuration (Teleportation).<br><strong>Opposition Arcane school</strong> Enchantment, Necromancy.<br>Conjuration spells +2 DC.<br>+2 on caster level checks to overcome spell resistance.",
+      school: "Conjuration - Teleportation",
+      opposition: "Enchantment, Necromancy",
+      domains: "",
+      bloodline: "",
+      spell_notes: "Conjuration spells +2 DC.<br>+2 on caster level checks to overcome spell resistance.",
       per_day: {
         level_0: 4,
         level_1: 4,
@@ -15970,6 +14195,10 @@ var orrin = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "",
       per_day: {
         level_0: "",
@@ -17614,6 +15843,10 @@ var ro = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "+2 on caster level checks to overcome spell resistance.",
       per_day: {
         level_0: 5,
@@ -19549,6 +17782,10 @@ var vos = (function() {
           half_level: false
         }
       },
+      school: "",
+      opposition: "",
+      domains: "",
+      bloodline: "",
       spell_notes: "",
       per_day: {
         level_0: "",
@@ -21278,60 +19515,58 @@ var clone = (function() {
     if (cloneType == "skill") {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
-        '  <div class="m-skill js-total-block" data-total-block-options="path:skills.custom[' + cloneIndex + '],addition:+ranks+misc+racial+feat+trait,bonuses:+str_bonus+dex_bonus+con_bonus+int_bonus+wis_bonus+cha_bonus+class_skill+level+half_level+check_penalty+size_modifier_stealth+size_modifier_fly,clone:true">' +
-        '    <div class="m-edit-box m-edit-box-indent m-edit-box-head-small m-edit-box-labels m-edit-box-guides">' +
-        '      <div class="m-edit-box-head">' +
-        '        <div class="m-skill-name m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']name,clone:true">' +
-        '          <input class="m-input-block-field u-full-width u-no-margin js-input-block-field" type="text" tabindex="1" placeholder="Custom skill">' +
-        '        </div>' +
+        '  <div class="m-edit-box m-edit-box-indent m-edit-box-head-small m-edit-box-labels js-total-block" data-total-block-options="path:skills.custom[' + cloneIndex + '],addition:+ranks+misc+racial+feat+trait,bonuses:+str_bonus+dex_bonus+con_bonus+int_bonus+wis_bonus+cha_bonus+class_skill+level+half_level+check_penalty+size_modifier_stealth+size_modifier_fly,clone:true">' +
+        '    <div class="m-edit-box-head">' +
+        '      <div class="m-skill-name m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']name,clone:true">' +
+        '        <input class="m-input-block-field u-full-width u-no-margin js-input-block-field" type="text" tabindex="1" placeholder="Custom skill">' +
         '      </div>' +
-        '      <div class="m-edit-box-body">' +
-        '        <div class="m-edit-box-content">' +
-        '          <div class="m-edit-box-item m-edit-box-group">' +
-        '            <div class="m-edit-box-item-total">' +
-        '              <p class="m-edit-box-label">Total</p>' +
-        '              <p class="m-edit-box-total js-text-block" data-text-block-options="path:skills.custom[' + cloneIndex + ']current,type:bonus,clone:true"></p>' +
+        '    </div>' +
+        '    <div class="m-edit-box-body">' +
+        '      <div class="m-edit-box-content m-edit-box-content-margin-large">' +
+        '        <div class="m-edit-box-item m-edit-box-group">' +
+        '          <div class="m-edit-box-item-total">' +
+        '            <p class="m-edit-box-label">Total</p>' +
+        '            <p class="m-edit-box-total js-text-block" data-text-block-options="path:skills.custom[' + cloneIndex + ']current,type:bonus,clone:true"></p>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']ranks,type:integer,clone:true">' +
+        '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-ranks">Ranks</label>' +
+        '              <input id="skills-custom-' + cloneIndex + '-ranks" class="m-input-block-field u-full-width u-text-center js-input-block-field js-input-block-field-ranks" type="number" tabindex="1">' +
         '            </div>' +
-        '            <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '              <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']ranks,type:integer,clone:true">' +
-        '                <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-ranks">Ranks</label>' +
-        '                <input id="skills-custom-' + cloneIndex + '-ranks" class="m-input-block-field u-full-width u-text-center js-input-block-field js-input-block-field-ranks" type="number" tabindex="1">' +
-        '              </div>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']racial,type:integer,clone:true">' +
+        '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-racial">Racial</label>' +
+        '              <input id="skills-custom-' + cloneIndex + '-racial" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
-        '            <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '              <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']racial,type:integer,clone:true">' +
-        '                <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-racial">Racial</label>' +
-        '                <input id="skills-custom-' + cloneIndex + '-racial" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
-        '              </div>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']feat,type:integer,clone:true">' +
+        '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-feat">Feat</label>' +
+        '              <input id="skills-custom-' + cloneIndex + '-feat" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
-        '            <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '              <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']feat,type:integer,clone:true">' +
-        '                <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-feat">Feat</label>' +
-        '                <input id="skills-custom-' + cloneIndex + '-feat" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
-        '              </div>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']trait,type:integer,clone:true">' +
+        '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-trait">Trait</label>' +
+        '              <input id="skills-custom-' + cloneIndex + '-trait" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
-        '            <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '              <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']trait,type:integer,clone:true">' +
-        '                <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-trait">Trait</label>' +
-        '                <input id="skills-custom-' + cloneIndex + '-trait" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
-        '              </div>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']misc,type:integer,clone:true">' +
+        '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-misc">Misc</label>' +
+        '              <input id="skills-custom-' + cloneIndex + '-misc" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
-        '            <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '              <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']misc,type:integer,clone:true">' +
-        '                <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-misc">Misc</label>' +
-        '                <input id="skills-custom-' + cloneIndex + '-misc" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
-        '              </div>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-check">' +
+        '            <div class="m-check-block">' +
+        '              <p class="m-edit-box-label">Class <span class="hidden-xs hidden-sm hidden-md">Skill</span></p>' +
+        '              <input class="m-check-block-check js-total-block-check" data-total-block-check-options="path:skills.custom[' + cloneIndex + ']bonuses,type:class_skill,clone:true" type="checkbox" tabindex="1">' +
+        '              <span class="m-check-block-check-icon"></span>' +
         '            </div>' +
-        '            <div class="m-edit-box-item-check">' +
-        '              <div class="m-check-block">' +
-        '                <p class="m-edit-box-label">Class <span class="hidden-xs hidden-sm hidden-md">Skill</span></p>' +
-        '                <input class="m-check-block-check js-total-block-check" data-total-block-check-options="path:skills.custom[' + cloneIndex + ']bonuses,type:class_skill,clone:true" type="checkbox" tabindex="1">' +
-        '                <span class="m-check-block-check-icon"></span>' +
-        '              </div>' +
-        '            </div>' +
-        '            <div class="m-edit-box-item-button-small">' +
-        '              <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-secondary button-large button-icon button-thin js-total-block-bonuses" data-total-block-bonuses-options="path:skills.custom[' + cloneIndex + ']bonuses,modalHeading:Custom Skill bonuses,clone:true" tabindex="1"><span class="icon-more-vertical"></span></a>' +
-        '            </div>' +
+        '          </div>' +
+        '          <div class="m-edit-box-item-button-small">' +
+        '            <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-secondary button-large button-icon button-thin js-total-block-bonuses" data-total-block-bonuses-options="path:skills.custom[' + cloneIndex + ']bonuses,modalHeading:Custom Skill bonuses,clone:true" tabindex="1"><span class="icon-more-vertical"></span></a>' +
         '          </div>' +
         '        </div>' +
         '      </div>' +
@@ -22611,18 +20846,18 @@ var display = (function() {
     displayListItem.setAttribute("data-spell-level", level);
     displayListItem.setAttribute("data-spell-count", index);
     // prepared
-    if (spell.state.prepared > 0) {
+    if (spell.prepared > 0) {
       // var marks = document.createElement("span");
-      for (var j = 0; j < spell.state.prepared; j++) {
+      for (var j = 0; j < spell.prepared; j++) {
         var preparedIcon = document.createElement("span");
         preparedIcon.setAttribute("class", "icon-radio-button-checked");
         displayListItemValue.insertBefore(preparedIcon, displayListItemValue.firstChild);
       };
     };
     // cast
-    if (spell.state.cast > 0) {
+    if (spell.cast > 0) {
       var all_check = displayListItemValue.querySelectorAll(".icon-radio-button-checked");
-      for (var j = 0; j < spell.state.cast; j++) {
+      for (var j = 0; j < spell.cast; j++) {
         if (all_check[j]) {
           helper.toggleClass(all_check[j], "icon-radio-button-checked");
           helper.toggleClass(all_check[j], "icon-radio-button-unchecked");
@@ -22630,7 +20865,7 @@ var display = (function() {
       };
     };
     // active
-    if (spell.state.active) {
+    if (spell.active) {
       var spellActive = document.createElement("span");
       spellActive.setAttribute("class", "m-display-list-item-spell-active");
       var activeIcon = document.createElement("span");
@@ -22660,14 +20895,17 @@ var display = (function() {
       path: path
     });
     var displayListItem;
-    if (typeof object != "undefined" && object != "") {
+    if (typeof object != undefined && object != "") {
 
-      if (object.ranks != "undefined" && object.ranks != "") {
+      if (object.ranks != undefined && object.ranks != "") {
         displayListItem = document.createElement("li");
         displayListItem.setAttribute("class", "m-display-list-item");
         var value = document.createElement("span");
         value.setAttribute("class", "m-display-list-item-value");
-        value.textContent = "+" + object.current;
+        value.textContent = object.current;
+        if (object.current > 0) {
+          value.textContent = "+" + value.textContent;
+        };
         if (prefix || object["name"] || object["variant_name"]) {
           var displayListItemPrefix = document.createElement("span");
           displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
@@ -22746,7 +20984,7 @@ var display = (function() {
         for (var i in object) {
           if (i == "classname") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "") {
+            if (typeof data != undefined && data != "") {
               var displayListItemPrefix = document.createElement("span");
               displayListItemPrefix.setAttribute("class", "m-display-item-text-snippet-prefix");
               displayListItemPrefix.textContent = data;
@@ -22754,7 +20992,7 @@ var display = (function() {
             };
           } else if (i == "level") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "" || data == 0) {
+            if (typeof data != undefined && data != "" || data == 0) {
               var displayListItemValue = document.createElement("span");
               displayListItemValue.setAttribute("class", "m-display-item-text-snippet-value");
               displayListItemValue.textContent = data;
@@ -22770,7 +21008,7 @@ var display = (function() {
         for (var i in object) {
           if (i == "item") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "") {
+            if (typeof data != undefined && data != "") {
               var displayListItemPrefix = document.createElement("span");
               displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
               displayListItemPrefix.textContent = data;
@@ -22778,10 +21016,10 @@ var display = (function() {
             };
           } else if (i == "current") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "" || data == 0) {
+            if (typeof data != undefined && data != "" || data == 0) {
               var displayListItemValue = document.createElement("span");
               displayListItemValue.setAttribute("class", "m-display-list-item-value");
-              if (typeof object.total != "undefined" && object.total != "") {
+              if (typeof object.total != undefined && object.total != "") {
                 data = data + "/" + object.total;
               };
               displayListItemValue.textContent = data;
@@ -22806,7 +21044,7 @@ var display = (function() {
         for (var i in object) {
           if (i == "name") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "") {
+            if (typeof data != undefined && data != "") {
               var displayListItemPrefix = document.createElement("span");
               displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
               displayListItemPrefix.textContent = data;
@@ -22814,10 +21052,10 @@ var display = (function() {
             };
           } else if (i == "current") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "" || data == 0) {
+            if (typeof data != undefined && data != "" || data == 0) {
               var displayListItemValue = document.createElement("span");
               displayListItemValue.setAttribute("class", "m-display-list-item-value");
-              if (typeof object.total != "undefined" && object.total != "") {
+              if (typeof object.total != undefined && object.total != "") {
                 data = data + "/" + object.total;
               };
               displayListItemValue.textContent = data;
@@ -22842,7 +21080,7 @@ var display = (function() {
         for (var i in object) {
           if (i == "name") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "") {
+            if (typeof data != undefined && data != "") {
               var displayListItemPrefix = document.createElement("span");
               displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
               displayListItemPrefix.textContent = data;
@@ -22850,7 +21088,7 @@ var display = (function() {
             };
           } else if (i == "quantity") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "" || data == 0) {
+            if (typeof data != undefined && data != "" || data == 0) {
               var displayListItemValue = document.createElement("span");
               displayListItemValue.setAttribute("class", "m-display-list-item-value");
               displayListItemValue.textContent = data;
@@ -22861,12 +21099,15 @@ var display = (function() {
       };
 
       if (cloneType == "skill") {
-        if (object.ranks != "undefined" && object.ranks != "") {
+        if (object.ranks != undefined && object.ranks != "") {
           displayListItem = document.createElement("li");
           displayListItem.setAttribute("class", "m-display-list-item");
           var displayListItemValue = document.createElement("span");
           displayListItemValue.setAttribute("class", "m-display-list-item-value");
-          displayListItemValue.textContent = "+" + object.current;
+          displayListItemValue.textContent = object.current;
+          if (object.current > 0) {
+            displayListItemValue.textContent = "+" + displayListItemValue.textContent;
+          };
           if (object["name"]) {
             var displayListItemPrefix = document.createElement("span");
             displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
@@ -22887,7 +21128,7 @@ var display = (function() {
         for (var i in object) {
           if (i == "weapon" || i == "damage" || i == "critical" || i == "range" || i == "type" || i == "ammo") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "") {
+            if (typeof data != undefined && data != "") {
               var displayListItemPrefix = document.createElement("span");
               displayListItemPrefix.setAttribute("class", "m-display-list-item-" + cloneType + "-" + i);
               displayListItemPrefix.textContent = data;
@@ -22895,7 +21136,7 @@ var display = (function() {
             };
           } else if (i == "attack") {
             var data = object[i];
-            if (typeof data != "undefined" && data != "") {
+            if (typeof data != undefined && data != "") {
               var displayListItemValue = document.createElement("h2");
               displayListItemValue.setAttribute("class", "m-display-list-item-" + cloneType + "-" + i);
               displayListItemValue.textContent = data;
@@ -22910,7 +21151,7 @@ var display = (function() {
         displayListItem.setAttribute("class", "m-display-list-item");
         for (var i in object) {
           var data = object[i];
-          if (typeof data != "undefined" && data != "") {
+          if (typeof data != undefined && data != "") {
             displayListItem.innerHTML = data;
           };
         };
@@ -22922,7 +21163,7 @@ var display = (function() {
     for (var i in object) {
       var testForValues = false;
       for (var j in object[i]) {
-        if (typeof object[i][j] != "undefined" && object[i][j] != "") {
+        if (typeof object[i][j] != undefined && object[i][j] != "") {
           testForValues = true;
         };
       };
@@ -22962,7 +21203,7 @@ var display = (function() {
       path: path
     });
     var displayListItem;
-    if (typeof data != "undefined" && data != "") {
+    if (typeof data != undefined && data != "") {
       if (valueType == "bonus" && data > 0) {
         data = "+" + data;
       };
@@ -23011,7 +21252,7 @@ var display = (function() {
         path: path
       });
     };
-    if (typeof data != "undefined" && data != "") {
+    if (typeof data != undefined && data != "") {
       displayItem = document.createElement("span");
       if (all_displayValueType) {
         if (all_displayValueType == "bonus" && data > 0) {
@@ -23049,7 +21290,7 @@ var display = (function() {
         path: path
       });
     };
-    if (typeof data != "undefined" && data != "") {
+    if (typeof data != undefined && data != "") {
       displayItem = document.createElement("span");
       displayItem.textContent = data;
     } else if (typeof data == "number" && data == 0) {
@@ -23076,7 +21317,7 @@ var display = (function() {
       path: path
     });
     var displayItem;
-    if (typeof data != "undefined" && data != "") {
+    if (typeof data != undefined && data != "") {
       displayItem = document.createElement("span");
       displayItem.setAttribute("class", "m-display-item-text-block");
       var value = document.createElement("span");
@@ -23121,7 +21362,7 @@ var display = (function() {
       path: path
     });
     var displayItem;
-    if (typeof data != "undefined" && data != "") {
+    if (typeof data != undefined && data != "") {
       displayItem = document.createElement("span");
       displayItem.setAttribute("class", "m-display-item-text-snippet");
       var value = document.createElement("span");
@@ -23205,7 +21446,7 @@ var display = (function() {
       path: path
     });
     var displayImage;
-    if (typeof data != "undefined" && data != "") {
+    if (typeof data != undefined && data != "") {
       var displayImage = document.createElement("div");
       displayImage.setAttribute("class", "m-display-item-image-wrapper");
       var displayImageItem = new Image;
@@ -26853,27 +25094,33 @@ var repair = (function() {
       characterObject.basics.initiative.trait = "";
     };
     // --------------------------------------------------
-    // repair spells
-    characterObject.spells.book.forEach(function(arrayItem) {
-      for (var key in arrayItem) {
-        if (arrayItem[key].length > 0) {
-          arrayItem[key].forEach(function(arrayItem) {
-            if (!("state" in arrayItem)) {
-              if (debug) {
-                console.log("\trepair spells");
-              };
-              arrayItem.state = {};
-              arrayItem.state.active = arrayItem.active;
-              arrayItem.state.cast = arrayItem.cast;
-              arrayItem.state.prepared = arrayItem.prepared;
-              delete arrayItem.active;
-              delete arrayItem.cast;
-              delete arrayItem.prepared;
-            };
-          });
-        };
+    if (!("school" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell school");
       };
-    });
+      characterObject.spells.school = "";
+    };
+    // --------------------------------------------------
+    if (!("opposition" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell opposition");
+      };
+      characterObject.spells.opposition = "";
+    };
+    // --------------------------------------------------
+    if (!("domains" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell domains");
+      };
+      characterObject.spells.domains = "";
+    };
+    // --------------------------------------------------
+    if (!("bloodline" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell bloodline");
+      };
+      characterObject.spells.bloodline = "";
+    };
     // --------------------------------------------------
     // sheet.store();
     return characterObject;
@@ -28016,25 +26263,25 @@ var spells = (function() {
     }, false);
   };
 
-  function add(element, data) {
-    addNewSpell(element, data);
+  function add(element, spellIndex) {
+    var spellData = spellsData.get({
+      index: spellIndex
+    });
+    addNewSpell(element, spellIndex, spellData);
   };
 
-  function addNewSpell(element, data) {
+  function addNewSpell(element, spellIndex, spellData) {
     var spellBook = helper.getClosest(element, ".js-spell-book");
     var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
     var addNewSpellField = spellBook.querySelector(".js-add-new-spell-field");
     var spellName;
-    if (data) {
-      spellName = data.name;
+    if (spellData) {
+      spellName = spellData.name;
     } else {
       spellName = addNewSpellField.value
     };
     if (spellName != "") {
-      var newSpellObject = new _create_spellObject(spellName, 0, false, 0, "");
-      if (data) {
-        newSpellObject.data = data;
-      };
+      var newSpellObject = new _create_spellObject(spellName, 0, false, 0, "", spellIndex);
       var newIndex = _get_spellBookCount(spellBookOptions.level);
       helper.setObject({
         object: sheet.get(),
@@ -28043,6 +26290,7 @@ var spells = (function() {
       });
       _render_spell(newSpellObject, spellBookOptions.level, newIndex, true);
       addNewSpellField.value = "";
+      _render_spellPlaceholder(spellBookOptions.level);
     };
   };
 
@@ -28052,15 +26300,14 @@ var spells = (function() {
     };
   };
 
-  function _create_spellObject(spellName, spellPrepared, spellActive, spellCast, spellNote) {
+  function _create_spellObject(spellName, spellPrepared, spellActive, spellCast, spellNote, spellIndex) {
     return {
       name: this.name = spellName || "",
       note: this.note = spellNote || "",
-      state: {
-        prepared: this.prepared = spellPrepared || 0,
-        active: this.active = spellActive || false,
-        cast: this.cast = spellCast || 0,
-      }
+      prepared: this.prepared = spellPrepared || 0,
+      active: this.active = spellActive || false,
+      cast: this.cast = spellCast || 0,
+      index: spellIndex || ""
     };
   };
 
@@ -28076,6 +26323,7 @@ var spells = (function() {
     } else {
       _spellState.set(spellBookOptions.level, null);
       _reset_stateSpellControl(spellBook);
+      _render_spellPlaceholder(spellBookOptions.level);
     };
   };
 
@@ -28101,28 +26349,28 @@ var spells = (function() {
     });
     if (_spellState.get(options.level) != null) {
       if (_spellState.get(options.level) == "prepare") {
-        if (spellObject.state.prepared < 50) {
-          spellObject.state.prepared++;
+        if (spellObject.prepared < 50) {
+          spellObject.prepared++;
         };
       } else if (_spellState.get(options.level) == "unprepare") {
-        if (spellObject.state.prepared > 0) {
-          spellObject.state.prepared--;
+        if (spellObject.prepared > 0) {
+          spellObject.prepared--;
         };
-        if (spellObject.state.prepared < spellObject.state.cast) {
-          spellObject.state.cast = spellObject.state.prepared;
+        if (spellObject.prepared < spellObject.cast) {
+          spellObject.cast = spellObject.prepared;
         };
       } else if (_spellState.get(options.level) == "cast") {
-        if (spellObject.state.cast < 50) {
-          spellObject.state.cast++;
+        if (spellObject.cast < 50) {
+          spellObject.cast++;
         };
-        if (spellObject.state.cast > spellObject.state.prepared) {
-          spellObject.state.prepared = spellObject.state.cast;
+        if (spellObject.cast > spellObject.prepared) {
+          spellObject.prepared = spellObject.cast;
         };
       } else if (_spellState.get(options.level) == "active") {
-        if (spellObject.state.active) {
-          spellObject.state.active = false;
+        if (spellObject.active) {
+          spellObject.active = false;
         } else {
-          spellObject.state.active = true;
+          spellObject.active = true;
         };
       } else if (_spellState.get(options.level) == "remove") {
         // store undo data
@@ -28165,16 +26413,16 @@ var spells = (function() {
           spellActive.removeChild(spellActive.lastChild);
         };
       };
-      if (spellObject.state.prepared > 0) {
-        for (var i = 0; i < spellObject.state.prepared; i++) {
+      if (spellObject.prepared > 0) {
+        for (var i = 0; i < spellObject.prepared; i++) {
           var preparedIcon = document.createElement("span");
           preparedIcon.setAttribute("class", "icon-radio-button-checked js-spell-mark-checked");
           spellMarks.insertBefore(preparedIcon, spellMarks.firstChild);
         };
       };
-      if (spellObject.state.cast > 0) {
+      if (spellObject.cast > 0) {
         var all_check = spellMarks.querySelectorAll(".icon-radio-button-checked");
-        for (var j = 0; j < spellObject.state.cast; j++) {
+        for (var j = 0; j < spellObject.cast; j++) {
           if (all_check[j]) {
             helper.toggleClass(all_check[j], "icon-radio-button-checked");
             helper.toggleClass(all_check[j], "icon-radio-button-unchecked");
@@ -28183,10 +26431,10 @@ var spells = (function() {
           };
         };
       };
-      if (spellObject.state.active) {
+      if (spellObject.active) {
         var activeIcon = document.createElement("span");
         activeIcon.setAttribute("class", "icon-play-arrow");
-        if (spellObject.state.active) {
+        if (spellObject.active) {
           spellActive.appendChild(activeIcon);
         };
       };
@@ -28209,34 +26457,34 @@ var spells = (function() {
     var tempSpellObject = JSON.parse(JSON.stringify(spellObject));
     var _hold_data = function(action, type) {
       if (type == "prepared") {
-        if (action == "plus" && tempSpellObject.state.prepared < 50) {
-          tempSpellObject.state.prepared++;
-        } else if (action == "minus" && tempSpellObject.state.prepared > 0) {
-          tempSpellObject.state.prepared--;
-        } else if (action == "clear" && tempSpellObject.state.prepared > 0) {
-          tempSpellObject.state.prepared = 0;
+        if (action == "plus" && tempSpellObject.prepared < 50) {
+          tempSpellObject.prepared++;
+        } else if (action == "minus" && tempSpellObject.prepared > 0) {
+          tempSpellObject.prepared--;
+        } else if (action == "clear" && tempSpellObject.prepared > 0) {
+          tempSpellObject.prepared = 0;
         };
-        if (tempSpellObject.state.cast > tempSpellObject.state.prepared) {
-          tempSpellObject.state.cast = tempSpellObject.state.prepared;
+        if (tempSpellObject.cast > tempSpellObject.prepared) {
+          tempSpellObject.cast = tempSpellObject.prepared;
         };
       };
       if (type == "cast") {
-        if (action == "plus" && tempSpellObject.state.cast < 50) {
-          tempSpellObject.state.cast++;
-        } else if (action == "minus" && tempSpellObject.state.cast > 0) {
-          tempSpellObject.state.cast--;
-        } else if (action == "clear" && tempSpellObject.state.cast > 0) {
-          tempSpellObject.state.cast = 0;
+        if (action == "plus" && tempSpellObject.cast < 50) {
+          tempSpellObject.cast++;
+        } else if (action == "minus" && tempSpellObject.cast > 0) {
+          tempSpellObject.cast--;
+        } else if (action == "clear" && tempSpellObject.cast > 0) {
+          tempSpellObject.cast = 0;
         };
-        if (tempSpellObject.state.prepared < tempSpellObject.state.cast) {
-          tempSpellObject.state.prepared = tempSpellObject.state.cast;
+        if (tempSpellObject.prepared < tempSpellObject.cast) {
+          tempSpellObject.prepared = tempSpellObject.cast;
         };
       };
       if (type == "active" && action == "toggle") {
-        if (tempSpellObject.state.active) {
-          tempSpellObject.state.active = false;
+        if (tempSpellObject.active) {
+          tempSpellObject.active = false;
         } else {
-          tempSpellObject.state.active = true;
+          tempSpellObject.active = true;
         };
       };
       // console.log("tempSpellObject", tempSpellObject);
@@ -28244,8 +26492,8 @@ var spells = (function() {
     var _render_count = function(spellControl) {
       var spellControlPreparedCount = spellControl.querySelector(".js-spell-control-prepared-count");
       var spellControlCastCount = spellControl.querySelector(".js-spell-control-cast-count");
-      spellControlPreparedCount.textContent = tempSpellObject.state.prepared;
-      spellControlCastCount.textContent = tempSpellObject.state.cast;
+      spellControlPreparedCount.textContent = tempSpellObject.prepared;
+      spellControlCastCount.textContent = tempSpellObject.cast;
     };
     var _store_data = function(spellControl) {
       tempSpellObject.note = spellControl.querySelector(".js-spell-control-textarea-note").innerHTML;
@@ -28262,6 +26510,8 @@ var spells = (function() {
     var _create_editBox = function(options) {
       var defaultOptions = {
         title: null,
+        textOnly: null,
+        guides: null,
         boxSize: null,
         content: null,
         contentMargin: null
@@ -28270,8 +26520,15 @@ var spells = (function() {
         var defaultOptions = helper.applyOptions(defaultOptions, options);
       };
       var box = document.createElement("div");
+      box.setAttribute("class", "m-edit-box m-edit-box-indent");
+      if (options.textOnly != null) {
+        helper.addClass(box, "m-edit-box-text-only");
+      };
+      if (options.guides != null) {
+        helper.addClass(box, "m-edit-box-guides");
+      };
       if (options.title != null) {
-        box.setAttribute("class", "m-edit-box m-edit-box-indent m-edit-box-head-small");
+        helper.addClass(box, "m-edit-box-head-small");
         var head = document.createElement("div");
         head.setAttribute("class", "m-edit-box-head");
         var title = document.createElement("h2");
@@ -28280,7 +26537,7 @@ var spells = (function() {
         head.appendChild(title);
         box.appendChild(head);
       } else {
-        box.setAttribute("class", "m-edit-box m-edit-box-indent m-edit-box-no-head-small");
+        helper.addClass(box, "m-edit-box-no-head-small");
       };
       var body = document.createElement("div");
       body.setAttribute("class", "m-edit-box-body");
@@ -28311,7 +26568,7 @@ var spells = (function() {
       };
       return editBoxItem;
     };
-    var _create_spellControlModal = function() {
+    var _create_spellModal = function() {
       var spellControl = document.createElement("div");
       spellControl.setAttribute("class", "m-spell-control js-spell-control");
 
@@ -28320,7 +26577,7 @@ var spells = (function() {
         preparedGroup.setAttribute("class", "m-edit-box-item m-edit-box-group-control-set");
         var preparedCount = document.createElement("p");
         preparedCount.setAttribute("class", "m-edit-box-total js-spell-control-prepared-count");
-        preparedCount.textContent = tempSpellObject.state.prepared;
+        preparedCount.textContent = tempSpellObject.prepared;
         var preparedPlus = document.createElement("button");
         preparedPlus.setAttribute("class", "u-inline-with-input button button-large button-thin button-icon");
         preparedPlus.setAttribute("tabindex", "1");
@@ -28359,7 +26616,7 @@ var spells = (function() {
         castGroup.setAttribute("class", "m-edit-box-item m-edit-box-group-control-set");
         var castCount = document.createElement("p");
         castCount.setAttribute("class", "m-edit-box-total js-spell-control-cast-count");
-        castCount.textContent = tempSpellObject.state.cast;
+        castCount.textContent = tempSpellObject.cast;
         var castPlus = document.createElement("button");
         castPlus.setAttribute("class", "u-inline-with-input button button-large button-thin button-icon");
         castPlus.setAttribute("tabindex", "1");
@@ -28401,7 +26658,7 @@ var spells = (function() {
         activeInput.setAttribute("id", "spell-active");
         activeInput.setAttribute("class", "m-check-block-check js-spell-control-active");
         activeInput.setAttribute("tabindex", "1");
-        activeInput.checked = tempSpellObject.state.active;
+        activeInput.checked = tempSpellObject.active;
         activeInput.addEventListener("change", function() {
           _hold_data("toggle", "active");
           _render_count(spellControl);
@@ -28428,220 +26685,239 @@ var spells = (function() {
 
         spellControl.appendChild(_create_editBox({
           title: "Prepared",
-          content: [preparedGroup, _create_editBoxItem("m-edit-box-item-button-large", preparedClear)],
-          contentMargin: "large"
+          guides: true,
+          content: [preparedGroup, _create_editBoxItem("m-edit-box-item-button-large", preparedClear)]
         }));
         spellControl.appendChild(_create_editBox({
           title: "Cast",
-          content: [castGroup, _create_editBoxItem("m-edit-box-item-button-large", castClear)],
-          contentMargin: "large"
+          guides: true,
+          content: [castGroup, _create_editBoxItem("m-edit-box-item-button-large", castClear)]
         }));
         spellControl.appendChild(_create_editBox({
           title: "Active",
+          guides: true,
           boxSize: "m-edit-box-item-check",
-          content: [activeCheck],
-          contentMargin: "large"
+          content: [activeCheck]
         }));
         spellControl.appendChild(_create_editBox({
           title: "Rename",
+          guides: true,
           boxSize: "m-edit-box-item-max",
-          content: [renameInput],
-          contentMargin: "large"
+          content: [renameInput]
         }));
         spellControl.appendChild(_create_editBox({
           title: "Spell notes",
+          guides: true,
           boxSize: "m-edit-box-item-max",
           content: [noteTextarea]
         }));
       };
 
       var _create_spellblock = function() {
-        if (tempSpellObject.data.school.base != "") {
+
+        var spellData = spellsData.get({
+          index: tempSpellObject.index
+        });
+
+        if (spellData.school.base != "") {
           var para = document.createElement("p");
-          var string = helper.capFirstLetter(tempSpellObject.data.school.base);
-          if (tempSpellObject.data.school.subschool != "") {
-            string = string + " (" + helper.capFirstLetter(tempSpellObject.data.school.subschool) + ")";
+          var string = helper.capFirstLetter(spellData.school.base);
+          if (spellData.school.subschool != "") {
+            string = string + " (" + helper.capFirstLetter(spellData.school.subschool) + ")";
           };
-          if (tempSpellObject.data.descriptor.string != "") {
-            string = string + " [" + helper.capFirstLetter(tempSpellObject.data.descriptor.string) + "]";
+          if (spellData.descriptor.string != "") {
+            string = string + " [" + helper.capFirstLetter(spellData.descriptor.string) + "]";
           };
           para.textContent = string;
           spellControl.appendChild(_create_editBox({
             title: "School",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.level.string != "") {
+        if (spellData.level.string != "") {
           var para = document.createElement("p");
           var string = "";
-          for (var key in tempSpellObject.data.level) {
-            if (key != "string" && key != "sla" && tempSpellObject.data.level[key] != null) {
-              string = string + helper.capFirstLetter(key) + " " + tempSpellObject.data.level[key] + ", ";
+          for (var key in spellData.level) {
+            if (key != "string" && key != "sla" && spellData.level[key] != null) {
+              string = string + helper.capFirstLetter(key) + " " + spellData.level[key] + ", ";
             };
           };
           string = string.replace(/,\s*$/, "");
           para.textContent = string;
           spellControl.appendChild(_create_editBox({
             title: "Level",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.time != "") {
+        if (spellData.casting.time != "") {
           var para = document.createElement("p");
-          para.textContent = helper.capFirstLetter(tempSpellObject.data.casting.time);
+          para.textContent = helper.capFirstLetter(spellData.casting.time);
           spellControl.appendChild(_create_editBox({
             title: "Casting time",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.components.string != "") {
+        if (spellData.components.string != "") {
           var para = document.createElement("p");
-          para.textContent = tempSpellObject.data.components.string;
+          para.textContent = spellData.components.string;
           spellControl.appendChild(_create_editBox({
             title: "Components",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.range != "") {
+        if (spellData.casting.range != "") {
           var para = document.createElement("p");
-          para.textContent = helper.capFirstLetter(tempSpellObject.data.casting.range);
+          para.textContent = helper.capFirstLetter(spellData.casting.range);
           spellControl.appendChild(_create_editBox({
             title: "Range",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.area != "") {
+        if (spellData.casting.area != "") {
           var para = document.createElement("p");
-          var string = helper.capFirstLetter(tempSpellObject.data.casting.area);
-          if (tempSpellObject.data.casting.shapeable) {
+          var string = helper.capFirstLetter(spellData.casting.area);
+          if (spellData.casting.shapeable) {
             string = string + " (S)";
           };
           para.textContent = string;
           spellControl.appendChild(_create_editBox({
             title: "Area",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.targets != "") {
+        if (spellData.casting.targets != "") {
           var para = document.createElement("p");
-          para.textContent = helper.capFirstLetter(tempSpellObject.data.casting.targets);
+          para.textContent = helper.capFirstLetter(spellData.casting.targets);
           spellControl.appendChild(_create_editBox({
             title: "Targets",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.duration != "") {
+        if (spellData.casting.duration != "") {
           var para = document.createElement("p");
-          var string = helper.capFirstLetter(tempSpellObject.data.casting.duration);
-          if (tempSpellObject.data.casting.dismissible) {
+          var string = helper.capFirstLetter(spellData.casting.duration);
+          if (spellData.casting.dismissible) {
             string = string + " (D)";
           };
           para.textContent = string;
           spellControl.appendChild(_create_editBox({
             title: "Duration",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.saving != "") {
+        if (spellData.casting.saving != "") {
           var para = document.createElement("p");
-          para.textContent = helper.capFirstLetter(tempSpellObject.data.casting.saving);
+          para.textContent = helper.capFirstLetter(spellData.casting.saving);
           spellControl.appendChild(_create_editBox({
             title: "Saving Throw",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.casting.spell_resistence != "") {
+        if (spellData.casting.spell_resistence != "") {
           var para = document.createElement("p");
-          para.textContent = helper.capFirstLetter(tempSpellObject.data.casting.spell_resistence);
+          para.textContent = helper.capFirstLetter(spellData.casting.spell_resistence);
           spellControl.appendChild(_create_editBox({
             title: "Spell Resistence",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.description.formated != "") {
+        if (spellData.description.formated != "") {
           var div = document.createElement("div");
-          div.innerHTML = tempSpellObject.data.description.formated;
+          div.innerHTML = spellData.description.formated;
           spellControl.appendChild(_create_editBox({
             title: "Description",
+            textOnly: true,
+            guides: true,
             content: [div],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "large"
+            boxSize: "m-edit-box-item-max"
           }));
         };
 
-        if (tempSpellObject.data.source != "") {
+        if (spellData.mythic.mythic && spellData.mythic.text != "") {
           var para = document.createElement("p");
-          para.textContent = tempSpellObject.data.source;
+          para.textContent = spellData.mythic.text;
+          spellControl.appendChild(_create_editBox({
+            title: "Mythic",
+            textOnly: true,
+            guides: true,
+            content: [para],
+            boxSize: "m-edit-box-item-max"
+          }));
+        };
+
+        if (spellData.mythic.mythic && spellData.mythic.augmented != "") {
+          var para = document.createElement("p");
+          para.textContent = spellData.mythic.augmented;
+          spellControl.appendChild(_create_editBox({
+            content: [para],
+            textOnly: true,
+            guides: true,
+            boxSize: "m-edit-box-item-max"
+          }));
+        };
+
+        if (spellData.source != "") {
+          var para = document.createElement("p");
+          para.textContent = spellData.source;
           spellControl.appendChild(_create_editBox({
             title: "Source",
+            textOnly: true,
+            guides: true,
             content: [para],
-            boxSize: "m-edit-box-item-max",
-            contentMargin: "small"
+            boxSize: "m-edit-box-item-max"
           }));
         };
-
-        // if (tempSpellObject.data.mythic.mythic && tempSpellObject.data.mythic.text != "") {
-        //   var para = document.createElement("p");
-        //   para.textContent = tempSpellObject.data.mythic.text;
-        //   spellControl.appendChild(_create_editBox({
-        //     title: "Mythic",
-        //     content: [para],
-        //     boxSize: "m-edit-box-item-max",
-        //     contentMargin: "small"
-        //   }));
-        // };
-        //
-        // if (tempSpellObject.data.mythic.mythic && tempSpellObject.data.mythic.augmented != "") {
-        //   var para = document.createElement("p");
-        //   para.textContent = tempSpellObject.data.mythic.augmented;
-        //   spellControl.appendChild(_create_editBox({
-        //     content: [para],
-        //     boxSize: "m-edit-box-item-max",
-        //     contentMargin: "small"
-        //   }));
-        // };
-
       };
 
-      if ("data" in tempSpellObject) {
+      if ("index" in tempSpellObject && tempSpellObject.index != "") {
         _create_spellblock();
-        spellControl.appendChild(document.createElement("hr"));
       };
+
       _create_controls();
       return spellControl;
     };
     if (_spellState.get(options.level) == null || force) {
-      var modalContent = _create_spellControlModal();
+      var modalContent = _create_spellModal();
       var modalAction = function() {
         _store_data(this);
         _update_spellButton(button, true);
@@ -28682,9 +26958,9 @@ var spells = (function() {
         path: spellBookOptions.path
       });
       for (var i in spellBook) {
-        spellBook[i].state.prepared = 0;
-        spellBook[i].state.cast = 0;
-        spellBook[i].state.active = false;
+        spellBook[i].prepared = 0;
+        spellBook[i].cast = 0;
+        spellBook[i].active = false;
       };
     };
     var promotAction = function() {
@@ -28798,6 +27074,7 @@ var spells = (function() {
       knownListToSaveTo.appendChild(spellButtonCol);
       _bind_spellKnownItem(spellButton);
     };
+    _render_spellPlaceholder(level);
   };
 
   function _render_spell(spellObject, level, spellIndex) {
@@ -28834,16 +27111,16 @@ var spells = (function() {
     var spellMarks = document.createElement("span");
     spellMarks.setAttribute("class", "m-spell-marks js-spell-marks");
     spellButton.appendChild(spellMarks);
-    if (spellObject.state.prepared > 0) {
-      for (var i = 0; i < spellObject.state.prepared; i++) {
+    if (spellObject.prepared > 0) {
+      for (var i = 0; i < spellObject.prepared; i++) {
         var preparedIcon = document.createElement("span");
         preparedIcon.setAttribute("class", "icon-radio-button-checked js-spell-mark-checked");
         spellMarks.insertBefore(preparedIcon, spellMarks.firstChild);
       };
     };
-    if (spellObject.state.cast > 0) {
+    if (spellObject.cast > 0) {
       var all_check = spellMarks.querySelectorAll(".icon-radio-button-checked");
-      for (var j = 0; j < spellObject.state.cast; j++) {
+      for (var j = 0; j < spellObject.cast; j++) {
         if (all_check[j]) {
           helper.toggleClass(all_check[j], "icon-radio-button-checked");
           helper.toggleClass(all_check[j], "icon-radio-button-unchecked");
@@ -28852,7 +27129,7 @@ var spells = (function() {
         };
       };
     };
-    if (spellObject.state.active) {
+    if (spellObject.active) {
       var activeIcon = document.createElement("span");
       activeIcon.setAttribute("class", "icon-play-arrow");
       if (spellActive.children.length > 0) {
@@ -28922,25 +27199,24 @@ var spells = (function() {
       for (var i = 0; i < all_spellControl.length; i++) {
         if (all_spellControl[i].classList.contains("button-primary")) {
           helper.removeClass(all_spellControl[i], "button-primary");
-          helper.addClass(all_spellControl[i], "button-secondary");
         };
-        if (all_spellControl[i].classList.contains("is-live")) {
-          helper.removeClass(all_spellControl[i], "is-live");
+        if (all_spellControl[i].classList.contains("button-secondary")) {
+          helper.removeClass(all_spellControl[i], "button-secondary");
         };
       };
     };
     var _activateControl = function() {
       if (_spellState.get(spellBookOptions.level) == "remove") {
-        helper.removeClass(button, "button-secondary");
         helper.addClass(button, "button-primary");
       } else if (_spellState.get(spellBookOptions.level) == null) {
-        helper.addClass(button, "button-secondary");
         helper.removeClass(button, "button-primary");
       };
       if (_spellState.get(spellBookOptions.level) == "prepare" || _spellState.get(spellBookOptions.level) == "unprepare" || _spellState.get(spellBookOptions.level) == "cast" || _spellState.get(spellBookOptions.level) == "active") {
-        helper.addClass(button, "is-live");
+        // helper.addClass(button, "is-live");
+        helper.addClass(button, "button-secondary");
       } else if (_spellState.get(spellBookOptions.level) == null) {
-        helper.removeClass(button, "is-live");
+        // helper.removeClass(button, "is-live");
+        helper.removeClass(button, "button-secondary");
       };
     };
     if (_spellState.get(spellBookOptions.level) != null) {
@@ -28958,13 +27234,22 @@ var spells = (function() {
       for (var i = 0; i < all_spellControl.length; i++) {
         if (all_spellControl[i].classList.contains("button-primary")) {
           helper.removeClass(all_spellControl[i], "button-primary");
-          helper.addClass(all_spellControl[i], "button-secondary");
+          helper.removeClass(all_spellControl[i], "button-secondary");
         };
-        if (all_spellControl[i].classList.contains("is-live")) {
-          helper.removeClass(all_spellControl[i], "is-live");
-        };
+        // if (all_spellControl[i].classList.contains("is-live")) {
+        //   helper.removeClass(all_spellControl[i], "is-live");
+        // };
       };
       _render_stateSpellBook(spellBook, spellBookOptions.level);
+    };
+  };
+
+  function _render_spellPlaceholder(level) {
+    var placeholder = helper.e(".js-placeholder-spell-level-" + level);
+    if (_get_spellBookCount(level) > 0) {
+      helper.addClass(placeholder, "is-hidden");
+    } else {
+      helper.removeClass(placeholder, "is-hidden");
     };
   };
 
@@ -32654,7 +30939,7 @@ var tip = (function() {
       tip.addEventListener("focus", function() {
         render(tip);
         clearTimeout(destroyTimer);
-        destroyTimer = setTimeout(destroy, 3000, this);
+        destroyTimer = setTimeout(destroy, 4000, this);
       }, false);
       tip.addEventListener("blur", function() {
         destroy();
@@ -33468,7 +31753,7 @@ var update = (function() {
   var history = [{
     version: "4.4.0",
     list: [
-      "*Added Spells look up and Spell description. Newly added Spells will have descriptions."
+      "*Added Spell Search, newly added Spells will have a descriptions."
     ]
   }, {
     version: "4.3.0",

@@ -846,27 +846,33 @@ var repair = (function() {
       characterObject.basics.initiative.trait = "";
     };
     // --------------------------------------------------
-    // repair spells
-    characterObject.spells.book.forEach(function(arrayItem) {
-      for (var key in arrayItem) {
-        if (arrayItem[key].length > 0) {
-          arrayItem[key].forEach(function(arrayItem) {
-            if (!("state" in arrayItem)) {
-              if (debug) {
-                console.log("\trepair spells");
-              };
-              arrayItem.state = {};
-              arrayItem.state.active = arrayItem.active;
-              arrayItem.state.cast = arrayItem.cast;
-              arrayItem.state.prepared = arrayItem.prepared;
-              delete arrayItem.active;
-              delete arrayItem.cast;
-              delete arrayItem.prepared;
-            };
-          });
-        };
+    if (!("school" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell school");
       };
-    });
+      characterObject.spells.school = "";
+    };
+    // --------------------------------------------------
+    if (!("opposition" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell opposition");
+      };
+      characterObject.spells.opposition = "";
+    };
+    // --------------------------------------------------
+    if (!("domains" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell domains");
+      };
+      characterObject.spells.domains = "";
+    };
+    // --------------------------------------------------
+    if (!("bloodline" in characterObject.spells)) {
+      if (debug) {
+        console.log("\trepair spell bloodline");
+      };
+      characterObject.spells.bloodline = "";
+    };
     // --------------------------------------------------
     // sheet.store();
     return characterObject;
