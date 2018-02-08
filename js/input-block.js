@@ -143,7 +143,7 @@ var inputBlock = (function() {
   };
 
   function _bind_name() {
-    var inputBlock = helper.e(".js-basics-name");
+    var inputBlock = helper.e(".js-basics-character-name");
     var input = inputBlock.querySelector(".js-input-block-field");
     input.addEventListener("input", function() {
       clearTimeout(_timer_updateNav);
@@ -308,7 +308,7 @@ var inputBlock = (function() {
       var type = button.dataset.eventType;
       var note;
       if (inputBlockOptions.eventType == "xp") {
-        note = "XP cleared";
+        note = "EXP cleared";
       } else if (inputBlockOptions.eventType == "platinum") {
         note = "PP cleared";
       } else if (inputBlockOptions.eventType == "gold") {

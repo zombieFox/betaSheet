@@ -102,8 +102,11 @@ var sheet = (function() {
     localStorage.clear();
     prompt.destroy();
     snack.destroy();
-    helper.store("backupAllCharacters", JSON.stringify(allCharacters));
+    // helper.store("backupAllCharacters", JSON.stringify(allCharacters));
     allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.all()));
+    repair.render({
+      debug: true
+    });
     setIndex(0);
     store();
     clear();
@@ -121,6 +124,9 @@ var sheet = (function() {
     prompt.destroy();
     snack.destroy();
     allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
+    repair.render({
+      debug: true
+    })
     setIndex(0);
     store();
     clear();
@@ -151,7 +157,6 @@ var sheet = (function() {
   };
 
   function render() {
-    repair.render(sheet.get());
     characterSelect.render();
     stats.render();
     clone.render();
@@ -338,9 +343,19 @@ var sheet = (function() {
       // console.log(event);
       if (helper.isJsonString(event.target.result)) {
         var data = JSON.parse(event.target.result);
-        if (data.awesomeSheet) {
-          add(data);
-          var name = allCharacters[getIndex()].basics.name;
+        if (data.awesomeSheet || data.awesomeSheet.awesome) {
+          add(repair.render({
+            object: data,
+            debug: true
+          }));
+          var name = get().basics.name || get().basics.character.name || "New character";
+          // var name = helper.getObject({
+          //   object: get(),
+          //   path: basics.name
+          // }) || helper.getObject({
+          //   object: get(),
+          //   path: basics.character.name
+          // }) || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " imported and back in the game."
           });
@@ -372,9 +387,19 @@ var sheet = (function() {
       // console.log(event);
       if (helper.isJsonString(event.target.result)) {
         var data = JSON.parse(event.target.result);
-        if (data.awesomeSheet) {
-          replace(data);
-          var name = allCharacters[getIndex()].basics.name || "New character";
+        if (data.awesomeSheet || data.awesomeSheet.awesome) {
+          replace(repair.render({
+            object: data,
+            debug: true
+          }));
+          var name = get().basics.name || get().basics.character.name || "New character";
+          // var name = helper.getObject({
+          //   object: get(),
+          //   path: basics.name
+          // }) || helper.getObject({
+          //   object: get(),
+          //   path: basics.character.name
+          // }) || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " replaced and back in the game."
           });
@@ -407,8 +432,8 @@ var sheet = (function() {
     readFile.onload = function(event) {
       if (helper.isJsonString(event.target.result)) {
         // console.log("JSON true");
-        if (JSON.parse(event.target.result).awesomeSheet) {
-          // console.log("awesome key true");
+        if (JSON.parse(event.target.result).awesomeSheet || JSON.parse(event.target.result).awesomeSheet.awesome) {
+          // console.log("awesome true");
           importSelectLabelText.textContent = fileList[0].name;
           helper.addClass(importSelectLabel, "m-import-select-label-ok");
           helper.removeClass(importSelectLabel, "m-import-select-label-error");
@@ -416,7 +441,7 @@ var sheet = (function() {
           helper.removeClass(importSelectLabelIcon, "icon-error-outline");
           helper.addClass(importSelectLabelIcon, "icon-check");
         } else {
-          // console.log("awesome key false");
+          // console.log("awesome false");
           importSelectLabelText.textContent = "JSON file not recognised by awesomeSheet";
           helper.removeClass(importSelectLabel, "m-import-select-label-ok");
           helper.addClass(importSelectLabel, "m-import-select-label-error");
@@ -444,7 +469,10 @@ var sheet = (function() {
 
   function exportJson() {
     var fileName;
-    var characterName = get().basics.name;
+    var characterName = helper.getObject({
+      object: get(),
+      path: "basics.character.name"
+    });
     var classLevel = classes.getClassLevel(sheet.get());
     if (characterName != "") {
       fileName = characterName;

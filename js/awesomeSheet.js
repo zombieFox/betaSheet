@@ -865,34 +865,68 @@ var card = (function() {
 var blank = (function() {
 
   var data = {
-    awesomeSheet: true,
+    awesomeSheet: {
+      awesome: true,
+      version: ""
+    },
     basics: {
-      name: "",
-      race: "",
-      level: "",
-      classes: [{
-        classname: "",
-        level: "",
-        hp: "",
-        fortitude: "",
-        reflex: "",
-        will: "",
-        ranks: "",
-        bab: ""
-      }],
-      size: {
-        category: "",
-        size_modifier: 0,
-        special_size_modifier: 0,
-        size_modifier_fly: 0,
-        size_modifier_stealth: 0
+      character: {
+        name: "",
+        race: "",
+        alignment: "",
+        deity: "",
+        height: "",
+        weight: "",
+        age: "",
+        gender: "",
+        hero_points: "",
+        description: "",
+        size: {
+          category: "",
+          modifier: {
+            base: "",
+            fly: "",
+            stealth: "",
+            special: ""
+          }
+        }
       },
-      alignment: "",
-      deity: "",
-      height: "",
-      weight: "",
-      age: "",
-      gender: "",
+      classes: {
+        all: [{
+          classname: "",
+          level: "",
+          hp: "",
+          fortitude: "",
+          reflex: "",
+          will: "",
+          ranks: "",
+          bab: ""
+        }]
+      },
+      experience: {
+        level: "",
+        next_level: "",
+        total: "",
+        advancement: "",
+        needed: ""
+      },
+      initiative: {
+        misc: "",
+        temp: "",
+        feat: "",
+        trait: "",
+        current: "",
+        bonuses: {
+          str: false,
+          dex: true,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
+          level: false,
+          half_level: false
+        }
+      },
       speed: {
         land: "",
         fly: "",
@@ -901,32 +935,7 @@ var blank = (function() {
         climb: "",
         burrow: ""
       },
-      hero_points: "",
-      character_description: "",
-      initiative: {
-        misc: "",
-        temp: "",
-        feat: "",
-        trait: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      xp: {
-        total: "",
-        advancement_speed: "",
-        next_level: "",
-        needed: ""
-      },
-      character_image: {
+      image: {
         uploaded: false,
         background: "",
         color: {
@@ -950,89 +959,76 @@ var blank = (function() {
     statistics: {
       stats: {
         str: {
-          current: "",
           modifier: "",
           base: "",
           enhancement: "",
           misc: "",
           racial: "",
-          temp: ""
+          temp: "",
+          current: ""
         },
         dex: {
-          current: "",
           modifier: "",
           base: "",
           enhancement: "",
           misc: "",
           racial: "",
-          temp: ""
+          temp: "",
+          current: ""
         },
         con: {
-          current: "",
           modifier: "",
           base: "",
           enhancement: "",
           misc: "",
           racial: "",
-          temp: ""
+          temp: "",
+          current: ""
         },
         int: {
-          current: "",
           modifier: "",
           base: "",
           enhancement: "",
           misc: "",
           racial: "",
-          temp: ""
+          temp: "",
+          current: ""
         },
         wis: {
-          current: "",
           modifier: "",
           base: "",
           enhancement: "",
           misc: "",
           racial: "",
-          temp: ""
+          temp: "",
+          current: ""
         },
         cha: {
-          current: "",
           modifier: "",
           base: "",
           enhancement: "",
           misc: "",
           racial: "",
-          temp: ""
+          temp: "",
+          current: ""
         }
       },
-      feats: "",
-      traits: "",
-      languages: "",
-      special_abilities: "",
-      power: []
+      abilities: {
+        feats: "",
+        traits: "",
+        languages: "",
+        special_abilities: ""
+      },
+      power: {
+        all: []
+      }
     },
     equipment: {
-      gear: "",
-      magic_gear: "",
-      potion_viles_oils: "",
-      scrolls: "",
-      item: {
-        all: [],
-        weight: {
-          current: ""
-        },
-        value: {
-          current: ""
-        }
-      },
-      encumbrance: {
-        encumbrance_str: "",
-        carry_move: {
-          light: "",
-          medium: "",
-          heavy: "",
-          lift: "",
-          drag: ""
-        }
+      possessions: {
+        gear: "",
+        magic_gear: "",
+        potion_viles_oils: "",
+        scrolls: ""
       },
       armor: {
         armor: "",
@@ -1055,14 +1051,35 @@ var blank = (function() {
         shoulders: "",
         wrist: ""
       },
+      item: {
+        all: [],
+        weight: {
+          current: ""
+        },
+        value: {
+          current: ""
+        }
+      },
+      encumbrance: {
+        encumbrance_str: "",
+        carry_move: {
+          light: "",
+          medium: "",
+          heavy: "",
+          lift: "",
+          drag: ""
+        }
+      },
+      consumable: {
+        all: []
+      },
       wealth: {
         platinum: "",
         gold: "",
         silver: "",
         copper: "",
         total: ""
-      },
-      consumable: []
+      }
     },
     defense: {
       hp: {
@@ -1070,198 +1087,89 @@ var blank = (function() {
         temp: "",
         damage: "",
         non_lethal_damage: "",
-        current: ""
+        current: "",
+        notes: ""
       },
       ac: {
-        misc: "",
-        temp: "",
-        armor: "",
-        shield: "",
-        deflect: "",
-        dodge: "",
-        natural: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          plus_ten: true,
-          ac_armor: true,
-          ac_shield: true,
-          ac_deflect: true,
-          ac_dodge: true,
-          ac_natural: true,
-          size: true,
-          max_dex: true
-        }
-      },
-      flat_footed: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          plus_ten: true,
-          ac_armor: true,
-          ac_shield: true,
-          ac_deflect: true,
-          ac_natural: true,
-          size: true
-        }
-      },
-      touch: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          plus_ten: true,
-          ac_deflect: true,
-          ac_dodge: true,
-          size: true,
-          max_dex: true
-        }
-      },
-      ac_notes: "",
-      fortitude: {
-        base: "",
-        resistance: "",
-        feat: "",
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: true,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      reflex: {
-        base: "",
-        resistance: "",
-        feat: "",
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      will: {
-        base: "",
-        resistance: "",
-        feat: "",
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: true,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      save_notes: "",
-      dr: {
-        feat: "",
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        overcome: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      sr: {
-        feat: "",
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      resist_notes: ""
-    },
-    offense: {
-      base_attack: "",
-      base_attack_bonuses: "",
-      cmb: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: true,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          bab: true,
-          special_size: true,
-          level: false,
-          half_level: false
-        }
+        armor_class: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            plus_ten: true,
+            armor: true,
+            shield: true,
+            deflect: true,
+            dodge: true,
+            natural: true,
+            size_base: true,
+            max_dex: true
+          }
+        },
+        flat_footed: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            plus_ten: true,
+            armor: true,
+            shield: true,
+            deflect: true,
+            natural: true,
+            size_base: true
+          }
+        },
+        touch: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            plus_ten: true,
+            deflect: true,
+            dodge: true,
+            size_base: true,
+            max_dex: true
+          }
+        },
+        stats: {
+          armor: "",
+          shield: "",
+          deflect: "",
+          dodge: "",
+          natural: ""
+        },
+        notes: ""
       },
       cmd: {
         misc: "",
         temp: "",
         current: "",
+        notes: "",
         bonuses: {
-          str_bonus: true,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
+          str: true,
+          dex: true,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           bab: true,
           special_size: true,
           level: false,
@@ -1269,55 +1177,197 @@ var blank = (function() {
           plus_ten: true
         }
       },
-      melee_attack: {
+      saves: {
+        fortitude: {
+          base: "",
+          resistance: "",
+          feat: "",
+          trait: "",
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: true,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        reflex: {
+          base: "",
+          resistance: "",
+          feat: "",
+          trait: "",
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        will: {
+          base: "",
+          resistance: "",
+          feat: "",
+          trait: "",
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        notes: ""
+      },
+      dr: {
+        feat: "",
+        trait: "",
         misc: "",
         temp: "",
         current: "",
+        overcome: "",
+        notes: "",
         bonuses: {
-          str_bonus: true,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          bab: true,
-          size: true,
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           level: false,
           half_level: false
         }
       },
-      ranged_attack: {
+      sr: {
+        spell_resistance: {
+          feat: "",
+          trait: "",
+          misc: "",
+          temp: "",
+          current: "",
+          notes: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+      },
+      resistance: {
+        feat: "",
+        trait: "",
         misc: "",
         temp: "",
         current: "",
+        notes: "",
         bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          bab: true,
-          size: true,
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           level: false,
           half_level: false
+        }
+      }
+    },
+    offense: {
+      stats: {
+        base_attack: "",
+        base_attack_bonuses: "",
+        melee_attack: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: true,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            bab: true,
+            size: true,
+            level: false,
+            half_level: false
+          }
+        },
+        ranged_attack: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            bab: true,
+            size: true,
+            level: false,
+            half_level: false
+          }
+        },
+      },
+      cmb: {
+        misc: "",
+        temp: "",
+        current: "",
+        notes: "",
+        bonuses: {
+          str: true,
+          dex: true,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
+          bab: true,
+          special_size: true,
+          level: false,
+          half_level: false,
+          plus_ten: true
         }
       },
       attack: {
         melee: [],
-        ranged: []
-      },
-      attack_notes: ""
+        ranged: [],
+        notes: ""
+      }
     },
     skills: {
       ranks: {
         total: "",
-        spent: {
-          include_custom: false,
-          current: ""
-        }
+        include_custom: false,
+        current: ""
       },
-      custom: [],
+      custom: {
+        all: []
+      },
       all: {
         acrobatics: {
           ranks: "",
@@ -1327,12 +1377,12 @@ var blank = (function() {
           feat: "",
           trait: "",
           bonuses: {
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: false,
             level: false,
             half_level: false,
@@ -1348,12 +1398,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1368,12 +1418,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1388,12 +1438,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: true,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: true,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -1409,12 +1459,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1430,12 +1480,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1450,12 +1500,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1470,12 +1520,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -1490,12 +1540,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1510,12 +1560,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -1530,12 +1580,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true,
@@ -1551,12 +1601,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1571,12 +1621,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1591,12 +1641,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1611,12 +1661,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1631,12 +1681,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1651,12 +1701,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1671,12 +1721,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1691,12 +1741,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1711,12 +1761,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1731,12 +1781,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1751,12 +1801,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1771,12 +1821,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1791,12 +1841,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1811,12 +1861,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1831,12 +1881,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1852,12 +1902,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1873,12 +1923,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1894,12 +1944,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1915,12 +1965,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1935,12 +1985,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -1955,12 +2005,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -1975,12 +2025,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -1995,12 +2045,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -2015,12 +2065,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true,
@@ -2036,12 +2086,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -2056,12 +2106,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: true,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: true,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -2076,12 +2126,12 @@ var blank = (function() {
           trait: "",
           bonuses: {
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -2090,312 +2140,323 @@ var blank = (function() {
       }
     },
     spells: {
-      concentration: {
-        current: "",
-        misc: "",
-        temp: "",
-        racial: "",
-        feat: "",
-        trait: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      caster_level_check: {
-        current: "",
-        misc: "",
-        temp: "",
-        racial: "",
-        feat: "",
-        trait: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      school: "",
-      opposition: "",
-      domains: "",
-      bloodline: "",
-      spell_notes: "",
-      per_day: {
-        level_0: "",
-        level_1: "",
-        level_2: "",
-        level_3: "",
-        level_4: "",
-        level_5: "",
-        level_6: "",
-        level_7: "",
-        level_8: "",
-        level_9: ""
-      },
-      known: {
-        level_0: "",
-        level_1: "",
-        level_2: "",
-        level_3: "",
-        level_4: "",
-        level_5: "",
-        level_6: "",
-        level_7: "",
-        level_8: "",
-        level_9: ""
-      },
-      bonus: {
-        level_0: "",
-        level_1: "",
-        level_2: "",
-        level_3: "",
-        level_4: "",
-        level_5: "",
-        level_6: "",
-        level_7: "",
-        level_8: "",
-        level_9: ""
-      },
-      dc: {
-        level_0: {
-          spell_level: 0,
+      stats: {
+        concentration: {
+          current: "",
           misc: "",
           temp: "",
+          racial: "",
           feat: "",
           trait: "",
-          current: "",
           bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
+            half_level: false
           }
+        },
+        caster_level_check: {
+          current: "",
+          misc: "",
+          temp: "",
+          racial: "",
+          feat: "",
+          trait: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        school: "",
+        opposition: "",
+        domains: "",
+        bloodline: "",
+        notes: ""
+      },
+      book: {
+        level_0: {
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 0,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_1: {
-          spell_level: 1,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 1,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_2: {
-          spell_level: 2,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 2,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_3: {
-          spell_level: 3,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 3,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_4: {
-          spell_level: 4,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 4,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_5: {
-          spell_level: 5,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 5,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_6: {
-          spell_level: 6,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 6,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_7: {
-          spell_level: 7,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 7,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_8: {
-          spell_level: 8,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 8,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_9: {
-          spell_level: 9,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 9,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         }
-      },
-      book: [{
-        level_0: []
-      }, {
-        level_1: []
-      }, {
-        level_2: []
-      }, {
-        level_3: []
-      }, {
-        level_4: []
-      }, {
-        level_5: []
-      }, {
-        level_6: []
-      }, {
-        level_7: []
-      }, {
-        level_8: []
-      }, {
-        level_9: []
-      }]
+      }
     },
     notes: {
-      character: [],
-      story: []
+      character: {
+        all: []
+      },
+      story: {
+        all: []
+      }
     },
-    events: []
+    events: {
+      all: []
+    }
   };
 
   // exposed methods
@@ -9588,24 +9649,27 @@ var nefi = (function() {
         }
       },
       custom: [],
-      acrobatics: {
-        ranks: "",
-        misc: 5,
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          class_skill: false,
-          level: false,
-          half_level: false,
-          check_penalty: true
-        }
-      },
       all: {
+        acrobatics: {
+          ranks: "",
+          misc: 5,
+          current: "",
+          racial: "",
+          feat: "",
+          trait: "",
+          bonuses: {
+            str_bonus: false,
+            dex_bonus: true,
+            con_bonus: false,
+            int_bonus: false,
+            wis_bonus: false,
+            cha_bonus: false,
+            class_skill: false,
+            level: false,
+            half_level: false,
+            check_penalty: true
+          }
+        },
         appraise: {
           ranks: "",
           misc: "",
@@ -15038,24 +15102,27 @@ var ro = (function() {
         }
       },
       custom: [],
-      acrobatics: {
-        ranks: 4,
-        misc: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          class_skill: false,
-          level: false,
-          half_level: false,
-          check_penalty: true
-        }
-      },
       all: {
+        acrobatics: {
+          ranks: 4,
+          misc: "",
+          current: "",
+          racial: "",
+          feat: "",
+          trait: "",
+          bonuses: {
+            str_bonus: false,
+            dex_bonus: true,
+            con_bonus: false,
+            int_bonus: false,
+            wis_bonus: false,
+            cha_bonus: false,
+            class_skill: false,
+            level: false,
+            half_level: false,
+            check_penalty: true
+          }
+        },
         appraise: {
           ranks: "",
           misc: "",
@@ -18130,88 +18197,82 @@ var characterImage = (function() {
   var backgroundTimer = null;
 
   function bind() {
-    var characterImageInput = helper.e(".js-character-image-input");
-    var characterImageClear = helper.e(".js-character-image-clear");
+    var imageInput = helper.e(".js-image-input");
+    var imageClear = helper.e(".js-image-clear");
+    var imageScaleCover = helper.e(".js-image-scale-cover");
+    var imageScaleContain = helper.e(".js-image-scale-contain");
+    var imageScaleCenter = helper.e(".js-image-scale-center");
+    var imageScaleTop = helper.e(".js-image-scale-top");
+    var imageScaleBottom = helper.e(".js-image-scale-bottom");
+    var imageScaleLeft = helper.e(".js-image-scale-left");
+    var imageScaleRight = helper.e(".js-image-scale-right");
+    var imageScaleInput = helper.e(".js-image-scale-input");
+    var imageScaleAverage = helper.e(".js-image-background-average");
+    var imageScaleBlack = helper.e(".js-image-background-black");
+    var imageScaleWhite = helper.e(".js-image-background-white");
 
-    var characterImageScaleCover = helper.e(".js-character-image-scale-cover");
-    var characterImageScaleContain = helper.e(".js-character-image-scale-contain");
-    var characterImageScaleCenter = helper.e(".js-character-image-scale-center");
-    var characterImageScaleTop = helper.e(".js-character-image-scale-top");
-    var characterImageScaleBottom = helper.e(".js-character-image-scale-bottom");
-    var characterImageScaleLeft = helper.e(".js-character-image-scale-left");
-    var characterImageScaleRight = helper.e(".js-character-image-scale-right");
-
-    var characterImageScaleInput = helper.e(".js-character-image-scale-input");
-
-    var characterBasicsImageScaleAverage = helper.e(".js-basics-character-image-background-average");
-    var characterBasicsImageScaleBlack = helper.e(".js-basics-character-image-background-black");
-    var characterBasicsImageScaleWhite = helper.e(".js-basics-character-image-background-white");
-
-    characterImageInput.addEventListener("change", function() {
+    imageInput.addEventListener("change", function() {
       _handleFiles(this);
     }, false);
-    characterImageClear.addEventListener("click", function() {
+    imageClear.addEventListener("click", function() {
       _removeCharacterImage();
     }, false);
-
-    characterImageScaleCover.addEventListener("click", function() {
+    imageScaleCover.addEventListener("click", function() {
       _render_size("cover");
       _render_position("center");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-    characterImageScaleContain.addEventListener("click", function() {
+    imageScaleContain.addEventListener("click", function() {
       _render_size("contain");
       _render_position("center");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-    characterImageScaleCenter.addEventListener("click", function() {
+    imageScaleCenter.addEventListener("click", function() {
       _render_position("center");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-    characterImageScaleTop.addEventListener("click", function() {
+    imageScaleTop.addEventListener("click", function() {
       _render_position("top");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-    characterImageScaleBottom.addEventListener("click", function() {
+    imageScaleBottom.addEventListener("click", function() {
       _render_position("bottom");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-    characterImageScaleLeft.addEventListener("click", function() {
+    imageScaleLeft.addEventListener("click", function() {
       _render_position("left");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-    characterImageScaleRight.addEventListener("click", function() {
+    imageScaleRight.addEventListener("click", function() {
       _render_position("right");
       _update_all_inputRangeBlock();
       sheet.store();
     }, false);
-
-    characterImageScaleInput.addEventListener("input", function() {
+    imageScaleInput.addEventListener("input", function() {
       _render_size();
       _calculate_positionXY();
       _render_position();
     }, false);
-
-    characterBasicsImageScaleAverage.addEventListener("click", function() {
+    imageScaleAverage.addEventListener("click", function() {
       backgroundTimer = setTimeout(_delay_bakcground, 350, this);
     }, false);
-    characterBasicsImageScaleBlack.addEventListener("click", function() {
+    imageScaleBlack.addEventListener("click", function() {
       backgroundTimer = setTimeout(_delay_bakcground, 350, this);
     }, false);
-    characterBasicsImageScaleWhite.addEventListener("click", function() {
+    imageScaleWhite.addEventListener("click", function() {
       backgroundTimer = setTimeout(_delay_bakcground, 350, this);
     }, false);
   };
 
   function _bind_image() {
     var body = helper.e("body");
-    var characterImagePreview = helper.e(".js-character-image-preview");
+    var imagePreview = helper.e(".js-image-preview");
     var image = null;
     var cursorX = 0;
     var cursorY = 0;
@@ -18219,7 +18280,7 @@ var characterImage = (function() {
     var imageY = 0;
     var dragStart = function(x, y) {
       // console.log("dragStart");
-      image = helper.e(".js-character-image");
+      image = helper.e(".js-image");
       if (image) {
         imageX = x - image.offsetLeft;
         imageY = y - image.offsetTop;
@@ -18239,10 +18300,7 @@ var characterImage = (function() {
       image = null;
       sheet.store();
     };
-    // var checkElement = function(event) {
-    //   return event.target.classList.contains("js-character-image-preview");
-    // };
-    characterImagePreview.addEventListener("mousedown", function(event) {
+    imagePreview.addEventListener("mousedown", function(event) {
       dragStart(event.clientX, event.clientY);
     });
     body.addEventListener("mousemove", function(event) {
@@ -18251,13 +18309,13 @@ var characterImage = (function() {
     body.addEventListener("mouseup", function(event) {
       dragStop();
     });
-    characterImagePreview.addEventListener("touchstart", function(event) {
+    imagePreview.addEventListener("touchstart", function(event) {
       dragStart(event.touches[0].clientX, event.touches[0].clientY);
     });
-    characterImagePreview.addEventListener("touchmove", function(event) {
+    imagePreview.addEventListener("touchmove", function(event) {
       dragging(event.touches[0].clientX, event.touches[0].clientY);
     });
-    characterImagePreview.addEventListener("touchend", function(event) {
+    imagePreview.addEventListener("touchend", function(event) {
       dragStop();
     });
   };
@@ -18340,26 +18398,25 @@ var characterImage = (function() {
 
   function _calculate_positionXY() {
     if (_get_uploadedState()) {
-      var characterImagePreview = helper.e(".js-character-image-preview");
-      var characterImage = helper.e(".js-character-image");
-      var x = characterImage.offsetLeft;
-      var y = characterImage.offsetTop;
+      var image = helper.e(".js-image");
+      var x = image.offsetLeft;
+      var y = image.offsetTop;
       _store_position(_calculate_positionX(x), _calculate_positionY(y));
     };
   };
 
   function _calculate_positionX(x) {
-    var characterImagePreview = helper.e(".js-character-image-preview");
-    var characterImage = helper.e(".js-character-image");
-    if (x < -(characterImage.width / 2) + 40) {
+    var imagePreview = helper.e(".js-image-preview");
+    var image = helper.e(".js-image");
+    if (x < -(image.width / 2) + 40) {
       // console.log("too far left");
-      x = -(characterImage.width / 2) + 40;
-    } else if (x > ((characterImagePreview.getBoundingClientRect().width) + (characterImage.width / 2)) - 40) {
+      x = -(image.width / 2) + 40;
+    } else if (x > ((imagePreview.getBoundingClientRect().width) + (image.width / 2)) - 40) {
       // console.log("too far right");
-      x = ((characterImagePreview.getBoundingClientRect().width) + (characterImage.width / 2)) - 40;
+      x = ((imagePreview.getBoundingClientRect().width) + (image.width / 2)) - 40;
     };
     // convert x and y into percentages
-    x = parseFloat((x / characterImagePreview.getBoundingClientRect().width) * 100).toLocaleString(undefined, {
+    x = parseFloat((x / imagePreview.getBoundingClientRect().width) * 100).toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -18367,16 +18424,16 @@ var characterImage = (function() {
   };
 
   function _calculate_positionY(y) {
-    var characterImagePreview = helper.e(".js-character-image-preview");
-    var characterImage = helper.e(".js-character-image");
-    if (y < -(characterImage.height / 2) + 40) {
+    var imagePreview = helper.e(".js-image-preview");
+    var image = helper.e(".js-image");
+    if (y < -(image.height / 2) + 40) {
       // console.log("too far top");
-      y = -(characterImage.height / 2) + 40;
-    } else if (y > ((characterImagePreview.getBoundingClientRect().height) + (characterImage.height / 2)) - 40) {
+      y = -(image.height / 2) + 40;
+    } else if (y > ((imagePreview.getBoundingClientRect().height) + (image.height / 2)) - 40) {
       // console.log("too far bottom");
-      y = ((characterImagePreview.getBoundingClientRect().height) + (characterImage.height / 2)) - 40;
+      y = ((imagePreview.getBoundingClientRect().height) + (image.height / 2)) - 40;
     };
-    y = parseFloat((y / characterImagePreview.getBoundingClientRect().height) * 100).toLocaleString(undefined, {
+    y = parseFloat((y / imagePreview.getBoundingClientRect().height) * 100).toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -18397,7 +18454,7 @@ var characterImage = (function() {
   function _calculate_orientation() {
     var size = helper.getObject({
       object: sheet.get(),
-      path: "basics.character_image.size"
+      path: "basics.image.size"
     });
     var imageWidth = size.width;
     var imageHeight = size.height;
@@ -18413,26 +18470,26 @@ var characterImage = (function() {
   };
 
   function _calculate_scale() {
-    var characterImageObject = helper.getObject({
+    var imageObject = helper.getObject({
       object: sheet.get(),
-      path: "basics.character_image"
+      path: "basics.image"
     });
-    var characterImagePreview = helper.e(".js-character-image-preview");
-    var containerWidth = characterImagePreview.getBoundingClientRect().width;
-    var containerHeight = characterImagePreview.getBoundingClientRect().height;
+    var imagePreview = helper.e(".js-image-preview");
+    var containerWidth = imagePreview.getBoundingClientRect().width;
+    var containerHeight = imagePreview.getBoundingClientRect().height;
     var scale;
-    // cover = parseInt((containerHeight / ((containerWidth / characterImageObject.size.width) * characterImageObject.size.width)) * 100, 10);
-    // contain = parseInt((containerHeight / ((containerWidth / characterImageObject.size.width) * characterImageObject.size.width)) * 100, 10);
-    if (characterImageObject.orientation == "landscape") {
-      scale = parseInt((containerHeight / ((containerWidth / characterImageObject.size.width) * characterImageObject.size.width)) * 100, 10);
-    } else if (characterImageObject.orientation == "portrait" || characterImageObject.orientation == "square") {
+    // cover = parseInt((containerHeight / ((containerWidth / imageObject.size.width) * imageObject.size.width)) * 100, 10);
+    // contain = parseInt((containerHeight / ((containerWidth / imageObject.size.width) * imageObject.size.width)) * 100, 10);
+    if (imageObject.orientation == "landscape") {
+      scale = parseInt((containerHeight / ((containerWidth / imageObject.size.width) * imageObject.size.width)) * 100, 10);
+    } else if (imageObject.orientation == "portrait" || imageObject.orientation == "square") {
       scale = 100;
     };
     _store_scale(scale);
   };
 
   function _update_all_inputRangeBlock() {
-    _update_inputRangeBlock(helper.e(".js-character-image-scale-input"));
+    _update_inputRangeBlock(helper.e(".js-image-scale-input"));
   };
 
   function _update_inputRangeBlock(input) {
@@ -18441,9 +18498,9 @@ var characterImage = (function() {
   };
 
   function _update_all_radio() {
-    _update_radio(helper.e(".js-basics-character-image-background-average"));
-    _update_radio(helper.e(".js-basics-character-image-background-black"));
-    _update_radio(helper.e(".js-basics-character-image-background-white"));
+    _update_radio(helper.e(".js-image-background-average"));
+    _update_radio(helper.e(".js-image-background-black"));
+    _update_radio(helper.e(".js-image-background-white"));
   };
 
   function _update_radio(radio) {
@@ -18452,13 +18509,13 @@ var characterImage = (function() {
   };
 
   function _clear_inputUpload(input) {
-    var characterImageInput = helper.e(".js-character-image-input");
+    var characterImageInput = helper.e(".js-image-input");
     characterImageInput.value = "";
   };
 
   function clear() {
-    var characterImageBackground = helper.e(".js-character-image-background");
-    var characterImage = helper.e(".js-character-image");
+    var characterImageBackground = helper.e(".js-image-background");
+    var characterImage = helper.e(".js-image");
     if (characterImage) {
       characterImageBackground.removeAttribute("style");
       characterImage.remove();
@@ -18488,7 +18545,7 @@ var characterImage = (function() {
     };
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image",
+      path: "basics.image",
       newValue: object
     });
     sheet.store();
@@ -18509,13 +18566,13 @@ var characterImage = (function() {
   function _render_image() {
     if (_get_uploadedState()) {
       // console.log("render image");
-      var characterImagePreview = helper.e(".js-character-image-preview");
+      var characterImagePreview = helper.e(".js-image-preview");
       var characterImageObject = helper.getObject({
         object: sheet.get(),
-        path: "basics.character_image"
+        path: "basics.image"
       });
       var image = new Image;
-      image.setAttribute("class", "m-character-image js-character-image");
+      image.setAttribute("class", "m-character-image js-image");
       image.src = characterImageObject.image;
       characterImagePreview.appendChild(image);
       _bind_image();
@@ -18527,9 +18584,9 @@ var characterImage = (function() {
       // console.log("render background");
       var characterImageObject = helper.getObject({
         object: sheet.get(),
-        path: "basics.character_image"
+        path: "basics.image"
       });
-      var characterImageBackground = helper.e(".js-character-image-background");
+      var characterImageBackground = helper.e(".js-image-background");
       var newBackgroundColor;
       if (characterImageObject.background == "black") {
         newBackgroundColor = "rgb(0,0,0)";
@@ -18547,10 +18604,10 @@ var characterImage = (function() {
       // console.log("render position");
       var characterImageObject = helper.getObject({
         object: sheet.get(),
-        path: "basics.character_image"
+        path: "basics.image"
       });
-      var characterImagePreview = helper.e(".js-character-image-preview");
-      var characterImage = helper.e(".js-character-image");
+      var characterImagePreview = helper.e(".js-image-preview");
+      var characterImage = helper.e(".js-image");
       var x;
       var y;
       var moveImage = function(image) {
@@ -18606,10 +18663,10 @@ var characterImage = (function() {
       // console.log("render resize");
       var characterImageObject = helper.getObject({
         object: sheet.get(),
-        path: "basics.character_image"
+        path: "basics.image"
       });
-      var characterImage = helper.e(".js-character-image");
-      var characterImagePreview = helper.e(".js-character-image-preview");
+      var characterImage = helper.e(".js-image");
+      var characterImagePreview = helper.e(".js-image-preview");
       if (characterImageObject.size.width == "" || characterImageObject.size.height == "") {
         _calculate_size(characterImage);
       };
@@ -18648,7 +18705,7 @@ var characterImage = (function() {
     };
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.position",
+      path: "basics.image.position",
       newValue: position
     });
   };
@@ -18657,7 +18714,7 @@ var characterImage = (function() {
     // console.log("store background");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.background",
+      path: "basics.image.background",
       newValue: background
     });
   };
@@ -18666,7 +18723,7 @@ var characterImage = (function() {
     // console.log("store color");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.color",
+      path: "basics.image.color",
       newValue: color
     });
   };
@@ -18675,7 +18732,7 @@ var characterImage = (function() {
     // console.log("store image");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.image",
+      path: "basics.image.image",
       newValue: imageBase64
     });
   };
@@ -18684,7 +18741,7 @@ var characterImage = (function() {
     // console.log("store scale");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.scale",
+      path: "basics.image.scale",
       newValue: scale
     });
   };
@@ -18693,7 +18750,7 @@ var characterImage = (function() {
     // console.log("store orientation");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.orientation",
+      path: "basics.image.orientation",
       newValue: orientation
     });
   };
@@ -18706,7 +18763,7 @@ var characterImage = (function() {
     };
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.size",
+      path: "basics.image.size",
       newValue: size
     });
   };
@@ -18715,7 +18772,7 @@ var characterImage = (function() {
     // console.log("store uploaded");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.character_image.uploaded",
+      path: "basics.image.uploaded",
       newValue: boolean
     });
   };
@@ -18723,7 +18780,7 @@ var characterImage = (function() {
   function _get_uploadedState() {
     var uploaded = helper.getObject({
       object: sheet.get(),
-      path: "basics.character_image.uploaded"
+      path: "basics.image.uploaded"
     });
     if (uploaded == "") {
       uploaded = false;
@@ -18900,7 +18957,7 @@ var characterSelect = (function() {
   };
 
   function _get_name(characterObject) {
-    var characterName = characterObject.basics.name;
+    var characterName = characterObject.basics.character.name;
     if (typeof characterName == "undefined" || characterName == "" || characterName == " ") {
       characterName = "New character";
     };
@@ -19166,7 +19223,7 @@ var classes = (function() {
   function render() {
     var all_classes = helper.getObject({
       object: sheet.get(),
-      path: "basics.classes"
+      path: "basics.classes.all"
     });
     var totalLevels = _total(all_classes, "level");
     var totalHP = _total(all_classes, "hp") + (totalLevels * stats.getMod("con"));
@@ -19178,7 +19235,7 @@ var classes = (function() {
     var baseAttackBonuses = _makeBaseAttackBonuses(totalBab);
     helper.setObject({
       object: sheet.get(),
-      path: "basics.level",
+      path: "basics.experience.level",
       newValue: totalLevels
     });
     helper.setObject({
@@ -19188,12 +19245,12 @@ var classes = (function() {
     });
     helper.setObject({
       object: sheet.get(),
-      path: "offense.base_attack",
+      path: "offense.stats.base_attack",
       newValue: totalBab
     });
     helper.setObject({
       object: sheet.get(),
-      path: "offense.base_attack_bonuses",
+      path: "offense.stats.base_attack_bonuses",
       newValue: baseAttackBonuses
     });
     helper.setObject({
@@ -19203,31 +19260,33 @@ var classes = (function() {
     });
     helper.setObject({
       object: sheet.get(),
-      path: "defense.fortitude.base",
+      path: "defense.saves.fortitude.base",
       newValue: totalFortitude
     });
     helper.setObject({
       object: sheet.get(),
-      path: "defense.reflex.base",
+      path: "defense.saves.reflex.base",
       newValue: totalReflex
     });
     helper.setObject({
       object: sheet.get(),
-      path: "defense.will.base",
+      path: "defense.saves.will.base",
       newValue: totalWill
     });
   };
 
   function get_classLevel(characterObject) {
     var classAndLevel = "";
-    var classes = characterObject.basics.classes;
-    for (var i = 0; i < classes.length; i++) {
-      var classname = classes[i].classname || "No class";
-      var level = classes[i].level || "No level";
-      classAndLevel = classAndLevel + classname + " " + level;
-      if (i < (classes.length - 1)) {
-        classAndLevel = classAndLevel + " / ";
-      };
+    var classes = characterObject.basics.classes.all;
+    if (classes.length > 0) {
+      classes.forEach(function(arrayItem, index) {
+        var classname = arrayItem.classname || "No class";
+        var level = arrayItem.level || "No level";
+        classAndLevel = classAndLevel + classname + " " + level;
+        if (index < (classes.length - 1)) {
+          classAndLevel = classAndLevel + " / ";
+        };
+      });
     };
     return classAndLevel;
   };
@@ -19269,31 +19328,58 @@ var clone = (function() {
   function _get_cloneObjects(cloneType) {
     var object;
     if (cloneType == "class") {
-      object = sheet.get().basics.classes;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "basics.classes.all"
+      });
     };
     if (cloneType == "consumable") {
-      object = sheet.get().equipment.consumable;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "equipment.consumable.all"
+      });
     };
     if (cloneType == "power") {
-      object = sheet.get().statistics.power;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "statistics.power.all"
+      });
     };
     if (cloneType == "item") {
-      object = sheet.get().equipment.item.all;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "equipment.item.all"
+      });
     };
     if (cloneType == "skill") {
-      object = sheet.get().skills.custom;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "skills.custom.all"
+      });
     };
     if (cloneType == "attack-melee") {
-      object = sheet.get().offense.attack.melee;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "offense.attack.melee.all"
+      });
     };
     if (cloneType == "attack-ranged") {
-      object = sheet.get().offense.attack.ranged;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "offense.attack.ranged.all"
+      });
     };
     if (cloneType == "note-character") {
-      object = sheet.get().notes.character;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "notes.character.all"
+      });
     };
     if (cloneType == "note-story") {
-      object = sheet.get().notes.story;
+      object = helper.getObject({
+        object: sheet.get(),
+        path: "notes.story.all"
+      });
     };
     return object;
   };
@@ -19306,13 +19392,13 @@ var clone = (function() {
         '  <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-large">' +
-        '        <div class="m-input-block js-input-block js-basics-class-level" data-input-block-options="path:basics.classes[' + cloneIndex + ']classname,clone:true">' +
+        '        <div class="m-input-block js-input-block js-basics-class-level" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']classname,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-classname-' + cloneIndex + '">Class Name</label>' +
         '          <input id="class-classname-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-small">' +
-        '        <div class="m-input-block js-input-block js-basics-class-level" data-input-block-options="path:basics.classes[' + cloneIndex + ']level,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block js-basics-class-level" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']level,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-level-' + cloneIndex + '">Levels</label>' +
         '          <input id="class-level-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:Total number of Levels in this Class.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
@@ -19320,19 +19406,19 @@ var clone = (function() {
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes[' + cloneIndex + ']hp,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']hp,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-hp-' + cloneIndex + '">HP</label>' +
         '          <input id="class-hp-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:HP for all Levels in this Class, including favored class bonuses. CON bonuses will be automatically added.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes[' + cloneIndex + ']bab,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']bab,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-bab-' + cloneIndex + '">BAB</label>' +
         '          <input id="class-bab-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:The highest BAB for this Class. Additional attacks will be automatically added.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes[' + cloneIndex + ']ranks,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']ranks,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-ranks-' + cloneIndex + '">Ranks</label>' +
         '          <input id="class-ranks-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:Skill Ranks for all Levels in this Class, including favored class bonuses. INT bonuses will be automatically added.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
@@ -19340,19 +19426,19 @@ var clone = (function() {
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes[' + cloneIndex + ']fortitude,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']fortitude,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-fortitude-' + cloneIndex + '">Base Fortitude</label>' +
         '          <input id="class-fortitude-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes[' + cloneIndex + ']reflex,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']reflex,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-reflex-' + cloneIndex + '">Base Reflex</label>' +
         '          <input id="class-reflex-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes[' + cloneIndex + ']will,type:integer,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']will,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-will-' + cloneIndex + '">Base Will</label>' +
         '          <input id="class-will-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '        </div>' +
@@ -19367,18 +19453,18 @@ var clone = (function() {
     if (cloneType == "consumable") {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
-        '  <div class="js-total-block" data-total-block-options="path:equipment.consumable[' + cloneIndex + '],addition:+total,subtraction:+used,clone:true">' +
+        '  <div class="js-total-block" data-total-block-options="path:equipment.consumable.all[' + cloneIndex + '],addition:+total,subtraction:+used,clone:true">' +
         '    <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
         '      <div class="m-edit-box-item-max m-edit-box-group">' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable[' + cloneIndex + ']item,clone:true">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable.all[' + cloneIndex + ']item,clone:true">' +
         '            <label class="m-input-block-label js-input-block-label" for="consumable-item-' + cloneIndex + '">Consumables</label>' +
         '            <input id="consumable-item-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '          </div>' +
         '        </div>' +
         '        <div class="m-edit-box-item-total">' +
         '          <p class="m-edit-box-label">Remaining</p>' +
-        '          <p class="m-edit-box-total js-text-block" data-text-block-options="path:equipment.consumable[' + cloneIndex + ']current,clone:true"></p>' +
+        '          <p class="m-edit-box-total js-text-block" data-text-block-options="path:equipment.consumable.all[' + cloneIndex + ']current,clone:true"></p>' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item m-edit-box-group-control-set">' +
@@ -19386,7 +19472,7 @@ var clone = (function() {
         '          <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-large button-icon button-thin js-input-block-increment" data-input-block-increment-options="target:consumable-total-' + cloneIndex + ',clone:true,action:subtraction" tabindex="1"><span class="icon-remove"></span></a>' +
         '        </div>' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable[' + cloneIndex + ']total,type:integer,minimum:0,noZero:true,clone:true">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable.all[' + cloneIndex + ']total,type:integer,minimum:0,noZero:true,clone:true">' +
         '            <label class="m-input-block-label js-input-block-label" for="consumable-total-' + cloneIndex + '">Total</label>' +
         '            <input id="consumable-total-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '          </div>' +
@@ -19403,7 +19489,7 @@ var clone = (function() {
         '          <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-large button-icon button-thin js-input-block-increment" data-input-block-increment-options="target:consumable-used-' + cloneIndex + ',clone:true,action:subtraction" tabindex="1"><span class="icon-remove"></span></a>' +
         '        </div>' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable[' + cloneIndex + ']used,type:integer,minimum:0,noZero:true,clone:true">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable.all[' + cloneIndex + ']used,type:integer,minimum:0,noZero:true,clone:true">' +
         '            <label class="m-input-block-label js-input-block-label" for="consumable-used-' + cloneIndex + '">Used</label>' +
         '            <input id="consumable-used-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '          </div>' +
@@ -19425,18 +19511,18 @@ var clone = (function() {
     if (cloneType == "power") {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
-        '  <div class="js-total-block" data-total-block-options="path:statistics.power[' + cloneIndex + '],addition:+total,subtraction:+used,clone:true">' +
+        '  <div class="js-total-block" data-total-block-options="path:statistics.power.all[' + cloneIndex + '],addition:+total,subtraction:+used,clone:true">' +
         '    <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
         '      <div class="m-edit-box-item-max m-edit-box-group">' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:statistics.power[' + cloneIndex + ']name,clone:true">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:statistics.power.all[' + cloneIndex + ']name,clone:true">' +
         '            <label class="m-input-block-label js-input-block-label" for="power-name-' + cloneIndex + '">Power</label>' +
         '            <input id="power-name-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '          </div>' +
         '        </div>' +
         '        <div class="m-edit-box-item-total">' +
         '          <p class="m-edit-box-label">Remaining</p>' +
-        '          <p class="m-edit-box-total js-text-block" data-text-block-options="path:statistics.power[' + cloneIndex + ']current,clone:true"></p>' +
+        '          <p class="m-edit-box-total js-text-block" data-text-block-options="path:statistics.power.all[' + cloneIndex + ']current,clone:true"></p>' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item m-edit-box-group-control-set">' +
@@ -19444,7 +19530,7 @@ var clone = (function() {
         '          <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-large button-icon button-thin js-input-block-increment" data-input-block-increment-options="target:power-total-' + cloneIndex + ',clone:true,action:subtraction" tabindex="1"><span class="icon-remove"></span></a>' +
         '        </div>' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:statistics.power[' + cloneIndex + ']total,type:integer,minimum:0,noZero:true,clone:true">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:statistics.power.all[' + cloneIndex + ']total,type:integer,minimum:0,noZero:true,clone:true">' +
         '            <label class="m-input-block-label js-input-block-label" for="power-total-' + cloneIndex + '">Total</label>' +
         '            <input id="power-total-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '          </div>' +
@@ -19461,7 +19547,7 @@ var clone = (function() {
         '          <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-large button-icon button-thin js-input-block-increment" data-input-block-increment-options="target:power-used-' + cloneIndex + ',clone:true,action:subtraction" tabindex="1"><span class="icon-remove"></span></a>' +
         '        </div>' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:statistics.power[' + cloneIndex + ']used,type:integer,minimum:0,noZero:true,clone:true">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:statistics.power.all[' + cloneIndex + ']used,type:integer,minimum:0,noZero:true,clone:true">' +
         '            <label class="m-input-block-label js-input-block-label" for="power-used-' + cloneIndex + '">Used</label>' +
         '            <input id="power-used-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '          </div>' +
@@ -19515,9 +19601,9 @@ var clone = (function() {
     if (cloneType == "skill") {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
-        '  <div class="m-edit-box m-edit-box-indent m-edit-box-head-small m-edit-box-labels js-total-block" data-total-block-options="path:skills.custom[' + cloneIndex + '],addition:+ranks+misc+racial+feat+trait,bonuses:+str_bonus+dex_bonus+con_bonus+int_bonus+wis_bonus+cha_bonus+class_skill+level+half_level+check_penalty+size_modifier_stealth+size_modifier_fly,clone:true">' +
+        '  <div class="m-edit-box m-edit-box-indent m-edit-box-head-small m-edit-box-labels js-total-block" data-total-block-options="path:skills.custom.all[' + cloneIndex + '],addition:+ranks+misc+racial+feat+trait,bonuses:+str+dex+con+int+wis+cha+class_skill+level+half_level+check_penalty+size_stealth+size_fly,clone:true">' +
         '    <div class="m-edit-box-head">' +
-        '      <div class="m-skill-name m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']name,clone:true">' +
+        '      <div class="m-skill-name m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']name,clone:true">' +
         '        <input class="m-input-block-field u-full-width u-no-margin js-input-block-field" type="text" tabindex="1" placeholder="Custom skill">' +
         '      </div>' +
         '    </div>' +
@@ -19526,34 +19612,34 @@ var clone = (function() {
         '        <div class="m-edit-box-item m-edit-box-group">' +
         '          <div class="m-edit-box-item-total">' +
         '            <p class="m-edit-box-label">Total</p>' +
-        '            <p class="m-edit-box-total js-text-block" data-text-block-options="path:skills.custom[' + cloneIndex + ']current,type:bonus,clone:true"></p>' +
+        '            <p class="m-edit-box-total js-text-block" data-text-block-options="path:skills.custom.all[' + cloneIndex + ']current,type:bonus,clone:true"></p>' +
         '          </div>' +
         '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']ranks,type:integer,clone:true">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']ranks,type:integer,clone:true">' +
         '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-ranks">Ranks</label>' +
         '              <input id="skills-custom-' + cloneIndex + '-ranks" class="m-input-block-field u-full-width u-text-center js-input-block-field js-input-block-field-ranks" type="number" tabindex="1">' +
         '            </div>' +
         '          </div>' +
         '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']racial,type:integer,clone:true">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']racial,type:integer,clone:true">' +
         '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-racial">Racial</label>' +
         '              <input id="skills-custom-' + cloneIndex + '-racial" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
         '          </div>' +
         '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']feat,type:integer,clone:true">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']feat,type:integer,clone:true">' +
         '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-feat">Feat</label>' +
         '              <input id="skills-custom-' + cloneIndex + '-feat" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
         '          </div>' +
         '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']trait,type:integer,clone:true">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']trait,type:integer,clone:true">' +
         '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-trait">Trait</label>' +
         '              <input id="skills-custom-' + cloneIndex + '-trait" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
         '          </div>' +
         '          <div class="m-edit-box-item-small m-edit-box-item-grow">' +
-        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom[' + cloneIndex + ']misc,type:integer,clone:true">' +
+        '            <div class="m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']misc,type:integer,clone:true">' +
         '              <label class="m-input-block-label js-input-block-label" for="skills-custom-' + cloneIndex + '-misc">Misc</label>' +
         '              <input id="skills-custom-' + cloneIndex + '-misc" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '            </div>' +
@@ -19561,12 +19647,12 @@ var clone = (function() {
         '          <div class="m-edit-box-item-check">' +
         '            <div class="m-check-block">' +
         '              <p class="m-edit-box-label">Class <span class="hidden-xs hidden-sm hidden-md">Skill</span></p>' +
-        '              <input class="m-check-block-check js-total-block-check" data-total-block-check-options="path:skills.custom[' + cloneIndex + ']bonuses,type:class_skill,clone:true" type="checkbox" tabindex="1">' +
+        '              <input class="m-check-block-check js-total-block-check" data-total-block-check-options="path:skills.custom.all[' + cloneIndex + ']bonuses,type:class_skill,clone:true" type="checkbox" tabindex="1">' +
         '              <span class="m-check-block-check-icon"></span>' +
         '            </div>' +
         '          </div>' +
         '          <div class="m-edit-box-item-button-small">' +
-        '            <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-secondary button-large button-icon button-thin js-total-block-bonuses" data-total-block-bonuses-options="path:skills.custom[' + cloneIndex + ']bonuses,modalHeading:Custom Skill bonuses,clone:true" tabindex="1"><span class="icon-more-vertical"></span></a>' +
+        '            <a href="javascript:void(0)" class="u-inline-with-input u-no-margin button button-secondary button-large button-icon button-thin js-total-block-bonuses" data-total-block-bonuses-options="path:skills.custom.all[' + cloneIndex + ']bonuses,modalHeading:Custom Skill bonuses,clone:true" tabindex="1"><span class="icon-more-vertical"></span></a>' +
         '          </div>' +
         '        </div>' +
         '      </div>' +
@@ -19582,20 +19668,20 @@ var clone = (function() {
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
         '    <div class="m-edit-box-item-max">' +
-        '      <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee[' + cloneIndex + ']weapon,clone:true">' +
+        '      <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']weapon,clone:true">' +
         '        <label class="m-input-block-label js-input-block-label" for="attack-melee-weapon-' + cloneIndex + '">Weapon</label>' +
         '        <input id="attack-melee-weapon-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '      </div>' +
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee[' + cloneIndex + ']attack,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']attack,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-melee-attack-' + cloneIndex + '">Attack</label>' +
         '          <input id="attack-melee-attack-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee[' + cloneIndex + ']damage,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']damage,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-melee-damage-' + cloneIndex + '">Damage</label>' +
         '          <input id="attack-melee-damage-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
@@ -19603,13 +19689,13 @@ var clone = (function() {
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee[' + cloneIndex + ']critical,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']critical,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-melee-critical-' + cloneIndex + '">Critical</label>' +
         '          <input id="attack-melee-critical-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee[' + cloneIndex + ']type,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']type,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-melee-type-' + cloneIndex + '">Type</label>' +
         '          <input id="attack-melee-type-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
@@ -19626,20 +19712,20 @@ var clone = (function() {
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
         '    <div class="m-edit-box-item-max">' +
-        '      <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']weapon,clone:true">' +
+        '      <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']weapon,clone:true">' +
         '        <label class="m-input-block-label js-input-block-label" for="attack-ranged-weapon-' + cloneIndex + '">Weapon</label>' +
         '        <input id="attack-ranged-weapon-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '      </div>' +
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']attack,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']attack,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-attack-' + cloneIndex + '">Attack</label>' +
         '          <input id="attack-ranged-attack-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']damage,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']damage,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-damage-' + cloneIndex + '">Damage</label>' +
         '          <input id="attack-ranged-damage-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
@@ -19647,13 +19733,13 @@ var clone = (function() {
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']critical,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']critical,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-critical-' + cloneIndex + '">Critical</label>' +
         '          <input id="attack-ranged-critical-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']range,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']range,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-range-' + cloneIndex + '">Range</label>' +
         '          <input id="attack-ranged-range-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
@@ -19661,13 +19747,13 @@ var clone = (function() {
         '    </div>' +
         '    <div class="m-edit-box-item m-edit-box-group">' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']ammo,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']ammo,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-ammo-' + cloneIndex + '">Ammo</label>' +
         '          <input id="attack-ranged-ammo-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged[' + cloneIndex + ']type,clone:true">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']type,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-type-' + cloneIndex + '">Type</label>' +
         '          <input id="attack-ranged-type-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '        </div>' +
@@ -19684,7 +19770,7 @@ var clone = (function() {
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box-content m-edit-box-content-margin-large">' +
         '    <div class="m-edit-box-item-max">' +
-        '      <div class="m-textarea-block js-textarea-block" data-textarea-block-options="path:notes.character[' + cloneIndex + ']note,clone:true">' +
+        '      <div class="m-textarea-block js-textarea-block" data-textarea-block-options="path:notes.character.all[' + cloneIndex + ']note,clone:true">' +
         '        <label class="m-textarea-block-label js-textarea-block-label" for="note-character-' + cloneIndex + '">Note</label>' +
         '        <div id="note-character-' + cloneIndex + '" class="m-textarea-block-field textarea textarea-large u-full-width js-textarea-block-field" contentEditable="true" tabindex="1"></div>' +
         '      </div>' +
@@ -19700,7 +19786,7 @@ var clone = (function() {
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box-content m-edit-box-content-margin-large">' +
         '    <div class="m-edit-box-item-max">' +
-        '      <div class="m-textarea-block js-textarea-block" data-textarea-block-options="path:notes.story[' + cloneIndex + ']note,clone:true">' +
+        '      <div class="m-textarea-block js-textarea-block" data-textarea-block-options="path:notes.story.all[' + cloneIndex + ']note,clone:true">' +
         '        <label class="m-textarea-block-label js-textarea-block-label" for="note-story-' + cloneIndex + '">Note</label>' +
         '        <div id="note-story-' + cloneIndex + '" class="m-textarea-block-field textarea textarea-large u-full-width js-textarea-block-field" contentEditable="true" tabindex="1"></div>' +
         '      </div>' +
@@ -19773,80 +19859,17 @@ var clone = (function() {
   };
 
   function _get_cloneCount(cloneType, mixed) {
-    var cloneCount;
-    if (cloneType == "class") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "basics.classes"
-      }).length;
+    if (mixed || cloneType == "note" || cloneType == "attack") {
+      if (cloneType == "note") {
+        return _get_cloneObjects("note-character").length + _get_cloneObjects("note-story").length;
+      } else if (cloneType == "attack") {
+        return _get_cloneObjects("attack-melee").length + _get_cloneObjects("attack-ranged").length;
+      } else {
+        return _get_cloneObjects(cloneType).length;
+      };
+    } else {
+      return _get_cloneObjects(cloneType).length;
     };
-    if (cloneType == "attack-melee") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "offense.attack.melee"
-      }).length;
-    };
-    if (cloneType == "attack-ranged") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "offense.attack.ranged"
-      }).length;
-    };
-    if (cloneType == "consumable") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "equipment.consumable"
-      }).length;
-    };
-    if (cloneType == "power") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "statistics.power"
-      }).length;
-    };
-    if (cloneType == "item") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "equipment.item.all"
-      }).length;
-    };
-    if (cloneType == "skill") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "skills.custom"
-      }).length;
-    };
-    if (cloneType == "note-character") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "notes.character"
-      }).length;
-    };
-    if (cloneType == "note-story") {
-      cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "notes.story"
-      }).length;
-    };
-    if (cloneType == "note" || cloneType == "note-character" && mixed || cloneType == "note-story" && mixed) {
-      (cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "notes.character"
-      }).length + helper.getObject({
-        object: sheet.get(),
-        path: "notes.story"
-      }).length)
-    };
-    if (cloneType == "attack" || cloneType == "attack-melee" && mixed || cloneType == "attack-ranged" && mixed) {
-      (cloneCount = helper.getObject({
-        object: sheet.get(),
-        path: "offense.attack.melee"
-      }).length + helper.getObject({
-        object: sheet.get(),
-        path: "offense.attack.ranged"
-      }).length)
-    };
-    return cloneCount;
   };
 
   function _get_placeholderClone(cloneType) {
@@ -20076,12 +20099,12 @@ var clone = (function() {
         feat: "",
         trait: "",
         bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           class_skill: false,
           level: false,
           half_level: false,
@@ -20815,6 +20838,7 @@ var display = (function() {
   };
 
   function _get_all_spell(all_displayPath) {
+    console.log(all_displayPath);
     var all_node = [];
     for (var i = 0; i < all_displayPath.length; i++) {
       var bookPath = all_displayPath[i].split(".");
@@ -21607,8 +21631,8 @@ var display = (function() {
   };
 
   function render(section) {
-    _render_displayBlock(section);
-    _update_displayPlaceholder(section);
+    // _render_displayBlock(section);
+    // _update_displayPlaceholder(section);
   };
 
   function _update_displayPlaceholder(section) {
@@ -21740,10 +21764,17 @@ var edit = (function() {
 var encumbrance = (function() {
 
   var changeEncumbranceTimer = null;
+  var carryMove = {
+    light: "",
+    medium: "",
+    heavy: "",
+    lift: "",
+    drag: ""
+  };
 
   function bind(input) {
-    var equipmentEncumbranceEncumbranceStr = helper.e("#equipment-encumbrance-encumbrance-str");
-    equipmentEncumbranceEncumbranceStr.addEventListener("input", function() {
+    var equipmentEncumbranceStr = helper.e("#equipment-encumbrance-str");
+    equipmentEncumbranceStr.addEventListener("input", function() {
       clearTimeout(changeEncumbranceTimer);
       changeEncumbranceTimer = setTimeout(update, 350);
     }, false);
@@ -21759,67 +21790,74 @@ var encumbrance = (function() {
     };
   };
 
-  function render() {
-    var object = _create_encumbranceObject(stats.getScore("str"));
+  function store() {
     helper.setObject({
       object: sheet.get(),
       path: "equipment.encumbrance.carry_move",
-      newValue: object
+      newValue: carryMove
     });
     sheet.store();
   };
 
-  function _create_encumbranceObject(value) {
-    var encumbranceStr = sheet.get().equipment.encumbrance.encumbrance_str;
-    if (sheet.get().equipment.encumbrance.encumbrance_str != "" && !isNaN(sheet.get().equipment.encumbrance.encumbrance_str)) {
-      value = sheet.get().equipment.encumbrance.encumbrance_str;
-    };
-    if (!isNaN(value)) {
-      var str = parseInt(value, 10);
-    } else {
-      str = value;
-    };
-    var allEncumbrance = {};
-    if (str > 0 && str <= 200) {
-      var maxLoad;
-      var base = [25, 28.75, 32.5, 37.5, 43.75, 50, 57.5, 65, 75, 87.5];
-      if (parseInt(str, 10) <= 10) {
-        maxLoad = 10 * str;
+  function render() {
+    _render_encumbrance();
+    store();
+  };
+
+  function _render_encumbrance() {
+    var str = stats.getScore("str");
+    var encumbranceStr = helper.getObject({
+      object: sheet.get(),
+      path: "equipment.encumbrance.str"
+    });
+    var _create_moveCarryObject = function(strVale) {
+      var object = {};
+      if (strVale > 0 && strVale <= 200) {
+        var maxLoad;
+        var base = [25, 28.75, 32.5, 37.5, 43.75, 50, 57.5, 65, 75, 87.5];
+        if (parseInt(strVale, 10) <= 10) {
+          maxLoad = 10 * strVale;
+        } else {
+          var index = (1 + strVale - 10 * parseInt(strVale / 10)) - 1;
+          maxLoad = base[index] * Math.pow(4, parseInt(strVale / 10));
+        };
+        var lightUpper = parseInt(maxLoad / 3).toLocaleString();
+        var mediumUpper = parseInt((2 * maxLoad) / 3).toLocaleString();
+        var mediumLower = (parseInt(maxLoad / 3) + 1).toLocaleString();
+        var heavyUpper = maxLoad.toLocaleString();
+        var heavyLower = (parseInt((2 * maxLoad) / 3) + 1).toLocaleString();
+        var lift = parseInt(2 * maxLoad).toLocaleString();
+        var drag = parseInt(5 * maxLoad).toLocaleString();
+        object.light = lightUpper + " lbs. or less";
+        object.medium = mediumLower + " - " + mediumUpper + " lbs.";
+        object.heavy = heavyLower + " - " + heavyUpper + " lbs.";
+        object.lift = lift + " lbs.";
+        object.drag = drag + " lbs.";
+      } else if (isNaN(strVale) || strVale <= 0) {
+        object.light = 0;
+        object.medium = 0;
+        object.heavy = 0;
+        object.lift = 0;
+        object.drag = 0;
       } else {
-        var index = (1 + str - 10 * parseInt(str / 10)) - 1;
-        maxLoad = base[index] * Math.pow(4, parseInt(str / 10));
+        object.light = "STR exceeds maximum calculation";
+        object.medium = "STR exceeds maximum calculation";
+        object.heavy = "STR exceeds maximum calculation";
+        object.lift = "STR exceeds maximum calculation";
+        object.drag = "STR exceeds maximum calculation";
       };
-      // console.log("maxLoad", maxLoad);
-      var lightUpper = parseInt(maxLoad / 3).toLocaleString();
-      var mediumUpper = parseInt((2 * maxLoad) / 3).toLocaleString();
-      var mediumLower = (parseInt(maxLoad / 3) + 1).toLocaleString();
-      var heavyUpper = maxLoad.toLocaleString();
-      var heavyLower = (parseInt((2 * maxLoad) / 3) + 1).toLocaleString();
-      var lift = parseInt(2 * maxLoad).toLocaleString();
-      var drag = parseInt(5 * maxLoad).toLocaleString();
-      allEncumbrance.light = lightUpper + " lbs. or less";
-      allEncumbrance.medium = mediumLower + " - " + mediumUpper + " lbs.";
-      allEncumbrance.heavy = heavyLower + " - " + heavyUpper + " lbs.";
-      allEncumbrance.lift = lift + " lbs.";
-      allEncumbrance.drag = drag + " lbs.";
-    } else if (isNaN(str) || str <= 0) {
-      allEncumbrance.light = 0;
-      allEncumbrance.medium = 0;
-      allEncumbrance.heavy = 0;
-      allEncumbrance.lift = 0;
-      allEncumbrance.drag = 0;
-    } else {
-      allEncumbrance.light = "STR exceeds maximum calculation";
-      allEncumbrance.medium = "STR exceeds maximum calculation";
-      allEncumbrance.heavy = "STR exceeds maximum calculation";
-      allEncumbrance.lift = "STR exceeds maximum calculation";
-      allEncumbrance.drag = "STR exceeds maximum calculation";
+      return object;
     };
-    return allEncumbrance;
+    if (encumbranceStr != "" && !isNaN(encumbranceStr)) {
+      carryMove = _create_moveCarryObject(encumbranceStr);
+    } else {
+      carryMove = _create_moveCarryObject(str);
+    };
   };
 
   // exposed methods
   return {
+    store: store,
     bind: bind,
     render: render
   };
@@ -21906,7 +21944,6 @@ var events = (function() {
           heading: options.promptHeading,
           message: options.promptMessage,
           actionText: "Clear",
-          cancelText: "Cancel",
           action: function() {
             _destroyXp();
             _store();
@@ -21924,7 +21961,6 @@ var events = (function() {
           heading: options.promptHeading,
           message: options.promptMessage,
           actionText: "Clear",
-          cancelText: "Cancel",
           action: function() {
             _destroyWealth();
             _store();
@@ -21990,7 +22026,7 @@ var events = (function() {
           data = "+" + data;
         };
         if (options.type == "xp") {
-          data = data + " XP";
+          data = data + " EXP";
         } else if (options.type == "wealth") {
           if (eventObject.type == "platinum") {
             data = data + " PP";
@@ -22368,7 +22404,7 @@ var inputBlock = (function() {
   };
 
   function _bind_name() {
-    var inputBlock = helper.e(".js-basics-name");
+    var inputBlock = helper.e(".js-basics-character-name");
     var input = inputBlock.querySelector(".js-input-block-field");
     input.addEventListener("input", function() {
       clearTimeout(_timer_updateNav);
@@ -22533,7 +22569,7 @@ var inputBlock = (function() {
       var type = button.dataset.eventType;
       var note;
       if (inputBlockOptions.eventType == "xp") {
-        note = "XP cleared";
+        note = "EXP cleared";
       } else if (inputBlockOptions.eventType == "platinum") {
         note = "PP cleared";
       } else if (inputBlockOptions.eventType == "gold") {
@@ -23865,7 +23901,7 @@ var onboarding = (function() {
   function render() {
     if (helper.getObject({
         object: sheet.get(),
-        path: "demo"
+        path: "awesomeSheet.demo"
       }) && (helper.read("onboarding") == undefined) || (helper.read("onboarding") == "false")) {
 
       var _render_onboardingModal = function() {
@@ -24248,12 +24284,10 @@ var registerServiceWorker = (function() {
 
 var repair = (function() {
 
-  var debug = false;
+  var _debug = false;
 
-  function _repair(characterObject) {
-    if (debug) {
-      console.log("-- Repair fired -- >>", characterObject.basics.name);
-    };
+  // legacy sheet update
+  function _update_440andBelow(characterObject) {
     // --------------------------------------------------
     // repair spell notes
     if (characterObject.spells.book) {
@@ -24262,9 +24296,7 @@ var repair = (function() {
           if (characterObject.spells.book[i][j].length > 0) {
             for (var k in characterObject.spells.book[i][j]) {
               if (!("note" in characterObject.spells.book[i][j][k]) && typeof characterObject.spells.book[i][j][k].note != "string") {
-                if (debug) {
-                  console.log("\trepair spell notes");
-                };
+                _log("\t\tlegacy update: spell notes");
                 characterObject.spells.book[i][j][k].note = "";
               };
             };
@@ -24275,34 +24307,26 @@ var repair = (function() {
     // --------------------------------------------------
     // repair item array
     if (typeof characterObject.equipment.item == "string" || !characterObject.equipment.item) {
-      if (debug) {
-        console.log("\trepair item array");
-      };
+      _log("\t\tlegacy update: item array");
       characterObject.equipment.item = [];
     };
     // --------------------------------------------------
     // repair note array
     if (typeof characterObject.notes.character == "string" || typeof characterObject.notes.story == "string") {
-      if (debug) {
-        console.log("\trepair note array");
-      };
+      _log("\t\tlegacy update: note array");
       characterObject.notes.character = [];
       characterObject.notes.story = [];
     };
     // --------------------------------------------------
     // repair custom skills array
     if (typeof characterObject.skills.custom == "string" || !characterObject.skills.custom) {
-      if (debug) {
-        console.log("\trepair custom skills array");
-      };
+      _log("\t\tlegacy update: custom skills array");
       characterObject.skills.custom = [];
     };
     // --------------------------------------------------
     // repair custom skills
     if ("custom_1" in characterObject.skills || "custom_2" in characterObject.skills || "custom_3" in characterObject.skills || "custom_4" in characterObject.skills || "custom_5" in characterObject.skills || "custom_6" in characterObject.skills || "custom_7" in characterObject.skills || "custom_8" in characterObject.skills) {
-      if (debug) {
-        console.log("\trepair custom skills");
-      };
+      _log("\t\tlegacy update: custom skills");
       var skillKeys = ["custom_1", "custom_2", "custom_3", "custom_4", "custom_5", "custom_6", "custom_7", "custom_8"];
       for (var i = 0; i < skillKeys.length; i++) {
         if (characterObject.skills[skillKeys[i]].name != "" || characterObject.skills[skillKeys[i]].ranks || characterObject.skills[skillKeys[i]].misc) {
@@ -24315,9 +24339,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair concentration bonus object
     if (typeof characterObject.spells.concentration.bonuses != "object" || !characterObject.spells.concentration.bonuses) {
-      if (debug) {
-        console.log("\trepair concentration bonus object");
-      };
+      _log("\t\tlegacy update: concentration bonus object");
       characterObject.spells.concentration.bonuses = {
         str_bonus: false,
         dex_bonus: false,
@@ -24332,9 +24354,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair initiative object
     if (typeof characterObject.basics.initiative != "object" || typeof characterObject.basics.initiative.bonuses != "object" || !characterObject.basics.initiative.bonuses) {
-      if (debug) {
-        console.log("\trepair initiative object");
-      };
+      _log("\t\tlegacy update: initiative object");
       characterObject.basics.initiative = {
         misc: "",
         temp: "",
@@ -24355,9 +24375,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair size object
     if (typeof characterObject.basics.size != "object" || "size_bonus" in characterObject.defense.ac) {
-      if (debug) {
-        console.log("\trepair size object");
-      };
+      _log("\t\tlegacy update: size object");
       var size = characterObject.basics.size;
       if (size == "M" || size == "m" || size == "medium" || size == "Medium" || size != "") {
         size = "Medium";
@@ -24389,9 +24407,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair alignment
     if (["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil", ""].indexOf(characterObject.basics.alignment) === -1) {
-      if (debug) {
-        console.log("\trepair alignment");
-      };
+      _log("\t\tlegacy update: alignment");
       if (["Lawful Good", "Lawful good", "lawful good", "LG", "Lg", "lg"].indexOf(characterObject.basics.alignment) > -1) {
         characterObject.basics.alignment = "Lawful Good";
       };
@@ -24423,9 +24439,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair armor
     if (typeof characterObject.equipment.armor != "object") {
-      if (debug) {
-        console.log("\trepair armor");
-      };
+      _log("\t\tlegacy update: armor");
       characterObject.equipment.armor = {
         armor: "",
         check_penalty: "",
@@ -24455,9 +24469,7 @@ var repair = (function() {
       if (key in object) {
         if (object.racial != "" && !isNaN(object.racial)) {
           if (object.misc != "" && !isNaN(object.misc)) {
-            if (debug) {
-              console.log("\trepair racial save bonuses");
-            };
+            _log("\t\tlegacy update: racial save bonuses");
             object.misc = object.misc + object.racial;
           } else {
             object.misc = object.racial;
@@ -24472,9 +24484,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair classes
     if (!characterObject.basics.classes || typeof characterObject.basics.class == "string") {
-      if (debug) {
-        console.log("\trepair classes");
-      };
+      _log("\t\tlegacy update: classes");
       characterObject.basics.classes = [{
         classname: "",
         level: "",
@@ -24527,9 +24537,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair caster level check
     if (!characterObject.spells.caster_level_check) {
-      if (debug) {
-        console.log("\trepair caster level check");
-      };
+      _log("\t\tlegacy update: caster level check");
       characterObject.spells.caster_level_check = {
         current: "",
         misc: "",
@@ -24550,9 +24558,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair encumbrance
     if ("light" in characterObject.equipment.encumbrance || "medium" in characterObject.equipment.encumbrance || "heavy" in characterObject.equipment.encumbrance || "lift" in characterObject.equipment.encumbrance || "drag" in characterObject.equipment.encumbrance) {
-      if (debug) {
-        console.log("\trepair encumbrance");
-      };
+      _log("\t\tlegacy update: encumbrance");
       delete characterObject.equipment.encumbrance.light;
       delete characterObject.equipment.encumbrance.medium;
       delete characterObject.equipment.encumbrance.heavy;
@@ -24560,53 +24566,54 @@ var repair = (function() {
       delete characterObject.equipment.encumbrance.drag;
     };
     // --------------------------------------------------
+    // repair encumbrance
+    if (!("carry_move" in characterObject.equipment.encumbrance)) {
+      _log("\t\tlegacy update: encumbrance");
+      characterObject.equipment.encumbrance = {
+        encumbrance_str: "",
+        carry_move: {
+          light: "",
+          medium: "",
+          heavy: "",
+          lift: "",
+          drag: ""
+        }
+      };
+    };
+    // --------------------------------------------------
     // repair xp
     if (typeof characterObject.basics.xp == "string" && !characterObject.basics.xp == "") {
-      if (debug) {
-        console.log("\trepair xp");
-      };
+      _log("\t\tlegacy update: xp");
       characterObject.basics.xp = parseInt(characterObject.basics.xp.replace(/,/g, ""), 10);
     };
     // --------------------------------------------------
     // repair wealth
     if (typeof characterObject.equipment.wealth.platinum == "string" && !characterObject.equipment.wealth.platinum == "") {
-      if (debug) {
-        console.log("\trepair wealth platinum");
-      };
+      _log("\t\tlegacy update: wealth platinum");
       characterObject.equipment.wealth.platinum = parseInt(characterObject.equipment.wealth.platinum.replace(/,/g, ""), 10);
     };
     if (typeof characterObject.equipment.wealth.gold == "string" && !characterObject.equipment.wealth.gold == "") {
-      if (debug) {
-        console.log("\trepair wealth gold");
-      };
+      _log("\t\tlegacy update: wealth gold");
       characterObject.equipment.wealth.gold = parseInt(characterObject.equipment.wealth.gold.replace(/,/g, ""), 10);
     };
     if (typeof characterObject.equipment.wealth.silver == "string" && !characterObject.equipment.wealth.silver == "") {
-      if (debug) {
-        console.log("\trepair wealth silver");
-      };
+      _log("\t\tlegacy update: wealth silver");
       characterObject.equipment.wealth.silver = parseInt(characterObject.equipment.wealth.silver.replace(/,/g, ""), 10);
     };
     if (typeof characterObject.equipment.wealth.copper == "string" && !characterObject.equipment.wealth.copper == "") {
-      if (debug) {
-        console.log("\trepair wealth copper");
-      };
+      _log("\t\tlegacy update: wealth copper");
       characterObject.equipment.wealth.copper = parseInt(characterObject.equipment.wealth.copper.replace(/,/g, ""), 10);
     };
     // --------------------------------------------------
     // repair events array
     if (!characterObject.hasOwnProperty("events")) {
-      if (debug) {
-        console.log("\trepair events array");
-      };
+      _log("\t\tlegacy update: events array");
       characterObject.events = [];
     };
     // --------------------------------------------------
     // repair xp and next level
     if (typeof characterObject.basics.xp == "string" || typeof characterObject.basics.xp == "number") {
-      if (debug) {
-        console.log("\trepair xp and next level");
-      };
+      _log("\t\tlegacy update: xp and next level");
       var oldXp;
       if (typeof characterObject.basics.xp == "number") {
         oldXp = characterObject.basics.xp;
@@ -24622,9 +24629,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair speed
     if (typeof characterObject.basics.speed == "string" || typeof characterObject.basics.speed == "number" || characterObject.basics.speed == "" || typeof characterObject.basics.speed != "object") {
-      if (debug) {
-        console.log("\trepair speed");
-      };
+      _log("\t\tlegacy update: speed");
       var oldSpeed = characterObject.basics.speed;
       characterObject.basics.speed = {};
       characterObject.basics.speed.land = oldSpeed;
@@ -24632,9 +24637,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair character image
     if (!characterObject.basics.character_image) {
-      if (debug) {
-        console.log("\trepair character image");
-      };
+      _log("\t\tlegacy update: character image");
       characterObject.basics.character_image = {
         uploaded: false,
         background: "",
@@ -24661,9 +24664,7 @@ var repair = (function() {
     if (characterObject.offense.attack.melee.length > 0) {
       for (var i = 0; i < characterObject.offense.attack.melee.length; i++) {
         if (!characterObject.offense.attack.melee[i].type && characterObject.offense.attack.melee[i].type != "") {
-          if (debug) {
-            console.log("\trepair attack types melee");
-          };
+          _log("\t\tlegacy update: attack types melee");
           characterObject.offense.attack.melee[i].type = "";
         };
       };
@@ -24671,9 +24672,7 @@ var repair = (function() {
     if (characterObject.offense.attack.ranged.length > 0) {
       for (var i = 0; i < characterObject.offense.attack.ranged.length; i++) {
         if (!characterObject.offense.attack.ranged[i].type && characterObject.offense.attack.ranged[i].type != "") {
-          if (debug) {
-            console.log("\trepair attack types ranged");
-          };
+          _log("\t\tlegacy update: attack types ranged");
           characterObject.offense.attack.ranged[i].type = "";
         };
       };
@@ -24681,9 +24680,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair stats
     if (!("enhancement" in characterObject.statistics.stats.str) || !("enhancement" in characterObject.statistics.stats.dex) || !("enhancement" in characterObject.statistics.stats.con) || !("enhancement" in characterObject.statistics.stats.int) || !("enhancement" in characterObject.statistics.stats.wis) || !("enhancement" in characterObject.statistics.stats.cha)) {
-      if (debug) {
-        console.log("\trepair stats");
-      };
+      _log("\t\tlegacy update: stats");
       for (var key in characterObject.statistics.stats) {
         characterObject.statistics.stats[key].current = "";
         characterObject.statistics.stats[key].modifier = "";
@@ -24711,9 +24708,7 @@ var repair = (function() {
       if (characterObject.events.length > 0) {
         for (var i = 0; i < characterObject.events.length; i++) {
           if (characterObject.events[i].event.aggregateValue) {
-            if (debug) {
-              console.log("\trepair events");
-            };
+            _log("\t\tlegacy update: events");
             characterObject.events[i].event.aggregate_value = characterObject.events[i].event.aggregateValue;
             delete characterObject.events[i].event.aggregateValue;
           };
@@ -24725,18 +24720,14 @@ var repair = (function() {
     // --------------------------------------------------
     // repair character image cover and contain
     if ("cover" in characterObject.basics.character_image || "contain" in characterObject.basics.character_image) {
-      if (debug) {
-        console.log("\trepair character image cover and contain");
-      };
+      _log("\t\tlegacy update: character image cover and contain");
       delete characterObject.basics.character_image.cover;
       delete characterObject.basics.character_image.contain;
     };
     // --------------------------------------------------
     // repair character image size
     if (!characterObject.basics.character_image.size) {
-      if (debug) {
-        console.log("\trepair character image size");
-      };
+      _log("\t\tlegacy update: character image size");
       characterObject.basics.character_image.size = {
         width: "",
         height: ""
@@ -24745,9 +24736,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair character image uploaded
     if (!("uploaded" in characterObject.basics.character_image)) {
-      if (debug) {
-        console.log("repair character image uploaded");
-      };
+      _log("repair character image uploaded");
       if (characterObject.equipment.potion_viles_oils != "") {
         characterObject.basics.character_image.uploaded = true;
       } else {
@@ -24757,9 +24746,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair equipment
     if (!characterObject.equipment.potion_viles_oils && characterObject.equipment.potion_viles_oils != "") {
-      if (debug) {
-        console.log("\trepair equipment");
-      };
+      _log("\t\tlegacy update: equipment");
       characterObject.equipment.potion_viles_oils = "";
     };
     if (!characterObject.equipment.scrolls && characterObject.equipment.scrolls != "") {
@@ -24768,9 +24755,7 @@ var repair = (function() {
     // --------------------------------------------------
     // repair skills
     if (!("all" in characterObject.skills)) {
-      if (debug) {
-        console.log("\trepair skills");
-      };
+      _log("\t\tlegacy update: skills");
       characterObject.skills.all = {};
       if ("acrobatics" in characterObject.skills) {
         characterObject.skills.all.acrobatics = characterObject.skills.acrobatics;
@@ -24930,21 +24915,15 @@ var repair = (function() {
     if (characterObject.skills.custom.length > 0) {
       for (var i = 0; i < characterObject.skills.custom.length; i++) {
         if (!("racial" in characterObject.skills.custom[i])) {
-          if (debug) {
-            console.log("\t\t repair custom skills");
-          };
+          _log("\t\tlegacy update: custom skills");
           characterObject.skills.custom[i].racial = "";
         };
         if (!("trait" in characterObject.skills.custom[i])) {
-          if (debug) {
-            console.log("\t\t repair custom skills");
-          };
+          _log("\t\tlegacy update: custom skills");
           characterObject.skills.custom[i].trait = "";
         };
         if (!("feat" in characterObject.skills.custom[i])) {
-          if (debug) {
-            console.log("\t\t repair custom skills");
-          };
+          _log("\t\tlegacy update: custom skills");
           characterObject.skills.custom[i].feat = "";
         };
       };
@@ -24952,48 +24931,36 @@ var repair = (function() {
     // --------------------------------------------------
     // repair concentration stats
     if (!("trait" in characterObject.spells.concentration)) {
-      if (debug) {
-        console.log("\t\t repair spell stats");
-      };
+      _log("\t\tlegacy update: spell stats");
       characterObject.spells.concentration.trait = "";
     };
     // repair caster level stats
     if (!("trait" in characterObject.spells.caster_level_check)) {
-      if (debug) {
-        console.log("\t\t caster level stats");
-      };
+      _log("\t\tlegacy update: level stats");
       characterObject.spells.caster_level_check.trait = "";
     };
     // --------------------------------------------------
     // repair item
     if (Array.isArray(characterObject.equipment.item)) {
-      if (debug) {
-        console.log("\trepair item");
-      };
+      _log("\t\tlegacy update: item");
       var tempItems = characterObject.equipment.item.slice();
       characterObject.equipment.item = {};
       characterObject.equipment.item.all = tempItems;
     };
     if (!("weight" in characterObject.equipment.item)) {
-      if (debug) {
-        console.log("\trepair item weight");
-      };
+      _log("\t\tlegacy update: item weight");
       characterObject.equipment.item.weight = {};
       characterObject.equipment.item.weight.current = "";
     };
     if (!("value" in characterObject.equipment.item)) {
-      if (debug) {
-        console.log("\trepair item value");
-      };
+      _log("\t\tlegacy update: item value");
       characterObject.equipment.item.value = {};
       characterObject.equipment.item.value.current = "";
     };
     // --------------------------------------------------
     // repair spell bonus
     if (!("bonus" in characterObject.spells)) {
-      if (debug) {
-        console.log("\trepair spells bonus");
-      };
+      _log("\t\tlegacy update: spells bonus");
       characterObject.spells.bonus = {};
       characterObject.spells.bonus.level_0 = "";
       characterObject.spells.bonus.level_1 = "";
@@ -25010,30 +24977,22 @@ var repair = (function() {
     // repair skills
     for (var i in characterObject.skills.all) {
       if (!("racial" in characterObject.skills.all[i])) {
-        if (debug) {
-          console.log("\trepair skill", i, "racial");
-        };
+        _log("\t\tlegacy update: skill " + i + " racial");
         characterObject.skills.all[i].racial = "";
       };
       if (!("feat" in characterObject.skills.all[i])) {
-        if (debug) {
-          console.log("\trepair skill", i, "feat");
-        };
+        _log("\t\tlegacy update: skill " + i + " feat");
         characterObject.skills.all[i].feat = "";
       };
       if (!("trait" in characterObject.skills.all[i])) {
-        if (debug) {
-          console.log("\trepair skill", i, "trait");
-        };
+        _log("\t\tlegacy update: skill " + i + " trait");
         characterObject.skills.all[i].trait = "";
       };
     };
     // --------------------------------------------------
     // repair spells
     if (typeof characterObject.spells.dc.level_0 != "object") {
-      if (debug) {
-        console.log("\trepair spell dc");
-      };
+      _log("\t\tlegacy update: spell dc");
       var dcObject = function(level, oldDc) {
         var object = {
           spell_level: level,
@@ -25074,73 +25033,1747 @@ var repair = (function() {
     // --------------------------------------------------
     // repair caster level check and concentration
     if (!("racial" in characterObject.spells.concentration)) {
-      if (debug) {
-        console.log("\trepair concentration racial");
-      };
+      _log("\t\tlegacy update: concentration racial");
       characterObject.spells.concentration.racial = "";
     };
     if (!("racial" in characterObject.spells.caster_level_check)) {
-      if (debug) {
-        console.log("\trepair caster level check racial");
-      };
+      _log("\t\tlegacy update: caster level check racial");
       characterObject.spells.caster_level_check.racial = "";
     };
     // --------------------------------------------------
     // repair initiative trait
     if (!("trait" in characterObject.basics.initiative)) {
-      if (debug) {
-        console.log("\trepair initiative trait");
-      };
+      _log("\t\tlegacy update: initiative trait");
       characterObject.basics.initiative.trait = "";
     };
     // --------------------------------------------------
     if (!("school" in characterObject.spells)) {
-      if (debug) {
-        console.log("\trepair spell school");
-      };
+      _log("\t\tlegacy update: spell school");
       characterObject.spells.school = "";
     };
     // --------------------------------------------------
     if (!("opposition" in characterObject.spells)) {
-      if (debug) {
-        console.log("\trepair spell opposition");
-      };
+      _log("\t\tlegacy update: spell opposition");
       characterObject.spells.opposition = "";
     };
     // --------------------------------------------------
     if (!("domains" in characterObject.spells)) {
-      if (debug) {
-        console.log("\trepair spell domains");
-      };
+      _log("\t\tlegacy update: spell domains");
       characterObject.spells.domains = "";
     };
     // --------------------------------------------------
     if (!("bloodline" in characterObject.spells)) {
-      if (debug) {
-        console.log("\trepair spell bloodline");
-      };
+      _log("\t\tlegacy update: spell bloodline");
       characterObject.spells.bloodline = "";
     };
     // --------------------------------------------------
     if (!("power" in characterObject.statistics)) {
-      if (debug) {
-        console.log("\trepair power");
-      };
+      _log("\t\tlegacy update: power");
       characterObject.statistics.power = [];
     };
     // --------------------------------------------------
-    // sheet.store();
-    return characterObject;
+    if (typeof characterObject.awesomeSheet == "boolean") {
+      _log("\t\tlegacy update: awesome check");
+      characterObject.awesomeSheet = {};
+      characterObject.awesomeSheet.awesome = true;
+      characterObject.awesomeSheet.version = "4.4.0";
+    };
+    _log("\t\tlegacy update: complete");
   };
 
-  function render(characterObject) {
-    if (characterObject) {
-      _repair(characterObject)
+  function _update_500(characterObject) {
+    tempCharacterObject = JSON.parse(JSON.stringify(characterObject));
+    // awesome
+    characterObject.awesomeSheet = {};
+    characterObject.awesomeSheet.awesome = true;
+    characterObject.awesomeSheet.version = "5.0.0";
+    // basics
+    characterObject.basics = {
+      character: {
+        name: tempCharacterObject.basics.name || "",
+        race: tempCharacterObject.basics.race || "",
+        alignment: tempCharacterObject.basics.alignment || "",
+        deity: tempCharacterObject.basics.deity || "",
+        height: tempCharacterObject.basics.height || "",
+        weight: tempCharacterObject.basics.weight || "",
+        age: tempCharacterObject.basics.age || "",
+        gender: tempCharacterObject.basics.gender || "",
+        hero_points: tempCharacterObject.basics.hero_points || "",
+        description: tempCharacterObject.basics.character_description || "",
+        size: {
+          category: tempCharacterObject.basics.size.category || "",
+          modifier: {
+            base: tempCharacterObject.basics.size.size_modifier || "",
+            special: tempCharacterObject.basics.size.special_size_modifier || "",
+            fly: tempCharacterObject.basics.size.size_modifier_fly || "",
+            stealth: tempCharacterObject.basics.size.size_modifier_stealth || ""
+          }
+        }
+      },
+      classes: {
+        all: tempCharacterObject.basics.classes || []
+      },
+      experience: {
+        level: "",
+        next_level: "",
+        total: tempCharacterObject.basics.xp.total || "",
+        advancement: tempCharacterObject.basics.xp.advancement_speed || "",
+        needed: ""
+      },
+      initiative: {
+        misc: tempCharacterObject.basics.initiative.misc || "",
+        temp: tempCharacterObject.basics.initiative.temp || "",
+        feat: tempCharacterObject.basics.initiative.feat || "",
+        trait: tempCharacterObject.basics.initiative.trait || "",
+        current: "",
+        bonuses: {
+          str: tempCharacterObject.basics.initiative.bonuses.str_bonus || false,
+          dex: tempCharacterObject.basics.initiative.bonuses.dex_bonus || true,
+          con: tempCharacterObject.basics.initiative.bonuses.con_bonus || false,
+          int: tempCharacterObject.basics.initiative.bonuses.int_bonus || false,
+          wis: tempCharacterObject.basics.initiative.bonuses.wis_bonus || false,
+          cha: tempCharacterObject.basics.initiative.bonuses.cha_bonus || false,
+          level: tempCharacterObject.basics.initiative.bonuses.level || false,
+          half_level: tempCharacterObject.basics.initiative.bonuses.half_level || false
+        }
+      },
+      speed: {
+        land: tempCharacterObject.basics.speed.land || "",
+        fly: tempCharacterObject.basics.speed.fly || "",
+        maneuverability: tempCharacterObject.basics.speed.maneuverability || "",
+        swim: tempCharacterObject.basics.speed.swim || "",
+        climb: tempCharacterObject.basics.speed.climb || "",
+        burrow: tempCharacterObject.basics.speed.burrow || ""
+      },
+      image: {
+        uploaded: tempCharacterObject.basics.character_image.uploaded || "",
+        background: tempCharacterObject.basics.character_image.background || "",
+        color: {
+          r: tempCharacterObject.basics.character_image.color.r || "",
+          g: tempCharacterObject.basics.character_image.color.g || "",
+          b: tempCharacterObject.basics.character_image.color.b || ""
+        },
+        image: tempCharacterObject.basics.character_image.image || "",
+        orientation: tempCharacterObject.basics.character_image.orientation || "",
+        position: {
+          x: tempCharacterObject.basics.character_image.position.x || "",
+          y: tempCharacterObject.basics.character_image.position.y || ""
+        },
+        size: {
+          width: tempCharacterObject.basics.character_image.size.width || "",
+          height: tempCharacterObject.basics.character_image.size.height || ""
+        },
+        scale: tempCharacterObject.basics.character_image.scale || ""
+      }
+    };
+    // statistics
+    characterObject.statistics = {
+      stats: {
+        str: {
+          modifier: tempCharacterObject.statistics.stats.str.modifier || "",
+          base: tempCharacterObject.statistics.stats.str.base || "",
+          enhancement: tempCharacterObject.statistics.stats.str.enhancement || "",
+          misc: tempCharacterObject.statistics.stats.str.misc || "",
+          racial: tempCharacterObject.statistics.stats.str.racial || "",
+          temp: tempCharacterObject.statistics.stats.str.temp || "",
+          current: ""
+        },
+        dex: {
+          modifier: tempCharacterObject.statistics.stats.dex.modifier || "",
+          base: tempCharacterObject.statistics.stats.dex.base || "",
+          enhancement: tempCharacterObject.statistics.stats.dex.enhancement || "",
+          misc: tempCharacterObject.statistics.stats.dex.misc || "",
+          racial: tempCharacterObject.statistics.stats.dex.racial || "",
+          temp: tempCharacterObject.statistics.stats.dex.temp || "",
+          current: ""
+        },
+        con: {
+          modifier: tempCharacterObject.statistics.stats.con.modifier || "",
+          base: tempCharacterObject.statistics.stats.con.base || "",
+          enhancement: tempCharacterObject.statistics.stats.con.enhancement || "",
+          misc: tempCharacterObject.statistics.stats.con.misc || "",
+          racial: tempCharacterObject.statistics.stats.con.racial || "",
+          temp: tempCharacterObject.statistics.stats.con.temp || "",
+          current: ""
+        },
+        int: {
+          modifier: tempCharacterObject.statistics.stats.int.modifier || "",
+          base: tempCharacterObject.statistics.stats.int.base || "",
+          enhancement: tempCharacterObject.statistics.stats.int.enhancement || "",
+          misc: tempCharacterObject.statistics.stats.int.misc || "",
+          racial: tempCharacterObject.statistics.stats.int.racial || "",
+          temp: tempCharacterObject.statistics.stats.int.temp || "",
+          current: ""
+        },
+        wis: {
+          modifier: tempCharacterObject.statistics.stats.wis.modifier || "",
+          base: tempCharacterObject.statistics.stats.wis.base || "",
+          enhancement: tempCharacterObject.statistics.stats.wis.enhancement || "",
+          misc: tempCharacterObject.statistics.stats.wis.misc || "",
+          racial: tempCharacterObject.statistics.stats.wis.racial || "",
+          temp: tempCharacterObject.statistics.stats.wis.temp || "",
+          current: ""
+        },
+        cha: {
+          modifier: tempCharacterObject.statistics.stats.cha.modifier || "",
+          base: tempCharacterObject.statistics.stats.cha.base || "",
+          enhancement: tempCharacterObject.statistics.stats.cha.enhancement || "",
+          misc: tempCharacterObject.statistics.stats.cha.misc || "",
+          racial: tempCharacterObject.statistics.stats.cha.racial || "",
+          temp: tempCharacterObject.statistics.stats.cha.temp || "",
+          current: ""
+        }
+      },
+      abilities: {
+        feats: tempCharacterObject.statistics.feats || "",
+        traits: tempCharacterObject.statistics.traits || "",
+        languages: tempCharacterObject.statistics.languages || "",
+        special: tempCharacterObject.statistics.special_abilities || ""
+      },
+      power: {
+        all: tempCharacterObject.statistics.power || []
+      }
+    };
+    // equipment
+    characterObject.equipment = {
+      possessions: {
+        gear: tempCharacterObject.equipment.gear || "",
+        magic_gear: tempCharacterObject.equipment.magic_gear || "",
+        potion_viles_oils: tempCharacterObject.equipment.potion_viles_oils || "",
+        scrolls: tempCharacterObject.equipment.scrolls || ""
+      },
+      armor: {
+        armor: tempCharacterObject.equipment.armor.armor || "",
+        check_penalty: tempCharacterObject.equipment.armor.check_penalty || "",
+        max_dex: tempCharacterObject.equipment.armor.max_dex || "",
+        shield: tempCharacterObject.equipment.armor.shield || ""
+      },
+      body_slots: {
+        belts: tempCharacterObject.equipment.body_slots.belts || "",
+        body: tempCharacterObject.equipment.body_slots.body || "",
+        chest: tempCharacterObject.equipment.body_slots.chest || "",
+        eyes: tempCharacterObject.equipment.body_slots.eyes || "",
+        feet: tempCharacterObject.equipment.body_slots.feet || "",
+        hands: tempCharacterObject.equipment.body_slots.hands || "",
+        head: tempCharacterObject.equipment.body_slots.head || "",
+        headband: tempCharacterObject.equipment.body_slots.headband || "",
+        neck: tempCharacterObject.equipment.body_slots.neck || "",
+        ring_left_hand: tempCharacterObject.equipment.body_slots.ring_left_hand || "",
+        ring_right_hand: tempCharacterObject.equipment.body_slots.ring_right_hand || "",
+        shoulders: tempCharacterObject.equipment.body_slots.shoulders || "",
+        wrist: tempCharacterObject.equipment.body_slots.wrist || ""
+      },
+      item: {
+        all: tempCharacterObject.equipment.item.all || [],
+        weight: {
+          current: ""
+        },
+        value: {
+          current: ""
+        }
+      },
+      encumbrance: {
+        str: tempCharacterObject.equipment.encumbrance.encumbrance_str || "",
+        carry_move: {
+          light: tempCharacterObject.equipment.encumbrance.carry_move.light || "",
+          medium: tempCharacterObject.equipment.encumbrance.carry_move.medium || "",
+          heavy: tempCharacterObject.equipment.encumbrance.carry_move.heavy || "",
+          lift: tempCharacterObject.equipment.encumbrance.carry_move.lift || "",
+          drag: tempCharacterObject.equipment.encumbrance.carry_move.drag || ""
+        }
+      },
+      consumable: {
+        all: tempCharacterObject.equipment.consumable || []
+      },
+      wealth: {
+        platinum: tempCharacterObject.equipment.wealth.platinum || "",
+        gold: tempCharacterObject.equipment.wealth.gold || "",
+        silver: tempCharacterObject.equipment.wealth.silver || "",
+        copper: tempCharacterObject.equipment.wealth.copper || "",
+        total: ""
+      }
+    };
+    // defense
+    characterObject.defense = {
+      hp: {
+        total: tempCharacterObject.defense.hp.total || "",
+        temp: tempCharacterObject.defense.hp.temp || "",
+        damage: tempCharacterObject.defense.hp.damage || "",
+        non_lethal_damage: tempCharacterObject.defense.hp.non_lethal_damage || "",
+        current: "",
+        notes: ""
+      },
+      ac: {
+        armor_class: {
+          misc: tempCharacterObject.defense.ac.misc || "",
+          temp: tempCharacterObject.defense.ac.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.defense.ac.bonuses.str_bonus || false,
+            dex: tempCharacterObject.defense.ac.bonuses.dex_bonus || true,
+            con: tempCharacterObject.defense.ac.bonuses.con_bonus || false,
+            int: tempCharacterObject.defense.ac.bonuses.int_bonus || false,
+            wis: tempCharacterObject.defense.ac.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.defense.ac.bonuses.cha_bonus || false,
+            plus_ten: tempCharacterObject.defense.ac.bonuses.plus_ten || true,
+            armor: tempCharacterObject.defense.ac.bonuses.ac_armor || true,
+            shield: tempCharacterObject.defense.ac.bonuses.ac_shield || true,
+            deflect: tempCharacterObject.defense.ac.bonuses.ac_deflect || true,
+            dodge: tempCharacterObject.defense.ac.bonuses.ac_dodge || true,
+            natural: tempCharacterObject.defense.ac.bonuses.ac_natural || true,
+            size_base: tempCharacterObject.defense.ac.bonuses.size || true,
+            max_dex: tempCharacterObject.defense.ac.bonuses.max_dex || true
+          }
+        },
+        flat_footed: {
+          misc: tempCharacterObject.defense.flat_footed.misc || "",
+          temp: tempCharacterObject.defense.flat_footed.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.defense.flat_footed.bonuses.str_bonus || false,
+            dex: tempCharacterObject.defense.flat_footed.bonuses.dex_bonus || false,
+            con: tempCharacterObject.defense.flat_footed.bonuses.con_bonus || false,
+            int: tempCharacterObject.defense.flat_footed.bonuses.int_bonus || false,
+            wis: tempCharacterObject.defense.flat_footed.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.defense.flat_footed.bonuses.cha_bonus || false,
+            plus_ten: tempCharacterObject.defense.flat_footed.bonuses.plus_ten || true,
+            armor: tempCharacterObject.defense.flat_footed.bonuses.ac_armor || true,
+            shield: tempCharacterObject.defense.flat_footed.bonuses.ac_shield || true,
+            deflect: tempCharacterObject.defense.flat_footed.bonuses.ac_deflect || true,
+            natural: tempCharacterObject.defense.flat_footed.bonuses.ac_natural || true,
+            size_base: tempCharacterObject.defense.flat_footed.bonuses.size || true
+          }
+        },
+        touch: {
+          misc: tempCharacterObject.defense.touch.misc || "",
+          temp: tempCharacterObject.defense.touch.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.defense.touch.bonuses.str_bonus || false,
+            dex: tempCharacterObject.defense.touch.bonuses.dex_bonus || true,
+            con: tempCharacterObject.defense.touch.bonuses.con_bonus || false,
+            int: tempCharacterObject.defense.touch.bonuses.int_bonus || false,
+            wis: tempCharacterObject.defense.touch.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.defense.touch.bonuses.cha_bonus || false,
+            plus_ten: tempCharacterObject.defense.touch.bonuses.plus_ten || true,
+            deflect: tempCharacterObject.defense.touch.bonuses.ac_deflect || true,
+            dodge: tempCharacterObject.defense.touch.bonuses.ac_dodge || true,
+            size_base: tempCharacterObject.defense.touch.bonuses.size || true,
+            max_dex: tempCharacterObject.defense.touch.bonuses.max_dex || true
+          }
+        },
+        stats: {
+          armor: tempCharacterObject.defense.ac.armor || "",
+          shield: tempCharacterObject.defense.ac.shield || "",
+          deflect: tempCharacterObject.defense.ac.deflect || "",
+          dodge: tempCharacterObject.defense.ac.dodge || "",
+          natural: tempCharacterObject.defense.ac.natural || ""
+        },
+        notes: tempCharacterObject.defense.ac_notes || ""
+      },
+      cmd: {
+        misc: tempCharacterObject.offense.cmd.misc || "",
+        temp: tempCharacterObject.offense.cmd.temp || "",
+        current: "",
+        notes: "",
+        bonuses: {
+          str: tempCharacterObject.offense.cmd.bonuses.str_bonus || true,
+          dex: tempCharacterObject.offense.cmd.bonuses.dex_bonus || true,
+          con: tempCharacterObject.offense.cmd.bonuses.con_bonus || false,
+          int: tempCharacterObject.offense.cmd.bonuses.int_bonus || false,
+          wis: tempCharacterObject.offense.cmd.bonuses.wis_bonus || false,
+          cha: tempCharacterObject.offense.cmd.bonuses.cha_bonus || false,
+          bab: tempCharacterObject.offense.cmd.bonuses.bab || true,
+          size_special: tempCharacterObject.offense.cmd.bonuses.special_size || true,
+          level: tempCharacterObject.offense.cmd.bonuses.level || false,
+          half_level: tempCharacterObject.offense.cmd.bonuses.half_level || false,
+          plus_ten: tempCharacterObject.offense.cmd.bonuses.plus_ten || true
+        }
+      },
+      saves: {
+        fortitude: {
+          base: tempCharacterObject.defense.fortitude.base || "",
+          resistance: tempCharacterObject.defense.fortitude.resistance || "",
+          feat: tempCharacterObject.defense.fortitude.feat || "",
+          trait: tempCharacterObject.defense.fortitude.trait || "",
+          misc: tempCharacterObject.defense.fortitude.misc || "",
+          temp: tempCharacterObject.defense.fortitude.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.defense.fortitude.bonuses.str_bonus || false,
+            dex: tempCharacterObject.defense.fortitude.bonuses.dex_bonus || false,
+            con: tempCharacterObject.defense.fortitude.bonuses.con_bonus || true,
+            int: tempCharacterObject.defense.fortitude.bonuses.int_bonus || false,
+            wis: tempCharacterObject.defense.fortitude.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.defense.fortitude.bonuses.cha_bonus || false,
+            level: tempCharacterObject.defense.fortitude.bonuses.level || false,
+            half_level: tempCharacterObject.defense.fortitude.bonuses.half_level || false
+          }
+        },
+        reflex: {
+          base: tempCharacterObject.defense.reflex.base || "",
+          resistance: tempCharacterObject.defense.reflex.resistance || "",
+          feat: tempCharacterObject.defense.reflex.feat || "",
+          trait: tempCharacterObject.defense.reflex.trait || "",
+          misc: tempCharacterObject.defense.reflex.misc || "",
+          temp: tempCharacterObject.defense.reflex.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.defense.reflex.bonuses.str_bonus || false,
+            dex: tempCharacterObject.defense.reflex.bonuses.dex_bonus || true,
+            con: tempCharacterObject.defense.reflex.bonuses.con_bonus || false,
+            int: tempCharacterObject.defense.reflex.bonuses.int_bonus || false,
+            wis: tempCharacterObject.defense.reflex.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.defense.reflex.bonuses.cha_bonus || false,
+            level: tempCharacterObject.defense.reflex.bonuses.level || false,
+            half_level: tempCharacterObject.defense.reflex.bonuses.half_level || false
+          }
+        },
+        will: {
+          base: tempCharacterObject.defense.will.base || "",
+          resistance: tempCharacterObject.defense.will.resistance || "",
+          feat: tempCharacterObject.defense.will.feat || "",
+          trait: tempCharacterObject.defense.will.trait || "",
+          misc: tempCharacterObject.defense.will.misc || "",
+          temp: tempCharacterObject.defense.will.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.defense.will.bonuses.str_bonus || false,
+            dex: tempCharacterObject.defense.will.bonuses.dex_bonus || false,
+            con: tempCharacterObject.defense.will.bonuses.con_bonus || false,
+            int: tempCharacterObject.defense.will.bonuses.int_bonus || false,
+            wis: tempCharacterObject.defense.will.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.defense.will.bonuses.cha_bonus || false,
+            level: tempCharacterObject.defense.will.bonuses.level || false,
+            half_level: tempCharacterObject.defense.will.bonuses.half_level || false
+          }
+        },
+        notes: tempCharacterObject.defense.save_notes || ""
+      },
+      dr: {
+        feat: tempCharacterObject.defense.dr.feat || "",
+        trait: tempCharacterObject.defense.dr.trait || "",
+        misc: tempCharacterObject.defense.dr.misc || "",
+        temp: tempCharacterObject.defense.dr.temp || "",
+        overcome: tempCharacterObject.defense.dr.overcome || "",
+        current: "",
+        notes: "",
+        bonuses: {
+          str: tempCharacterObject.defense.dr.bonuses.str_bonus || false,
+          dex: tempCharacterObject.defense.dr.bonuses.dex_bonus || false,
+          con: tempCharacterObject.defense.dr.bonuses.con_bonus || false,
+          int: tempCharacterObject.defense.dr.bonuses.int_bonus || false,
+          wis: tempCharacterObject.defense.dr.bonuses.wis_bonus || false,
+          cha: tempCharacterObject.defense.dr.bonuses.cha_bonus || false,
+          level: tempCharacterObject.defense.dr.bonuses.level || false,
+          half_level: tempCharacterObject.defense.dr.bonuses.half_level || false
+        }
+      },
+      sr: {
+        feat: tempCharacterObject.defense.sr.feat || "",
+        trait: tempCharacterObject.defense.sr.trait || "",
+        misc: tempCharacterObject.defense.sr.misc || "",
+        temp: tempCharacterObject.defense.sr.temp || "",
+        current: "",
+        notes: "",
+        bonuses: {
+          str: tempCharacterObject.defense.sr.bonuses.str_bonus || false,
+          dex: tempCharacterObject.defense.sr.bonuses.dex_bonus || false,
+          con: tempCharacterObject.defense.sr.bonuses.con_bonus || false,
+          int: tempCharacterObject.defense.sr.bonuses.int_bonus || false,
+          wis: tempCharacterObject.defense.sr.bonuses.wis_bonus || false,
+          cha: tempCharacterObject.defense.sr.bonuses.cha_bonus || false,
+          level: tempCharacterObject.defense.sr.bonuses.level || false,
+          half_level: tempCharacterObject.defense.sr.bonuses.half_level || false
+        }
+      },
+      resistance: {
+        feat: "",
+        trait: "",
+        misc: "",
+        temp: "",
+        current: "",
+        notes: tempCharacterObject.defense.resist_notes,
+        bonuses: {
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
+          level: false,
+          half_level: false
+        }
+      }
+    };
+    // offense
+    characterObject.offense = {
+      stats: {
+        base_attack: tempCharacterObject.offense.base_attack || "",
+        base_attack_bonuses: tempCharacterObject.offense.base_attack_bonuses || "",
+        melee: {
+          misc: tempCharacterObject.offense.melee_attack.misc || "",
+          temp: tempCharacterObject.offense.melee_attack.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.offense.melee_attack.bonuses.str_bonus || true,
+            dex: tempCharacterObject.offense.melee_attack.bonuses.dex_bonus || false,
+            con: tempCharacterObject.offense.melee_attack.bonuses.con_bonus || false,
+            int: tempCharacterObject.offense.melee_attack.bonuses.int_bonus || false,
+            wis: tempCharacterObject.offense.melee_attack.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.offense.melee_attack.bonuses.cha_bonus || false,
+            bab: tempCharacterObject.offense.melee_attack.bonuses.bab || true,
+            size_base: tempCharacterObject.offense.melee_attack.bonuses.special_size || true,
+            level: tempCharacterObject.offense.melee_attack.bonuses.level || false,
+            half_level: tempCharacterObject.offense.melee_attack.bonuses.half_level || false
+          }
+        },
+        ranged: {
+          misc: tempCharacterObject.offense.ranged_attack.misc || "",
+          temp: tempCharacterObject.offense.ranged_attack.temp || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.offense.ranged_attack.bonuses.str_bonus || false,
+            dex: tempCharacterObject.offense.ranged_attack.bonuses.dex_bonus || true,
+            con: tempCharacterObject.offense.ranged_attack.bonuses.con_bonus || false,
+            int: tempCharacterObject.offense.ranged_attack.bonuses.int_bonus || false,
+            wis: tempCharacterObject.offense.ranged_attack.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.offense.ranged_attack.bonuses.cha_bonus || false,
+            bab: tempCharacterObject.offense.ranged_attack.bonuses.bab || true,
+            size_base: tempCharacterObject.offense.ranged_attack.bonuses.special_size || true,
+            level: tempCharacterObject.offense.ranged_attack.bonuses.level || false,
+            half_level: tempCharacterObject.offense.ranged_attack.bonuses.half_level || false
+          }
+        }
+      },
+      cmb: {
+        misc: tempCharacterObject.offense.cmb.misc || "",
+        temp: tempCharacterObject.offense.cmb.temp || "",
+        current: "",
+        notes: "",
+        bonuses: {
+          str: tempCharacterObject.offense.cmb.bonuses.str_bonus || true,
+          dex: tempCharacterObject.offense.cmb.bonuses.dex_bonus || false,
+          con: tempCharacterObject.offense.cmb.bonuses.con_bonus || false,
+          int: tempCharacterObject.offense.cmb.bonuses.int_bonus || false,
+          wis: tempCharacterObject.offense.cmb.bonuses.wis_bonus || false,
+          cha: tempCharacterObject.offense.cmb.bonuses.cha_bonus || false,
+          bab: tempCharacterObject.offense.cmb.bonuses.bab || true,
+          size_special: tempCharacterObject.offense.cmb.bonuses.special_size || true,
+          level: tempCharacterObject.offense.cmb.bonuses.level || false,
+          half_level: tempCharacterObject.offense.cmb.bonuses.half_level || false
+        }
+      },
+      attack: {
+        notes: tempCharacterObject.offense.attack_notes || "",
+        melee: {
+          all: tempCharacterObject.offense.attack.melee || []
+        },
+        ranged: {
+          all: tempCharacterObject.offense.attack.ranged || []
+        }
+      }
+    };
+    // skills
+    characterObject.skills = {
+      ranks: {
+        total: "",
+        include_custom: tempCharacterObject.skills.ranks.spent.include_custom || false,
+        current: ""
+      },
+      custom: {
+        all: tempCharacterObject.skills.custom || []
+      },
+      default: {
+        acrobatics: {
+          ranks: tempCharacterObject.skills.all.acrobatics.ranks || "",
+          misc: tempCharacterObject.skills.all.acrobatics.misc || "",
+          racial: tempCharacterObject.skills.all.acrobatics.racial || "",
+          feat: tempCharacterObject.skills.all.acrobatics.feat || "",
+          trait: tempCharacterObject.skills.all.acrobatics.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.acrobatics.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.acrobatics.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.acrobatics.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.acrobatics.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.acrobatics.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.acrobatics.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.acrobatics.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.acrobatics.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.acrobatics.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.acrobatics.bonuses.check_penalty || true
+          }
+        },
+        appraise: {
+          ranks: tempCharacterObject.skills.all.appraise.ranks || "",
+          misc: tempCharacterObject.skills.all.appraise.misc || "",
+          racial: tempCharacterObject.skills.all.appraise.racial || "",
+          feat: tempCharacterObject.skills.all.appraise.feat || "",
+          trait: tempCharacterObject.skills.all.appraise.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.appraise.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.appraise.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.appraise.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.appraise.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.appraise.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.appraise.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.appraise.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.appraise.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.appraise.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.appraise.bonuses.check_penalty || false
+          }
+        },
+        bluff: {
+          ranks: tempCharacterObject.skills.all.bluff.ranks || "",
+          misc: tempCharacterObject.skills.all.bluff.misc || "",
+          racial: tempCharacterObject.skills.all.bluff.racial || "",
+          feat: tempCharacterObject.skills.all.bluff.feat || "",
+          trait: tempCharacterObject.skills.all.bluff.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.bluff.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.bluff.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.bluff.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.bluff.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.bluff.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.bluff.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.bluff.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.bluff.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.bluff.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.bluff.bonuses.check_penalty || false
+          }
+        },
+        climb: {
+          ranks: tempCharacterObject.skills.all.climb.ranks || "",
+          misc: tempCharacterObject.skills.all.climb.misc || "",
+          racial: tempCharacterObject.skills.all.climb.racial || "",
+          feat: tempCharacterObject.skills.all.climb.feat || "",
+          trait: tempCharacterObject.skills.all.climb.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.climb.bonuses.str_bonus || true,
+            dex: tempCharacterObject.skills.all.climb.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.climb.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.climb.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.climb.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.climb.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.climb.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.climb.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.climb.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.climb.bonuses.check_penalty || true
+          }
+        },
+        craft_1: {
+          variant_name: tempCharacterObject.skills.all.craft_1.variant_name || "",
+          ranks: tempCharacterObject.skills.all.craft_1.ranks || "",
+          misc: tempCharacterObject.skills.all.craft_1.misc || "",
+          racial: tempCharacterObject.skills.all.craft_1.racial || "",
+          feat: tempCharacterObject.skills.all.craft_1.feat || "",
+          trait: tempCharacterObject.skills.all.craft_1.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.craft_1.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.craft_1.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.craft_1.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.craft_1.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.craft_1.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.craft_1.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.craft_1.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.craft_1.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.craft_1.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.craft_1.bonuses.check_penalty || false
+          }
+        },
+        craft_2: {
+          variant_name: tempCharacterObject.skills.all.craft_2.variant_name || "",
+          ranks: tempCharacterObject.skills.all.craft_2.ranks || "",
+          misc: tempCharacterObject.skills.all.craft_2.misc || "",
+          racial: tempCharacterObject.skills.all.craft_2.racial || "",
+          feat: tempCharacterObject.skills.all.craft_2.feat || "",
+          trait: tempCharacterObject.skills.all.craft_2.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.craft_2.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.craft_2.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.craft_2.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.craft_2.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.craft_2.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.craft_2.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.craft_2.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.craft_2.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.craft_2.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.craft_2.bonuses.check_penalty || false
+          }
+        },
+        diplomacy: {
+          ranks: tempCharacterObject.skills.all.diplomacy.ranks || "",
+          misc: tempCharacterObject.skills.all.diplomacy.misc || "",
+          racial: tempCharacterObject.skills.all.diplomacy.racial || "",
+          feat: tempCharacterObject.skills.all.diplomacy.feat || "",
+          trait: tempCharacterObject.skills.all.diplomacy.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.diplomacy.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.diplomacy.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.diplomacy.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.diplomacy.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.diplomacy.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.diplomacy.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.diplomacy.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.diplomacy.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.diplomacy.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.diplomacy.bonuses.check_penalty || false
+          }
+        },
+        disable_device: {
+          ranks: tempCharacterObject.skills.all.disable_device.ranks || "",
+          misc: tempCharacterObject.skills.all.disable_device.misc || "",
+          racial: tempCharacterObject.skills.all.disable_device.racial || "",
+          feat: tempCharacterObject.skills.all.disable_device.feat || "",
+          trait: tempCharacterObject.skills.all.disable_device.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.disable_device.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.disable_device.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.disable_device.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.disable_device.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.disable_device.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.disable_device.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.disable_device.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.disable_device.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.disable_device.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.disable_device.bonuses.check_penalty || true
+          }
+        },
+        disguise: {
+          ranks: tempCharacterObject.skills.all.disguise.ranks || "",
+          misc: tempCharacterObject.skills.all.disguise.misc || "",
+          racial: tempCharacterObject.skills.all.disguise.racial || "",
+          feat: tempCharacterObject.skills.all.disguise.feat || "",
+          trait: tempCharacterObject.skills.all.disguise.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.disguise.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.disguise.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.disguise.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.disguise.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.disguise.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.disguise.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.disguise.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.disguise.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.disguise.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.disguise.bonuses.check_penalty || false
+          }
+        },
+        escape_artist: {
+          ranks: tempCharacterObject.skills.all.escape_artist.ranks || "",
+          misc: tempCharacterObject.skills.all.escape_artist.misc || "",
+          racial: tempCharacterObject.skills.all.escape_artist.racial || "",
+          feat: tempCharacterObject.skills.all.escape_artist.feat || "",
+          trait: tempCharacterObject.skills.all.escape_artist.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.escape_artist.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.escape_artist.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.escape_artist.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.escape_artist.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.escape_artist.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.escape_artist.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.escape_artist.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.escape_artist.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.escape_artist.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.escape_artist.bonuses.check_penalty || true
+          }
+        },
+        fly: {
+          ranks: tempCharacterObject.skills.all.fly.ranks || "",
+          misc: tempCharacterObject.skills.all.fly.misc || "",
+          racial: tempCharacterObject.skills.all.fly.racial || "",
+          feat: tempCharacterObject.skills.all.fly.feat || "",
+          trait: tempCharacterObject.skills.all.fly.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.fly.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.fly.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.fly.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.fly.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.fly.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.fly.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.fly.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.fly.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.fly.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.fly.bonuses.check_penalty || true,
+            size_fly: tempCharacterObject.skills.all.fly.bonuses.size_modifier_fly || true
+          }
+        },
+        handle_animal: {
+          ranks: tempCharacterObject.skills.all.handle_animal.ranks || "",
+          misc: tempCharacterObject.skills.all.handle_animal.misc || "",
+          racial: tempCharacterObject.skills.all.handle_animal.racial || "",
+          feat: tempCharacterObject.skills.all.handle_animal.feat || "",
+          trait: tempCharacterObject.skills.all.handle_animal.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.handle_animal.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.handle_animal.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.handle_animal.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.handle_animal.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.handle_animal.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.handle_animal.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.handle_animal.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.handle_animal.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.handle_animal.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.handle_animal.bonuses.check_penalty || false
+          }
+        },
+        heal: {
+          ranks: tempCharacterObject.skills.all.heal.ranks || "",
+          misc: tempCharacterObject.skills.all.heal.misc || "",
+          racial: tempCharacterObject.skills.all.heal.racial || "",
+          feat: tempCharacterObject.skills.all.heal.feat || "",
+          trait: tempCharacterObject.skills.all.heal.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.heal.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.heal.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.heal.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.heal.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.heal.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.skills.all.heal.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.heal.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.heal.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.heal.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.heal.bonuses.check_penalty || false
+          }
+        },
+        intimidate: {
+          ranks: tempCharacterObject.skills.all.intimidate.ranks || "",
+          misc: tempCharacterObject.skills.all.intimidate.misc || "",
+          racial: tempCharacterObject.skills.all.intimidate.racial || "",
+          feat: tempCharacterObject.skills.all.intimidate.feat || "",
+          trait: tempCharacterObject.skills.all.intimidate.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.intimidate.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.intimidate.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.intimidate.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.intimidate.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.intimidate.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.intimidate.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.intimidate.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.intimidate.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.intimidate.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.intimidate.bonuses.check_penalty || false
+          }
+        },
+        knowledge_arcana: {
+          ranks: tempCharacterObject.skills.all.knowledge_arcana.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_arcana.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_arcana.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_arcana.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_arcana.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_arcana.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_arcana.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_arcana.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_arcana.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_arcana.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_arcana.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_arcana.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_arcana.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_arcana.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_arcana.bonuses.check_penalty || false
+          }
+        },
+        knowledge_dungeoneering: {
+          ranks: tempCharacterObject.skills.all.knowledge_dungeoneering.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_dungeoneering.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_dungeoneering.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_dungeoneering.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_dungeoneering.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_dungeoneering.bonuses.check_penalty || false
+          }
+        },
+        knowledge_engineering: {
+          ranks: tempCharacterObject.skills.all.knowledge_engineering.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_engineering.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_engineering.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_engineering.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_engineering.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_engineering.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_engineering.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_engineering.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_engineering.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_engineering.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_engineering.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_engineering.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_engineering.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_engineering.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_engineering.bonuses.check_penalty || false
+          }
+        },
+        knowledge_geography: {
+          ranks: tempCharacterObject.skills.all.knowledge_geography.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_geography.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_geography.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_geography.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_geography.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_geography.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_geography.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_geography.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_geography.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_geography.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_geography.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_geography.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_geography.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_geography.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_geography.bonuses.check_penalty || false
+          }
+        },
+        knowledge_history: {
+          ranks: tempCharacterObject.skills.all.knowledge_history.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_history.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_history.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_history.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_history.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_history.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_history.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_history.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_history.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_history.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_history.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_history.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_history.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_history.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_history.bonuses.check_penalty || false
+          }
+        },
+        knowledge_local: {
+          ranks: tempCharacterObject.skills.all.knowledge_local.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_local.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_local.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_local.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_local.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_local.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_local.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_local.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_local.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_local.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_local.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_local.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_local.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_local.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_local.bonuses.check_penalty || false
+          }
+        },
+        knowledge_nature: {
+          ranks: tempCharacterObject.skills.all.knowledge_nature.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_nature.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_nature.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_nature.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_nature.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_nature.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_nature.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_nature.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_nature.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_nature.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_nature.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_nature.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_nature.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_nature.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_nature.bonuses.check_penalty || false
+          }
+        },
+        knowledge_nobility: {
+          ranks: tempCharacterObject.skills.all.knowledge_nobility.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_nobility.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_nobility.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_nobility.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_nobility.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_nobility.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_nobility.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_nobility.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_nobility.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_nobility.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_nobility.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_nobility.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_nobility.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_nobility.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_nobility.bonuses.check_penalty || false
+          }
+        },
+        knowledge_planes: {
+          ranks: tempCharacterObject.skills.all.knowledge_planes.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_planes.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_planes.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_planes.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_planes.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_planes.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_planes.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_planes.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_planes.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_planes.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_planes.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_planes.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_planes.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_planes.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_planes.bonuses.check_penalty || false
+          }
+        },
+        knowledge_religion: {
+          ranks: tempCharacterObject.skills.all.knowledge_religion.ranks || "",
+          misc: tempCharacterObject.skills.all.knowledge_religion.misc || "",
+          racial: tempCharacterObject.skills.all.knowledge_religion.racial || "",
+          feat: tempCharacterObject.skills.all.knowledge_religion.feat || "",
+          trait: tempCharacterObject.skills.all.knowledge_religion.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.knowledge_religion.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.knowledge_religion.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.knowledge_religion.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.knowledge_religion.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.knowledge_religion.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.knowledge_religion.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.knowledge_religion.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.knowledge_religion.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.knowledge_religion.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.knowledge_religion.bonuses.check_penalty || false
+          }
+        },
+        linguistics: {
+          ranks: tempCharacterObject.skills.all.linguistics.ranks || "",
+          misc: tempCharacterObject.skills.all.linguistics.misc || "",
+          racial: tempCharacterObject.skills.all.linguistics.racial || "",
+          feat: tempCharacterObject.skills.all.linguistics.feat || "",
+          trait: tempCharacterObject.skills.all.linguistics.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.linguistics.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.linguistics.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.linguistics.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.linguistics.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.linguistics.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.linguistics.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.linguistics.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.linguistics.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.linguistics.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.linguistics.bonuses.check_penalty || false
+          }
+        },
+        perception: {
+          ranks: tempCharacterObject.skills.all.perception.ranks || "",
+          misc: tempCharacterObject.skills.all.perception.misc || "",
+          racial: tempCharacterObject.skills.all.perception.racial || "",
+          feat: tempCharacterObject.skills.all.perception.feat || "",
+          trait: tempCharacterObject.skills.all.perception.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.perception.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.perception.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.perception.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.perception.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.perception.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.skills.all.perception.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.perception.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.perception.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.perception.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.perception.bonuses.check_penalty || false
+          }
+        },
+        perform_1: {
+          variant_name: tempCharacterObject.skills.all.perform_1.variant_name || "",
+          ranks: tempCharacterObject.skills.all.perform_1.ranks || "",
+          misc: tempCharacterObject.skills.all.perform_1.misc || "",
+          racial: tempCharacterObject.skills.all.perform_1.racial || "",
+          feat: tempCharacterObject.skills.all.perform_1.feat || "",
+          trait: tempCharacterObject.skills.all.perform_1.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.perform_1.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.perform_1.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.perform_1.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.perform_1.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.perform_1.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.perform_1.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.perform_1.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.perform_1.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.perform_1.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.perform_1.bonuses.check_penalty || false
+          }
+        },
+        perform_2: {
+          variant_name: tempCharacterObject.skills.all.perform_2.variant_name || "",
+          ranks: tempCharacterObject.skills.all.perform_2.ranks || "",
+          misc: tempCharacterObject.skills.all.perform_2.misc || "",
+          racial: tempCharacterObject.skills.all.perform_2.racial || "",
+          feat: tempCharacterObject.skills.all.perform_2.feat || "",
+          trait: tempCharacterObject.skills.all.perform_2.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.perform_2.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.perform_2.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.perform_2.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.perform_2.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.perform_2.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.perform_2.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.perform_2.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.perform_2.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.perform_2.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.perform_2.bonuses.check_penalty || false
+          }
+        },
+        profession_1: {
+          variant_name: tempCharacterObject.skills.all.profession_1.variant_name || "",
+          ranks: tempCharacterObject.skills.all.profession_1.ranks || "",
+          misc: tempCharacterObject.skills.all.profession_1.misc || "",
+          racial: tempCharacterObject.skills.all.profession_1.racial || "",
+          feat: tempCharacterObject.skills.all.profession_1.feat || "",
+          trait: tempCharacterObject.skills.all.profession_1.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.profession_1.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.profession_1.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.profession_1.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.profession_1.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.profession_1.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.skills.all.profession_1.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.profession_1.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.profession_1.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.profession_1.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.profession_1.bonuses.check_penalty || false
+          }
+        },
+        profession_2: {
+          variant_name: tempCharacterObject.skills.all.profession_2.variant_name || "",
+          ranks: tempCharacterObject.skills.all.profession_2.ranks || "",
+          misc: tempCharacterObject.skills.all.profession_2.misc || "",
+          racial: tempCharacterObject.skills.all.profession_2.racial || "",
+          feat: tempCharacterObject.skills.all.profession_2.feat || "",
+          trait: tempCharacterObject.skills.all.profession_2.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.profession_2.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.profession_2.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.profession_2.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.profession_2.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.profession_2.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.skills.all.profession_2.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.profession_2.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.profession_2.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.profession_2.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.profession_2.bonuses.check_penalty || false
+          }
+        },
+        ride: {
+          ranks: tempCharacterObject.skills.all.ride.ranks || "",
+          misc: tempCharacterObject.skills.all.ride.misc || "",
+          racial: tempCharacterObject.skills.all.ride.racial || "",
+          feat: tempCharacterObject.skills.all.ride.feat || "",
+          trait: tempCharacterObject.skills.all.ride.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.ride.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.ride.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.ride.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.ride.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.ride.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.ride.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.ride.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.ride.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.ride.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.ride.bonuses.check_penalty || true
+          }
+        },
+        sense_motive: {
+          ranks: tempCharacterObject.skills.all.sense_motive.ranks || "",
+          misc: tempCharacterObject.skills.all.sense_motive.misc || "",
+          racial: tempCharacterObject.skills.all.sense_motive.racial || "",
+          feat: tempCharacterObject.skills.all.sense_motive.feat || "",
+          trait: tempCharacterObject.skills.all.sense_motive.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.sense_motive.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.sense_motive.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.sense_motive.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.sense_motive.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.sense_motive.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.skills.all.sense_motive.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.sense_motive.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.sense_motive.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.sense_motive.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.sense_motive.bonuses.check_penalty || false
+          }
+        },
+        sleight_of_hand: {
+          ranks: tempCharacterObject.skills.all.sleight_of_hand.ranks || "",
+          misc: tempCharacterObject.skills.all.sleight_of_hand.misc || "",
+          racial: tempCharacterObject.skills.all.sleight_of_hand.racial || "",
+          feat: tempCharacterObject.skills.all.sleight_of_hand.feat || "",
+          trait: tempCharacterObject.skills.all.sleight_of_hand.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.sleight_of_hand.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.sleight_of_hand.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.sleight_of_hand.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.sleight_of_hand.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.sleight_of_hand.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.sleight_of_hand.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.sleight_of_hand.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.sleight_of_hand.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.sleight_of_hand.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.sleight_of_hand.bonuses.check_penalty || true
+          }
+        },
+        spellcraft: {
+          ranks: tempCharacterObject.skills.all.spellcraft.ranks || "",
+          misc: tempCharacterObject.skills.all.spellcraft.misc || "",
+          racial: tempCharacterObject.skills.all.spellcraft.racial || "",
+          feat: tempCharacterObject.skills.all.spellcraft.feat || "",
+          trait: tempCharacterObject.skills.all.spellcraft.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.spellcraft.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.spellcraft.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.spellcraft.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.spellcraft.bonuses.int_bonus || true,
+            wis: tempCharacterObject.skills.all.spellcraft.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.spellcraft.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.spellcraft.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.spellcraft.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.spellcraft.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.spellcraft.bonuses.check_penalty || false
+          }
+        },
+        stealth: {
+          ranks: tempCharacterObject.skills.all.stealth.ranks || "",
+          misc: tempCharacterObject.skills.all.stealth.misc || "",
+          racial: tempCharacterObject.skills.all.stealth.racial || "",
+          feat: tempCharacterObject.skills.all.stealth.feat || "",
+          trait: tempCharacterObject.skills.all.stealth.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.stealth.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.stealth.bonuses.dex_bonus || true,
+            con: tempCharacterObject.skills.all.stealth.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.stealth.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.stealth.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.stealth.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.stealth.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.stealth.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.stealth.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.stealth.bonuses.check_penalty || true,
+            size_stealth: tempCharacterObject.skills.all.stealth.bonuses.size_stealth || true
+          }
+        },
+        survival: {
+          ranks: tempCharacterObject.skills.all.survival.ranks || "",
+          misc: tempCharacterObject.skills.all.survival.misc || "",
+          racial: tempCharacterObject.skills.all.survival.racial || "",
+          feat: tempCharacterObject.skills.all.survival.feat || "",
+          trait: tempCharacterObject.skills.all.survival.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.survival.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.survival.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.survival.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.survival.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.survival.bonuses.wis_bonus || true,
+            cha: tempCharacterObject.skills.all.survival.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.survival.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.survival.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.survival.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.survival.bonuses.check_penalty || false
+          }
+        },
+        swim: {
+          ranks: tempCharacterObject.skills.all.swim.ranks || "",
+          misc: tempCharacterObject.skills.all.swim.misc || "",
+          racial: tempCharacterObject.skills.all.swim.racial || "",
+          feat: tempCharacterObject.skills.all.swim.feat || "",
+          trait: tempCharacterObject.skills.all.swim.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.swim.bonuses.str_bonus || true,
+            dex: tempCharacterObject.skills.all.swim.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.swim.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.swim.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.swim.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.swim.bonuses.cha_bonus || false,
+            class_skill: tempCharacterObject.skills.all.swim.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.swim.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.swim.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.swim.bonuses.check_penalty || true
+          }
+        },
+        use_magic_device: {
+          ranks: tempCharacterObject.skills.all.use_magic_device.ranks || "",
+          misc: tempCharacterObject.skills.all.use_magic_device.misc || "",
+          racial: tempCharacterObject.skills.all.use_magic_device.racial || "",
+          feat: tempCharacterObject.skills.all.use_magic_device.feat || "",
+          trait: tempCharacterObject.skills.all.use_magic_device.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.skills.all.use_magic_device.bonuses.str_bonus || false,
+            dex: tempCharacterObject.skills.all.use_magic_device.bonuses.dex_bonus || false,
+            con: tempCharacterObject.skills.all.use_magic_device.bonuses.con_bonus || false,
+            int: tempCharacterObject.skills.all.use_magic_device.bonuses.int_bonus || false,
+            wis: tempCharacterObject.skills.all.use_magic_device.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.skills.all.use_magic_device.bonuses.cha_bonus || true,
+            class_skill: tempCharacterObject.skills.all.use_magic_device.bonuses.class_skill || false,
+            level: tempCharacterObject.skills.all.use_magic_device.bonuses.level || false,
+            half_level: tempCharacterObject.skills.all.use_magic_device.bonuses.half_level || false,
+            check_penalty: tempCharacterObject.skills.all.use_magic_device.bonuses.check_penalty || false
+          }
+        }
+      }
+    };
+    if (characterObject.skills.custom.all.length > 0) {
+      for (var i = 0; i < characterObject.skills.custom.all.length; i++) {
+        characterObject.skills.custom.all[i].bonuses = {
+          str: tempCharacterObject.skills.custom[i].bonuses.str_bonus || false,
+          dex: tempCharacterObject.skills.custom[i].bonuses.dex_bonus || false,
+          con: tempCharacterObject.skills.custom[i].bonuses.con_bonus || false,
+          int: tempCharacterObject.skills.custom[i].bonuses.int_bonus || false,
+          wis: tempCharacterObject.skills.custom[i].bonuses.wis_bonus || false,
+          cha: tempCharacterObject.skills.custom[i].bonuses.cha_bonus || false,
+          class_skill: tempCharacterObject.skills.custom[i].bonuses.class_skill || false,
+          level: tempCharacterObject.skills.custom[i].bonuses.level || false,
+          half_level: tempCharacterObject.skills.custom[i].bonuses.half_level || false,
+          check_penalty: tempCharacterObject.skills.custom[i].bonuses.check_penalty || false,
+          size_stealth: tempCharacterObject.skills.custom[i].bonuses.size_modifier_stealth || false,
+          size_fly: tempCharacterObject.skills.custom[i].bonuses.size_modifier_fly || false
+        };
+      };
+    };
+    // spells
+    characterObject.spells = {
+      stats: {
+        concentration: {
+          misc: tempCharacterObject.spells.concentration.misc || "",
+          temp: tempCharacterObject.spells.concentration.temp || "",
+          racial: tempCharacterObject.spells.concentration.racial || "",
+          feat: tempCharacterObject.spells.concentration.feat || "",
+          trait: tempCharacterObject.spells.concentration.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.spells.concentration.bonuses.str_bonus || false,
+            dex: tempCharacterObject.spells.concentration.bonuses.dex_bonus || false,
+            con: tempCharacterObject.spells.concentration.bonuses.con_bonus || false,
+            int: tempCharacterObject.spells.concentration.bonuses.int_bonus || false,
+            wis: tempCharacterObject.spells.concentration.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.spells.concentration.bonuses.cha_bonus || false,
+            level: tempCharacterObject.spells.concentration.bonuses.level || false,
+            half_level: tempCharacterObject.spells.concentration.bonuses.half_level || false
+          }
+        },
+        caster_level_check: {
+          misc: tempCharacterObject.spells.caster_level_check.misc || "",
+          temp: tempCharacterObject.spells.caster_level_check.temp || "",
+          racial: tempCharacterObject.spells.caster_level_check.racial || "",
+          feat: tempCharacterObject.spells.caster_level_check.feat || "",
+          trait: tempCharacterObject.spells.caster_level_check.trait || "",
+          current: "",
+          bonuses: {
+            str: tempCharacterObject.spells.caster_level_check.bonuses.str_bonus || false,
+            dex: tempCharacterObject.spells.caster_level_check.bonuses.dex_bonus || false,
+            con: tempCharacterObject.spells.caster_level_check.bonuses.con_bonus || false,
+            int: tempCharacterObject.spells.caster_level_check.bonuses.int_bonus || false,
+            wis: tempCharacterObject.spells.caster_level_check.bonuses.wis_bonus || false,
+            cha: tempCharacterObject.spells.caster_level_check.bonuses.cha_bonus || false,
+            level: tempCharacterObject.spells.caster_level_check.bonuses.level || false,
+            half_level: tempCharacterObject.spells.caster_level_check.bonuses.half_level || false
+          }
+        },
+        school: tempCharacterObject.spells.school || "",
+        opposition: tempCharacterObject.spells.opposition || "",
+        domains: tempCharacterObject.spells.domains || "",
+        bloodline: tempCharacterObject.spells.bloodline || "",
+        notes: tempCharacterObject.spells.spell_notes || ""
+      },
+      book: {
+        level_0: {
+          per_day: tempCharacterObject.spells.per_day.level_0 || "",
+          known: tempCharacterObject.spells.known.level_0 || "",
+          bonus: tempCharacterObject.spells.bonus.level_0 || "",
+          dc: {
+            spell_level: 0,
+            misc: tempCharacterObject.spells.dc.level_0.misc || "",
+            temp: tempCharacterObject.spells.dc.level_0.temp || "",
+            feat: tempCharacterObject.spells.dc.level_0.feat || "",
+            trait: tempCharacterObject.spells.dc.level_0.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_0.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_0.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_0.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_0.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_0.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_0.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_0.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_0.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_0.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_0.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[0].level_0
+        },
+        level_1: {
+          per_day: tempCharacterObject.spells.per_day.level_1 || "",
+          known: tempCharacterObject.spells.known.level_1 || "",
+          bonus: tempCharacterObject.spells.bonus.level_1 || "",
+          dc: {
+            spell_level: 1,
+            misc: tempCharacterObject.spells.dc.level_1.misc || "",
+            temp: tempCharacterObject.spells.dc.level_1.temp || "",
+            feat: tempCharacterObject.spells.dc.level_1.feat || "",
+            trait: tempCharacterObject.spells.dc.level_1.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_1.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_1.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_1.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_1.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_1.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_1.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_1.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_1.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_1.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_1.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[1].level_1
+        },
+        level_2: {
+          per_day: tempCharacterObject.spells.per_day.level_2 || "",
+          known: tempCharacterObject.spells.known.level_2 || "",
+          bonus: tempCharacterObject.spells.bonus.level_2 || "",
+          dc: {
+            spell_level: 2,
+            misc: tempCharacterObject.spells.dc.level_2.misc || "",
+            temp: tempCharacterObject.spells.dc.level_2.temp || "",
+            feat: tempCharacterObject.spells.dc.level_2.feat || "",
+            trait: tempCharacterObject.spells.dc.level_2.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_2.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_2.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_2.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_2.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_2.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_2.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_2.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_2.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_2.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_2.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[2].level_2
+        },
+        level_3: {
+          per_day: tempCharacterObject.spells.per_day.level_3 || "",
+          known: tempCharacterObject.spells.known.level_3 || "",
+          bonus: tempCharacterObject.spells.bonus.level_3 || "",
+          dc: {
+            spell_level: 3,
+            misc: tempCharacterObject.spells.dc.level_3.misc || "",
+            temp: tempCharacterObject.spells.dc.level_3.temp || "",
+            feat: tempCharacterObject.spells.dc.level_3.feat || "",
+            trait: tempCharacterObject.spells.dc.level_3.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_3.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_3.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_3.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_3.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_3.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_3.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_3.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_3.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_3.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_3.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[3].level_3
+        },
+        level_4: {
+          per_day: tempCharacterObject.spells.per_day.level_4 || "",
+          known: tempCharacterObject.spells.known.level_4 || "",
+          bonus: tempCharacterObject.spells.bonus.level_4 || "",
+          dc: {
+            spell_level: 4,
+            misc: tempCharacterObject.spells.dc.level_4.misc || "",
+            temp: tempCharacterObject.spells.dc.level_4.temp || "",
+            feat: tempCharacterObject.spells.dc.level_4.feat || "",
+            trait: tempCharacterObject.spells.dc.level_4.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_4.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_4.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_4.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_4.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_4.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_4.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_4.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_4.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_4.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_4.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[4].level_4
+        },
+        level_5: {
+          per_day: tempCharacterObject.spells.per_day.level_5 || "",
+          known: tempCharacterObject.spells.known.level_5 || "",
+          bonus: tempCharacterObject.spells.bonus.level_5 || "",
+          dc: {
+            spell_level: 5,
+            misc: tempCharacterObject.spells.dc.level_5.misc || "",
+            temp: tempCharacterObject.spells.dc.level_5.temp || "",
+            feat: tempCharacterObject.spells.dc.level_5.feat || "",
+            trait: tempCharacterObject.spells.dc.level_5.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_5.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_5.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_5.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_5.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_5.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_5.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_5.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_5.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_5.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_5.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[5].level_5
+        },
+        level_6: {
+          per_day: tempCharacterObject.spells.per_day.level_6 || "",
+          known: tempCharacterObject.spells.known.level_6 || "",
+          bonus: tempCharacterObject.spells.bonus.level_6 || "",
+          dc: {
+            spell_level: 6,
+            misc: tempCharacterObject.spells.dc.level_6.misc || "",
+            temp: tempCharacterObject.spells.dc.level_6.temp || "",
+            feat: tempCharacterObject.spells.dc.level_6.feat || "",
+            trait: tempCharacterObject.spells.dc.level_6.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_6.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_6.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_6.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_6.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_6.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_6.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_6.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_6.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_6.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_6.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[6].level_6
+        },
+        level_7: {
+          per_day: tempCharacterObject.spells.per_day.level_7 || "",
+          known: tempCharacterObject.spells.known.level_7 || "",
+          bonus: tempCharacterObject.spells.bonus.level_7 || "",
+          dc: {
+            spell_level: 7,
+            misc: tempCharacterObject.spells.dc.level_7.misc || "",
+            temp: tempCharacterObject.spells.dc.level_7.temp || "",
+            feat: tempCharacterObject.spells.dc.level_7.feat || "",
+            trait: tempCharacterObject.spells.dc.level_7.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_7.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_7.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_7.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_7.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_7.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_7.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_7.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_7.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_7.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_7.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[7].level_7
+        },
+        level_8: {
+          per_day: tempCharacterObject.spells.per_day.level_8 || "",
+          known: tempCharacterObject.spells.known.level_8 || "",
+          bonus: tempCharacterObject.spells.bonus.level_8 || "",
+          dc: {
+            spell_level: 8,
+            misc: tempCharacterObject.spells.dc.level_8.misc || "",
+            temp: tempCharacterObject.spells.dc.level_8.temp || "",
+            feat: tempCharacterObject.spells.dc.level_8.feat || "",
+            trait: tempCharacterObject.spells.dc.level_8.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_8.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_8.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_8.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_8.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_8.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_8.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_8.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_8.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_8.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_8.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[8].level_8
+        },
+        level_9: {
+          per_day: tempCharacterObject.spells.per_day.level_9 || "",
+          known: tempCharacterObject.spells.known.level_9 || "",
+          bonus: tempCharacterObject.spells.bonus.level_9 || "",
+          dc: {
+            spell_level: 9,
+            misc: tempCharacterObject.spells.dc.level_9.misc || "",
+            temp: tempCharacterObject.spells.dc.level_9.temp || "",
+            feat: tempCharacterObject.spells.dc.level_9.feat || "",
+            trait: tempCharacterObject.spells.dc.level_9.trait || "",
+            current: "",
+            bonuses: {
+              str: tempCharacterObject.spells.dc.level_9.bonuses.str_bonus || false,
+              dex: tempCharacterObject.spells.dc.level_9.bonuses.dex_bonus || false,
+              con: tempCharacterObject.spells.dc.level_9.bonuses.con_bonus || false,
+              int: tempCharacterObject.spells.dc.level_9.bonuses.int_bonus || false,
+              wis: tempCharacterObject.spells.dc.level_9.bonuses.wis_bonus || false,
+              cha: tempCharacterObject.spells.dc.level_9.bonuses.cha_bonus || false,
+              level: tempCharacterObject.spells.dc.level_9.bonuses.level || false,
+              half_level: tempCharacterObject.spells.dc.level_9.bonuses.half_level || false,
+              spell_level: tempCharacterObject.spells.dc.level_9.bonuses.spell_level || false,
+              plus_ten: tempCharacterObject.spells.dc.level_9.bonuses.plus_ten || false
+            }
+          },
+          all: tempCharacterObject.spells.book[9].level_9
+        }
+      }
+    };
+    // spells
+    characterObject.notes = {
+      character: {
+        all: tempCharacterObject.notes.character || []
+      },
+      story: {
+        all: tempCharacterObject.notes.story || []
+      }
+    }
+    _log("\tupdate complete 5.0.0");
+  };
+
+  function _update(options) {
+    var defaultOptions = {
+      object: null,
+      bumpTo: null
+    };
+    if (options) {
+      var defaultOptions = helper.applyOptions(defaultOptions, options);
+    };
+    var _bumpToVersion = function(version, updateAction) {
+      if (defaultOptions.object.awesomeSheet.version != version) {
+        updateAction(defaultOptions.object);
+      };
+    };
+    if (defaultOptions.object != null) {
+      if (defaultOptions.bumpTo == "5.0.0") {
+        _bumpToVersion("5.0.0", _update_500);
+      };
+    };
+  };
+
+  function _repair(options) {
+    var defaultOptions = {
+      object: null
+    };
+    if (options) {
+      var defaultOptions = helper.applyOptions(defaultOptions, options);
+    };
+    if (defaultOptions.object) {
+      var name = defaultOptions.object.basics.name || defaultOptions.object.basics.character.name;
+      _log("_____________________________________________");
+      _log("REPAIR + UPDATE > > > " + name);
+
+      // if awesomeSheet check is a boolean
+      if (typeof defaultOptions.object.awesomeSheet == "boolean") {
+        _log("\tlegacy update: 4.4.0 and below");
+        // --------------------------------------------------
+        _update_440andBelow(defaultOptions.object);
+      };
+
+      if (defaultOptions.object.awesomeSheet.version != update.version()) {
+        // version bump
+        _log("\tupdate: from " + defaultOptions.object.awesomeSheet.version + " to " + update.version());
+        _update({
+          object: defaultOptions.object,
+          bumpTo: update.version()
+        });
+      };
+
+    };
+  };
+
+  function render(options) {
+    var defaultOptions = {
+      debug: false,
+      object: null
+    };
+    if (options) {
+      var defaultOptions = helper.applyOptions(defaultOptions, options);
+    };
+    _debug = defaultOptions.debug;
+    // check for character object
+    if (defaultOptions.object) {
+      _repair({
+        object: defaultOptions.object
+      });
+      // if no object repair all characters
     } else {
       var allCharacters = sheet.getAll();
-      for (var i = 0; i < allCharacters.length; i++) {
-        _repair(allCharacters[i]);
-      };
+      allCharacters.forEach(function(arrayItem) {
+        _repair({
+          object: arrayItem
+        });
+      });
+    };
+    // store characters
+    sheet.store();
+  };
+
+  function _log(message) {
+    if (_debug) {
+      console.log(message);
     };
   };
 
@@ -25363,8 +26996,11 @@ var sheet = (function() {
     localStorage.clear();
     prompt.destroy();
     snack.destroy();
-    helper.store("backupAllCharacters", JSON.stringify(allCharacters));
+    // helper.store("backupAllCharacters", JSON.stringify(allCharacters));
     allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.all()));
+    repair.render({
+      debug: true
+    });
     setIndex(0);
     store();
     clear();
@@ -25382,6 +27018,9 @@ var sheet = (function() {
     prompt.destroy();
     snack.destroy();
     allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
+    repair.render({
+      debug: true
+    })
     setIndex(0);
     store();
     clear();
@@ -25412,7 +27051,6 @@ var sheet = (function() {
   };
 
   function render() {
-    repair.render(sheet.get());
     characterSelect.render();
     stats.render();
     clone.render();
@@ -25599,9 +27237,19 @@ var sheet = (function() {
       // console.log(event);
       if (helper.isJsonString(event.target.result)) {
         var data = JSON.parse(event.target.result);
-        if (data.awesomeSheet) {
-          add(data);
-          var name = allCharacters[getIndex()].basics.name;
+        if (data.awesomeSheet || data.awesomeSheet.awesome) {
+          add(repair.render({
+            object: data,
+            debug: true
+          }));
+          var name = get().basics.name || get().basics.character.name || "New character";
+          // var name = helper.getObject({
+          //   object: get(),
+          //   path: basics.name
+          // }) || helper.getObject({
+          //   object: get(),
+          //   path: basics.character.name
+          // }) || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " imported and back in the game."
           });
@@ -25633,9 +27281,19 @@ var sheet = (function() {
       // console.log(event);
       if (helper.isJsonString(event.target.result)) {
         var data = JSON.parse(event.target.result);
-        if (data.awesomeSheet) {
-          replace(data);
-          var name = allCharacters[getIndex()].basics.name || "New character";
+        if (data.awesomeSheet || data.awesomeSheet.awesome) {
+          replace(repair.render({
+            object: data,
+            debug: true
+          }));
+          var name = get().basics.name || get().basics.character.name || "New character";
+          // var name = helper.getObject({
+          //   object: get(),
+          //   path: basics.name
+          // }) || helper.getObject({
+          //   object: get(),
+          //   path: basics.character.name
+          // }) || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " replaced and back in the game."
           });
@@ -25668,8 +27326,8 @@ var sheet = (function() {
     readFile.onload = function(event) {
       if (helper.isJsonString(event.target.result)) {
         // console.log("JSON true");
-        if (JSON.parse(event.target.result).awesomeSheet) {
-          // console.log("awesome key true");
+        if (JSON.parse(event.target.result).awesomeSheet || JSON.parse(event.target.result).awesomeSheet.awesome) {
+          // console.log("awesome true");
           importSelectLabelText.textContent = fileList[0].name;
           helper.addClass(importSelectLabel, "m-import-select-label-ok");
           helper.removeClass(importSelectLabel, "m-import-select-label-error");
@@ -25677,7 +27335,7 @@ var sheet = (function() {
           helper.removeClass(importSelectLabelIcon, "icon-error-outline");
           helper.addClass(importSelectLabelIcon, "icon-check");
         } else {
-          // console.log("awesome key false");
+          // console.log("awesome false");
           importSelectLabelText.textContent = "JSON file not recognised by awesomeSheet";
           helper.removeClass(importSelectLabel, "m-import-select-label-ok");
           helper.addClass(importSelectLabel, "m-import-select-label-error");
@@ -25705,7 +27363,10 @@ var sheet = (function() {
 
   function exportJson() {
     var fileName;
-    var characterName = get().basics.name;
+    var characterName = helper.getObject({
+      object: get(),
+      path: "basics.character.name"
+    });
     var classLevel = classes.getClassLevel(sheet.get());
     if (characterName != "") {
       fileName = characterName;
@@ -25919,41 +27580,41 @@ var size = (function() {
     var size = helper.e(".js-size");
     var selectBlockDropdown = size.querySelector(".js-select-block-dropdown");
     var index = selectBlockDropdown.selectedIndex;
-    var object = _create_sizeObject(index);
+    var modifier = _create_sizeObject(index);
     helper.setObject({
       object: sheet.get(),
-      path: "basics.size.size_modifier",
-      newValue: object.size_modifier
+      path: "basics.character.size.modifier.base",
+      newValue: modifier.base
     });
     helper.setObject({
       object: sheet.get(),
-      path: "basics.size.special_size_modifier",
-      newValue: object.special_size_modifier
+      path: "basics.character.size.modifier.special",
+      newValue: modifier.special
     });
     helper.setObject({
       object: sheet.get(),
-      path: "basics.size.size_modifier_fly",
-      newValue: object.size_modifier_fly
+      path: "basics.character.size.modifier.fly",
+      newValue: modifier.fly
     });
     helper.setObject({
       object: sheet.get(),
-      path: "basics.size.size_modifier_stealth",
-      newValue: object.size_modifier_stealth
+      path: "basics.character.size.modifier.stealth",
+      newValue: modifier.stealth
     });
     sheet.store();
   };
 
   function _create_sizeObject(index) {
-    var allSize = {};
-    var all_size_modifier = [0, 8, 4, 2, 1, 0, -1, -2, -4, -8];
-    var all_special_size_modifier = [0, -8, -4, -2, -1, 0, 1, 2, 4, 8];
-    var all_size_modifier_fly = [0, 8, 6, 4, 2, 0, -2, -4, -6, -8];
-    var all_size_modifier_stealth = [0, 16, 12, 8, 4, 0, -4, -8, -12, -16];
-    allSize.size_modifier = all_size_modifier[index];
-    allSize.special_size_modifier = all_special_size_modifier[index];
-    allSize.size_modifier_fly = all_size_modifier_fly[index];
-    allSize.size_modifier_stealth = all_size_modifier_stealth[index];
-    return allSize;
+    var modifier = {};
+    var modifierBase = [0, 8, 4, 2, 1, 0, -1, -2, -4, -8];
+    var modifierSpecial = [0, -8, -4, -2, -1, 0, 1, 2, 4, 8];
+    var modifierFly = [0, 8, 6, 4, 2, 0, -2, -4, -6, -8];
+    var modifierStealth = [0, 16, 12, 8, 4, 0, -4, -8, -12, -16];
+    modifier.base = modifierBase[index];
+    modifier.special = modifierSpecial[index];
+    modifier.fly = modifierFly[index];
+    modifier.stealth = modifierStealth[index];
+    return modifier;
   };
 
   function _create_encumbranceObject(str) {};
@@ -25971,7 +27632,7 @@ var skills = (function() {
   var renderTimer = null;
 
   function bind() {
-    var skillsRanksSpentIncludeCustom = helper.e(".js-skills-ranks-spent-include-custom");
+    var skillsRanksSpentIncludeCustom = helper.e(".js-skills-ranks-include-custom");
     var all_inputBlockFieldRanks = helper.eA(".js-input-block-field-ranks");
 
     skillsRanksSpentIncludeCustom.addEventListener("change", function() {
@@ -25995,15 +27656,15 @@ var skills = (function() {
   function render() {
     var includeCustom = helper.getObject({
       object: sheet.get(),
-      path: "skills.ranks.spent.include_custom"
+      path: "skills.ranks.include_custom"
     });
     var all_skills = helper.getObject({
       object: sheet.get(),
-      path: "skills.all"
+      path: "skills.default"
     });
     var all_customSkills = helper.getObject({
       object: sheet.get(),
-      path: "skills.custom"
+      path: "skills.custom.all"
     });
     var ranks = [];
     var ranksTotal;
@@ -26020,7 +27681,7 @@ var skills = (function() {
     });
     helper.setObject({
       object: sheet.get(),
-      path: "skills.ranks.spent.current",
+      path: "skills.ranks.current",
       newValue: ranksTotal
     });
   };
@@ -26183,9 +27844,9 @@ var spells = (function() {
   };
 
   function _destroy_spellBook(level) {
-    var spellBook = helper.e(".js-spell-book-known-level-" + level);
-    while (spellBook.lastChild) {
-      spellBook.removeChild(spellBook.lastChild);
+    var spellBlockKnown = helper.e(".js-spell-block-known-level-" + level);
+    while (spellBlockKnown.lastChild) {
+      spellBlockKnown.removeChild(spellBlockKnown.lastChild);
     };
   };
 
@@ -26208,7 +27869,7 @@ var spells = (function() {
   function _restore_spellObject(level, index, spell) {
     var spellBook = helper.getObject({
       object: sheet.get(),
-      path: "spells.book[" + level + "]level_" + level
+      path: "spells.book.level_" + level + ".all"
     });
     spellBook.splice(index, 0, spell);
     _destroy_spellBook(level);
@@ -26221,7 +27882,7 @@ var spells = (function() {
   };
 
   function clear() {
-    var all_spellBookKnown = helper.eA(".js-spell-book-known");
+    var all_spellBookKnown = helper.eA(".js-spell-block-known");
     for (var i = 0; i < all_spellBookKnown.length; i++) {
       while (all_spellBookKnown[i].lastChild) {
         all_spellBookKnown[i].removeChild(all_spellBookKnown[i].lastChild);
@@ -26278,9 +27939,9 @@ var spells = (function() {
   };
 
   function addNewSpell(element, spellIndex, spellData) {
-    var spellBook = helper.getClosest(element, ".js-spell-book");
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
-    var addNewSpellField = spellBook.querySelector(".js-add-new-spell-field");
+    var spellBlock = helper.getClosest(element, ".js-spell-block");
+    var spellBlockOptions = helper.makeObject(spellBlock.dataset.spellBlockOptions);
+    var addNewSpellField = spellBlock.querySelector(".js-add-new-spell-field");
     var spellName;
     if (spellData) {
       spellName = spellData.name;
@@ -26289,15 +27950,15 @@ var spells = (function() {
     };
     if (spellName != "") {
       var newSpellObject = new _create_spellObject(spellName, 0, false, 0, "", spellIndex);
-      var newIndex = _get_spellBookCount(spellBookOptions.level);
+      var newIndex = _get_spellBookCount(spellBlockOptions.level);
       helper.setObject({
         object: sheet.get(),
-        path: spellBookOptions.path + "[" + newIndex + "]",
+        path: spellBlockOptions.path + "[" + newIndex + "]",
         newValue: newSpellObject
       });
-      _render_spell(newSpellObject, spellBookOptions.level, newIndex, true);
+      _render_spell(newSpellObject, spellBlockOptions.level, newIndex, true);
       addNewSpellField.value = "";
-      _render_spellPlaceholder(spellBookOptions.level);
+      _render_spellPlaceholder(spellBlockOptions.level);
     };
   };
 
@@ -26320,24 +27981,28 @@ var spells = (function() {
 
   function _spellKnownItem(button) {
     var options = helper.makeObject(button.dataset.spellButtonOptions);
-    var spellBook = helper.getClosest(button, ".js-spell-book");
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
+    var spellBlock = helper.getClosest(button, ".js-spell-block");
+    var spellBlockOptions = helper.makeObject(spellBlock.dataset.spellBlockOptions);
+    // depending on spell state change the spell object
     _update_spellObject(button);
+    // depending on spell state change the spell button
     _update_spellButton(button);
-    if (_get_spellBookCount(spellBookOptions.level) > 0) {
-      _render_quickSpellControl(button);
-      _fireball(options.level, options.index);
-    } else {
-      _spellState.set(spellBookOptions.level, null);
-      _reset_stateSpellControl(spellBook);
-      _render_spellPlaceholder(spellBookOptions.level);
+    // depending on spell state show spell quick controls
+    _render_quickSpellControl(button);
+    // depending on spell state show easter egg
+    _fireball(options.level, options.index);
+    // if no spell left reset controls and placeholder
+    if (_get_spellBookCount(spellBlockOptions.level) == 0) {
+      _spellState.set(spellBlockOptions.level, null);
+      _reset_stateSpellControl(spellBlock);
+      _render_spellPlaceholder(spellBlockOptions.level);
     };
   };
 
   function _fireball(level, index) {
     var spellObject = helper.getObject({
       object: sheet.get(),
-      path: "spells.book[" + level + "]level_" + level + "[" + index + "]"
+      path: "spells.book.level_" + level + ".all[" + index + "]"
     });
     if (_spellState.get(level) == "cast") {
       var fireballName = ["Fireball", "fireball", "Fire ball", "fire Ball", "fire ball", "Fire Ball", "FIREBALL", "FIREBALL!", "FIREBALL!!", "FIREBALL!!!", "FIREBALL!!!!"];
@@ -26352,7 +28017,7 @@ var spells = (function() {
     var options = helper.makeObject(button.dataset.spellButtonOptions);
     var spellObject = helper.getObject({
       object: sheet.get(),
-      path: "spells.book[" + options.level + "]level_" + options.level + "[" + options.index + "]"
+      path: "spells.book.level_" + options.level + ".all[" + options.index + "]"
     });
     if (_spellState.get(options.level) != null) {
       if (_spellState.get(options.level) == "prepare") {
@@ -26385,7 +28050,7 @@ var spells = (function() {
         // remove spell from spellbook
         helper.getObject({
           object: sheet.get(),
-          path: "spells.book[" + options.level + "]level_" + options.level
+          path: "spells.book.level_" + options.level + ".all"
         }).splice(options.index, 1);
         // snack with undo option
         snack.render({
@@ -26404,7 +28069,7 @@ var spells = (function() {
     var options = helper.makeObject(button.dataset.spellButtonOptions);
     var spellObject = helper.getObject({
       object: sheet.get(),
-      path: "spells.book[" + options.level + "]level_" + options.level + "[" + options.index + "]"
+      path: "spells.book.level_" + options.level + ".all[" + options.index + "]"
     });
     var spellName = button.querySelector(".js-spell-name");
     var spellMarks = button.querySelector(".js-spell-marks");
@@ -26450,7 +28115,7 @@ var spells = (function() {
       _destroy_spellBook(options.level);
       _render_all_spells(helper.getObject({
         object: sheet.get(),
-        path: "spells.book[" + options.level + "]level_" + options.level
+        path: "spells.book.level_" + options.level + ".all"
       }), options.level);
     };
   };
@@ -26459,7 +28124,7 @@ var spells = (function() {
     var options = helper.makeObject(button.dataset.spellButtonOptions);
     var spellObject = helper.getObject({
       object: sheet.get(),
-      path: "spells.book[" + options.level + "]level_" + options.level + "[" + options.index + "]"
+      path: "spells.book.level_" + options.level + ".all[" + options.index + "]"
     });
     var tempSpellObject = JSON.parse(JSON.stringify(spellObject));
     var _hold_data = function(action, type) {
@@ -26494,7 +28159,6 @@ var spells = (function() {
           tempSpellObject.active = true;
         };
       };
-      // console.log("tempSpellObject", tempSpellObject);
     };
     var _render_count = function(spellControl) {
       var spellControlPreparedCount = spellControl.querySelector(".js-spell-control-prepared-count");
@@ -26510,7 +28174,7 @@ var spells = (function() {
       tempSpellObject.name = spellControl.querySelector(".js-spell-control-input-name").value;
       helper.setObject({
         object: sheet.get(),
-        path: "spells.book[ " + options.level + "].level_" + options.level + "[" + options.index + "]",
+        path: "spells.book.level_" + options.level + ".all[" + options.index + "]",
         newValue: tempSpellObject
       });
     };
@@ -26957,12 +28621,12 @@ var spells = (function() {
 
   function _resetAllSpells(button) {
     var options = helper.makeObject(button.dataset.spellControlOptions);
-    var spellBook = helper.getClosest(button, ".js-spell-book");
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
+    var spellBlock = helper.getClosest(button, ".js-spell-block");
+    var spellBlockOptions = helper.makeObject(spellBlock.dataset.spellBlockOptions);
     var reset = function() {
       var spellBook = helper.getObject({
         object: sheet.get(),
-        path: spellBookOptions.path
+        path: spellBlockOptions.path
       });
       for (var i in spellBook) {
         spellBook[i].prepared = 0;
@@ -26976,13 +28640,13 @@ var spells = (function() {
       render();
       sheet.store();
       snack.render({
-        message: "All level " + spellBookOptions.level + " spells reset."
+        message: "All level " + spellBlockOptions.level + " spells reset."
       });
     };
-    if (_get_spellBookCount(spellBookOptions.level)) {
+    if (_get_spellBookCount(spellBlockOptions.level)) {
       prompt.render({
-        heading: "Reset level " + spellBookOptions.level + " spells?",
-        message: "All level " + spellBookOptions.level + " Prepared, Cast and Active spells will be set to normal states.",
+        heading: "Reset level " + spellBlockOptions.level + " spells?",
+        message: "All level " + spellBlockOptions.level + " Prepared, Cast and Active spells will be set to normal states.",
         actionText: "Reset",
         action: promotAction
       });
@@ -26992,17 +28656,17 @@ var spells = (function() {
 
   function _sortAllSpells(button) {
     var options = helper.makeObject(button.dataset.spellControlOptions);
-    var spellBook = helper.getClosest(button, ".js-spell-book");
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
+    var spellBlock = helper.getClosest(button, ".js-spell-block");
+    var spellBlockOptions = helper.makeObject(spellBlock.dataset.spellBlockOptions);
     var sort = function() {
       var spellBook = helper.getObject({
         object: sheet.get(),
-        path: spellBookOptions.path
+        path: spellBlockOptions.path
       });
       var newSpellBook = helper.sortObject(spellBook, "name");
       helper.setObject({
         object: sheet.get(),
-        path: spellBookOptions.path,
+        path: spellBlockOptions.path,
         newValue: newSpellBook
       });
     };
@@ -27012,13 +28676,13 @@ var spells = (function() {
       render();
       sheet.store();
       snack.render({
-        message: "All level " + spellBookOptions.level + " spells alphabetically sorted."
+        message: "All level " + spellBlockOptions.level + " spells alphabetically sorted."
       });
     };
-    if (_get_spellBookCount(spellBookOptions.level)) {
+    if (_get_spellBookCount(spellBlockOptions.level)) {
       prompt.render({
-        heading: "Sort level " + spellBookOptions.level + " spells",
-        message: "Sort all level " + spellBookOptions.level + " spells in alphabetical order?",
+        heading: "Sort level " + spellBlockOptions.level + " spells",
+        message: "Sort all level " + spellBlockOptions.level + " spells in alphabetical order?",
         actionText: "Sort",
         action: promotAction
       });
@@ -27028,15 +28692,15 @@ var spells = (function() {
 
   function _update_stateSpellEditMode(button) {
     var options = helper.makeObject(button.dataset.spellControlOptions);
-    var spellBook = helper.getClosest(button, ".js-spell-book");
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
-    if (_get_spellBookCount(spellBookOptions.level) > 0) {
-      _spellState.set(spellBookOptions.level, options.state);
+    var spellBlock = helper.getClosest(button, ".js-spell-block");
+    var spellBlockOptions = helper.makeObject(spellBlock.dataset.spellBlockOptions);
+    if (_get_spellBookCount(spellBlockOptions.level) > 0) {
+      _spellState.set(spellBlockOptions.level, options.state);
       _render_stateSpellControl(button);
-      _render_stateSpellBook(spellBook, spellBookOptions.level);
-      _render_stateSpellBookItem(spellBook, spellBookOptions.level);
+      _render_stateSpellBlock(spellBlock, spellBlockOptions.level);
+      _render_stateSpellBlockItem(spellBlock, spellBlockOptions.level);
     } else {
-      _spellState.set(spellBookOptions.level, null);
+      _spellState.set(spellBlockOptions.level, null);
       _render_stateSpellControl(button);
     };
   };
@@ -27044,27 +28708,39 @@ var spells = (function() {
   function _get_spellBookCount(level) {
     return helper.getObject({
       object: sheet.get(),
-      path: "spells.book[" + level + "]level_" + level
+      path: "spells.book.level_" + level + ".all"
     }).length;
   };
 
-  function render() {
-    var all_spellBook = helper.getObject({
-      object: sheet.get(),
-      path: "spells.book"
-    });
-    var spellsToRender;
-    // iterate over all objects keys to find spells then push those values to spellsToRender
-    if (all_spellBook) {
-      for (var i = 0; i < all_spellBook.length; i++) {
-        // console.log(all_spellBook[i]);
-        for (var j in all_spellBook[i]) {
-          // console.log(all_spellBook[i][j]);
-          spellsToRender = all_spellBook[i][j];
-          _render_all_spells(spellsToRender, i);
-        };
+  function render(spellBlock) {
+    if (spellBlock) {
+      _render_spellBlock(spellBlock);
+    } else {
+      var all_spellBlock = helper.eA(".js-spell-block");
+      for (var i = 0; i < all_spellBlock.length; i++) {
+        _render_spellBlock(all_spellBlock[i]);
       };
     };
+  };
+
+  function _render_spellBlock(spellBlock) {
+    var options = helper.makeObject(spellBlock.dataset.spellBlockOptions);
+    var all_spells = helper.getObject({
+      object: sheet.get(),
+      path: options.path
+    });
+    for (var i = 0; i < all_spells.length; i++) {
+      var spellBlockKnown = spellBlock.querySelector(".js-spell-block-known");
+      var spellObject = all_spells[i];
+      var spellButtonCol = document.createElement("div");
+      spellButtonCol.setAttribute("class", "m-spell-col js-spell-col");
+      // append new spell to spell list
+      var spellButton = _create_spellButton(spellObject, options.level, i);
+      spellButtonCol.appendChild(spellButton);
+      spellBlockKnown.appendChild(spellButtonCol);
+      _bind_spellKnownItem(spellButton);
+    };
+    _render_spellPlaceholder(options.level);
   };
 
   function _render_all_spells(array, level) {
@@ -27074,7 +28750,7 @@ var spells = (function() {
       var spellButtonCol = document.createElement("div");
       spellButtonCol.setAttribute("class", "m-spell-col js-spell-col");
       // find spell list to add too
-      var knownListToSaveTo = helper.e(".js-spell-book-known-level-" + level);
+      var knownListToSaveTo = helper.e(".js-spell-block-known-level-" + level);
       // append new spell to spell list
       var spellButton = _create_spellButton(spellObject, level, i);
       spellButtonCol.appendChild(spellButton);
@@ -27089,7 +28765,7 @@ var spells = (function() {
     var spellButtonCol = document.createElement("div");
     spellButtonCol.setAttribute("class", "m-spell-col js-spell-col");
     // find spell list to add too
-    var knownListToSaveTo = helper.e(".js-spell-book-known-level-" + level);
+    var knownListToSaveTo = helper.e(".js-spell-block-known-level-" + level);
     // append new spell to spell list
     var spellButton = _create_spellButton(spellObject, level, spellIndex, true);
     spellButtonCol.appendChild(spellButton);
@@ -27162,7 +28838,7 @@ var spells = (function() {
     return spellButton;
   };
 
-  function _render_stateSpellBookItem(spellBook, level) {
+  function _render_stateSpellBlockItem(spellBook, level) {
     var all_spellBookItem = spellBook.querySelectorAll(".js-spell");
     var _normalStateSpellItems = function() {
       for (var i = 0; i < all_spellBookItem.length; i++) {
@@ -27190,7 +28866,7 @@ var spells = (function() {
     };
   };
 
-  function _render_stateSpellBook(spellBook, level) {
+  function _render_stateSpellBlock(spellBook, level) {
     if (_spellState.get(level) == "remove") {
       helper.addClass(spellBook, "is-state-remove");
     } else {
@@ -27199,9 +28875,9 @@ var spells = (function() {
   };
 
   function _render_stateSpellControl(button) {
-    var spellBook = helper.getClosest(button, ".js-spell-book");
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
-    var all_spellControl = spellBook.querySelectorAll(".js-spell-control");
+    var spellBlock = helper.getClosest(button, ".js-spell-block");
+    var spellBlockOptions = helper.makeObject(spellBlock.dataset.spellBlockOptions);
+    var all_spellControl = spellBlock.querySelectorAll(".js-spell-control");
     var _resetAllControl = function() {
       for (var i = 0; i < all_spellControl.length; i++) {
         if (all_spellControl[i].classList.contains("button-primary")) {
@@ -27213,20 +28889,20 @@ var spells = (function() {
       };
     };
     var _activateControl = function() {
-      if (_spellState.get(spellBookOptions.level) == "remove") {
+      if (_spellState.get(spellBlockOptions.level) == "remove") {
         helper.addClass(button, "button-primary");
-      } else if (_spellState.get(spellBookOptions.level) == null) {
+      } else if (_spellState.get(spellBlockOptions.level) == null) {
         helper.removeClass(button, "button-primary");
       };
-      if (_spellState.get(spellBookOptions.level) == "prepare" || _spellState.get(spellBookOptions.level) == "unprepare" || _spellState.get(spellBookOptions.level) == "cast" || _spellState.get(spellBookOptions.level) == "active") {
+      if (_spellState.get(spellBlockOptions.level) == "prepare" || _spellState.get(spellBlockOptions.level) == "unprepare" || _spellState.get(spellBlockOptions.level) == "cast" || _spellState.get(spellBlockOptions.level) == "active") {
         // helper.addClass(button, "is-live");
         helper.addClass(button, "button-secondary");
-      } else if (_spellState.get(spellBookOptions.level) == null) {
+      } else if (_spellState.get(spellBlockOptions.level) == null) {
         // helper.removeClass(button, "is-live");
         helper.removeClass(button, "button-secondary");
       };
     };
-    if (_spellState.get(spellBookOptions.level) != null) {
+    if (_spellState.get(spellBlockOptions.level) != null) {
       _resetAllControl();
       _activateControl();
     } else {
@@ -27235,19 +28911,16 @@ var spells = (function() {
   };
 
   function _reset_stateSpellControl(spellBook) {
-    var spellBookOptions = helper.makeObject(spellBook.dataset.spellBookOptions);
+    var spellBlockOptions = helper.makeObject(spellBook.dataset.spellBlockOptions);
     var all_spellControl = spellBook.querySelectorAll(".js-spell-control");
-    if (_get_spellBookCount(spellBookOptions.level) == 0) {
+    if (_get_spellBookCount(spellBlockOptions.level) == 0) {
       for (var i = 0; i < all_spellControl.length; i++) {
         if (all_spellControl[i].classList.contains("button-primary")) {
           helper.removeClass(all_spellControl[i], "button-primary");
           helper.removeClass(all_spellControl[i], "button-secondary");
         };
-        // if (all_spellControl[i].classList.contains("is-live")) {
-        //   helper.removeClass(all_spellControl[i], "is-live");
-        // };
       };
-      _render_stateSpellBook(spellBook, spellBookOptions.level);
+      _render_stateSpellBlock(spellBook, spellBlockOptions.level);
     };
   };
 
@@ -30902,13 +32575,13 @@ var themeColor = (function() {
       })) {
       for (var i = 0; i < themeMeta.length; i++) {
         if (themeMeta[i].getAttribute("name") == "theme-color") {
-          themeMeta[i].setAttribute("content", "#b0002e");
+          themeMeta[i].setAttribute("content", "#970027");
         };
       };
     } else {
       for (var i = 0; i < themeMeta.length; i++) {
         if (themeMeta[i].getAttribute("name") == "theme-color") {
-          themeMeta[i].setAttribute("content", "#245689");
+          themeMeta[i].setAttribute("content", "#1e4a76");
         };
       };
     };
@@ -31051,7 +32724,6 @@ var tip = (function() {
 })();
 
 var totalBlock = (function() {
-
 
   function bind(totalBlock) {
     if (totalBlock) {
@@ -31204,10 +32876,10 @@ var totalBlock = (function() {
         // max dex is not a bonus too add or subtract but a value to limit the dex modifier
         if (totalBlockObject.bonuses[key] && key != "max_dex") {
           var externalBouns;
-          if (key == "str_bonus") {
+          if (key == "str") {
             externalBouns = _checkValue(stats.getMod("str"));
           };
-          if (key == "dex_bonus") {
+          if (key == "dex") {
             // if max dex is true
             if (totalBlockObject.bonuses.max_dex) {
               if (helper.getObject({
@@ -31228,76 +32900,88 @@ var totalBlock = (function() {
               externalBouns = _checkValue(stats.getMod("dex"));
             };
           };
-          if (key == "con_bonus") {
+          if (key == "con") {
             externalBouns = _checkValue(stats.getMod("con"));
           };
-          if (key == "int_bonus") {
+          if (key == "int") {
             externalBouns = _checkValue(stats.getMod("int"));
           };
-          if (key == "wis_bonus") {
+          if (key == "wis") {
             externalBouns = _checkValue(stats.getMod("wis"));
           };
-          if (key == "cha_bonus") {
+          if (key == "cha") {
             externalBouns = _checkValue(stats.getMod("cha"));
           };
           if (key == "bab") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "offense.base_attack"
+              path: "offense.stats.base_attack"
             }));
           };
-          if (key == "size") {
+          if (key == "size_base") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "basics.size.size_modifier"
+              path: "basics.character.size.modifier.base"
             }));
           };
-          if (key == "special_size") {
+          if (key == "size_fly") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "basics.size.special_size_modifier"
+              path: "basics.character.size.modifier.fly"
+            }));
+          };
+          if (key == "size_stealth") {
+            externalBouns = _checkValue(helper.getObject({
+              object: sheet.get(),
+              path: "basics.character.size.modifier.stealth"
+            }));
+          };
+          if (key == "size_special") {
+            externalBouns = _checkValue(helper.getObject({
+              object: sheet.get(),
+              path: "basics.character.size.modifier.special"
             }));
           };
           if (key == "level") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "basics.level"
+              path: "basics.experience.level"
             }));
           };
           if (key == "half_level") {
             externalBouns = Math.floor(_checkValue(helper.getObject({
               object: sheet.get(),
-              path: "basics.level"
+              path: "basics.experience.level"
             })) / 2);
           };
-          if (key == "ac_armor") {
+          if (key == "armor") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "defense.ac.armor"
+              path: "defense.ac.stats.armor"
             }));
           };
-          if (key == "ac_shield") {
+          if (key == "shield") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "defense.ac.shield"
+              path: "defense.ac.stats.shield"
             }));
           };
-          if (key == "ac_deflect") {
+          if (key == "deflect") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "defense.ac.deflect"
+              path: "defense.ac.stats.deflect"
             }));
           };
-          if (key == "ac_dodge") {
+          if (key == "dodge") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "defense.ac.dodge"
+              path: "defense.ac.stats.dodge"
             }));
           };
-          if (key == "ac_natural") {
+          if (key == "natural") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "defense.ac.natural"
+              path: "defense.ac.stats.natural"
             }));
           };
           if (key == "check_penalty") {
@@ -31308,18 +32992,6 @@ var totalBlock = (function() {
           };
           if (key == "class_skill") {
             externalBouns = _checkClassSkill(totalBlockObject);
-          };
-          if (key == "size_modifier_fly") {
-            externalBouns = _checkValue(helper.getObject({
-              object: sheet.get(),
-              path: "basics.size.size_modifier_fly"
-            }));
-          };
-          if (key == "size_modifier_stealth") {
-            externalBouns = _checkValue(helper.getObject({
-              object: sheet.get(),
-              path: "basics.size.size_modifier_stealth"
-            }));
           };
           if (key == "spell_level") {
             externalBouns = _checkValue(helper.getObject({
@@ -31488,93 +33160,93 @@ var totalBlock = (function() {
         };
         return newData;
       };
-      if (label == "str-bonus" || label == "str_bonus") {
+      if (label == "str") {
         return "STR Bonus (" + _addPrefix(stats.getMod("str")) + ")";
-      } else if (label == "dex-bonus" || label == "dex_bonus") {
+      } else if (label == "dex") {
         return "DEX Bonus (" + _addPrefix(stats.getMod("dex")) + ")";
-      } else if (label == "con-bonus" || label == "con_bonus") {
+      } else if (label == "con") {
         return "CON Bonus (" + _addPrefix(stats.getMod("con")) + ")";
-      } else if (label == "int-bonus" || label == "int_bonus") {
+      } else if (label == "int") {
         return "INT Bonus (" + _addPrefix(stats.getMod("int")) + ")";
-      } else if (label == "wis-bonus" || label == "wis_bonus") {
+      } else if (label == "wis") {
         return "WIS Bonus (" + _addPrefix(stats.getMod("wis")) + ")";
-      } else if (label == "cha-bonus" || label == "cha_bonus") {
+      } else if (label == "cha") {
         return "CHA Bonus (" + _addPrefix(stats.getMod("cha")) + ")";
       } else if (label == "bab") {
         return "Base Attack Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
           path: "offense.base_attack"
         })) + ")";
-      } else if (label == "size") {
+      } else if (label == "size_base") {
         return "Size Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "basics.size.size_modifier"
+          path: "basics.character.size.modifier.base"
         })) + ")";
-      } else if (label == "special_size") {
+      } else if (label == "size_special") {
         return "Special Size Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "basics.size.special_size_modifier"
+          path: "basics.character.size.modifier.special"
         })) + ")";
-      } else if (label == "size_modifier_fly") {
+      } else if (label == "size_fly") {
         return "Size Fly Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "basics.size.size_modifier_fly"
+          path: "basics.character.size.modifier.fly"
         })) + ")";
-      } else if (label == "size_modifier_stealth") {
+      } else if (label == "size_stealth") {
         return "Size Stealth Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "basics.size.size_modifier_stealth"
+          path: "basics.character.size.modifier.stealth"
         })) + ")";
       } else if (label == "level") {
         return "Level (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "basics.level"
+          path: "basics.experience.level"
         })) + ")";
-      } else if (label == "half-level" || label == "half_level") {
+      } else if (label == "half_level") {
         return "Half Level (" + _addPrefix(Math.floor(helper.getObject({
           object: sheet.get(),
-          path: "basics.level"
+          path: "basics.experience.level"
         }) / 2)) + ")";
-      } else if (label == "plus-ten" || label == "plus_ten") {
+      } else if (label == "plus_ten") {
         return "Plus 10";
-      } else if (label == "ac-armor" || label == "ac_armor") {
+      } else if (label == "armor") {
         return "Armor Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "defense.ac.armor"
+          path: "defense.ac.stats.armor"
         })) + ")";
-      } else if (label == "ac-shield" || label == "ac_shield") {
+      } else if (label == "shield") {
         return "Shield Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "defense.ac.shield"
+          path: "defense.ac.stats.shield"
         })) + ")";
-      } else if (label == "ac-deflect" || label == "ac_deflect") {
+      } else if (label == "deflect") {
         return "Deflect Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "defense.ac.deflect"
+          path: "defense.ac.stats.deflect"
         })) + ")";
-      } else if (label == "ac-dodge" || label == "ac_dodge") {
+      } else if (label == "dodge") {
         return "Dodge Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "defense.ac.dodge"
+          path: "defense.ac.stats.dodge"
         })) + ")";
-      } else if (label == "ac-natural" || label == "ac_natural") {
+      } else if (label == "natural") {
         return "Natural Armor Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "defense.ac.natural"
+          path: "defense.ac.stats.natural"
         })) + ")";
-      } else if (label == "class-skill" || label == "class_skill") {
+      } else if (label == "class_skill") {
         return "Class Skill (+3)";
-      } else if (label == "check-penalty" || label == "check_penalty") {
+      } else if (label == "check_penalty") {
         return "Armor Check Penalty (" + _addPrefix(helper.getObject({
           object: sheet.get(),
           path: "equipment.armor.check_penalty"
         })) + ")";
-      } else if (label == "max-dex" || label == "max_dex") {
+      } else if (label == "max_dex") {
         return "Max Dex Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
           path: "equipment.armor.max_dex"
         })) + ")";
-      } else if (label == "spell-level" || label == "spell_level") {
+      } else if (label == "spell_level") {
         return "Spell Level (" + _addPrefix(helper.getObject({
           object: sheet.get(),
           path: totalBlockOptions.path + ".spell_level"
@@ -31588,119 +33260,119 @@ var totalBlock = (function() {
       if (totalBlockBonusesObject) {
         // order the bonuses for rendering in modal
         var orderedBonuses = [];
-        if ("str_bonus" in totalBlockBonusesObject) {
+        if ("str" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "str_bonus": totalBlockBonusesObject["str_bonus"]
+            str: totalBlockBonusesObject["str"]
           })
         };
-        if ("dex_bonus" in totalBlockBonusesObject) {
+        if ("dex" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "dex_bonus": totalBlockBonusesObject["dex_bonus"]
+            dex: totalBlockBonusesObject["dex"]
           })
         };
-        if ("con_bonus" in totalBlockBonusesObject) {
+        if ("con" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "con_bonus": totalBlockBonusesObject["con_bonus"]
+            con: totalBlockBonusesObject["con"]
           })
         };
-        if ("int_bonus" in totalBlockBonusesObject) {
+        if ("int" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "int_bonus": totalBlockBonusesObject["int_bonus"]
+            int: totalBlockBonusesObject["int"]
           })
         };
-        if ("wis_bonus" in totalBlockBonusesObject) {
+        if ("wis" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "wis_bonus": totalBlockBonusesObject["wis_bonus"]
+            wis: totalBlockBonusesObject["wis"]
           })
         };
-        if ("cha_bonus" in totalBlockBonusesObject) {
+        if ("cha" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "cha_bonus": totalBlockBonusesObject["cha_bonus"]
+            cha: totalBlockBonusesObject["cha"]
           })
         };
         if ("bab" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "bab": totalBlockBonusesObject["bab"]
+            bab: totalBlockBonusesObject["bab"]
           })
         };
         if ("level" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "level": totalBlockBonusesObject["level"]
+            level: totalBlockBonusesObject["level"]
           })
         };
         if ("half_level" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "half_level": totalBlockBonusesObject["half_level"]
+            half_level: totalBlockBonusesObject["half_level"]
           })
         };
         if ("class_skill" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "class_skill": totalBlockBonusesObject["class_skill"]
+            class_skill: totalBlockBonusesObject["class_skill"]
           })
         };
         if ("max_dex" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "max_dex": totalBlockBonusesObject["max_dex"]
+            max_dex: totalBlockBonusesObject["max_dex"]
           })
         };
         if ("check_penalty" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "check_penalty": totalBlockBonusesObject["check_penalty"]
+            check_penalty: totalBlockBonusesObject["check_penalty"]
           })
         };
         if ("plus_ten" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "plus_ten": totalBlockBonusesObject["plus_ten"]
+            plus_ten: totalBlockBonusesObject["plus_ten"]
           })
         };
-        if ("ac_armor" in totalBlockBonusesObject) {
+        if ("armor" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "ac_armor": totalBlockBonusesObject["ac_armor"]
+            armor: totalBlockBonusesObject["armor"]
           })
         };
-        if ("ac_shield" in totalBlockBonusesObject) {
+        if ("shield" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "ac_shield": totalBlockBonusesObject["ac_shield"]
+            shield: totalBlockBonusesObject["shield"]
           })
         };
-        if ("ac_deflect" in totalBlockBonusesObject) {
+        if ("deflect" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "ac_deflect": totalBlockBonusesObject["ac_deflect"]
+            deflect: totalBlockBonusesObject["deflect"]
           })
         };
-        if ("ac_dodge" in totalBlockBonusesObject) {
+        if ("dodge" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "ac_dodge": totalBlockBonusesObject["ac_dodge"]
+            dodge: totalBlockBonusesObject["dodge"]
           })
         };
-        if ("ac_natural" in totalBlockBonusesObject) {
+        if ("natural" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "ac_natural": totalBlockBonusesObject["ac_natural"]
+            natural: totalBlockBonusesObject["natural"]
           })
         };
-        if ("size" in totalBlockBonusesObject) {
+        if ("size_base" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "size": totalBlockBonusesObject["size"]
+            size_base: totalBlockBonusesObject["size_base"]
           })
         };
-        if ("special_size" in totalBlockBonusesObject) {
+        if ("size_special" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "special_size": totalBlockBonusesObject["special_size"]
+            size_special: totalBlockBonusesObject["size_special"]
           })
         };
-        if ("size_modifier_fly" in totalBlockBonusesObject) {
+        if ("size_fly" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "size_modifier_fly": totalBlockBonusesObject["size_modifier_fly"]
+            size_fly: totalBlockBonusesObject["size_fly"]
           })
         };
-        if ("size_modifier_stealth" in totalBlockBonusesObject) {
+        if ("size_stealth" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "size_modifier_stealth": totalBlockBonusesObject["size_modifier_stealth"]
+            size_stealth: totalBlockBonusesObject["size_stealth"]
           })
         };
         if ("spell_level" in totalBlockBonusesObject) {
           orderedBonuses.push({
-            "spell_level": totalBlockBonusesObject["spell_level"]
+            spell_level: totalBlockBonusesObject["spell_level"]
           })
         };
         for (var i = 0; i < orderedBonuses.length; i++) {
@@ -31758,6 +33430,11 @@ var totalBlock = (function() {
 var update = (function() {
 
   var history = [{
+    version: "5.0.0",
+    list: [
+      "Update and optimise the character data object."
+    ]
+  }, {
     version: "4.4.0",
     list: [
       "*Added Spell Search, newly added Spells will have a descriptions."
@@ -32018,13 +33695,13 @@ var update = (function() {
     ]
   }];
 
-  function currentVersion() {
+  function version() {
     return history[0].version;
   };
 
   // exposed methods
   return {
-    ver: currentVersion,
+    version: version,
     history: history
   };
 
@@ -32147,7 +33824,7 @@ var xp = (function() {
     var selectedTrack = false;
     var speed = helper.getObject({
       object: sheet.get(),
-      path: "basics.xp.advancement_speed"
+      path: "basics.experience.advancement_speed"
     });
     var nextLevel;
     var nextLevelXpMileStone;
@@ -32155,7 +33832,7 @@ var xp = (function() {
     var nextLevelIndex;
     var currentXp = helper.getObject({
       object: sheet.get(),
-      path: "basics.xp.total"
+      path: "basics.experience.total"
     });
     if (speed == "Slow") {
       selectedTrack = trackSlow;
@@ -32181,23 +33858,23 @@ var xp = (function() {
         };
         helper.setObject({
           object: sheet.get(),
-          path: "basics.xp.next_level",
+          path: "basics.experience.next_level",
           newValue: nextLevelXpMileStone
         });
         helper.setObject({
           object: sheet.get(),
-          path: "basics.xp.needed",
+          path: "basics.experience.needed",
           newValue: nextLevelXpNeeded
         });
       } else {
         helper.setObject({
           object: sheet.get(),
-          path: "basics.xp.next_level",
+          path: "basics.experience.next_level",
           newValue: ""
         });
         helper.setObject({
           object: sheet.get(),
-          path: "basics.xp.needed",
+          path: "basics.experience.needed",
           newValue: ""
         });
       };
@@ -32205,12 +33882,12 @@ var xp = (function() {
     var _clear_nextXp = function() {
       helper.setObject({
         object: sheet.get(),
-        path: "basics.xp.next_level",
+        path: "basics.experience.next_level",
         newValue: ""
       });
       helper.setObject({
         object: sheet.get(),
-        path: "basics.xp.needed",
+        path: "basics.experience.needed",
         newValue: ""
       });
     };
@@ -32236,7 +33913,9 @@ var xp = (function() {
 
 (function() {
 
-  repair.render();
+  repair.render({
+    debug: true
+  });
   sheet.render();
   sheet.bind();
   onboarding.render();
