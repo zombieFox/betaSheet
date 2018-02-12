@@ -129,7 +129,6 @@ var spells = (function() {
     var spellData = spellsData.get({
       index: spellIndex
     });
-    console.log(element, spellIndex, spellData);
     addNewSpell(element, spellIndex, spellData);
   };
 
@@ -388,7 +387,7 @@ var spells = (function() {
         contentMargin: null
       };
       if (options) {
-        var defaultOptions = helper.applyOptions(defaultOptions, options);
+        defaultOptions = helper.applyOptions(defaultOptions, options);
       };
       var box = document.createElement("div");
       box.setAttribute("class", "m-edit-box m-edit-box-indent");
