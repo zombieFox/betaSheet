@@ -2663,7 +2663,7 @@ label {
   transition: background-color 0.3s ease-in-out; }
 
 .m-card-head {
-  background-color: #173049;
+  background-color: #1e4a76;
   position: relative;
   transition: background-color 0.3s ease-in-out; }
 
@@ -2687,17 +2687,17 @@ label {
       font-size: 1.2em; }
 
 .m-card-tabs {
-  background-color: #173049; }
+  background-color: #1e4a76; }
 
 .m-card-body {
   padding: 2em;
   position: relative; }
 
 .is-display-mode .m-card-head {
-  background-color: #64001a; }
+  background-color: #970027; }
 
 .is-display-mode .m-card-tabs {
-  background-color: #64001a; }
+  background-color: #970027; }
 
 .is-minimise .m-card {
   background-color: transparent;
@@ -2711,10 +2711,10 @@ label {
   visibility: hidden; }
 
 .is-minimise .m-card-head {
-  background-color: #173049; }
+  background-color: #1b3d5f; }
 
 .is-minimise.is-display-mode .m-card-head {
-  background-color: #64001a; }
+  background-color: #970027; }
 
 .is-night-mode .m-card {
   background-color: #141414; }
@@ -4919,7 +4919,7 @@ label {
             transform: translate(0, -3em); }
 
 .m-header-bar {
-  background-color: #1e4a76;
+  background-color: #173049;
   margin: 0;
   padding: 0;
   display: -webkit-flex;
@@ -5018,7 +5018,7 @@ label {
     display: inline-block; }
 
 .is-display-mode .m-header-bar {
-  background-color: #970027; }
+  background-color: #64001a; }
 
 .is-display-mode .m-header-control:first-child {
   border-right-color: rgba(253, 0, 66, 0.55); }

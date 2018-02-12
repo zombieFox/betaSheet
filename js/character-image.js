@@ -1,6 +1,6 @@
 var characterImage = (function() {
 
-  var backgroundTimer = null;
+  var _timer_background = null;
 
   function bind() {
     var imageInput = helper.e(".js-image-input");
@@ -66,13 +66,13 @@ var characterImage = (function() {
       _render_position();
     }, false);
     imageScaleAverage.addEventListener("click", function() {
-      backgroundTimer = setTimeout(_delay_bakcground, 350, this);
+      _timer_background = setTimeout(_delay_bakcground, 350, this);
     }, false);
     imageScaleBlack.addEventListener("click", function() {
-      backgroundTimer = setTimeout(_delay_bakcground, 350, this);
+      _timer_background = setTimeout(_delay_bakcground, 350, this);
     }, false);
     imageScaleWhite.addEventListener("click", function() {
-      backgroundTimer = setTimeout(_delay_bakcground, 350, this);
+      _timer_background = setTimeout(_delay_bakcground, 350, this);
     }, false);
   };
 
@@ -337,7 +337,7 @@ var characterImage = (function() {
         g: "",
         b: ""
       },
-      image: "",
+      data: "",
       orientation: "",
       position: {
         x: "",
@@ -379,7 +379,7 @@ var characterImage = (function() {
       });
       var image = new Image;
       image.setAttribute("class", "m-character-image js-image");
-      image.src = characterImageObject.image;
+      image.src = characterImageObject.data;
       characterImagePreview.appendChild(image);
       _bind_image();
     };
@@ -538,7 +538,7 @@ var characterImage = (function() {
     // console.log("store image");
     helper.setObject({
       object: sheet.get(),
-      path: "basics.image.image",
+      path: "basics.image.data",
       newValue: imageBase64
     });
   };
