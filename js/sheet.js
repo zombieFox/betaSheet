@@ -1,57 +1,49 @@
 var sheet = (function() {
 
-  var _all_characters = JSON.parse(JSON.stringify([blank.data]));
+  var allCharacters = JSON.parse(JSON.stringify([blank.data]));
 
-  var _currentCharacterIndex = 0;
+  var currentCharacterIndex = 0;
+
+  var saveHardCodedCharacters = (function() {
+    if (helper.read("allCharacters")) {
+      allCharacters = JSON.parse(helper.read("allCharacters"));
+    } else if (typeof hardCodedCharacters !== "undefined") {
+      allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.demo())); // for demo load sample characters
+      // allCharacters = [blank.data]; // for production load blank character
+    };
+    store();
+  })();
 
   var setCurrentCharacterIndex = (function() {
     if (helper.read("charactersIndex")) {
-      _currentCharacterIndex = parseInt(helper.read("charactersIndex"), 10);
+      currentCharacterIndex = parseInt(helper.read("charactersIndex"), 10);
     };
   })();
 
-  function init() {
-    if (helper.read("allCharacters")) {
-      _all_characters = JSON.parse(helper.read("allCharacters"));
-    } else {
-      // load demo characters
-      _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
-      // load blank character
-      // _all_characters = JSON.parse(JSON.stringify([blank.data]));
-    };
-    _all_characters.forEach(function(item, index, array) {
-      array[index] = repair.render({
-        object: item
-      });
-    });
-    store();
-  };
-
   function store() {
-    helper.store("allCharacters", JSON.stringify(_all_characters));
+    helper.store("allCharacters", JSON.stringify(allCharacters));
   };
 
   function getAll() {
-    return _all_characters;
+    return allCharacters;
   };
 
   function get() {
-    return _all_characters[_currentCharacterIndex];
+    return allCharacters[currentCharacterIndex];
   };
 
   function getIndex() {
-    return _currentCharacterIndex;
+    return currentCharacterIndex;
   };
 
   function setIndex(index) {
-    _currentCharacterIndex = index;
-    helper.store("charactersIndex", _currentCharacterIndex);
+    currentCharacterIndex = index;
+    helper.store("charactersIndex", currentCharacterIndex);
   };
 
   function add(newCharacter) {
     var dataToAdd = newCharacter || JSON.parse(JSON.stringify(blank.data));
-    dataToAdd.awesomeSheet.version = update.version();
-    _all_characters.push(dataToAdd);
+    allCharacters.push(dataToAdd);
     setIndex(getAll().length - 1);
     clear();
     render();
@@ -64,8 +56,8 @@ var sheet = (function() {
 
   function replace(newCharacter) {
     var dataToAdd = newCharacter;
-    _all_characters.splice(getIndex(), 1);
-    _all_characters.splice(getIndex(), 0, dataToAdd);
+    allCharacters.splice(getIndex(), 1);
+    allCharacters.splice(getIndex(), 0, dataToAdd);
     clear();
     render();
     nav.scrollToTop();
@@ -74,9 +66,9 @@ var sheet = (function() {
 
   function remove() {
     var _destroy = function() {
-      _all_characters.splice(getIndex(), 1);
+      allCharacters.splice(getIndex(), 1);
       var message = helper.truncate(name, 50, true) + " removed.";
-      if (_all_characters.length == 0) {
+      if (allCharacters.length == 0) {
         add();
         message = message + " New character added.";
       };
@@ -110,12 +102,8 @@ var sheet = (function() {
     localStorage.clear();
     prompt.destroy();
     snack.destroy();
-    _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.all()));
-    _all_characters.forEach(function(item, index, array) {
-      array[index] = repair.render({
-        object: item
-      });
-    });
+    helper.store("backupAllCharacters", JSON.stringify(allCharacters));
+    allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.all()));
     setIndex(0);
     store();
     clear();
@@ -132,12 +120,7 @@ var sheet = (function() {
     localStorage.clear();
     prompt.destroy();
     snack.destroy();
-    _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
-    _all_characters.forEach(function(item, index, array) {
-      array[index] = repair.render({
-        object: item
-      });
-    });
+    allCharacters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
     setIndex(0);
     store();
     clear();
@@ -154,7 +137,7 @@ var sheet = (function() {
     localStorage.clear();
     prompt.destroy();
     snack.destroy();
-    _all_characters = JSON.parse(JSON.stringify([blank.data]));
+    allCharacters = JSON.parse(JSON.stringify([blank.data]));
     setIndex(0);
     store();
     clear();
@@ -168,6 +151,7 @@ var sheet = (function() {
   };
 
   function render() {
+    repair.render(sheet.get());
     characterSelect.render();
     stats.render();
     clone.render();
@@ -182,7 +166,7 @@ var sheet = (function() {
     spells.render();
     encumbrance.render();
     size.render();
-    exp.render();
+    xp.render();
     wealth.render();
     totalBlock.render();
     textBlock.render();
@@ -229,7 +213,7 @@ var sheet = (function() {
     card.bind();
     tip.bind();
     events.bind();
-    exp.bind();
+    xp.bind();
     characterImage.bind();
     registerServiceWorker.bind();
   };
@@ -266,11 +250,10 @@ var sheet = (function() {
   };
 
   function replaceJson() {
-    // var name = helper.getObject({
-    //   object: get(),
-    //   path: "basics.character.name"
-    // });
-    var name = get().basics.name || get().basics.character.name || "New character";
+    var name = helper.getObject({
+      object: get(),
+      path: "basics.name"
+    });
     modal.render({
       heading: "Replace " + name,
       content: _importJsonModal({
@@ -355,18 +338,9 @@ var sheet = (function() {
       // console.log(event);
       if (helper.isJsonString(event.target.result)) {
         var data = JSON.parse(event.target.result);
-        if (data.awesomeSheet || data.awesomeSheet.awesome) {
-          add(repair.render({
-            object: data
-          }));
-          var name = get().basics.name || get().basics.character.name || "New character";
-          // var name = helper.getObject({
-          //   object: get(),
-          //   path: basics.name
-          // }) || helper.getObject({
-          //   object: get(),
-          //   path: basics.character.name
-          // }) || "New character";
+        if (data.awesomeSheet) {
+          add(data);
+          var name = allCharacters[getIndex()].basics.name;
           snack.render({
             message: helper.truncate(name, 40, true) + " imported and back in the game."
           });
@@ -398,18 +372,9 @@ var sheet = (function() {
       // console.log(event);
       if (helper.isJsonString(event.target.result)) {
         var data = JSON.parse(event.target.result);
-        if (data.awesomeSheet || data.awesomeSheet.awesome) {
-          replace(repair.render({
-            object: data
-          }));
-          var name = get().basics.name || get().basics.character.name || "New character";
-          // var name = helper.getObject({
-          //   object: get(),
-          //   path: basics.name
-          // }) || helper.getObject({
-          //   object: get(),
-          //   path: basics.character.name
-          // }) || "New character";
+        if (data.awesomeSheet) {
+          replace(data);
+          var name = allCharacters[getIndex()].basics.name || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " replaced and back in the game."
           });
@@ -442,8 +407,8 @@ var sheet = (function() {
     readFile.onload = function(event) {
       if (helper.isJsonString(event.target.result)) {
         // console.log("JSON true");
-        if (JSON.parse(event.target.result).awesomeSheet || JSON.parse(event.target.result).awesomeSheet.awesome) {
-          // console.log("awesome true");
+        if (JSON.parse(event.target.result).awesomeSheet) {
+          // console.log("awesome key true");
           importSelectLabelText.textContent = fileList[0].name;
           helper.addClass(importSelectLabel, "m-import-select-label-ok");
           helper.removeClass(importSelectLabel, "m-import-select-label-error");
@@ -451,7 +416,7 @@ var sheet = (function() {
           helper.removeClass(importSelectLabelIcon, "icon-error-outline");
           helper.addClass(importSelectLabelIcon, "icon-check");
         } else {
-          // console.log("awesome false");
+          // console.log("awesome key false");
           importSelectLabelText.textContent = "JSON file not recognised by awesomeSheet";
           helper.removeClass(importSelectLabel, "m-import-select-label-ok");
           helper.addClass(importSelectLabel, "m-import-select-label-error");
@@ -479,10 +444,7 @@ var sheet = (function() {
 
   function exportJson() {
     var fileName;
-    var characterName = helper.getObject({
-      object: get(),
-      path: "basics.character.name"
-    });
+    var characterName = get().basics.name;
     var classLevel = classes.getClassLevel(sheet.get());
     if (characterName != "") {
       fileName = characterName;
@@ -569,7 +531,6 @@ var sheet = (function() {
 
   // exposed methods
   return {
-    init: init,
     getAll: getAll,
     get: get,
     store: store,
