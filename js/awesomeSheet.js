@@ -27337,10 +27337,11 @@ var sheet = (function() {
   };
 
   function replaceJson() {
-    var name = helper.getObject({
-      object: get(),
-      path: "basics.name"
-    });
+    // var name = helper.getObject({
+    //   object: get(),
+    //   path: "basics.character.name"
+    // });
+    var name = get().basics.name || get().basics.character.name || "New character";
     modal.render({
       heading: "Replace " + name,
       content: _importJsonModal({

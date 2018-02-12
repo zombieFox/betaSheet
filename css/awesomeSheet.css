@@ -2663,7 +2663,7 @@ label {
   transition: background-color 0.3s ease-in-out; }
 
 .m-card-head {
-  background-color: #1e4a76;
+  background-color: #173049;
   position: relative;
   transition: background-color 0.3s ease-in-out; }
 
@@ -2687,17 +2687,17 @@ label {
       font-size: 1.2em; }
 
 .m-card-tabs {
-  background-color: #1e4a76; }
+  background-color: #173049; }
 
 .m-card-body {
   padding: 2em;
   position: relative; }
 
 .is-display-mode .m-card-head {
-  background-color: #970027; }
+  background-color: #64001a; }
 
 .is-display-mode .m-card-tabs {
-  background-color: #970027; }
+  background-color: #64001a; }
 
 .is-minimise .m-card {
   background-color: transparent;
@@ -2711,10 +2711,10 @@ label {
   visibility: hidden; }
 
 .is-minimise .m-card-head {
-  background-color: #1b3d5f; }
+  background-color: #122435; }
 
 .is-minimise.is-display-mode .m-card-head {
-  background-color: #970027; }
+  background-color: #4a0013; }
 
 .is-night-mode .m-card {
   background-color: #141414; }
@@ -4919,7 +4919,7 @@ label {
             transform: translate(0, -3em); }
 
 .m-header-bar {
-  background-color: #173049;
+  background-color: #1e4a76;
   margin: 0;
   padding: 0;
   display: -webkit-flex;
@@ -5018,7 +5018,7 @@ label {
     display: inline-block; }
 
 .is-display-mode .m-header-bar {
-  background-color: #64001a; }
+  background-color: #970027; }
 
 .is-display-mode .m-header-control:first-child {
   border-right-color: rgba(253, 0, 66, 0.55); }
@@ -5714,7 +5714,7 @@ label {
             transform: translate(0, -3em); }
 
 .m-nav-bar {
-  background-color: #1b3d5f;
+  background-color: #1e4a76;
   padding: 0 1em;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5786,7 +5786,7 @@ label {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  color: rgba(255, 255, 255, 0.25);
+  color: #060a0e;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -5798,7 +5798,7 @@ label {
   .m-nav-link [class^="icon-"] {
     font-size: 1.5em; }
   .m-nav-link:link, .m-nav-link:visited {
-    color: rgba(255, 255, 255, 0.25); }
+    color: #060a0e; }
   .m-nav-link:focus, .m-nav-link:hover {
     background-color: transparent;
     text-decoration: none;
@@ -5812,7 +5812,7 @@ label {
       color: #ffffff; }
 
 .is-display-mode .m-nav-bar {
-  background-color: #7d0021; }
+  background-color: #970027; }
 
 @media (min-width: 700px) {
   .m-nav {
