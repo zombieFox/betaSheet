@@ -43,7 +43,8 @@ var sheet = (function() {
     };
     _all_characters.forEach(function(item, index, array) {
       array[index] = repair.render({
-        object: item
+        object: item,
+        debug: true
       });
     });
     store();
@@ -134,7 +135,8 @@ var sheet = (function() {
     _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.all()));
     _all_characters.forEach(function(item, index, array) {
       array[index] = repair.render({
-        object: item
+        object: item,
+        debug: true
       });
     });
     index.set(0);
@@ -156,7 +158,8 @@ var sheet = (function() {
     _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
     _all_characters.forEach(function(item, index, array) {
       array[index] = repair.render({
-        object: item
+        object: item,
+        debug: true
       });
     });
     index.set(0);
@@ -175,7 +178,9 @@ var sheet = (function() {
     localStorage.clear();
     prompt.destroy();
     snack.destroy();
-    _all_characters = JSON.parse(JSON.stringify([blank.data]));
+    var dataToAdd = JSON.parse(JSON.stringify(blank.data));
+    dataToAdd.awesomeSheet.version = update.version();
+    _all_characters = [dataToAdd];
     index.set(0);
     store();
     clear();
@@ -208,6 +213,7 @@ var sheet = (function() {
     totalBlock.render();
     textBlock.render();
     characterImage.render();
+    pill.render();
     display.render();
   };
 
@@ -223,6 +229,7 @@ var sheet = (function() {
     textareaBlock.clear();
     characterImage.clear();
     spells.clear();
+    pill.clear();
     display.clear();
   };
 
@@ -252,6 +259,7 @@ var sheet = (function() {
     events.bind();
     exp.bind();
     characterImage.bind();
+    pill.bind();
     registerServiceWorker.bind();
   };
 
@@ -269,7 +277,7 @@ var sheet = (function() {
   };
 
   function load() {
-    spellsData.load();
+    data.load();
   };
 
   function switcher(newIndex) {
@@ -380,7 +388,8 @@ var sheet = (function() {
         var data = JSON.parse(event.target.result);
         if (data.awesomeSheet || data.awesomeSheet.awesome) {
           add(repair.render({
-            object: data
+            object: data,
+            debug: true
           }));
           var name = get().basics.name || get().basics.character.name || "New character";
           // var name = helper.getObject({
@@ -423,7 +432,8 @@ var sheet = (function() {
         var data = JSON.parse(event.target.result);
         if (data.awesomeSheet || data.awesomeSheet.awesome) {
           replace(repair.render({
-            object: data
+            object: data,
+            debug: true
           }));
           var name = get().basics.name || get().basics.character.name || "New character";
           // var name = helper.getObject({
@@ -539,6 +549,7 @@ var sheet = (function() {
         menu.close();
         shade.destroy();
         log.destroy();
+        tip.destroy();
         page.update();
       };
       // ctrl+alt+f
