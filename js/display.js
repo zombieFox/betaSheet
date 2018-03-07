@@ -3,6 +3,8 @@ var display = (function() {
   var _displayContent = {
     basics: {
       intro: [{
+        areaClass: ["m-display-intro"],
+        wrapper: ["m-display-intro-image"],
         type: "image",
         element: "div",
         classname: ["m-display-image-wrapper"],
@@ -14,16 +16,16 @@ var display = (function() {
           color: "basics.image.color"
         }]
       }, {
+        wrapper: ["m-display-intro-name"],
         type: "snippet",
         element: "h1",
-        classname: ["m-display-name"],
         content: [{
           path: "basics.character.name"
         }]
       }, {
+        wrapper: ["m-display-intro-class"],
         type: "snippet",
         element: "p",
-        classname: ["m-display-class"],
         content: [{
           path: "basics.classes.string"
         }]
@@ -356,9 +358,9 @@ var display = (function() {
       }, {
         type: "snippet",
         element: "h1",
-        head: "Total",
         content: [{
           path: "equipment.wealth.total",
+          prefix: "Total",
           suffix: "GP",
           valueType: "currency"
         }]
@@ -383,8 +385,7 @@ var display = (function() {
           prefix: "Flat Footed"
         }, {
           path: "defense.cmd.current",
-          prefix: "CMD",
-          valueType: "bonus"
+          prefix: "CMD"
         }, {
           path: "defense.dr.current",
           prefix: "DR",
@@ -1133,23 +1134,36 @@ var display = (function() {
     if (options) {
       options.sections.forEach(function(arrayItem) {
 
-        var content = helper.getObject({
+        var all_displayObject = helper.getObject({
           object: _displayContent,
           path: arrayItem
         });
         var displayArea = document.createElement("div");
         displayArea.setAttribute("class", "m-display-area");
         var displayAreaContent = false;
-
-        content.forEach(function(arrayItem, index) {
-          var elementToAdd = _render_content(arrayItem);
-          // console.log(options.sections, elementToAdd);
-          if (elementToAdd) {
-            if (elementToAdd.length > 0) {
-              elementToAdd.forEach(function(arrayItem) {
+        all_displayObject.forEach(function(arrayItem, index) {
+          if (arrayItem.areaClass) {
+            arrayItem.areaClass.forEach(function(arrayItem) {
+              helper.addClass(displayArea, arrayItem);
+            });
+          };
+          var wrapper = false;
+          var all_elementToAdd = _render_content(arrayItem);
+          if (arrayItem.wrapper) {
+            wrapper = document.createElement("div");
+            wrapper.setAttribute("class", arrayItem.wrapper);
+          };
+          if (all_elementToAdd) {
+            if (all_elementToAdd.length > 0) {
+              all_elementToAdd.forEach(function(arrayItem) {
                 if (arrayItem) {
                   displayAreaContent = true;
-                  displayArea.appendChild(arrayItem);
+                  if (wrapper) {
+                    wrapper.appendChild(arrayItem);
+                    displayArea.appendChild(wrapper);
+                  } else {
+                    displayArea.appendChild(arrayItem);
+                  };
                 };
               });
             };
@@ -1388,7 +1402,7 @@ var display = (function() {
           stat.setAttribute("class", "m-display-stat");
           var statName = document.createElement("span");
           statName.setAttribute("class", "m-display-stat-name");
-          var statValue = document.createElement("strong");
+          var statValue = document.createElement("span");
           statValue.setAttribute("class", "m-display-stat-value");
           var mod = document.createElement("h1");
           mod.setAttribute("class", "m-display-mod");

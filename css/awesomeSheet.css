@@ -2163,11 +2163,14 @@ label {
     margin: 0;
     display: block;
     -webkit-columns: 10em 2;
+       -moz-columns: 10em 2;
             columns: 10em 2;
     -webkit-column-gap: 2em;
+       -moz-column-gap: 2em;
             column-gap: 2em; }
     .l-section-wrapper > * {
       -webkit-column-break-inside: avoid;
+         page-break-inside: avoid;
               break-inside: avoid; }
   .l-section {
     margin: 0 0 1em;
@@ -6468,6 +6471,32 @@ label {
   .m-display-area:not(:only-child):not(:last-child) {
     margin-bottom: 1.5em; }
 
+.m-display-image-wrapper {
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: -3em auto 1em;
+  width: 14em;
+  height: 14em;
+  min-width: 14em;
+  min-height: 14em;
+  max-width: 14em;
+  max-height: 14em;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 6px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden; }
+
+.m-display-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center; }
+
 .m-display-head {
   color: #ca0035;
   font-size: 0.75em;
@@ -6478,7 +6507,7 @@ label {
 .m-display-prefix,
 .m-display-suffix {
   font-size: 0.75em;
-  font-family: "Open Sans Light Italic", Helvetica, Arial, sans-serif; }
+  font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif; }
   .m-display-prefix:not(:last-child):not(:last-child),
   .m-display-suffix:not(:last-child):not(:last-child) {
     margin-bottom: 0; }
@@ -6623,7 +6652,7 @@ h3 .m-display-value {
 
 .m-display-stat {
   color: #ca0035;
-  font-family: "Open Sans Light Italic", Helvetica, Arial, sans-serif; }
+  font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif; }
 
 .m-display-stat-name {
   margin-right: 0.5em; }
@@ -6674,7 +6703,7 @@ h3 .m-display-value {
     [class^="m-display-list"] .m-display-list-item .m-display-list-item-prefix,
     [class^="m-display-list"] .m-display-list-item .m-display-list-item-suffix {
       font-size: 0.75em;
-      font-family: "Open Sans Light Italic", Helvetica, Arial, sans-serif; }
+      font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif; }
     [class*="m-display-list"] .m-display-list-item .m-display-list-item-prefix,
     [class^="m-display-list"] .m-display-list-item .m-display-list-item-prefix {
       color: #ca0035; }
@@ -6884,7 +6913,7 @@ h3 .m-display-value {
   .m-display-list-item-attack-weapon .m-display-list-item-attack-prefix {
     margin: 0;
     font-size: 0.75em;
-    font-family: "Open Sans Light Italic", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif;
     color: #ca0035;
     display: inline-block; }
   .m-display-list-item-attack-ammo .m-display-list-item-attack-value,
@@ -6959,28 +6988,6 @@ h3 .m-display-value {
 .is-night-mode .m-display-list-item-attack-type:not(:only-child):not(:last-child):after {
   background-color: #2e2e2e; }
 
-.m-display-image-wrapper {
-  background-color: #ffffff;
-  border-radius: 50%;
-  margin: -3em auto 1em;
-  width: 20em;
-  height: 20em;
-  box-sizing: border-box;
-  position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 6px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden; }
-
-.m-display-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-transform-origin: center center;
-      -ms-transform-origin: center center;
-          transform-origin: center center; }
-
 @media (min-width: 550px) {
   .m-display-stats {
     -webkit-flex-flow: row nowrap;
@@ -7051,6 +7058,39 @@ h3 .m-display-value {
         margin-right: 8%; } }
 
 @media (min-width: 700px) {
+  .m-display-intro {
+    display: grid;
+    grid-template-columns: 16em 2fr;
+    grid-template-rows: 8em 8em; }
+    .m-display-intro .m-display-intro-image {
+      grid-row-start: 1;
+      grid-row-end: 9;
+      grid-column-start: 1;
+      grid-column-end: 2; }
+    .m-display-intro .m-display-intro-name {
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      -webkit-align-self: end;
+          -ms-flex-item-align: end;
+              align-self: end; }
+    .m-display-intro .m-display-intro-class {
+      grid-row-start: 2;
+      grid-row-end: 3;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      -webkit-align-self: start;
+          -ms-flex-item-align: start;
+              align-self: start; }
+  .m-display-image-wrapper {
+    margin: 0 1em 0 -4em;
+    width: 16em;
+    height: 16em;
+    min-width: 16em;
+    min-height: 16em;
+    max-width: 16em;
+    max-height: 16em; }
   .m-display-snippet-item .m-display-prefix {
     margin-right: 0;
     display: block; }
@@ -7133,10 +7173,6 @@ h3 .m-display-value {
     background-color: #2e2e2e; } }
 
 @media (min-width: 900px) {
-  .m-display-image-wrapper {
-    margin: 0;
-    width: 15em;
-    height: 15em; }
   .m-display-list-responsive .m-display-list-item {
     -webkit-flex: 0 0 30%;
         -ms-flex: 0 0 30%;
@@ -7162,9 +7198,9 @@ h3 .m-display-value {
         -ms-flex-pack: end;
             justify-content: flex-end; }
   .m-display-list-item-attack-weapon {
-    -webkit-flex: 0 0 40%;
-        -ms-flex: 0 0 40%;
-            flex: 0 0 40%; }
+    -webkit-flex: 0 0 35%;
+        -ms-flex: 0 0 35%;
+            flex: 0 0 35%; }
     .m-display-list-item-attack-weapon:not(:only-child):not(:last-child) {
       padding-right: 1em; }
   .m-display-list-item-attack-attack {
