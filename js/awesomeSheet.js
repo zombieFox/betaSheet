@@ -120,12 +120,12 @@ var helper = (function() {
         var key = "\"" + kevValuePair[0] + "\"";
         var value;
         // if the value has + with a space after it
-        if (/\+(?=\S)/.test(kevValuePair[1])) {
+        if (/\+/.test(kevValuePair[1])) {
           // remove first + symbol
           kevValuePair[1] = kevValuePair[1].substr(1, kevValuePair[1].length);
           // split the would be values
           // split on character if not followed by a space
-          var all_value = kevValuePair[1].split(/\+(?=\S)/);
+          var all_value = kevValuePair[1].split(/\+/);
           // if there are multiple values make an array
           value = "["
           for (var q = 0; q < all_value.length; q++) {
@@ -855,7 +855,6 @@ var card = (function() {
         event.stopPropagation();
         event.preventDefault();
         _displayToggle(this);
-        // _unminimise(this);
       }, false);
     };
   };
@@ -868,10 +867,11 @@ var card = (function() {
 
   function _displayToggle(element) {
     var section = helper.getClosest(element, ".js-section");
-    display.clear(section);
-    display.render(section);
-    display.toggle(section);
-    display.update();
+    display.clear();
+    display.render();
+    display.toggle({
+      section: section
+    });
     themeColor.update();
   };
 
@@ -879,14 +879,15 @@ var card = (function() {
     var section = helper.getClosest(element, ".js-section");
     var icon = section.querySelector(".js-card-minimise-icon");
     var cardTabs = section.querySelector(".js-card-tabs");
-    var display = (section.dataset.displayMode == "true");
 
     var _minimise = function() {
       section.dataset.minimise = "true";
       helper.addClass(section, "is-minimise");
       helper.addClass(icon, "icon-unfold-more");
       helper.removeClass(icon, "icon-unfold-less");
-      if (cardTabs && !display) {
+      if (cardTabs && !display.state.get({
+          section: section
+        })) {
         helper.addClass(cardTabs, "is-hidden");
       };
     };
@@ -896,7 +897,9 @@ var card = (function() {
       helper.removeClass(section, "is-minimise");
       helper.removeClass(icon, "icon-unfold-more");
       helper.addClass(icon, "icon-unfold-less");
-      if (cardTabs && !display) {
+      if (cardTabs && !display.state.get({
+          section: section
+        })) {
         helper.removeClass(cardTabs, "is-hidden");
       };
     };
@@ -914,7 +917,6 @@ var card = (function() {
   };
 
 })();
-
 var blank = (function() {
 
   var data = {
@@ -1066,6 +1068,10 @@ var blank = (function() {
           current: ""
         }
       },
+      abilities: {
+        all: [],
+        notes: ""
+      },
       feats: {
         all: [],
         notes: ""
@@ -1075,10 +1081,6 @@ var blank = (function() {
         notes: ""
       },
       languages: {
-        all: [],
-        notes: ""
-      },
-      abilities: {
         all: [],
         notes: ""
       },
@@ -2623,8 +2625,7 @@ var izlara = (function() {
           height: 500
         },
         scale: 100
-      },
-      character_image: {}
+      }
     },
     statistics: {
       stats: {
@@ -5742,8 +5743,7 @@ var ravich = (function() {
           height: 500
         },
         scale: 190
-      },
-      character_image: {}
+      }
     },
     statistics: {
       stats: {
@@ -13218,34 +13218,68 @@ var nif = (function() {
 var orrin = (function() {
 
   var data = {
-    awesomeSheet: true,
+    awesomeSheet: {
+      awesome: true,
+      version: 5.1
+    },
     basics: {
-      name: "Orrin Alareth",
-      race: "Human",
-      level: "",
-      classes: [{
-        classname: "Rogue",
-        level: 11,
-        hp: 68,
-        fortitude: 3,
-        reflex: 7,
-        will: 3,
-        ranks: 99,
-        bab: 8
-      }],
-      size: {
-        category: "Medium",
-        size_modifier: 0,
-        special_size_modifier: 0,
-        size_modifier_fly: 0,
-        size_modifier_stealth: 0
+      character: {
+        name: "Orrin Alareth",
+        race: "Human",
+        alignment: "Lawful Evil",
+        deity: "",
+        height: "6'0",
+        weight: "206 lbs",
+        age: "26",
+        gender: "Male",
+        hero_points: "",
+        description: "A energetic overweight man. Reddened medium-brown skin, round face, blue-green, wrinkled eyes, a double chin and wavy light brown hair. Very good reflexes and exceptional dexterity and coordination.",
+        size: {
+          category: "Medium",
+          modifier: {
+            base: "",
+            special: "",
+            fly: "",
+            stealth: ""
+          }
+        }
       },
-      alignment: "Lawful Evil",
-      deity: "",
-      height: "6'0",
-      weight: "206 lbs",
-      age: "26",
-      gender: "Male",
+      classes: {
+        all: [{
+          classname: "Rogue",
+          level: 11,
+          hp: 68,
+          fortitude: 3,
+          reflex: 7,
+          will: 3,
+          ranks: 99,
+          bab: 8
+        }]
+      },
+      experience: {
+        level: 11,
+        next_level: 145000,
+        needed: "",
+        total: "",
+        advancement: "Fast"
+      },
+      initiative: {
+        misc: "",
+        temp: "",
+        feat: "",
+        trait: "",
+        current: "",
+        bonuses: {
+          str: false,
+          dex: true,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
+          level: false,
+          half_level: false
+        }
+      },
       speed: {
         land: "30ft",
         fly: "",
@@ -13254,123 +13288,233 @@ var orrin = (function() {
         climb: "",
         burrow: ""
       },
-      hero_points: "",
-      character_description: "A energetic overweight man. Reddened medium-brown skin, round face, blue-green, wrinkled eyes, a double chin and wavy light brown hair. Very good reflexes and exceptional dexterity and coordination.",
-      initiative: {
-        misc: "",
-        temp: "",
-        feat: "",
-        trait: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      xp: {
-        total: 105348,
-        advancement_speed: "Medium",
-        next_level: "",
-        needed: ""
-      },
-      character_image: {
+      image: {
+        uploaded: "",
         background: "",
         color: {
           r: "",
           g: "",
           b: ""
         },
+        data: "",
         orientation: "",
         position: {
           x: "",
           y: ""
         },
-        scale: "",
-        image: "",
-        uploaded: "",
         size: {
           width: "",
           height: ""
-        }
+        },
+        scale: ""
       }
     },
     statistics: {
       stats: {
         str: {
-          modifier: 1,
+          modifier: "",
           base: 13,
-          current: "",
-          racial: "",
           enhancement: "",
           misc: "",
-          temp: ""
+          racial: "",
+          temp: "",
+          current: ""
         },
         dex: {
-          modifier: 7,
+          modifier: "",
           base: 18,
-          current: "",
-          racial: 2,
           enhancement: 4,
           misc: "",
-          temp: ""
+          racial: 2,
+          temp: "",
+          current: ""
         },
         con: {
-          modifier: 1,
+          modifier: "",
           base: 12,
-          current: "",
-          racial: "",
           enhancement: "",
           misc: "",
-          temp: ""
+          racial: "",
+          temp: "",
+          current: ""
         },
         int: {
-          modifier: 3,
+          modifier: "",
           base: 12,
-          current: "",
-          racial: "",
           enhancement: 4,
           misc: "",
-          temp: ""
+          racial: "",
+          temp: "",
+          current: ""
         },
         wis: {
-          modifier: 1,
+          modifier: "",
           base: 12,
-          current: "",
-          racial: "",
           enhancement: "",
           misc: "",
-          temp: ""
+          racial: "",
+          temp: "",
+          current: ""
         },
         cha: {
-          modifier: -2,
+          modifier: "",
           base: 7,
-          current: "",
-          racial: "",
           enhancement: "",
           misc: "",
-          temp: ""
+          racial: "",
+          temp: "",
+          current: ""
         }
       },
-      feats: "Weapon Finesse, Dodge, Two-Weapon Fighting, Weapon focus (Rapier), Deft hands, Great Fortitude, Iron Will, Two-Weapon Defense",
-      traits: "Reactionary, Resilient",
-      languages: "Common, Elven",
-      special_abilities: "Sneak Attack (+6d6), Trapfinding, Evasion (Ex), Rogue Talent Trap spotter (Ex), Trap Sense +3 (Ex), Rogue Talent Finesse Rogue, Uncanny Dodge (Ex), Rogue Talent Fast Stealth (Ex), Improved Uncanny Dodge (Ex), Rogue Talent Combat Trick - Improved Two-Weapon Fighting, Rogue Talent Offensive Defense (Ex), Advanced Talent Knock-Out Blow (Ex)",
-      power: [{
-        name: "Knock-Out Blow",
-        current: "",
-        total: 1,
-        used: ""
-      }]
+      abilities: {
+        all: [{
+          name: "Advanced Talent (Knock-Out Blow)",
+          note: "(Ex) Once per day, the rogue can forgo her sneak attack damage to attempt to knock out an opponent. She must declare the use of knock-out blow before she makes the attack. If the attack hits, it does normal damage, but instead of dealing sneak attack damage (and instead of any effect that triggers when the rogue deals sneak attack damage), the target falls unconscious for 1d4 rounds. A successful Fortitude save reduces this effect to staggered for 1 round. The DC of this save is equal to 10 + 1/2 the rogue's level + the rogue's Intelligence modifier.",
+          index: false
+        }, {
+          name: "Evasion",
+          note: "(Ex) At 2nd level and higher, a rogue can avoid even magical and unusual attacks with great agility. If she makes a successful Reflex saving throw against an attack that normally deals half damage on a successful save, she instead takes no damage. Evasion can be used only if the rogue is wearing light armor or no armor. A helpless rogue does not gain the benefit of evasion.",
+          index: false
+        }, {
+          name: "Improved Uncanny Dodge",
+          note: "(Ex) A rogue of 8th level or higher can no longer be flanked.",
+          index: false
+        }, {
+          name: "Rogue Talent (Combat Trick [Improved Two-Weapon Fighting])",
+          note: "A rogue that selects this talent gains a bonus combat feat.",
+          index: false
+        }, {
+          name: "Rogue Talent (Fast Stealth)",
+          note: "(Ex)<span style=\"font-size: 1em;\">&nbsp;This ability allows a rogue to move at full speed using the Stealth skill without penalty.</span>",
+          index: false
+        }, {
+          name: "Rogue Talent (Finesse Rogue)",
+          note: "A rogue that selects this talent gains Weapon Finesse as a bonus feat.",
+          index: false
+        }, {
+          name: "Rogue Talent (Offensive Defense)",
+          note: "(Ex) When a rogue with this talent hits a creature with a melee attack that deals sneak attack damage, the rogue gains a +1 dodge bonus to AC for each sneak attack die rolled for 1 round.",
+          index: false
+        }, {
+          name: "Rogue Talent (Trap Spotter)",
+          note: "(Ex) Whenever a rogue with this talent comes within 10 feet of a trap, she receives an immediate Perception skill check to notice the trap. This check should be made in secret by the GM.",
+          index: false
+        }, {
+          name: "Sneak Attack (+1d6)",
+          note: "If a rogue can catch an opponent when he is unable to defend himself effectively from her attack, she can strike a vital spot for extra damage.<div><br></div><div>The rogue's attack deals extra damage anytime her target would be denied a Dexterity bonus to AC (whether the target actually has a Dexterity bonus or not), or when the rogue flanks her target. This extra damage is 1d6 at 1st level, and increases by 1d6 every two rogue levels thereafter. Should the rogue score a critical hit with a sneak attack, this extra damage is not multiplied. Ranged attacks can count as sneak attacks only if the target is within 30 feet.</div><div><br></div><div>With a weapon that deals nonlethal damage (like a sap, whip, or an unarmed strike), a rogue can make a sneak attack that deals nonlethal damage instead of lethal damage. She cannot use a weapon that deals lethal damage to deal nonlethal damage in a sneak attack, not even with the usual –4 penalty.</div><div><br></div><div>The rogue must be able to see the target well enough to pick out a vital spot and must be able to reach such a spot. A rogue cannot sneak attack while striking a creature with concealment.</div>",
+          index: false
+        }, {
+          name: "Trap Sense (+3)",
+          note: "(Ex) At 3rd level, a rogue gains an intuitive sense that alerts her to danger from traps, giving her a +1 bonus on Reflex saves made to avoid traps and a +1 dodge bonus to AC against attacks made by traps. These bonuses rise to +2 when the rogue reaches 6th level, to +3 when she reaches 9th level, to +4 when she reaches 12th level, to +5 at 15th, and to +6 at 18th level.",
+          index: false
+        }, {
+          name: "Trapfinding",
+          note: "A rogue adds 1/2 her level to Perception skill checks made to locate traps and to Disable Device skill checks (minimum +1). A rogue can use Disable Device to disarm magic traps.",
+          index: false
+        }, {
+          name: "Uncanny Dodge",
+          note: "(Ex) Starting at 4th level, a rogue can react to danger before her senses would normally allow her to do so. She cannot be caught flat-footed, nor does she lose her Dex bonus to AC if the attacker is invisible. She still loses her Dexterity bonus to AC if immobilized. A rogue with this ability can still lose her Dexterity bonus to AC if an opponent successfully uses the feint action (see Combat) against her.<div><br></div><div>If a rogue already has uncanny dodge from a different class, she automatically gains improved uncanny dodge (see below) instead.</div>",
+          index: false
+        }],
+        notes: ""
+      },
+      power: {
+        all: [{
+          name: "Knock-Out Blow",
+          current: "",
+          total: 1,
+          used: ""
+        }]
+      },
+      feats: {
+        all: [{
+          name: "Deft Hands",
+          note: "",
+          index: 295
+        }, {
+          name: "Dodge",
+          note: "",
+          index: 361
+        }, {
+          name: "Great Fortitude",
+          note: "",
+          index: 596
+        }, {
+          name: "Iron Will",
+          note: "",
+          index: 783
+        }, {
+          name: "Two-Weapon Defense",
+          note: "",
+          index: 1393
+        }, {
+          name: "Two-Weapon Fighting",
+          note: "",
+          index: 1396
+        }, {
+          name: "Weapon Finesse",
+          note: "",
+          index: 1448
+        }, {
+          name: "Weapon Focus (Rapier)",
+          note: "",
+          index: 1450
+        }],
+        notes: ""
+      },
+      traits: {
+        all: [{
+          name: "Reactionary",
+          note: "",
+          index: 787
+        }, {
+          name: "Resilient",
+          note: "",
+          index: 804
+        }],
+        notes: ""
+      },
+      languages: {
+        all: [{
+          name: "Common",
+          note: "",
+          index: 5
+        }, {
+          name: "Elven",
+          note: "",
+          index: 9
+        }],
+        notes: ""
+      }
     },
     equipment: {
-      gear: "Fur coat and cold weather outfit, Thieves' tools MW, Climber's kit, Magnifying glass, Merchant's scale, Backpack, Flask of Oil (3), Pouch (belt), Sack, Candle, Flint and Steel, Torch, Tindertwig (5), Rations (5 days), Waterskin, Bedroll, Blanket, Rope (silk), Mirror, Compass, Ink, Pen, Paper sheets, Dagger (2), Hide armor, 10ft pole in pieces",
-      magic_gear: "Ioun Torch, Ioun Stones Dusty Rose, Rapier +1<br>",
+      possessions: {
+        gear: "Fur coat and cold weather outfit, Thieves' tools MW, Climber's kit, Magnifying glass, Merchant's scale, Backpack, Flask of Oil (3), Pouch (belt), Sack, Candle, Flint and Steel, Torch, Tindertwig (5), Rations (5 days), Waterskin, Bedroll, Blanket, Rope (silk), Mirror, Compass, Ink, Pen, Paper sheets, Dagger (2), Hide armor, 10ft pole in pieces",
+        magic_gear: "Ioun Torch, Ioun Stones Dusty Rose, Rapier +1<br>",
+        potion_viles_oils: "Cure Light Wounds (6), Endure Elements (1), Bless Weapon (4), Greese (1), Reduce Person (1), Stabilise (1), Cure Light Wounds (1), Jump (1), Protection from Good (1), Protection from Law (1), Protection from Evil (1), Remove Fear (1), Remove Sickness (1), Shield of Faith (1), Vanish (1), Gaseous Form (1), Dispel Magic (1)",
+        scrolls: ""
+      },
+      armor: {
+        armor: "Mithral Chain Shirt +2",
+        check_penalty: "",
+        max_dex: "",
+        shield: ""
+      },
+      body_slots: {
+        belts: "Belt of Dexterity +4",
+        body: "",
+        chest: "Vest of Escape",
+        eyes: "Eyes of the Eagle",
+        feet: "",
+        hands: "Gloves of Reconnaissance",
+        head: "Headband of Vast Intelligence +4",
+        headband: "",
+        neck: "Amulet of a Natural Armor +1",
+        ring_left_hand: "Ring of Force Shield",
+        ring_right_hand: "Ring of Protection +1",
+        shoulders: "Cloak of Resistance +2",
+        wrist: ""
+      },
       item: {
         all: [{
           name: "Flask of Oil",
@@ -13401,7 +13545,7 @@ var orrin = (function() {
         }
       },
       encumbrance: {
-        encumbrance_str: "",
+        str: "",
         carry_move: {
           light: "",
           medium: "",
@@ -13410,207 +13554,212 @@ var orrin = (function() {
           drag: ""
         }
       },
-      armor: {
-        armor: "Mithral Chain Shirt +2",
-        check_penalty: "",
-        max_dex: "",
-        shield: ""
-      },
-      body_slots: {
-        belts: "Belt of Dexterity +4",
-        body: "",
-        chest: "Vest of Escape",
-        eyes: "Eyes of the Eagle",
-        feet: "",
-        hands: "Gloves of Reconnaissance",
-        head: "Headband of Vast Intelligence +4",
-        headband: "",
-        neck: "Amulet of a Natural Armor +1",
-        ring_left_hand: "Ring of Force Shield",
-        ring_right_hand: "Ring of Protection +1",
-        shoulders: "Cloak of Resistance +2",
-        wrist: ""
+      consumable: {
+        all: [{
+          item: "Gloves of Reconnaissance",
+          current: "",
+          total: 10,
+          used: 2
+        }, {
+          item: "Wand of Magic Missile (CL5)",
+          current: "",
+          total: 50,
+          used: 6
+        }, {
+          item: "Wand of Cure Light Wounds",
+          current: "",
+          total: 50,
+          used: 1
+        }, {
+          item: "Wand of Entangle",
+          current: "",
+          total: 50,
+          used: ""
+        }]
       },
       wealth: {
         platinum: 3,
         gold: 13009,
         silver: 5,
         copper: "",
-        total: 13039.5,
-        include_item: false
-      },
-      consumable: [{
-        item: "Gloves of Reconnaissance",
-        current: "",
-        total: 10,
-        used: 2
-      }, {
-        item: "Wand of Magic Missile (CL5)",
-        current: "",
-        total: 50,
-        used: 4
-      }, {
-        item: "Wand of Cure Light Wounds",
-        current: "",
-        total: 50,
-        used: 1
-      }, {
-        item: "Wand of Entangle",
-        current: "",
-        total: 50,
-        used: ""
-      }],
-      potion_viles_oils: "Cure Light Wounds (6), Endure Elements (1), Bless Weapon (4), Greese (1), Reduce Person (1), Stabilise (1), Cure Light Wounds (1), Jump (1), Protection from Good (1), Protection from Law (1), Protection from Evil (1), Remove Fear (1), Remove Sickness (1), Shield of Faith (1), Vanish (1), Gaseous Form (1), Dispel Magic (1)",
-      scrolls: ""
+        total: 13039.5
+      }
     },
     defense: {
       hp: {
-        total: "",
+        total: 79,
         temp: "",
-        damage: "",
+        damage: 36,
         non_lethal_damage: "",
-        current: ""
+        current: "",
+        notes: ""
       },
       ac: {
-        misc: "",
-        temp: "",
-        armor: 6,
-        shield: 3,
-        deflect: 1,
-        dodge: 1,
-        natural: 1,
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          plus_ten: true,
-          ac_armor: true,
-          ac_shield: true,
-          ac_deflect: true,
-          ac_dodge: true,
-          ac_natural: true,
-          size: true,
-          max_dex: true
-        }
+        armor_class: {
+          misc: 3,
+          temp: 4,
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            plus_ten: true,
+            armor: true,
+            shield: true,
+            deflect: true,
+            dodge: true,
+            natural: true,
+            size_base: true,
+            max_dex: true
+          }
+        },
+        flat_footed: {
+          misc: 3,
+          temp: 4,
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            plus_ten: true,
+            armor: true,
+            shield: true,
+            deflect: true,
+            natural: true,
+            size_base: true,
+            dodge: false
+          }
+        },
+        touch: {
+          misc: 3,
+          temp: 4,
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            plus_ten: true,
+            deflect: true,
+            dodge: true,
+            size_base: true,
+            max_dex: true,
+            armor: false,
+            shield: false,
+            natural: false
+          }
+        },
+        stats: {
+          armor: 6,
+          shield: 3,
+          deflect: 1,
+          dodge: 1,
+          natural: 1
+        },
+        notes: "+3 dodge bonus to AC against attacks made by traps.<br>+2 AC against incorporeal attacks.<br>+6 Dodge to AC for 1 round after Sneak Attack.<br>Spells active: Barkskin (+5), Magic Vestment (+4), Deathward, Stoneskin (DR 10/adamantine[56/120]), Heroism, Haste, Mirror Image (1)"
       },
-      flat_footed: {
+      cmd: {
         misc: "",
         temp: "",
         current: "",
+        notes: "",
         bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          plus_ten: true,
-          ac_armor: true,
-          ac_shield: true,
-          ac_deflect: true,
-          ac_natural: true,
-          size: true,
-          ac_dodge: false
-        }
-      },
-      touch: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          plus_ten: true,
-          ac_deflect: true,
-          ac_dodge: true,
-          size: true,
-          max_dex: true,
-          ac_armor: false,
-          ac_shield: false,
-          ac_natural: false
-        }
-      },
-      ac_notes: "+3 dodge bonus to AC against attacks made by traps.<br>+2 AC against incorporeal attacks.<br>+6 Dodge to AC for 1 round after Sneak Attack.",
-      fortitude: {
-        base: "",
-        resistance: 2,
-        feat: 2,
-        trait: 1,
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: true,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
+          str: true,
+          dex: true,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
+          bab: true,
+          size_special: true,
           level: false,
-          half_level: false
+          half_level: false,
+          plus_ten: true
         }
       },
-      reflex: {
-        base: "",
-        resistance: 2,
-        feat: "",
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
+      saves: {
+        fortitude: {
+          base: 3,
+          resistance: 2,
+          feat: 2,
+          trait: 1,
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: true,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        reflex: {
+          base: 7,
+          resistance: 2,
+          feat: "",
+          trait: "",
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        will: {
+          base: 3,
+          resistance: 2,
+          feat: 2,
+          trait: "",
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        notes: "+3 bonus on Reflex saves made to avoid traps."
       },
-      will: {
-        base: "",
-        resistance: 2,
-        feat: 2,
-        trait: "",
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: true,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      save_notes: "+3 bonus on Reflex saves made to avoid traps.",
       dr: {
         feat: "",
         trait: "",
         misc: "",
         temp: "",
-        current: "",
         overcome: "",
+        current: "",
+        notes: "",
         bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           level: false,
           half_level: false
         }
@@ -13621,228 +13770,235 @@ var orrin = (function() {
         misc: "",
         temp: "",
         current: "",
+        notes: "",
         bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           level: false,
           half_level: false
         }
       },
-      resist_notes: ""
+      resistance: {
+        feat: "",
+        trait: "",
+        misc: "",
+        temp: "",
+        current: "",
+        notes: "",
+        bonuses: {
+          str: false,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
+          level: false,
+          half_level: false
+        }
+      }
     },
     offense: {
-      base_attack: "",
-      base_attack_bonuses: "",
+      stats: {
+        base_attack: 8,
+        base_attack_bonuses: "+8 / +3",
+        melee: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: true,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            bab: true,
+            size_base: true,
+            level: false,
+            half_level: false
+          }
+        },
+        ranged: {
+          misc: "",
+          temp: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            bab: true,
+            size_base: true,
+            level: false,
+            half_level: false
+          }
+        }
+      },
       cmb: {
         misc: "",
         temp: "",
         current: "",
+        notes: "",
         bonuses: {
-          str_bonus: true,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
+          str: true,
+          dex: false,
+          con: false,
+          int: false,
+          wis: false,
+          cha: false,
           bab: true,
-          special_size: true,
-          level: false,
-          half_level: false
-        }
-      },
-      cmd: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: true,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          bab: true,
-          special_size: true,
-          level: false,
-          half_level: false,
-          plus_ten: true
-        }
-      },
-      melee_attack: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: true,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          bab: true,
-          size: true,
-          level: false,
-          half_level: false
-        }
-      },
-      ranged_attack: {
-        misc: "",
-        temp: "",
-        current: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          bab: true,
-          size: true,
+          size_special: true,
           level: false,
           half_level: false
         }
       },
       attack: {
-        melee: [{
-          weapon: "Mithral Rapier +2",
-          attack: "+18",
-          damage: "1d6+3",
-          critical: "18–20/×2",
-          type: "Piercing"
-        }, {
-          weapon: "Rapier +1 Shocking",
-          attack: "+16",
-          damage: "1d6+2 + 1d6 Electrical",
-          critical: "18-20/x2",
-          type: "Piercing"
-        }, {
-          weapon: "Short Sword +1",
-          attack: "+16",
-          damage: "1d6+2",
-          critical: "19–20/×2",
-          type: "Piercing"
-        }, {
-          weapon: "Mithral Rapier +2, Short Sword +1",
-          attack: "+16/+16/+9/+9",
-          damage: "1d6+3, 1d6+2",
-          critical: "18–20/×2, 19–20/×2",
-          type: "Piercing, Piercing"
-        }, {
-          weapon: "Silver Dagger",
-          attack: "+15",
-          damage: "1d6+1",
-          critical: "19–20/×2",
-          type: "Piercing"
-        }, {
-          weapon: "Sap",
-          attack: "+15",
-          damage: "1d6+1",
-          critical: "x2",
-          type: "Bludgeoning"
-        }, {
-          weapon: "Punching Dagger +2 Shocking",
-          attack: "+17",
-          damage: "1d4+3 + 1d6 Electrical",
-          critical: "x3",
-          type: "Piercing"
-        }, {
-          weapon: "Mithral Rapier +2, Punching Dagger +2 Shocking",
-          attack: "+16/+16/+10/+10",
-          damage: "1d6+3, 1d4+3 + 1d6 Electrical",
-          critical: "18–20/×2, x3",
-          type: "Piercing, Piercing"
-        }, {
-          weapon: "Rapier +1 Shocking, Punching Dagger +2 Shocking",
-          attack: "+15/+15/+10/+10",
-          damage: "1d6+2 + 1d6 Electrical, 1d4+3 + 1d6 Electrical",
-          critical: "18–20/×2, x3",
-          type: "Piercing, Piercing"
-        }],
-        ranged: [{
-          weapon: "Shortbow (MW)",
-          attack: "+15/+10",
-          damage: "1d6",
-          critical: "x3",
-          range: "60 ft",
-          ammo: "50",
-          type: "Piercing"
-        }]
-      },
-      attack_notes: "+6d6 Sneak attack.<br>Knock-Out Blow DC 18."
+        notes: "+6d6 Sneak attack.<br>Knock-Out Blow DC 18.",
+        melee: {
+          all: [{
+            weapon: "Mithral Rapier +2",
+            attack: "+18",
+            damage: "1d6+3",
+            critical: "18–20/×2",
+            type: "Piercing"
+          }, {
+            weapon: "Rapier +1 Shocking",
+            attack: "+16",
+            damage: "1d6+2 + 1d6 Electrical",
+            critical: "18-20/x2",
+            type: "Piercing"
+          }, {
+            weapon: "Short Sword +1",
+            attack: "+16",
+            damage: "1d6+2",
+            critical: "19–20/×2",
+            type: "Piercing"
+          }, {
+            weapon: "Mithral Rapier +2, Short Sword +1",
+            attack: "+16/+16/+9/+9",
+            damage: "1d6+3, 1d6+2",
+            critical: "18–20/×2, 19–20/×2",
+            type: "Piercing, Piercing"
+          }, {
+            weapon: "Silver Dagger",
+            attack: "+15",
+            damage: "1d6+1",
+            critical: "19–20/×2",
+            type: "Piercing"
+          }, {
+            weapon: "Sap",
+            attack: "+15",
+            damage: "1d6+1",
+            critical: "x2",
+            type: "Bludgeoning"
+          }, {
+            weapon: "Punching Dagger +2 Shocking",
+            attack: "+17",
+            damage: "1d4+3 + 1d6 Electrical",
+            critical: "x3",
+            type: "Piercing"
+          }, {
+            weapon: "Mithral Rapier +2, Punching Dagger +2 Shocking",
+            attack: "+16/+16/+10/+10",
+            damage: "1d6+3, 1d4+3 + 1d6 Electrical",
+            critical: "18–20/×2, x3",
+            type: "Piercing, Piercing"
+          }, {
+            weapon: "Rapier +1 Shocking, Punching Dagger +2 Shocking",
+            attack: "+15/+15/+10/+10",
+            damage: "1d6+2 + 1d6 Electrical, 1d4+3 + 1d6 Electrical",
+            critical: "18–20/×2, x3",
+            type: "Piercing, Piercing"
+          }]
+        },
+        ranged: {
+          all: [{
+            weapon: "Shortbow (MW)",
+            attack: "+15/+10",
+            damage: "1d6",
+            critical: "x3",
+            range: "60 ft",
+            ammo: "50",
+            type: "Piercing"
+          }]
+        }
+      }
     },
     skills: {
       ranks: {
         total: "",
-        spent: {
-          include_custom: false,
-          current: ""
-        }
+        include_custom: false,
+        current: ""
       },
-      custom: [{
-        name: "Perception (Traps)",
-        ranks: 11,
-        misc: 5,
-        current: "",
-        racial: "",
-        trait: "",
-        feat: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: true,
-          cha_bonus: false,
-          class_skill: true,
-          level: false,
-          half_level: true,
-          check_penalty: false,
-          size_modifier_stealth: false,
-          size_modifier_fly: false
-        }
-      }, {
-        name: "Disable Device (Traps)",
-        ranks: 11,
-        misc: 8,
-        current: "",
-        racial: "",
-        trait: "",
-        feat: "",
-        bonuses: {
-          class_skill: true,
-          str_bonus: false,
-          dex_bonus: true,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: true,
-          check_penalty: true,
-          size_modifier_stealth: false,
-          size_modifier_fly: false
-        }
-      }],
-      all: {
+      custom: {
+        all: [{
+          name: "Perception (Traps)",
+          ranks: 11,
+          misc: 5,
+          current: "",
+          racial: "",
+          trait: "",
+          feat: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
+            class_skill: true,
+            level: false,
+            half_level: true,
+            check_penalty: false,
+            size_stealth: false,
+            size_fly: false
+          }
+        }, {
+          name: "Disable Device (Traps)",
+          ranks: 11,
+          misc: 8,
+          current: "",
+          racial: "",
+          trait: "",
+          feat: "",
+          bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            class_skill: true,
+            level: false,
+            half_level: true,
+            check_penalty: true,
+            size_stealth: false,
+            size_fly: false
+          }
+        }]
+      },
+      default: {
         acrobatics: {
           ranks: 11,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -13851,18 +14007,18 @@ var orrin = (function() {
         appraise: {
           ranks: 4,
           misc: 2,
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -13871,18 +14027,18 @@ var orrin = (function() {
         bluff: {
           ranks: 11,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -13891,18 +14047,18 @@ var orrin = (function() {
         climb: {
           ranks: 7,
           misc: 2,
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: true,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: true,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -13912,18 +14068,18 @@ var orrin = (function() {
           variant_name: "",
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -13933,18 +14089,18 @@ var orrin = (function() {
           variant_name: "",
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -13953,18 +14109,18 @@ var orrin = (function() {
         diplomacy: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -13973,18 +14129,18 @@ var orrin = (function() {
         disable_device: {
           ranks: 11,
           misc: 8,
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -13993,18 +14149,18 @@ var orrin = (function() {
         disguise: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14013,18 +14169,18 @@ var orrin = (function() {
         escape_artist: {
           ranks: 11,
           misc: 6,
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -14033,39 +14189,39 @@ var orrin = (function() {
         fly: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true,
-            size_modifier_fly: true
+            size_fly: true
           }
         },
         handle_animal: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14074,18 +14230,18 @@ var orrin = (function() {
         heal: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14094,18 +14250,18 @@ var orrin = (function() {
         intimidate: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14114,18 +14270,18 @@ var orrin = (function() {
         knowledge_arcana: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14134,18 +14290,18 @@ var orrin = (function() {
         knowledge_dungeoneering: {
           ranks: 4,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14154,18 +14310,18 @@ var orrin = (function() {
         knowledge_engineering: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14174,18 +14330,18 @@ var orrin = (function() {
         knowledge_geography: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14194,18 +14350,18 @@ var orrin = (function() {
         knowledge_history: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14214,18 +14370,18 @@ var orrin = (function() {
         knowledge_local: {
           ranks: 4,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14234,18 +14390,18 @@ var orrin = (function() {
         knowledge_nature: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14254,18 +14410,18 @@ var orrin = (function() {
         knowledge_nobility: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14274,18 +14430,18 @@ var orrin = (function() {
         knowledge_planes: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14294,18 +14450,18 @@ var orrin = (function() {
         knowledge_religion: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14314,18 +14470,18 @@ var orrin = (function() {
         linguistics: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14334,18 +14490,18 @@ var orrin = (function() {
         perception: {
           ranks: 11,
           misc: 5,
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14355,18 +14511,18 @@ var orrin = (function() {
           variant_name: "",
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14376,18 +14532,18 @@ var orrin = (function() {
           variant_name: "",
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14397,18 +14553,18 @@ var orrin = (function() {
           variant_name: "",
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14418,18 +14574,18 @@ var orrin = (function() {
           variant_name: "",
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14438,18 +14594,18 @@ var orrin = (function() {
         ride: {
           ranks: 3,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -14458,18 +14614,18 @@ var orrin = (function() {
         sense_motive: {
           ranks: 11,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14478,18 +14634,18 @@ var orrin = (function() {
         sleight_of_hand: {
           ranks: 11,
           misc: 2,
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -14498,18 +14654,18 @@ var orrin = (function() {
         spellcraft: {
           ranks: 11,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: true,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: true,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14518,39 +14674,39 @@ var orrin = (function() {
         stealth: {
           ranks: 11,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: true,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: true,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true,
-            size_modifier_stealth: true
+            size_stealth: true
           }
         },
         survival: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: true,
+            cha: false,
             class_skill: false,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: true,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14559,18 +14715,18 @@ var orrin = (function() {
         swim: {
           ranks: "",
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: true,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             class_skill: false,
-            str_bonus: true,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
             level: false,
             half_level: false,
             check_penalty: true
@@ -14579,18 +14735,18 @@ var orrin = (function() {
         use_magic_device: {
           ranks: 11,
           misc: "",
-          current: "",
           racial: "",
           feat: "",
           trait: "",
+          current: "",
           bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: true,
             class_skill: true,
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: true,
             level: false,
             half_level: false,
             check_penalty: false
@@ -14599,395 +14755,430 @@ var orrin = (function() {
       }
     },
     spells: {
-      concentration: {
-        current: "",
-        misc: "",
-        temp: "",
-        racial: "",
-        feat: "",
-        trait: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      caster_level_check: {
-        current: "",
-        misc: "",
-        temp: "",
-        racial: "",
-        feat: "",
-        trait: "",
-        bonuses: {
-          str_bonus: false,
-          dex_bonus: false,
-          con_bonus: false,
-          int_bonus: false,
-          wis_bonus: false,
-          cha_bonus: false,
-          level: false,
-          half_level: false
-        }
-      },
-      school: "",
-      opposition: "",
-      domains: "",
-      bloodline: "",
-      spell_notes: "",
-      per_day: {
-        level_0: "",
-        level_1: "",
-        level_2: "",
-        level_3: "",
-        level_4: "",
-        level_5: "",
-        level_6: "",
-        level_7: "",
-        level_8: "",
-        level_9: ""
-      },
-      known: {
-        level_0: "",
-        level_1: "",
-        level_2: "",
-        level_3: "",
-        level_4: "",
-        level_5: "",
-        level_6: "",
-        level_7: "",
-        level_8: "",
-        level_9: ""
-      },
-      bonus: {
-        level_0: "",
-        level_1: "",
-        level_2: "",
-        level_3: "",
-        level_4: "",
-        level_5: "",
-        level_6: "",
-        level_7: "",
-        level_8: "",
-        level_9: ""
-      },
-      dc: {
-        level_0: {
-          spell_level: 0,
+      stats: {
+        concentration: {
           misc: "",
           temp: "",
+          racial: "",
           feat: "",
           trait: "",
           current: "",
           bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
             level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
+            half_level: false
           }
+        },
+        caster_level_check: {
+          misc: "",
+          temp: "",
+          racial: "",
+          feat: "",
+          trait: "",
+          current: "",
+          bonuses: {
+            str: false,
+            dex: false,
+            con: false,
+            int: false,
+            wis: false,
+            cha: false,
+            level: false,
+            half_level: false
+          }
+        },
+        school: "",
+        opposition: "",
+        domains: "",
+        bloodline: "",
+        notes: ""
+      },
+      book: {
+        level_0: {
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 0,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_1: {
-          spell_level: 1,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 1,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_2: {
-          spell_level: 2,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 2,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_3: {
-          spell_level: 3,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 3,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_4: {
-          spell_level: 4,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 4,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_5: {
-          spell_level: 5,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 5,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_6: {
-          spell_level: 6,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 6,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_7: {
-          spell_level: 7,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 7,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_8: {
-          spell_level: 8,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 8,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         },
         level_9: {
-          spell_level: 9,
-          misc: "",
-          temp: "",
-          feat: "",
-          trait: "",
-          current: "",
-          bonuses: {
-            str_bonus: false,
-            dex_bonus: false,
-            con_bonus: false,
-            int_bonus: false,
-            wis_bonus: false,
-            cha_bonus: false,
-            level: false,
-            half_level: false,
-            spell_level: false,
-            plus_ten: false
-          }
+          per_day: "",
+          known: "",
+          bonus: "",
+          dc: {
+            spell_level: 9,
+            misc: "",
+            temp: "",
+            feat: "",
+            trait: "",
+            current: "",
+            bonuses: {
+              str: false,
+              dex: false,
+              con: false,
+              int: false,
+              wis: false,
+              cha: false,
+              level: false,
+              half_level: false,
+              spell_level: false,
+              plus_ten: false
+            }
+          },
+          all: []
         }
-      },
-      book: [{
-        level_0: []
-      }, {
-        level_1: []
-      }, {
-        level_2: []
-      }, {
-        level_3: []
-      }, {
-        level_4: []
-      }, {
-        level_5: []
-      }, {
-        level_6: []
-      }, {
-        level_7: []
-      }, {
-        level_8: []
-      }, {
-        level_9: []
-      }]
+      }
     },
     notes: {
-      character: [{
-        note: "<strong>+2 to One Ability Score</strong> Human characters get a +2 bonus to one ability score of their choice at creation to represent their varied nature.<br><strong>Medium</strong> Humans are Medium creatures and have no bonuses or penalties due to their size.<br><strong>Normal Speed</strong> Humans have a base speed of 30 feet.<br><strong>Bonus Feat</strong> Humans select one extra feat at 1st level.<br><strong>Skilled</strong> Humans gain an additional skill rank at first level and one additional rank whenever they gain a level.<br><strong>Languages</strong> Humans begin play speaking Common. Humans with high Intelligence scores can choose any languages they want (except secret languages, such as Druidic)."
-      }, {
-        note: "<strong>Sneak attack</strong> If a rogue can catch an opponent when he is unable to defend himself effectively from her attack, she can strike a vital spot for extra damage.<br>The rogue's attack deals extra damage anytime her target would be denied a Dexterity bonus to AC (whether the target actually has a Dexterity bonus or not), or when the rogue flanks her target. This extra damage is 1d6 at 1st level, and increases by 1d6 every two rogue levels thereafter. Should the rogue score a critical hit with a sneak attack, this extra damage is not multiplied. Ranged attacks can count as sneak attacks only if the target is within 30 feet.<br>With a weapon that deals nonlethal damage (like a sap, whip, or an unarmed strike), a rogue can make a sneak attack that deals nonlethal damage instead of lethal damage. She cannot use a weapon that deals lethal damage to deal nonlethal damage in a sneak attack, not even with the usual –4 penalty.<br>The rogue must be able to see the target well enough to pick out a vital spot and must be able to reach such a spot. A rogue cannot sneak attack while striking a creature with concealment.<br><strong>Trapfinding</strong> A rogue adds 1/2 her level to Perception skill checks made to locate traps and to Disable Device skill checks (minimum +1). A rogue can use Disable Device to disarm magic traps.<br><strong>Evasion (Ex)</strong> At 2nd level and higher, a rogue can avoid even magical and unusual attacks with great agility. If she makes a successful Reflex saving throw against an attack that normally deals half damage on a successful save, she instead takes no damage. Evasion can be used only if the rogue is wearing light armor or no armor. A helpless rogue does not gain the benefit of evasion.<br><strong>Rogue Talent Trap spotter (Ex)</strong> Whenever a rogue with this talent comes within 10 feet of a trap, she receives an immediate Perception skill check to notice the trap. This check should be made in secret by the GM.<br><strong>Trap Sense +3 (Ex)</strong> At 3rd level, a rogue gains an intuitive sense that alerts her to danger from traps, giving her a +1 bonus on Reflex saves made to avoid traps and a +1 dodge bonus to AC against attacks made by traps. These bonuses rise to +2 when the rogue reaches 6th level, to +3 when she reaches 9th level, to +4 when she reaches 12th level, to +5 at 15th, and to +6 at 18th level.<br><strong>Rogue Talent Finesse Rogue (Ex)</strong> A rogue that selects this talent gains Weapon Finesse as a bonus feat.<br><strong>Uncanny Dodge (Ex)</strong> Starting at 4th level, a rogue can react to danger before her senses would normally allow her to do so. She cannot be caught flat-footed, nor does she lose her Dex bonus to AC if the attacker is invisible. She still loses her Dexterity bonus to AC if immobilized. A rogue with this ability can still lose her Dexterity bonus to AC if an opponent successfully uses the feint action against her.<br><strong>Rogue Talent Fast Stealth (Ex)</strong> This ability allows a rogue to move at full speed using the Stealth skill without penalty.<br><strong>Improved Uncanny Dodge (Ex)</strong> A rogue of 8th level or higher can no longer be flanked.<br>This defense denies another rogue the ability to sneak attack the character by flanking her, unless the attacker has at least four more rogue levels than the target does.<br>If a character already has uncanny dodge (see above) from another class, the levels from the classes that grant uncanny dodge stack to determine the minimum rogue level required to flank the character.<br><strong>Rogue Talent Combat Trick - Improved Two-Weapon Fighting</strong> In addition to the standard single extra attack you get with an off-hand weapon, you get a second attack with it, albeit at a –5 penalty.<br><strong>Rogue Talent Offensive Defense</strong> When a rogue with this talent hits a creature with a melee attack that deals sneak attack damage, the rogue gains a +1 dodge bonus to AC for each sneak attack die rolled for 1 round.<br><strong>Advanced Talent Knock-Out Blow (Ex)</strong> Once per day, the rogue can forgo her sneak attack damage to attempt to knock out an opponent. She must declare the use of knock-out blow before she makes the attack. If the attack hits, it does normal damage, but instead of dealing sneak attack damage (and instead of any effect that triggers when the rogue deals sneak attack damage), the target falls unconscious for 1d4 rounds. A successful Fortitude save reduces this effect to staggered for 1 round. The DC of this save is equal to 10 + 1/2 the rogue's level + the rogue's Intelligence modifier."
-      }, {
-        note: "<strong>Reactionary</strong> You were bullied often as a child, but never quite developed an offensive response. Instead, you became adept at anticipating sudden attacks and reacting to danger quickly. You gain a +2 trait bonus on Initiative checks.<br><strong>Resilient</strong> Growing up in a poor neighborhood or in the unforgiving wilds often forced you to subsist on food and water from doubtful sources. You've built up your mettle as a result, and gain a +1 trait bonus on Fortitude saves.<br><strong>Weapon Finesse</strong> With a light weapon, rapier, whip, or spiked chain made for a creature of your size category, you may use your Dexterity modifier instead of your Strength modifier on attack rolls. If you carry a shield, its armor check penalty applies to your attack rolls.<br><strong>Dodge</strong> You gain a +1 dodge bonus to your AC. A condition that makes you lose your Dex bonus to AC also makes you lose the benefits of this feat.<br><strong>Two-Weapon Fighting</strong> Your penalties on attack rolls for fighting with two weapons are reduced. The penalty for your primary hand lessens by 2 and the one for your off hand lessens by 6. See Two-Weapon Fighting in Combat.<br><strong>Weapon focus</strong> You gain a +1 bonus on all attack rolls you make using the selected weapon.<br><strong>Deft hands</strong> You get a +2 bonus on Disable Device and Sleight of Hand skill checks. If you have 10 or more ranks in one of these skills, the bonus increases to +4 for that skill.<br><strong>Great Fortitude</strong> You get a +2 bonus on all Fortitude saving throws.<br><strong>Iron Will</strong> You get a +2 bonus on all Will saving throws.<br><strong>Two-Weapon Defense</strong> When wielding a double weapon or two weapons you gain a +1 shield bonus to your AC."
-      }, {
-        note: "Headband of Vast Intelligence +4 Skills: Sense Motive, Spellcraft."
-      }],
-      story: []
+      character: {
+        all: [{
+          note: "Headband of Vast Intelligence +4 Skills: Sense Motive, Spellcraft."
+        }]
+      },
+      story: {
+        all: []
+      }
     },
-    events: [{
-      type: "xp",
-      event: {
-        aggregate_value: 17280
-      },
-      timestamp: {
-        date: 19,
-        day: 1,
-        year: 2018,
-        hours: 23,
-        milliseconds: 753,
-        minutes: 10,
-        month: 1,
-        seconds: 56
-      }
-    }, {
-      type: "xp",
-      event: {
-        aggregate_value: 12800
-      },
-      timestamp: {
-        date: 5,
-        day: 1,
-        year: 2018,
-        hours: 18,
-        milliseconds: 793,
-        minutes: 43,
-        month: 1,
-        seconds: 35
-      }
-    }, {
-      type: "xp",
-      event: {
-        aggregate_value: 2360
-      },
-      timestamp: {
-        date: 29,
-        day: 1,
-        year: 2018,
-        hours: 18,
-        milliseconds: 349,
-        minutes: 50,
-        month: 0,
-        seconds: 16
-      }
-    }, {
-      type: "xp",
-      event: {
-        aggregate_value: 15200
-      },
-      timestamp: {
-        date: 16,
-        day: 2,
-        year: 2018,
-        hours: 20,
-        milliseconds: 11,
-        minutes: 46,
-        month: 0,
-        seconds: 2
-      }
-    }, {
-      type: "xp",
-      event: {
-        aggregate_value: 12590
-      },
-      timestamp: {
-        date: 6,
-        day: 3,
-        year: 2017,
-        hours: 23,
-        milliseconds: 741,
-        minutes: 55,
-        month: 11,
-        seconds: 18
-      }
-    }]
+    events: {
+      all: [{
+        type: "xp",
+        event: {
+          aggregate_value: 17280
+        },
+        timestamp: {
+          date: 19,
+          day: 1,
+          year: 2018,
+          hours: 23,
+          milliseconds: 753,
+          minutes: 10,
+          month: 1,
+          seconds: 56
+        }
+      }, {
+        type: "xp",
+        event: {
+          aggregate_value: 12800
+        },
+        timestamp: {
+          date: 5,
+          day: 1,
+          year: 2018,
+          hours: 18,
+          milliseconds: 793,
+          minutes: 43,
+          month: 1,
+          seconds: 35
+        }
+      }, {
+        type: "xp",
+        event: {
+          aggregate_value: 2360
+        },
+        timestamp: {
+          date: 29,
+          day: 1,
+          year: 2018,
+          hours: 18,
+          milliseconds: 349,
+          minutes: 50,
+          month: 0,
+          seconds: 16
+        }
+      }, {
+        type: "xp",
+        event: {
+          aggregate_value: 15200
+        },
+        timestamp: {
+          date: 16,
+          day: 2,
+          year: 2018,
+          hours: 20,
+          milliseconds: 11,
+          minutes: 46,
+          month: 0,
+          seconds: 2
+        }
+      }, {
+        type: "xp",
+        event: {
+          aggregate_value: 930
+        },
+        timestamp: {
+          date: 10,
+          day: 4,
+          year: 2018,
+          hours: 19,
+          milliseconds: 10,
+          minutes: 40,
+          month: 0,
+          seconds: 0
+        }
+      }, {
+        type: "xp",
+        event: {
+          aggregate_value: 12590
+        },
+        timestamp: {
+          date: 10,
+          day: 4,
+          year: 2018,
+          hours: 19,
+          milliseconds: 10,
+          minutes: 40,
+          month: 0,
+          seconds: 0
+        }
+      }, {
+        type: "xp",
+        event: {
+          aggregate_value: 70160
+        },
+        timestamp: {
+          date: 10,
+          day: 4,
+          year: 2018,
+          hours: 19,
+          milliseconds: 10,
+          minutes: 40,
+          month: 0,
+          seconds: 0
+        }
+      }]
+    }
   };
 
   // exposed methods
@@ -19376,7 +19567,10 @@ var characterSelect = (function() {
     var characterSelectName = helper.e(".js-character-select-name");
     var characterSelectClassLevel = helper.e(".js-character-select-class-level");
     characterSelectName.textContent = _get_name(sheet.get());
-    characterSelectClassLevel.textContent = classes.getClassLevel(sheet.get());
+    characterSelectClassLevel.textContent = helper.getObject({
+      object: sheet.get(),
+      path: "basics.classes.string"
+    });
   };
 
   function _get_name(characterObject) {
@@ -19388,11 +19582,8 @@ var characterSelect = (function() {
   };
 
   function _createCharacterItem(characterObject, characterIndex) {
-    var classLevel = classes.getClassLevel(characterObject);
     var characterName = _get_name(characterObject);
-
     var uniqueId = helper.randomString(10);
-
     var navCharacter = document.createElement("li");
     navCharacter.setAttribute("class", "m-character-select-list-item js-character-select-list-item-" + characterIndex);
 
@@ -19417,7 +19608,12 @@ var characterSelect = (function() {
 
     var classLevelSpan = document.createElement("span");
     classLevelSpan.setAttribute("class", "m-character-select-list-item-class-level");
-    classLevelSpan.textContent = classLevel;
+    classLevelSpan.textContent = helper.getObject({
+      object: sheet.get({
+        index: characterIndex
+      }),
+      path: "basics.classes.string"
+    });
 
     // build module
     detailsSpan.appendChild(nameSpan);
@@ -19448,7 +19644,6 @@ var characterSelect = (function() {
   };
 
 })();
-
 var checkBlock = (function() {
 
   var storeCheckTimer = null;
@@ -19699,29 +19894,36 @@ var classes = (function() {
       path: "defense.saves.will.base",
       newValue: totalWill
     });
+    _classLevel();
   };
 
-  function get_classLevel(characterObject) {
+  function _classLevel() {
     var classAndLevel = "";
-    var classes = characterObject.basics.classes.all;
+    var classes = helper.getObject({
+      object: sheet.get(),
+      path: "basics.classes.all"
+    });
     if (classes.length > 0) {
       classes.forEach(function(arrayItem, index) {
         var classname = arrayItem.classname || "No class";
         var level = arrayItem.level || "No level";
         classAndLevel = classAndLevel + classname + " " + level;
         if (index < (classes.length - 1)) {
-          classAndLevel = classAndLevel + " / ";
+          classAndLevel = classAndLevel + ", ";
         };
       });
     };
-    return classAndLevel;
+    helper.setObject({
+      object: sheet.get(),
+      path: "basics.classes.string",
+      newValue: classAndLevel
+    });
   };
 
   // exposed methods
   return {
     bind: bind,
-    render: render,
-    getClassLevel: get_classLevel
+    render: render
   };
 
 })();
@@ -19854,19 +20056,19 @@ var clone = (function() {
         '      <div class="m-edit-box-item-medium">' +
         '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']fortitude,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-fortitude-' + cloneIndex + '">Base Fortitude</label>' +
-        '          <input id="class-fortitude-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
+        '          <input id="class-fortitude-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:Base Fortitude save for this Class at this Level.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
         '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']reflex,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-reflex-' + cloneIndex + '">Base Reflex</label>' +
-        '          <input id="class-reflex-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
+        '          <input id="class-reflex-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:Base Reflex save for this Class at this Level.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
         '        <div class="m-input-block js-input-block" data-input-block-options="path:basics.classes.all[' + cloneIndex + ']will,type:integer,clone:true">' +
         '          <label class="m-input-block-label js-input-block-label" for="class-will-' + cloneIndex + '">Base Will</label>' +
-        '          <input id="class-will-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
+        '          <input id="class-will-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field js-tip" data-tip-options="message:Base Will save for this Class at this Level.,state:focus,clone:true" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '    </div>' +
@@ -19883,9 +20085,9 @@ var clone = (function() {
         '    <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
         '      <div class="m-edit-box-item-max m-edit-box-group">' +
         '        <div class="m-edit-box-item-large">' +
-        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable.all[' + cloneIndex + ']item,clone:true">' +
-        '            <label class="m-input-block-label js-input-block-label" for="consumable-item-' + cloneIndex + '">Consumables</label>' +
-        '            <input id="consumable-item-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
+        '          <div class="m-input-block js-input-block" data-input-block-options="path:equipment.consumable.all[' + cloneIndex + ']name,clone:true">' +
+        '            <label class="m-input-block-label js-input-block-label" for="consumable-name-' + cloneIndex + '">Consumables</label>' +
+        '            <input id="consumable-name-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
         '          </div>' +
         '        </div>' +
         '        <div class="m-edit-box-item-total">' +
@@ -20495,7 +20697,7 @@ var clone = (function() {
     };
     if (cloneType == "consumable") {
       object = {
-        item: "",
+        name: "",
         current: "",
         total: "",
         used: ""
@@ -21645,6 +21847,936 @@ var data = (function() {
 })();
 var display = (function() {
 
+  var _displayContent = {
+    basics: {
+      intro: [{
+        type: "image",
+        element: "div",
+        classname: ["m-display-image-wrapper"],
+        content: [{
+          path: "basics.image.data",
+          scale: "basics.image.scale",
+          position: "basics.image.position",
+          background: "basics.image.background",
+          color: "basics.image.color"
+        }]
+      }, {
+        type: "snippet",
+        element: "h1",
+        classname: ["m-display-name"],
+        content: [{
+          path: "basics.character.name"
+        }]
+      }, {
+        type: "snippet",
+        element: "p",
+        classname: ["m-display-class"],
+        content: [{
+          path: "basics.classes.string"
+        }]
+      }],
+      character: [{
+        type: "snippet",
+        element: "p",
+        content: [{
+          path: "basics.initiative.current",
+          prefix: "Initiative",
+          valueType: "bonus"
+        }, {
+          path: "basics.speed.land",
+          prefix: "Land Speed"
+        }, {
+          path: "basics.speed.swim",
+          prefix: "Swim Speed"
+        }, {
+          path: "basics.speed.climb",
+          prefix: "Climb Speed"
+        }, {
+          path: "basics.speed.burrow",
+          prefix: "Burrow Speed"
+        }, {
+          path: "basics.speed.fly",
+          prefix: "Fly Speed",
+          dependency: "basics.speed.maneuverability"
+        }, {
+          path: "basics.character.deity",
+          prefix: "Deity"
+        }, {
+          path: "basics.character.gender",
+          prefix: "Gender"
+        }, {
+          path: "basics.character.race",
+          prefix: "Race"
+        }, {
+          path: "basics.experience.total",
+          prefix: "EXP",
+          valueType: "number"
+        }, {
+          path: "basics.character.alignment",
+          prefix: "Alignment"
+        }, {
+          path: "basics.character.size.category",
+          prefix: "Size"
+        }, {
+          path: "basics.character.height",
+          prefix: "Height"
+        }, {
+          path: "basics.character.weight",
+          prefix: "Weight"
+        }, {
+          path: "basics.character.age",
+          prefix: "Age"
+        }, {
+          path: "basics.character.hero_points",
+          prefix: "Hero Points"
+        }]
+      }],
+      description: [{
+        type: "block",
+        element: "p",
+        content: [{
+          path: "basics.character.description",
+          prefix: "Description"
+        }]
+      }]
+    },
+    statistics: {
+      stats: [{
+        type: "stat",
+        element: "ul",
+        content: [{
+          statPath: "statistics.stats.str.current",
+          modPath: "statistics.stats.str.modifier",
+          prefix: "STR"
+        }, {
+          statPath: "statistics.stats.dex.current",
+          modPath: "statistics.stats.dex.modifier",
+          prefix: "DEX"
+        }, {
+          statPath: "statistics.stats.con.current",
+          modPath: "statistics.stats.con.modifier",
+          prefix: "CON"
+        }, {
+          statPath: "statistics.stats.int.current",
+          modPath: "statistics.stats.int.modifier",
+          prefix: "INT"
+        }, {
+          statPath: "statistics.stats.wis.current",
+          modPath: "statistics.stats.wis.modifier",
+          prefix: "WIS"
+        }, {
+          statPath: "statistics.stats.con.current",
+          modPath: "statistics.stats.con.modifier",
+          prefix: "CHA"
+        }]
+      }],
+      abilities: [{
+        type: "list",
+        element: "ul",
+        classname: ["m-display-list-dash"],
+        head: "Abilities",
+        content: [{
+          path: "statistics.abilities.all",
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "statistics.abilities.notes",
+          prefix: "Abilities Notes"
+        }]
+      }],
+      feats: [{
+        type: "list",
+        element: "ul",
+        classname: ["m-display-list-dash"],
+        head: "Feats",
+        content: [{
+          path: "statistics.feats.all",
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "statistics.feats.notes",
+          prefix: "Feats Notes"
+        }]
+      }],
+      traits: [{
+        type: "list",
+        element: "ul",
+        classname: ["m-display-list-dash"],
+        head: "Traits",
+        content: [{
+          path: "statistics.traits.all",
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "statistics.traits.notes",
+          prefix: "Traits Notes"
+        }]
+      }],
+      languages: [{
+        type: "list",
+        element: "ul",
+        classname: ["m-display-list-dash"],
+        head: "languages",
+        content: [{
+          path: "statistics.languages.all",
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "statistics.languages.notes",
+          prefix: "Languages Notes"
+        }]
+      }],
+      power: [{
+        type: "clone",
+        element: "ul",
+        cloneType: "power",
+        classname: ["m-display-list-responsive"],
+        head: "Powers",
+        content: [{
+          path: "statistics.power.all",
+        }]
+      }]
+    },
+    equipment: {
+      gear: [{
+        type: "block",
+        element: "p",
+        head: "Gear",
+        content: [{
+          path: "equipment.possessions.gear",
+        }]
+      }],
+      magic_gear: [{
+        type: "block",
+        element: "p",
+        head: "Magic Gear",
+        content: [{
+          path: "equipment.possessions.magic_gear",
+        }]
+      }],
+      potion_viles_oils: [{
+        type: "block",
+        element: "p",
+        head: "Potions/Viles/Oils",
+        content: [{
+          path: "equipment.possessions.potion_viles_oils",
+        }]
+      }],
+      scrolls: [{
+        type: "block",
+        element: "p",
+        head: "Scrolls",
+        content: [{
+          path: "equipment.possessions.scrolls",
+        }]
+      }],
+      armor: [{
+        type: "group",
+        element: "ul",
+        classname: ["m-display-list-responsive", "m-display-list-stack"],
+        head: "Armor",
+        content: [{
+          path: "equipment.armor.armor",
+          prefix: "Armor"
+        }, {
+          path: "equipment.armor.shield",
+          prefix: "Shield"
+        }]
+      }],
+      body_slots: [{
+        type: "group",
+        element: "ul",
+        classname: ["m-display-list-stack", "m-display-list-responsive"],
+        head: "Body Slots",
+        content: [{
+          path: "equipment.body_slots.belts",
+          prefix: "Belts"
+        }, {
+          path: "equipment.body_slots.body",
+          prefix: "Body"
+        }, {
+          path: "equipment.body_slots.chest",
+          prefix: "Chest"
+        }, {
+          path: "equipment.body_slots.eyes",
+          prefix: "Eyes"
+        }, {
+          path: "equipment.body_slots.feet",
+          prefix: "Feet"
+        }, {
+          path: "equipment.body_slots.hands",
+          prefix: "Hands"
+        }, {
+          path: "equipment.body_slots.head",
+          prefix: "Head"
+        }, {
+          path: "equipment.body_slots.headband",
+          prefix: "Headband"
+        }, {
+          path: "equipment.body_slots.neck",
+          prefix: "Neck"
+        }, {
+          path: "equipment.body_slots.ring_left_hand",
+          prefix: "Ring (Left Hand)"
+        }, {
+          path: "equipment.body_slots.ring_right_hand",
+          prefix: "Ring (Right Hand)"
+        }, {
+          path: "equipment.body_slots.shoulders",
+          prefix: "Shoulders"
+        }, {
+          path: "equipment.body_slots.wrist",
+          prefix: "Wrist"
+        }]
+      }],
+      item: [{
+        type: "clone",
+        element: "ul",
+        cloneType: "item",
+        classname: ["m-display-list-responsive", "m-display-list-compact"],
+        head: "Items",
+        content: [{
+          path: "equipment.item.all",
+        }]
+      }],
+      encumbrance: [{
+        type: "snippet",
+        element: "p",
+        head: "Encumbrance",
+        content: [{
+          path: "equipment.encumbrance.carry_move.light",
+          prefix: "Light"
+        }, {
+          path: "equipment.encumbrance.carry_move.medium",
+          prefix: "Medium"
+        }, {
+          path: "equipment.encumbrance.carry_move.heavy",
+          prefix: "Heavy"
+        }, {
+          path: "equipment.encumbrance.carry_move.lift",
+          prefix: "Lift"
+        }, {
+          path: "equipment.encumbrance.carry_move.drag",
+          prefix: "Drag"
+        }]
+      }],
+      consumable: [{
+        type: "clone",
+        element: "p",
+        cloneType: "consumable",
+        classname: ["m-display-list-responsive"],
+        head: "Consumables",
+        content: [{
+          path: "equipment.consumable.all",
+          prefix: "Light"
+        }]
+      }],
+      wealth: [{
+        type: "snippet",
+        element: "p",
+        head: "Wealth",
+        content: [{
+          path: "equipment.wealth.platinum",
+          suffix: "PP",
+          valueType: "currency"
+        }, {
+          path: "equipment.wealth.gold",
+          suffix: "GP",
+          valueType: "currency"
+        }, {
+          path: "equipment.wealth.silver",
+          suffix: "SP",
+          valueType: "currency"
+        }, {
+          path: "equipment.wealth.copper",
+          suffix: "CP",
+          valueType: "currency"
+        }]
+      }, {
+        type: "snippet",
+        element: "h1",
+        head: "Total",
+        content: [{
+          path: "equipment.wealth.total",
+          suffix: "GP",
+          valueType: "currency"
+        }]
+      }]
+    },
+    defense: {
+      all: [{
+        type: "snippet",
+        element: "h1",
+        content: [{
+          path: "defense.hp.current",
+          prefix: "HP",
+          dependency: "defense.hp.total"
+        }, {
+          path: "defense.ac.armor_class.current",
+          prefix: "AC"
+        }, {
+          path: "defense.ac.touch.current",
+          prefix: "Touch"
+        }, {
+          path: "defense.ac.flat_footed.current",
+          prefix: "Flat Footed"
+        }, {
+          path: "defense.cmd.current",
+          prefix: "CMD",
+          valueType: "bonus"
+        }, {
+          path: "defense.dr.current",
+          prefix: "DR",
+          dependency: "defense.dr.overcome"
+        }, {
+          path: "defense.sr.current",
+          prefix: "SR"
+        }]
+      }],
+      saves: [{
+        type: "snippet",
+        element: "h1",
+        content: [{
+          path: "defense.saves.fortitude.current",
+          prefix: "Fortitude",
+          valueType: "bonus"
+        }, {
+          path: "defense.saves.reflex.current",
+          prefix: "Reflex",
+          valueType: "bonus"
+        }, {
+          path: "defense.saves.will.current",
+          prefix: "Will",
+          valueType: "bonus"
+        }]
+      }],
+      notes: [{
+        type: "block",
+        element: "p",
+        content: [{
+          path: "defense.ac.notes",
+          prefix: "AC Notes"
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "defense.cmd.notes",
+          prefix: "CMD Notes"
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "defense.dr.notes",
+          prefix: "Notes"
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "defense.sr.notes",
+          prefix: "Notes"
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "defense.saves.notes",
+          prefix: "Saves Notes"
+        }]
+      }]
+    },
+    offense: {
+      all: [{
+        type: "snippet",
+        element: "h1",
+        content: [{
+          path: "offense.stats.melee.current",
+          prefix: "Melee",
+          valueType: "bonus"
+        }, {
+          path: "offense.stats.ranged.current",
+          prefix: "Ranged",
+          valueType: "bonus"
+        }, {
+          path: "offense.cmb.current",
+          prefix: "CMB",
+          valueType: "bonus"
+        }]
+      }],
+      notes: [{
+        type: "block",
+        element: "p",
+        content: [{
+          path: "offense.attack.notes",
+          prefix: "Attack Notes"
+        }]
+      }],
+      melee: [{
+        type: "clone",
+        element: "ul",
+        cloneType: "attack",
+        classname: ["m-display-list-attack"],
+        head: "Melee",
+        content: [{
+          path: "offense.attack.melee.all",
+        }]
+      }],
+      ranged: [{
+        type: "clone",
+        element: "ul",
+        cloneType: "attack",
+        classname: ["m-display-list-attack"],
+        head: "Ranged",
+        content: [{
+          path: "offense.attack.ranged.all",
+        }]
+      }]
+    },
+    skills: {
+      all: [{
+        type: "skills",
+        element: "ul",
+        classname: ["m-display-list-responsive"],
+        content: [{
+          path: "skills.default",
+          skillType: "default"
+        }, {
+          path: "skills.custom.all",
+          skillType: "custom"
+        }]
+      }]
+    },
+    spells: {
+      stats: [{
+        type: "snippet",
+        element: "h1",
+        head: "Stats",
+        content: [{
+          path: "spells.stats.concentration.current",
+          prefix: "Concentration"
+        }, {
+          path: "spells.stats.caster_level_check.current",
+          prefix: "Caster Level Check"
+        }]
+      }, {
+        type: "snippet",
+        element: "p",
+        content: [{
+          path: "spells.stats.school",
+          prefix: "School"
+        }, {
+          path: "spells.stats.opposition",
+          prefix: "Opposition"
+        }, {
+          path: "spells.stats.domains",
+          prefix: "Domains"
+        }, {
+          path: "spells.stats.bloodline",
+          prefix: "Bloodline"
+        }]
+      }, {
+        type: "block",
+        element: "p",
+        content: [{
+          path: "spells.stats.notes",
+          prefix: "Spells Notes"
+        }]
+      }],
+      level_0: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 0",
+        content: [{
+          path: "spells.book.level_0.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_0.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_0.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_0.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 0,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_0.all",
+        }]
+      }],
+      level_1: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 1",
+        content: [{
+          path: "spells.book.level_1.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_1.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_1.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_1.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 1,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_1.all",
+        }]
+      }],
+      level_2: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 2",
+        content: [{
+          path: "spells.book.level_2.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_2.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_2.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_2.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 2,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_2.all",
+        }]
+      }],
+      level_3: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 3",
+        content: [{
+          path: "spells.book.level_3.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_3.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_3.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_3.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 3,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_3.all",
+        }]
+      }],
+      level_4: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 4",
+        content: [{
+          path: "spells.book.level_4.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_4.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_4.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_4.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 4,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_4.all",
+        }]
+      }],
+      level_5: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 5",
+        content: [{
+          path: "spells.book.level_5.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_5.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_5.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_5.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 5,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_5.all",
+        }]
+      }],
+      level_6: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 6",
+        content: [{
+          path: "spells.book.level_6.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_6.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_6.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_6.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 6,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_6.all",
+        }]
+      }],
+      level_7: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 7",
+        content: [{
+          path: "spells.book.level_7.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_7.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_7.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_7.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 7,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_7.all",
+        }]
+      }],
+      level_8: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 8",
+        content: [{
+          path: "spells.book.level_8.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_8.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_8.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_8.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 8,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_8.all",
+        }]
+      }],
+      level_9: [{
+        type: "snippet",
+        element: "p",
+        head: "Level 9",
+        content: [{
+          path: "spells.book.level_9.known",
+          prefix: "Known"
+        }, {
+          path: "spells.book.level_9.per_day",
+          prefix: "Per Day"
+        }, {
+          path: "spells.book.level_9.bonus",
+          prefix: "Bonus"
+        }, {
+          path: "spells.book.level_9.dc.current",
+          prefix: "DC"
+        }]
+      }, {
+        type: "spells",
+        element: "ul",
+        level: 9,
+        classname: ["m-display-list-spell"],
+        content: [{
+          path: "spells.book.level_9.all",
+        }]
+      }]
+    },
+    notes: {
+      character: [{
+        type: "clone",
+        element: "ul",
+        classname: ["m-display-list"],
+        cloneType: "note",
+        head: "Character",
+        content: [{
+          path: "notes.character.all",
+        }]
+      }],
+      story: [{
+        type: "clone",
+        element: "ul",
+        classname: ["m-display-list"],
+        cloneType: "note",
+        head: "Story",
+        content: [{
+          path: "notes.story.all",
+        }]
+      }]
+    }
+  };
+
+  var state = (function() {
+    var displayState = {
+      basics: false,
+      statistics: false,
+      equipment: false,
+      defense: false,
+      offense: false,
+      skills: false,
+      spells: false,
+      notes: false
+    };
+    var get = function(options) {
+      var defaultOptions = {
+        section: null,
+        all: null
+      };
+      if (options) {
+        defaultOptions = helper.applyOptions(defaultOptions, options);
+      };
+      if (defaultOptions.all != null && defaultOptions.all) {
+        var displayOnCount = 0;
+        var sectionCount = 0;
+        for (var key in displayState) {
+          sectionCount++;
+          if (displayState[key]) {
+            displayOnCount++;
+          };
+        };
+        // if no sections are in display mode
+        if (displayOnCount == 0) {
+          return false;
+          // if all sections are in display mode
+        } else if (displayOnCount == sectionCount) {
+          return true;
+          // if more than half the number of sections are in display mode
+        } else if (displayOnCount >= (sectionCount / 2)) {
+          return true;
+        } else {
+          // else restore to edit mode
+          return false;
+        };
+      } else if (defaultOptions.section != null) {
+        return displayState[defaultOptions.section.id];
+      } else {
+        return displayState;
+      };
+    };
+    var set = function(options) {
+      var defaultOptions = {
+        section: null,
+        all: null
+      };
+      if (options) {
+        defaultOptions = helper.applyOptions(defaultOptions, options);
+      };
+      if (defaultOptions.all != null && defaultOptions.all) {
+        var displayOnCount = 0;
+        var sectionCount = 0;
+        for (var key in displayState) {
+          sectionCount++;
+          if (displayState[key]) {
+            displayOnCount++;
+          };
+        };
+        // if no sections are in display mode
+        if (displayOnCount == 0) {
+          for (var key in displayState) {
+            displayState[key] = true;
+          };
+          // if all sections are in display mode
+        } else if (displayOnCount == sectionCount) {
+          for (var key in displayState) {
+            displayState[key] = false;
+          };
+          // if more than half the number of sections are in display mode
+        } else if (displayOnCount >= (sectionCount / 2)) {
+          for (var key in displayState) {
+            displayState[key] = true;
+          };
+        } else {
+          // else restore to edit mode
+          for (var key in displayState) {
+            displayState[key] = false;
+          };
+        };
+      } else if (defaultOptions.section != null) {
+        if (displayState[defaultOptions.section.id]) {
+          displayState[defaultOptions.section.id] = false;
+        } else {
+          displayState[defaultOptions.section.id] = true;
+        };
+      };
+    };
+    // exposed methods
+    return {
+      set: set,
+      get: get
+    };
+  })();
+
   function bind() {
     _bind_fab();
   };
@@ -21655,17 +22787,107 @@ var display = (function() {
       totalBlock.render();
       clear();
       render();
-      toggle();
+      toggle({
+        all: true
+      });
       themeColor.update();
     }, false);
   };
 
-  function update() {
-    _update_displayState();
-    _update_displayPlaceholder();
+  function toggle(options) {
+    var defaultOptions = {
+      section: null,
+      all: null
+    };
+    if (options) {
+      defaultOptions = helper.applyOptions(defaultOptions, options);
+    };
+    if (defaultOptions.all != null && defaultOptions.all) {
+      state.set({
+        all: true
+      });
+      _toggle_all_section({
+        all: true
+      });
+      _toggle_chrome();
+    } else if (defaultOptions.section != null) {
+      state.set({
+        section: defaultOptions.section
+      });
+      _toggle_section({
+        section: defaultOptions.section
+      });
+      _toggle_chrome();
+    };
   };
 
-  function _update_displayState() {
+  function _toggle_all_section(options) {
+    var defaultOptions = {
+      section: null,
+      all: null
+    };
+    if (options) {
+      defaultOptions = helper.applyOptions(defaultOptions, options);
+    };
+    if (defaultOptions.all != null && defaultOptions.all) {
+      var all_section = helper.eA(".js-section");
+      all_section.forEach(function(arrayItem) {
+        _toggle_section({
+          section: arrayItem
+        });
+      });
+    } else if (defaultOptions.section != null) {
+      _toggle_section({
+        section: defaultOptions.section
+      });
+    };
+  };
+
+  function _toggle_section(options) {
+    var defaultOptions = {
+      section: null
+    };
+    if (options) {
+      defaultOptions = helper.applyOptions(defaultOptions, options);
+    };
+    var display = defaultOptions.section.querySelector(".js-display");
+    var icon = defaultOptions.section.querySelector(".js-card-toggle-icon");
+    var edit = defaultOptions.section.querySelector(".js-edit");
+    var cardTabs = defaultOptions.section.querySelector(".js-card-tabs");
+    var minimise = (defaultOptions.section.dataset.minimise == "true");
+    var _toggle_on = function() {
+      helper.addClass(defaultOptions.section, "is-display-mode");
+      helper.addClass(edit, "is-hidden");
+      helper.removeClass(display, "is-hidden");
+      helper.addClass(icon, "icon-edit");
+      helper.removeClass(icon, "icon-reader");
+      if (cardTabs && !minimise) {
+        helper.addClass(cardTabs, "is-hidden");
+      };
+    };
+    var _toggle_off = function() {
+      helper.removeClass(defaultOptions.section, "is-display-mode");
+      helper.removeClass(edit, "is-hidden");
+      helper.addClass(display, "is-hidden");
+      helper.removeClass(icon, "icon-edit");
+      helper.addClass(icon, "icon-reader");
+      if (cardTabs && !minimise) {
+        helper.removeClass(cardTabs, "is-hidden");
+      };
+    };
+
+    if (defaultOptions.section != null) {
+      if (state.get({
+          section: defaultOptions.section
+        })) {
+        _toggle_on();
+      } else {
+        _toggle_off();
+      };
+    };
+  };
+
+  function _toggle_chrome() {
     var header = helper.e(".js-header");
     var nav = helper.e(".js-nav");
     var menuElement = helper.e(".js-menu");
@@ -21678,7 +22900,7 @@ var display = (function() {
     var all_section = helper.eA(".js-section");
     var anySectionDisplay = false;
     var allSectionDisplay = 0;
-    var _displayOn = function() {
+    var _toggle_on = function() {
       helper.addClass(fabIcon, "icon-edit");
       helper.removeClass(fabIcon, "icon-reader");
       helper.removeClass(fabButton, "button-primary");
@@ -21690,8 +22912,12 @@ var display = (function() {
       if (shade) {
         helper.addClass(shade, "is-display-mode");
       };
+      menu.toggleMenuItem({
+        menuItem: menuItem,
+        state: "active"
+      });
     };
-    var _displayOff = function() {
+    var _toggle_off = function() {
       helper.removeClass(fabIcon, "icon-edit");
       helper.addClass(fabIcon, "icon-reader");
       helper.addClass(fabButton, "button-primary");
@@ -21703,716 +22929,106 @@ var display = (function() {
       if (shade) {
         helper.removeClass(shade, "is-display-mode");
       };
-    };
-    for (var i = 0; i < all_section.length; i++) {
-      if (all_section[i].dataset.displayMode == "true") {
-        anySectionDisplay = true;
-        allSectionDisplay++;
-      };
-    };
-    if (anySectionDisplay) {
-      if (allSectionDisplay == all_section.length) {
-        fab.dataset.displayMode = true;
-        fab.dataset.displayModeAll = true;
-        _displayOn();
-        menu.toggleMenuItem({
-          menuItem: menuItem,
-          state: "active"
-        });
-      } else {
-        fab.dataset.displayMode = true;
-        fab.dataset.displayModeAll = false;
-        _displayOff();
-        menu.toggleMenuItem({
-          menuItem: menuItem,
-          state: "inactive"
-        });
-      };
-    } else {
-      fab.dataset.displayMode = false;
-      fab.dataset.displayModeAll = false;
-      _displayOff();
       menu.toggleMenuItem({
         menuItem: menuItem,
         state: "inactive"
       });
     };
-  };
-
-  function _toggle_section(element, forceToggle) {
-    var icon = element.querySelector(".js-card-toggle-icon");
-    var section = helper.getClosest(element, ".js-section");
-    var minimise = (section.dataset.minimise == "true");
-    var edit = section.querySelector(".js-edit");
-    var cardTabs = section.querySelector(".js-card-tabs");
-    var all_display = section.querySelectorAll(".js-display");
-    var _displayOn = function() {
-      section.dataset.displayMode = "true";
-      helper.addClass(section, "is-display-mode");
-      helper.addClass(edit, "is-hidden");
-      if (cardTabs && !minimise) {
-        helper.addClass(cardTabs, "is-hidden");
-      };
-      for (var i = 0; i < all_display.length; i++) {
-        helper.removeClass(all_display[i], "is-hidden");
-      };
-      helper.addClass(icon, "icon-edit");
-      helper.removeClass(icon, "icon-reader");
-    };
-    var _displayOff = function() {
-      section.dataset.displayMode = "false";
-      helper.removeClass(section, "is-display-mode");
-      helper.removeClass(edit, "is-hidden");
-      if (cardTabs && !minimise) {
-        helper.removeClass(cardTabs, "is-hidden");
-      };
-      for (var i = 0; i < all_display.length; i++) {
-        helper.addClass(all_display[i], "is-hidden");
-      };
-      helper.removeClass(icon, "icon-edit");
-      helper.addClass(icon, "icon-reader");
-    };
-    if (forceToggle == true) {
-      _displayOn();
-    } else if (forceToggle == false) {
-      _displayOff();
+    if (state.get({
+        all: true
+      })) {
+      _toggle_on();
     } else {
-      if (section.dataset.displayMode == "true") {
-        _displayOff();
-      } else if (section.dataset.displayMode == "false" || !section.dataset.displayMode) {
-        _displayOn();
-      };
+      _toggle_off();
     };
   };
 
-  function _toggle_all_section() {
-    var fab = helper.e(".js-fab");
-    var all_section = helper.eA(".js-section");
-    if (fab.dataset.displayMode == "true") {
-      fab.dataset.displayMode = false;
-      for (var i = 0; i < all_section.length; i++) {
-        _toggle_section(all_section[i], false);
-      };
-    } else if (fab.dataset.displayMode == "false" || !fab.dataset.displayMode) {
-      fab.dataset.displayMode = true;
-      for (var i = 0; i < all_section.length; i++) {
-        _toggle_section(all_section[i], true);
-      };
-    };
-    update();
-  };
-
-  function toggle(section, boolean) {
-    if (section) {
-      _toggle_section(section, boolean);
-    } else {
-      _toggle_all_section();
-    };
-  };
-
-  function clear(section) {
+  function clear(display) {
     var _removeAllChildren = function(parent) {
       while (parent.lastChild) {
         parent.removeChild(parent.lastChild);
       };
     };
-    if (section) {
-      var all_target = section.querySelectorAll(".js-display-block-target");
+    if (display) {
+      var all_displayBlock = display.querySelectorAll(".js-display-block");
     } else {
-      var all_target = helper.eA(".js-display-block-target");
+      var all_displayBlock = helper.eA(".js-display-block");
     };
-    for (var i = 0; i < all_target.length; i++) {
-      var displayBlock = helper.getClosest(all_target[i], ".js-display-block");
-      displayBlock.dataset.displayContent = false;
-      _removeAllChildren(all_target[i]);
-    };
-  };
-
-  function _get_all_pill(all_displayPath) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var all_pill = helper.getObject({
-        object: sheet.get(),
-        path: all_displayPath[i]
-      });
-      if (all_pill.length == 0) {
-        all_node.push(false);
-      } else {
-        for (var j = 0; j < all_pill.length; j++) {
-          all_node.push(_get_pill(all_pill[j]));
-        };
-      };
-    };
-    return all_node;
-  };
-
-  function _get_pill(pill) {
-    var displayListItem = document.createElement("li");
-    displayListItem.setAttribute("class", "m-display-list-item m-display-list-item-pill");
-    var pillName = document.createElement("span");
-    pillName.textContent = pill.name;
-    displayListItem.appendChild(pillName);
-    return displayListItem;
-  };
-
-  function _get_all_spell(all_displayPath, all_displaySpellLevel) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var all_spells = helper.getObject({
-        object: sheet.get(),
-        path: all_displayPath[i]
-      });
-      if (all_spells.length == 0) {
-        all_node.push(false);
-      } else {
-        for (var j = 0; j < all_spells.length; j++) {
-          var spell = all_spells[j];
-          all_node.push(_get_spell(spell, all_displaySpellLevel[i], j));
-        };
-      };
-    };
-    return all_node;
-  };
-
-  function _get_spell(spell, level, index) {
-    var displayListItem = document.createElement("li");
-    displayListItem.setAttribute("class", "m-display-list-item m-display-list-item-spell");
-    var displayListItemPrefix = document.createElement("span");
-    displayListItemPrefix.setAttribute("class", "m-display-list-item-spell-name");
-    var spellName = document.createElement("span");
-    spellName.textContent = spell.name;
-    var displayListItemValue = document.createElement("span");
-    displayListItemValue.setAttribute("class", "m-display-list-item-spell-count");
-    displayListItemPrefix.appendChild(spellName);
-    displayListItem.appendChild(displayListItemPrefix);
-    displayListItem.appendChild(displayListItemValue);
-    displayListItem.setAttribute("data-spell-level", level);
-    displayListItem.setAttribute("data-spell-count", index);
-    // prepared
-    if (spell.prepared > 0) {
-      // var marks = document.createElement("span");
-      for (var j = 0; j < spell.prepared; j++) {
-        var preparedIcon = document.createElement("span");
-        preparedIcon.setAttribute("class", "icon-radio-button-checked");
-        displayListItemValue.insertBefore(preparedIcon, displayListItemValue.firstChild);
-      };
-    };
-    // cast
-    if (spell.cast > 0) {
-      var all_check = displayListItemValue.querySelectorAll(".icon-radio-button-checked");
-      for (var j = 0; j < spell.cast; j++) {
-        if (all_check[j]) {
-          helper.toggleClass(all_check[j], "icon-radio-button-checked");
-          helper.toggleClass(all_check[j], "icon-radio-button-unchecked");
-        };
-      };
-    };
-    // active
-    if (spell.active) {
-      var spellActive = document.createElement("span");
-      spellActive.setAttribute("class", "m-display-list-item-spell-active");
-      var activeIcon = document.createElement("span");
-      activeIcon.setAttribute("class", "icon-play-arrow");
-      spellActive.appendChild(activeIcon);
-      spellName.insertBefore(spellActive, spellName.firstChild);
-    };
-    displayListItem.addEventListener("click", function() {
-      spells.update(helper.e(".js-spell-block-known-level-" + level).querySelectorAll(".js-spell-col")[index].querySelector(".js-spell"), true);
-    }, false);
-    return displayListItem;
-  };
-
-  function _get_all_skill(all_displayPath, displayPrefix) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var path = all_displayPath[i];
-      var prefix = displayPrefix[i];
-      all_node.push(_get_skill(path, prefix));
-    };
-    return all_node;
-  };
-
-  function _get_skill(path, prefix) {
-    var object = helper.getObject({
-      object: sheet.get(),
-      path: path
+    all_displayBlock.forEach(function(arrayItem) {
+      _removeAllChildren(arrayItem);
     });
-    var displayListItem;
-    if (typeof object != undefined && object != "") {
-
-      if (object.ranks != undefined && object.ranks != "") {
-        displayListItem = document.createElement("li");
-        displayListItem.setAttribute("class", "m-display-list-item");
-        var value = document.createElement("span");
-        value.setAttribute("class", "m-display-list-item-value");
-        value.textContent = object.current;
-        if (object.current > 0) {
-          value.textContent = "+" + value.textContent;
-        };
-        if (prefix || object["name"] || object["variant_name"]) {
-          var displayListItemPrefix = document.createElement("span");
-          displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
-          if (object["name"]) {
-            displayListItemPrefix.textContent = object["name"] + " ";
-          } else if (object["variant_name"]) {
-            displayListItemPrefix.textContent = object["variant_name"] + " ";
-          } else {
-            displayListItemPrefix.textContent = prefix;
-          };
-          displayListItem.appendChild(displayListItemPrefix);
-        };
-        displayListItem.appendChild(value);
-      } else {
-        displayListItem = false;
-      };
-
-    };
-    return displayListItem;
   };
 
-  function _get_all_clone(all_displayPath) {
-    var all_node = [];
-
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var all_clones = helper.getObject({
-        object: sheet.get(),
-        path: all_displayPath[i]
-      });
-      if (all_clones.length == 0) {
-        all_node.push(false);
-      } else {
-        for (var j = 0; j < all_clones.length; j++) {
-          var cloneType;
-          if (all_displayPath[i] == "basics.classes.all") {
-            cloneType = "class";
-          };
-          if (all_displayPath[i] == "equipment.consumable.all") {
-            cloneType = "consumable";
-          };
-          if (all_displayPath[i] == "statistics.power.all") {
-            cloneType = "power";
-          };
-          if (all_displayPath[i] == "equipment.item.all") {
-            cloneType = "item";
-          };
-          if (all_displayPath[i] == "skills.custom.all") {
-            cloneType = "skill";
-          };
-          if (all_displayPath[i] == "offense.attack.melee.all") {
-            cloneType = "attack-melee";
-          };
-          if (all_displayPath[i] == "offense.attack.ranged.all") {
-            cloneType = "attack-ranged";
-          };
-          if (all_displayPath[i] == "notes.character.all") {
-            cloneType = "note-character";
-          };
-          if (all_displayPath[i] == "notes.story.all") {
-            cloneType = "note-story";
-          };
-          all_node.push(_get_clone(all_clones[j], cloneType));
-        };
-      };
-    };
-    return all_node;
+  function render(displayBlock) {
+    _render_all_displayBlock(displayBlock);
+    _render_all_placeholderDisplay();
   };
 
-  function _get_clone(object, cloneType) {
-    var _get_cloneItem = function(object, cloneType) {
-      var displayListItem;
-
-      if (cloneType == "class") {
-        displayListItem = document.createElement("span");
-        displayListItem.setAttribute("class", "m-display-item-text-snippet");
-        for (var i in object) {
-          if (i == "classname") {
-            var data = object[i];
-            if (typeof data != undefined && data != "") {
-              var displayListItemPrefix = document.createElement("span");
-              displayListItemPrefix.setAttribute("class", "m-display-item-text-snippet-prefix");
-              displayListItemPrefix.textContent = data;
-              displayListItem.appendChild(displayListItemPrefix);
-            };
-          } else if (i == "level") {
-            var data = object[i];
-            if (typeof data != undefined && data != "" || data == 0) {
-              var displayListItemValue = document.createElement("span");
-              displayListItemValue.setAttribute("class", "m-display-item-text-snippet-value");
-              displayListItemValue.textContent = data;
-              displayListItem.appendChild(displayListItemValue);
-            };
-          };
-        };
-      };
-
-      if (cloneType == "consumable") {
-        displayListItem = document.createElement("li");
-        displayListItem.setAttribute("class", "m-display-list-item");
-        for (var i in object) {
-          if (i == "item") {
-            var data = object[i];
-            if (typeof data != undefined && data != "") {
-              var displayListItemPrefix = document.createElement("span");
-              displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
-              displayListItemPrefix.textContent = data;
-              displayListItem.appendChild(displayListItemPrefix);
-            };
-          } else if (i == "current") {
-            var data = object[i];
-            if (typeof data != undefined && data != "" || data == 0) {
-              var displayListItemValue = document.createElement("span");
-              displayListItemValue.setAttribute("class", "m-display-list-item-value");
-              if (typeof object.total != undefined && object.total != "") {
-                data = data + "/" + object.total;
-              };
-              displayListItemValue.textContent = data;
-              displayListItem.appendChild(displayListItemValue);
-            };
-          };
-        };
-        var percentage = parseFloat(((object.total - object.used) / object.total) * 100).toFixed(2);
-        if (percentage < 0) {
-          percentage = 0;
-        };
-        var percentageBar = document.createElement("span");
-        percentageBar.setAttribute("class", "m-display-list-item-percentage");
-        percentageBar.setAttribute("style", "width: " + percentage + "%;");
-        displayListItem.appendChild(percentageBar);
-        // console.log(object.item, object.total, object.used, percentage);
-      };
-
-      if (cloneType == "power") {
-        displayListItem = document.createElement("li");
-        displayListItem.setAttribute("class", "m-display-list-item");
-        for (var i in object) {
-          if (i == "name") {
-            var data = object[i];
-            if (typeof data != undefined && data != "") {
-              var displayListItemPrefix = document.createElement("span");
-              displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
-              displayListItemPrefix.textContent = data;
-              displayListItem.appendChild(displayListItemPrefix);
-            };
-          } else if (i == "current") {
-            var data = object[i];
-            if (typeof data != undefined && data != "" || data == 0) {
-              var displayListItemValue = document.createElement("span");
-              displayListItemValue.setAttribute("class", "m-display-list-item-value");
-              if (typeof object.total != undefined && object.total != "") {
-                data = data + "/" + object.total;
-              };
-              displayListItemValue.textContent = data;
-              displayListItem.appendChild(displayListItemValue);
-            };
-          };
-        };
-        var percentage = parseFloat(((object.total - object.used) / object.total) * 100).toFixed(2);
-        if (percentage < 0) {
-          percentage = 0;
-        };
-        var percentageBar = document.createElement("span");
-        percentageBar.setAttribute("class", "m-display-list-item-percentage");
-        percentageBar.setAttribute("style", "width: " + percentage + "%;");
-        displayListItem.appendChild(percentageBar);
-        // console.log(object.item, object.total, object.used, percentage);
-      };
-
-      if (cloneType == "item") {
-        displayListItem = document.createElement("li");
-        displayListItem.setAttribute("class", "m-display-list-item");
-        for (var i in object) {
-          if (i == "name") {
-            var data = object[i];
-            if (typeof data != undefined && data != "") {
-              var displayListItemPrefix = document.createElement("span");
-              displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
-              displayListItemPrefix.textContent = data;
-              displayListItem.appendChild(displayListItemPrefix);
-            };
-          } else if (i == "quantity") {
-            var data = object[i];
-            if (typeof data != undefined && data != "" || data == 0) {
-              var displayListItemValue = document.createElement("span");
-              displayListItemValue.setAttribute("class", "m-display-list-item-value");
-              displayListItemValue.textContent = data;
-              displayListItem.appendChild(displayListItemValue);
-            };
-          };
-        };
-      };
-
-      if (cloneType == "skill") {
-        if (object.ranks != undefined && object.ranks != "") {
-          displayListItem = document.createElement("li");
-          displayListItem.setAttribute("class", "m-display-list-item");
-          var displayListItemValue = document.createElement("span");
-          displayListItemValue.setAttribute("class", "m-display-list-item-value");
-          displayListItemValue.textContent = object.current;
-          if (object.current > 0) {
-            displayListItemValue.textContent = "+" + displayListItemValue.textContent;
-          };
-          if (object["name"]) {
-            var displayListItemPrefix = document.createElement("span");
-            displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
-            displayListItemPrefix.textContent = object["name"];
-          } else {
-            displayListItemPrefix.textContent = "Custom Skill";
-          };
-          displayListItem.appendChild(displayListItemPrefix);
-          displayListItem.appendChild(displayListItemValue);
-        } else {
-          displayListItem = false;
-        };
-      };
-
-      if (cloneType == "attack-melee" || cloneType == "attack-ranged") {
-        displayListItem = document.createElement("li");
-        displayListItem.setAttribute("class", "m-display-list-item-" + cloneType);
-        for (var i in object) {
-          if (i == "weapon" || i == "damage" || i == "critical" || i == "range" || i == "type" || i == "ammo") {
-            var data = object[i];
-            if (typeof data != undefined && data != "") {
-              var displayListItemPrefix = document.createElement("span");
-              displayListItemPrefix.setAttribute("class", "m-display-list-item-" + cloneType + "-" + i);
-              displayListItemPrefix.textContent = data;
-              displayListItem.appendChild(displayListItemPrefix);
-            };
-          } else if (i == "attack") {
-            var data = object[i];
-            if (typeof data != undefined && data != "") {
-              var displayListItemValue = document.createElement("h2");
-              displayListItemValue.setAttribute("class", "m-display-list-item-" + cloneType + "-" + i);
-              displayListItemValue.textContent = data;
-              displayListItem.appendChild(displayListItemValue);
-            };
-          };
-        };
-      };
-
-      if (cloneType == "note-character" || cloneType == "note-story") {
-        displayListItem = document.createElement("li");
-        displayListItem.setAttribute("class", "m-display-list-item");
-        for (var i in object) {
-          var data = object[i];
-          if (typeof data != undefined && data != "") {
-            displayListItem.innerHTML = data;
-          };
-        };
-      };
-
-      return displayListItem;
-    };
-
-    for (var i in object) {
-      var testForValues = false;
-      for (var j in object[i]) {
-        if (typeof object[i][j] != undefined && object[i][j] != "") {
-          testForValues = true;
-        };
-      };
-      if (testForValues) {
-        return _get_cloneItem(object, cloneType);
-      } else {
-        return false;
-      };
-    };
-
-  };
-
-  function _get_all_list(all_displayPath, all_displayPrefix, all_displaySuffix, all_displayValueType) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var path = all_displayPath[i];
-      var prefix = false;
-      var suffix = false;
-      var valueType = false;
-      if (all_displayPrefix[i]) {
-        prefix = all_displayPrefix[i];
-      };
-      if (all_displaySuffix[i]) {
-        suffix = all_displaySuffix[i];
-      };
-      if (all_displayValueType[i]) {
-        valueType = all_displayValueType[i];
-      };
-      all_node.push(_get_list(path, prefix, suffix, valueType));
-    };
-    return all_node;
-  };
-
-  function _get_list(path, prefix, suffix, valueType) {
-    var data = helper.getObject({
-      object: sheet.get(),
-      path: path
-    });
-    var displayListItem;
-    if (typeof data != undefined && data != "") {
-      if (valueType == "bonus" && data > 0) {
-        data = "+" + data;
-      };
-      displayListItem = document.createElement("li");
-      displayListItem.setAttribute("class", "m-display-list-item");
-      var displayListItemvalue = document.createElement("span");
-      displayListItemvalue.setAttribute("class", "m-display-list-item-value");
-      displayListItemvalue.textContent = data;
-      if (prefix) {
-        var displayListItemPrefix = document.createElement("span");
-        displayListItemPrefix.setAttribute("class", "m-display-list-item-prefix");
-        displayListItemPrefix.textContent = prefix;
-        displayListItem.appendChild(displayListItemPrefix);
-      };
-      displayListItem.appendChild(displayListItemvalue);
-      if (suffix) {
-        var displayListItemSuffix = document.createElement("span");
-        displayListItemSuffix.setAttribute("class", "m-display-list-item-suffix");
-        displayListItemSuffix.textContent = prefix;
-        displayListItem.appendChild(displayListItemSuffix);
-      };
+  function _render_all_displayBlock(displayBlock) {
+    if (displayBlock) {
+      _render_displayBlock(displayBlock);
     } else {
-      displayListItem = false;
-    };
-    return displayListItem;
-  };
-
-  function _get_all_modifier(all_displayPath, all_displayValueType) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var path = all_displayPath[i];
-      all_node.push(_get_modifier(path, all_displayValueType));
-    };
-    return all_node;
-  };
-
-  function _get_modifier(path, all_displayValueType) {
-    var displayItem;
-    var data;
-    var modifierPath = path.split(".");
-    if (sheet.get()[modifierPath[0]][modifierPath[1]][modifierPath[2]].temp_modifier) {
-      data = sheet.get()[modifierPath[0]][modifierPath[1]][modifierPath[2]].temp_modifier;
-    } else {
-      data = helper.getObject({
-        object: sheet.get(),
-        path: path
+      var all_displayBlock = helper.eA(".js-display-block");
+      all_displayBlock.forEach(function(arrayItem) {
+        _render_displayBlock(arrayItem);
       });
     };
-    if (typeof data != undefined && data != "") {
-      displayItem = document.createElement("span");
-      if (all_displayValueType) {
-        if (all_displayValueType == "bonus" && data > 0) {
+  };
+
+  function _render_displayBlock(displayBlock) {
+    var options = helper.makeObject(displayBlock.dataset.displayOptions);
+    if (options) {
+      options.sections.forEach(function(arrayItem) {
+
+        var content = helper.getObject({
+          object: _displayContent,
+          path: arrayItem
+        });
+        var displayArea = document.createElement("div");
+        displayArea.setAttribute("class", "m-display-area");
+        var displayAreaContent = false;
+
+        content.forEach(function(arrayItem, index) {
+          var elementToAdd = _render_content(arrayItem);
+          // console.log(options.sections, elementToAdd);
+          if (elementToAdd) {
+            if (elementToAdd.length > 0) {
+              elementToAdd.forEach(function(arrayItem) {
+                if (arrayItem) {
+                  displayAreaContent = true;
+                  displayArea.appendChild(arrayItem);
+                };
+              });
+            };
+          };
+        });
+
+        if (displayAreaContent) {
+          displayBlock.appendChild(displayArea);
+        };
+
+      });
+    };
+  };
+
+  function _render_content(displayObject) {
+    var dataFormat = {
+      number: function(data) {
+        if (data > 0) {
+          data = parseFloat(data).toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          });
+        };
+        return data;
+      },
+      bonus: function(data) {
+        if (data > 0) {
           data = "+" + data;
         };
-      };
-      displayItem.textContent = data;
-    } else if (typeof data == "number" && data == 0) {
-      displayItem = document.createElement("span");
-      displayItem.textContent = data;
-    } else {
-      displayItem = false;
-    };
-    return displayItem;
-  };
-
-  function _get_all_stat(all_displayPath) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var path = all_displayPath[i];
-      all_node.push(_get_stat(path));
-    };
-    return all_node;
-  };
-
-  function _get_stat(path) {
-    var displayItem;
-    var data;
-    var statPath = path.split(".");
-    if (sheet.get()[statPath[0]][statPath[1]][statPath[2]].temp_score) {
-      data = sheet.get()[statPath[0]][statPath[1]][statPath[2]].temp_score
-    } else {
-      data = helper.getObject({
-        object: sheet.get(),
-        path: path
-      });
-    };
-    if (typeof data != undefined && data != "") {
-      displayItem = document.createElement("span");
-      displayItem.textContent = data;
-    } else if (typeof data == "number" && data == 0) {
-      var displayItem = document.createElement("span");
-      displayItem.textContent = data;
-    } else {
-      displayItem = false;
-    };
-    return displayItem;
-  };
-
-  function _get_all_textBlock(all_displayPath) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var path = all_displayPath[i];
-      all_node.push(_get_textBlock(path));
-    };
-    return all_node;
-  };
-
-  function _get_textBlock(path, target) {
-    var data = helper.getObject({
-      object: sheet.get(),
-      path: path
-    });
-    var displayItem;
-    if (typeof data != undefined && data != "") {
-      displayItem = document.createElement("span");
-      displayItem.setAttribute("class", "m-display-item-text-block");
-      var value = document.createElement("span");
-      value.setAttribute("class", "m-display-item-text-block-value");
-      value.innerHTML = data;
-      displayItem.appendChild(value);
-    } else {
-      displayItem = false;
-    };
-    return displayItem;
-  };
-
-  function _get_all_textSnippet(all_displayPath, all_displayPrefix, all_displaySuffix, all_displayDependency, all_displayValueType) {
-    var all_node = [];
-    for (var i = 0; i < all_displayPath.length; i++) {
-      var path = all_displayPath[i];
-      var dependency = false;
-      var prefix = false;
-      var suffix = false;
-      var valueType = false;
-      if (all_displayPrefix[i]) {
-        prefix = all_displayPrefix[i];
-      };
-      if (all_displayDependency[i]) {
-        dependency = all_displayDependency[i];
-      };
-      if (all_displaySuffix[i]) {
-        suffix = all_displaySuffix[i];
-      };
-      if (all_displayValueType[i]) {
-        valueType = all_displayValueType[i];
-      };
-      all_node.push(_get_textSnippet(path, prefix, suffix, dependency, valueType));
-    };
-    // console.log("all_node", all_node);
-    return all_node;
-  };
-
-  function _get_textSnippet(path, prefix, suffix, dependency, valueType) {
-    var data = helper.getObject({
-      object: sheet.get(),
-      path: path
-    });
-    var displayItem;
-    if (typeof data != undefined && data != "") {
-      displayItem = document.createElement("span");
-      displayItem.setAttribute("class", "m-display-item-text-snippet");
-      var value = document.createElement("span");
-      value.setAttribute("class", "m-display-item-text-snippet-value");
-      if (valueType == "bonus" && data > 0) {
-        data = "+" + data;
-      } else if (valueType == "currency" && data > 0) {
+        return data;
+      },
+      currency: function(data) {
         data = parseFloat(data).toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
@@ -22420,12 +23036,9 @@ var display = (function() {
         if (data.indexOf(".00") !== -1) {
           data = data.substr(0, data.indexOf("."));
         };
-      } else if (valueType == "number" && data > 0) {
-        data = parseFloat(data).toLocaleString(undefined, {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        });
-      } else if (valueType == "weight" && data > 0) {
+        return data;
+      },
+      weight: function(data) {
         data = parseFloat(data).toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
@@ -22433,260 +23046,792 @@ var display = (function() {
         if (data.indexOf(".00") !== -1) {
           data = data.substr(0, data.indexOf("."));
         };
-      };
-      if (dependency) {
-        data = data + " / " + helper.getObject({
-          object: sheet.get(),
-          path: dependency
-        });
-      };
-      value.innerHTML = data;
-      if (prefix) {
-        var spanPrefix = document.createElement("span");
-        spanPrefix.setAttribute("class", "m-display-item-text-snippet-prefix");
-        spanPrefix.textContent = prefix;
-        displayItem.appendChild(spanPrefix);
-      };
-      displayItem.appendChild(value);
-      if (suffix) {
-        var spanSuffix = document.createElement("span");
-        spanSuffix.setAttribute("class", "m-display-item-text-snippet-suffix");
-        spanSuffix.textContent = suffix;
-        displayItem.appendChild(spanSuffix);
-      };
-    } else {
-      displayItem = false;
+        return data;
+      }
     };
-    // console.log(path, displayItem);
-    return displayItem;
-  };
-
-  function _get_all_image(all_displayPath, all_displayScale, all_displayPosition, all_displayColor) {
-    var all_node = [];
-    var scale = false;
-    var position = false;
-    var color = false;
-    for (var i = 0; i < all_displayPath.length; i++) {
-      if (all_displayScale[i]) {
-        scale = all_displayScale[i];
-      };
-      if (all_displayPosition[i]) {
-        position = all_displayPosition[i];
-      };
-      if (all_displayColor[i]) {
-        color = all_displayColor[i];
-      };
-      var path = all_displayPath[i];
-      all_node.push(_get_image(path, scale, position, color));
-    };
-    // console.log("all_node", all_node);
-    return all_node;
-  };
-
-  function _get_image(path, scale, position, color) {
-    var data = helper.getObject({
-      object: sheet.get(),
-      path: path
-    });
-    var displayImage;
-    if (typeof data != undefined && data != "") {
-      var displayImage = document.createElement("div");
-      displayImage.setAttribute("class", "m-display-item-image-wrapper");
-      var displayImageItem = new Image;
-      // displayImage.setAttribute("class", "m-character-image js-character-image");
-      displayImageItem.setAttribute("class", "m-display-item-image");
-      displayImageItem.src = data;
-      if (scale) {
-        var scale = helper.getObject({
-          object: sheet.get(),
-          path: scale
-        });
-      } else {
-        scale = 1;
-      };
-      if (position) {
-        var position = helper.getObject({
-          object: sheet.get(),
-          path: position
-        });
-      } else {
-        position = {
-          x: 0,
-          y: 0
-        };
-      };
-      if (color) {
-        var background = helper.getObject({
-          object: sheet.get(),
-          path: "basics.character_image.background"
-        });
-        var color;
-        if (background == "black") {
-          color = "rgb(0,0,0)";
-        } else if (background == "white") {
-          color = "rgb(255,255,255)";
-        } else if (background == "average") {
-          color = helper.getObject({
-            object: sheet.get(),
-            path: color
+    var createElement = {
+      image: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
           });
-          color = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
         };
-      };
-      displayImage.style.backgroundColor = color;
-      displayImageItem.style.width = scale + "%";
-      displayImageItem.style.left = position.x + "%";
-      displayImageItem.style.top = position.y + "%";
-      displayImage.appendChild(displayImageItem);
-    } else {
-      displayImage = false;
-    };
-    return displayImage;
-  };
-
-  function _render_displayBlock(section) {
-    // find all display blocks
-    var all_displayBlock;
-    if (section) {
-      all_displayBlock = section.querySelectorAll(".js-display-block");
-    } else {
-      all_displayBlock = helper.eA(".js-display-block");
-    };
-    // loop all display blocks
-    for (var i = 0; i < all_displayBlock.length; i++) {
-      // find all targets in this display blocks
-      var all_displayBlockTarget = all_displayBlock[i].querySelectorAll(".js-display-block-target");
-      // start a "no data found at path" count
-      var dataNotFoundAtPath = 0;
-      var totalNodeLength = 0;
-      var all_node = [];
-
-      // loop over each target in this display blocks
-      for (var j = 0; j < all_displayBlockTarget.length; j++) {
-
-        // get all data from display blocks target
-        var target = all_displayBlockTarget[j];
-        // var display = helper.getClosest(all_displayBlockTarget[j], ".js-display");
-        var displayType = all_displayBlockTarget[j].dataset.displayType;
-        var all_displayPath;
-        var all_displayDependency = false;
-        var all_displayPrefix = false;
-        var all_displaySuffix = false;
-        var all_displayValueType = false;
-        var all_displayScale = false;
-        var all_displayPosition = false;
-        var all_displayColor = false;
-        var all_displaySpellLevel = false;
-
-        if (all_displayBlockTarget[j].dataset.displayPath) {
-          all_displayPath = all_displayBlockTarget[j].dataset.displayPath.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displayDependency) {
-          all_displayDependency = all_displayBlockTarget[j].dataset.displayDependency.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displayPrefix) {
-          all_displayPrefix = all_displayBlockTarget[j].dataset.displayPrefix.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displaySuffix) {
-          all_displaySuffix = all_displayBlockTarget[j].dataset.displaySuffix.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displayValueType) {
-          all_displayValueType = all_displayBlockTarget[j].dataset.displayValueType.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displayScale) {
-          all_displayScale = all_displayBlockTarget[j].dataset.displayScale.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displayPosition) {
-          all_displayPosition = all_displayBlockTarget[j].dataset.displayPosition.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displayColor) {
-          all_displayColor = all_displayBlockTarget[j].dataset.displayColor.split(",");
-        };
-        if (all_displayBlockTarget[j].dataset.displaySpellLevel) {
-          all_displaySpellLevel = all_displayBlockTarget[j].dataset.displaySpellLevel.split(",");
-        };
-
-        // get an array of nodes using the array of paths
-        if (displayType == "stat") {
-          all_node = _get_all_stat(all_displayPath);
-        } else if (displayType == "modifier") {
-          all_node = _get_all_modifier(all_displayPath, all_displayValueType);
-        } else if (displayType == "image") {
-          all_node = _get_all_image(all_displayPath, all_displayScale, all_displayPosition, all_displayColor);
-        } else if (displayType == "text-snippet") {
-          all_node = _get_all_textSnippet(all_displayPath, all_displayPrefix, all_displaySuffix, all_displayDependency, all_displayValueType);
-        } else if (displayType == "text-block") {
-          all_node = _get_all_textBlock(all_displayPath);
-        } else if (displayType == "list") {
-          all_node = _get_all_list(all_displayPath, all_displayPrefix, all_displaySuffix, all_displayValueType);
-        } else if (displayType == "clone") {
-          all_node = _get_all_clone(all_displayPath);
-        } else if (displayType == "skill") {
-          all_node = _get_all_skill(all_displayPath, all_displayPrefix);
-        } else if (displayType == "spell") {
-          all_node = _get_all_spell(all_displayPath, all_displaySpellLevel);
-        } else if (displayType == "pill") {
-          all_node = _get_all_pill(all_displayPath);
-        };
-
-        // loop over each node in array and append to target
-        all_node.forEach(function(arrayItem) {
-          if (arrayItem != false) {
-            // append to target
-            target.appendChild(arrayItem);
-          } else {
-            // or increment the "no data found at path" count
-            dataNotFoundAtPath++;
+        var contentFound = 0;
+        displayObject.content.forEach(function(arrayItem, index) {
+          var data = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (data != "") {
+            contentFound++;
+            var displayImageItem = new Image;
+            displayImageItem.setAttribute("class", "m-display-image");
+            displayImageItem.src = data;
+            var scale = helper.getObject({
+              object: sheet.get(),
+              path: arrayItem.scale
+            });
+            var position = helper.getObject({
+              object: sheet.get(),
+              path: arrayItem.position
+            });
+            var background = helper.getObject({
+              object: sheet.get(),
+              path: arrayItem.background
+            });
+            var color;
+            if (background == "black") {
+              color = "rgb(0,0,0)";
+            } else if (background == "white") {
+              color = "rgb(255,255,255)";
+            } else if (background == "average") {
+              color = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.color
+              });
+              color = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
+            };
+            element.style.backgroundColor = color;
+            displayImageItem.style.width = scale + "%";
+            displayImageItem.style.left = position.x + "%";
+            displayImageItem.style.top = position.y + "%";
+            element.appendChild(displayImageItem);
           };
         });
-
-        totalNodeLength = totalNodeLength + all_node.length;
-      };
-      // if the "no data found at path" count == total "path count" this display blocks target is empty so add a data vale to reflect this
-      if (totalNodeLength > dataNotFoundAtPath) {
-        all_displayBlock[i].dataset.displayContent = true;
-      } else {
-        all_displayBlock[i].dataset.displayContent = false;
-      };
-
-    };
-
-  };
-
-  function render(section) {
-    _render_displayBlock(section);
-    _update_displayPlaceholder(section);
-  };
-
-  function _update_displayPlaceholder(section) {
-    var all_display
-    if (section) {
-      all_display = [section];
-    } else {
-      all_display = helper.eA(".js-display");
-    };
-    for (var i = 0; i < all_display.length; i++) {
-      var placeholderDisplay = all_display[i].querySelector(".js-placeholder-display");
-      var all_displayBlock = all_display[i].querySelectorAll(".js-display-block");
-      var contentFound = false;
-      var lastActiveDisplayBlock;
-
-      for (var j = 0; j < all_displayBlock.length; j++) {
-        if (all_displayBlock[j].dataset.displayContent == "true") {
-          lastActiveDisplayBlock = all_displayBlock[j];
-          contentFound = true;
-          helper.removeClass(all_displayBlock[j], "is-hidden");
+        if (contentFound > 0) {
+          all_element.push(element);
         } else {
-          helper.addClass(all_displayBlock[j], "is-hidden");
+          all_element.push(false);
         };
-      };
-      for (var j = 0; j < all_displayBlock.length; j++) {
-        helper.removeClass(all_displayBlock[j], "m-display-block-last");
-      };
-      if (lastActiveDisplayBlock) {
-        helper.addClass(lastActiveDisplayBlock, "m-display-block-last");
-      };
-      if (contentFound) {
+        return all_element;
+      },
+      snippet: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "m-display-snippet");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        var contentFound = 0;
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        displayObject.content.forEach(function(arrayItem, index) {
+          var data = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (data != "") {
+            if (arrayItem.valueType) {
+              data = dataFormat[arrayItem.valueType](data);
+            };
+            if (arrayItem.dependency) {
+              var dependencyData = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.dependency
+              });
+              if (dependencyData != "") {
+                data = data + " / " + dependencyData;
+              };
+            };
+            contentFound++;
+            var snippet = document.createElement("span");
+            snippet.setAttribute("class", "m-display-snippet-item");
+            if (arrayItem.prefix) {
+              var prefix = document.createElement("span");
+              prefix.setAttribute("class", "m-display-prefix");
+              prefix.textContent = arrayItem.prefix;
+              snippet.appendChild(prefix);
+            };
+            var value = document.createElement("span");
+            value.setAttribute("class", "m-display-value");
+            value.textContent = data;
+            snippet.appendChild(value);
+            if (arrayItem.suffix) {
+              var suffix = document.createElement("span");
+              suffix.setAttribute("class", "m-display-suffix");
+              suffix.textContent = arrayItem.suffix;
+              snippet.appendChild(suffix);
+            };
+            element.appendChild(snippet);
+          };
+        });
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      block: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "m-display-text-block");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        var contentFound = 0;
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        displayObject.content.forEach(function(arrayItem, index) {
+          var data = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (data != "") {
+            contentFound++;
+            if (arrayItem.prefix) {
+              var prefix = document.createElement("span");
+              prefix.setAttribute("class", "m-display-prefix");
+              prefix.textContent = arrayItem.prefix;
+              element.appendChild(prefix);
+            };
+            var value = document.createElement("span");
+            value.setAttribute("class", "m-display-value");
+            value.innerHTML = data;
+            element.appendChild(value);
+            if (arrayItem.suffix) {
+              var suffix = document.createElement("span");
+              suffix.setAttribute("class", "m-display-suffix");
+              suffix.textContent = arrayItem.suffix;
+              element.appendChild(suffix);
+            };
+          };
+        });
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      stat: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "m-display-stats u-list-unstyled");
+        var contentFound = 0;
+        displayObject.content.forEach(function(arrayItem, index) {
+          contentFound++;
+          var listItem = document.createElement("li");
+          listItem.setAttribute("class", "m-display-stats-item");
+          var stat = document.createElement("span");
+          stat.setAttribute("class", "m-display-stat");
+          var statName = document.createElement("span");
+          statName.setAttribute("class", "m-display-stat-name");
+          var statValue = document.createElement("strong");
+          statValue.setAttribute("class", "m-display-stat-value");
+          var mod = document.createElement("h1");
+          mod.setAttribute("class", "m-display-mod");
+          var statData = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.statPath
+          });
+          var modData = dataFormat.bonus(helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.modPath
+          }));
+          statName.textContent = arrayItem.prefix;
+          statValue.textContent = statData;
+          mod.textContent = modData;
+          stat.appendChild(statName);
+          stat.appendChild(statValue);
+          listItem.appendChild(stat);
+          listItem.appendChild(mod);
+          element.appendChild(listItem);
+        });
+        if (contentFound > 0) {
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      list: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "u-list-unstyled");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        var contentFound = 0;
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        displayObject.content.forEach(function(arrayItem, index) {
+          var all_listItem = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (all_listItem.length > 0) {
+            all_listItem.forEach(function(arrayItem) {
+              contentFound++;
+              var listItem = document.createElement("li");
+              listItem.setAttribute("class", "m-display-list-item");
+              var listItemName = document.createElement("span");
+              listItemName.setAttribute("class", "m-display-list-item-name");
+              listItemName.textContent = arrayItem.name;
+              listItem.appendChild(listItemName);
+              element.appendChild(listItem);
+            });
+          };
+        });
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      group: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "u-list-unstyled");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        var contentFound = 0;
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        displayObject.content.forEach(function(arrayItem, index) {
+          var data = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (data != "") {
+            contentFound++;
+            var listItem = document.createElement("li");
+            listItem.setAttribute("class", "m-display-list-item");
+            if (arrayItem.prefix) {
+              var prefix = document.createElement("span");
+              prefix.setAttribute("class", "m-display-list-item-prefix");
+              prefix.textContent = arrayItem.prefix;
+              listItem.appendChild(prefix);
+            };
+            if (arrayItem.suffix) {
+              var suffix = document.createElement("span");
+              suffix.setAttribute("class", "m-display-list-item-suffix");
+              suffix.textContent = arrayItem.suffix;
+              listItem.appendChild(suffix);
+            };
+            var listItemName = document.createElement("span");
+            listItemName.setAttribute("class", "m-display-list-item-name");
+            listItemName.textContent = data;
+            listItem.appendChild(listItemName);
+            element.appendChild(listItem);
+          };
+        });
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      pill: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "u-list-unstyled");
+        var contentFound = 0;
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        displayObject.content.forEach(function(arrayItem, index) {
+          var all_pill = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (all_pill.length > 0) {
+            all_pill.forEach(function(arrayItem) {
+              contentFound++;
+              var listItem = document.createElement("li");
+              listItem.setAttribute("class", "m-display-list-item");
+              var listItemName = document.createElement("span");
+              listItemName.setAttribute("class", "m-display-list-item-name");
+              listItemName.textContent = arrayItem.name;
+              listItem.appendChild(listItemName);
+              element.appendChild(listItem);
+            });
+          };
+        });
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      clone: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "u-list-unstyled");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        var contentFound = 0;
+        var cloneVariant = {
+          consumable: function() {
+            displayObject.content.forEach(function(arrayItem, index) {
+              var all_clone = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.path
+              });
+              if (all_clone.length > 0) {
+                all_clone.forEach(function(arrayItem) {
+                  if (arrayItem.name != "") {
+                    contentFound++;
+                    var listItem = document.createElement("li");
+                    listItem.setAttribute("class", "m-display-list-item");
+                    var listItemName = document.createElement("span");
+                    listItemName.setAttribute("class", "m-display-list-item-name");
+                    listItemName.textContent = arrayItem.name;
+                    var listItemValue = document.createElement("span");
+                    listItemValue.setAttribute("class", "m-display-list-item-value");
+                    listItemValue.textContent = (arrayItem.current || 0) + "/" + (arrayItem.total || 0);
+                    var percentage = parseFloat(((arrayItem.total - arrayItem.used) / arrayItem.total) * 100).toFixed(2);
+                    if (percentage < 0) {
+                      percentage = 0;
+                    };
+                    var percentageBar = document.createElement("span");
+                    percentageBar.setAttribute("class", "m-display-list-item-percentage");
+                    percentageBar.setAttribute("style", "width: " + percentage + "%;");
+                    listItem.appendChild(listItemName);
+                    listItem.appendChild(listItemValue);
+                    listItem.appendChild(percentageBar);
+                    element.appendChild(listItem);
+                  };
+                });
+              };
+            })
+          },
+          power: function() {
+            displayObject.content.forEach(function(arrayItem, index) {
+              var all_clone = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.path
+              });
+              if (all_clone.length > 0) {
+                all_clone.forEach(function(arrayItem) {
+                  if (arrayItem.name != "") {
+                    contentFound++;
+                    var listItem = document.createElement("li");
+                    listItem.setAttribute("class", "m-display-list-item");
+                    var listItemName = document.createElement("span");
+                    listItemName.setAttribute("class", "m-display-list-item-name");
+                    listItemName.textContent = arrayItem.name;
+                    var listItemValue = document.createElement("span");
+                    listItemValue.setAttribute("class", "m-display-list-item-value");
+                    listItemValue.textContent = arrayItem.current + "/" + arrayItem.total;
+                    var percentage = parseFloat(((arrayItem.total - arrayItem.used) / arrayItem.total) * 100).toFixed(2);
+                    if (percentage < 0) {
+                      percentage = 0;
+                    };
+                    var percentageBar = document.createElement("span");
+                    percentageBar.setAttribute("class", "m-display-list-item-percentage");
+                    percentageBar.setAttribute("style", "width: " + percentage + "%;");
+                    listItem.appendChild(listItemName);
+                    listItem.appendChild(listItemValue);
+                    listItem.appendChild(percentageBar);
+                    element.appendChild(listItem);
+                  };
+                });
+              };
+            })
+          },
+          item: function() {
+            displayObject.content.forEach(function(arrayItem, index) {
+              var all_clone = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.path
+              });
+              if (all_clone.length > 0) {
+                all_clone.forEach(function(arrayItem) {
+                  if (arrayItem.name != "") {
+                    contentFound++;
+                    var listItem = document.createElement("li");
+                    listItem.setAttribute("class", "m-display-list-item");
+                    var listItemName = document.createElement("span");
+                    listItemName.setAttribute("class", "m-display-list-item-name");
+                    listItemName.textContent = arrayItem.name;
+                    var listItemValue = document.createElement("span");
+                    listItemValue.setAttribute("class", "m-display-list-item-value");
+                    listItemValue.textContent = arrayItem.quantity;
+                    listItem.appendChild(listItemName);
+                    listItem.appendChild(listItemValue);
+                    element.appendChild(listItem);
+                  };
+                });
+              };
+            })
+          },
+          attack: function() {
+            displayObject.content.forEach(function(arrayItem, index) {
+              var all_clone = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.path
+              });
+              if (all_clone.length > 0) {
+                all_clone.forEach(function(arrayItem) {
+                  if (arrayItem.weapon != "") {
+                    contentFound++;
+                    var _createSnippet = function(config) {
+                      var meleeItem = document.createElement("span");
+                      meleeItem.setAttribute("class", "m-display-list-item-attack-" + config.classname);
+                      if (config.prefix) {
+                        var prefix = document.createElement("span");
+                        prefix.setAttribute("class", "m-display-list-item-attack-prefix");
+                        prefix.textContent = config.prefix;
+                        meleeItem.appendChild(prefix);
+                      };
+                      var value = document.createElement("span");
+                      value.setAttribute("class", "m-display-list-item-attack-value");
+                      value.textContent = config.value;
+                      meleeItem.appendChild(value);
+                      return meleeItem;
+                    };
+                    var listItem = document.createElement("li");
+                    listItem.setAttribute("class", "m-display-list-item-attack");
+                    if ("weapon" in arrayItem && arrayItem.weapon != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Weapon",
+                        value: arrayItem.weapon,
+                        classname: "weapon"
+                      }));
+                    };
+                    if ("attack" in arrayItem && arrayItem.attack != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Attack",
+                        value: arrayItem.attack,
+                        classname: "attack"
+                      }));
+                    };
+                    if ("damage" in arrayItem && arrayItem.damage != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Damage",
+                        value: arrayItem.damage,
+                        classname: "damage"
+                      }));
+                    };
+                    if ("critical" in arrayItem && arrayItem.critical != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Critical",
+                        value: arrayItem.critical,
+                        classname: "critical"
+                      }));
+                    };
+                    if ("type" in arrayItem && arrayItem.type != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Type",
+                        value: arrayItem.type,
+                        classname: "type"
+                      }));
+                    };
+                    if ("range" in arrayItem && arrayItem.range != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Range",
+                        value: arrayItem.range,
+                        classname: "range"
+                      }));
+                    };
+                    if ("ammo" in arrayItem && arrayItem.ammo != "") {
+                      listItem.appendChild(_createSnippet({
+                        prefix: "Ammo",
+                        value: arrayItem.ammo,
+                        classname: "ammo"
+                      }));
+                    };
+                    element.appendChild(listItem);
+                  };
+                });
+              };
+            })
+          },
+          note: function() {
+            displayObject.content.forEach(function(arrayItem, index) {
+              var all_clone = helper.getObject({
+                object: sheet.get(),
+                path: arrayItem.path
+              });
+              if (all_clone.length > 0) {
+                all_clone.forEach(function(arrayItem) {
+                  if (arrayItem.note != "") {
+                    contentFound++;
+                    var listItem = document.createElement("li");
+                    listItem.setAttribute("class", "m-display-list-item");
+                    var listItemValue = document.createElement("span");
+                    listItemValue.setAttribute("class", "m-display-list-item-text-block");
+                    listItemValue.innerHTML = arrayItem.note;
+                    listItem.appendChild(listItemValue);
+                    element.appendChild(listItem);
+                  };
+                });
+              };
+            })
+          }
+        };
+
+        cloneVariant[displayObject.cloneType]();
+
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      skills: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "u-list-unstyled");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        var contentFound = 0;
+        if (displayObject.head) {
+          var head = document.createElement("p");
+          head.setAttribute("class", "m-display-head");
+          head.textContent = displayObject.head;
+        };
+        var foundSkills = [];
+        displayObject.content.forEach(function(arrayItem, index) {
+          var all_listItem = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          var skills = {
+            default: function() {
+              var skillNames = {
+                acrobatics: "Acrobatics",
+                appraise: "Appraise",
+                bluff: "Bluff",
+                climb: "Climb",
+                craft_1: "Craft 1",
+                craft_2: "Craft 2",
+                diplomacy: "Diplomacy",
+                disable_device: "Disable Device",
+                disguise: "Disguise",
+                escape_artist: "Escape Artist",
+                fly: "Fly",
+                handle_animal: "Handle Animal",
+                heal: "Heal",
+                intimidate: "Intimidate",
+                knowledge_arcana: "Knowledge Arcana",
+                knowledge_dungeoneering: "Knowledge Dungeoneering",
+                knowledge_engineering: "Knowledge Engineering",
+                knowledge_geography: "Knowledge Geography",
+                knowledge_history: "Knowledge History",
+                knowledge_local: "Knowledge Local",
+                knowledge_nature: "Knowledge Nature",
+                knowledge_nobility: "Knowledge Nobility",
+                knowledge_planes: "Knowledge Planes",
+                knowledge_religion: "Knowledge Religion",
+                linguistics: "Linguistics",
+                perception: "Perception",
+                perform_1: "Perform 1",
+                perform_2: "Perform 2",
+                profession_1: "Profession 1",
+                profession_2: "Profession 2",
+                ride: "Ride",
+                sense_motive: "Sense Motive",
+                sleight_of_hand: "Sleight of Hand",
+                spellcraft: "Spellcraft",
+                stealth: "Stealth",
+                survival: "Survival",
+                swim: "Swim",
+                use_magic_device: "Use Magic Device"
+              };
+              for (var key in all_listItem) {
+                if (all_listItem[key].ranks != "") {
+                  contentFound++;
+                  var skillObject = {
+                    name: skillNames[key],
+                    current: all_listItem[key].current
+                  };
+                  foundSkills.push(skillObject);
+                };
+              };
+            },
+            custom: function() {
+              all_listItem.forEach(function(arrayItem) {
+                if (all_listItem.ranks != "") {
+                  contentFound++;
+                  var skillObject = {
+                    name: arrayItem.name,
+                    current: arrayItem.current
+                  };
+                  foundSkills.push(skillObject);
+                };
+              });
+            }
+          };
+          skills[arrayItem.skillType]();
+        });
+        helper.sortObject(foundSkills, "name");
+        if (foundSkills.length > 0) {
+          foundSkills.forEach(function(arrayItem) {
+            var listItem = document.createElement("li");
+            listItem.setAttribute("class", "m-display-list-item");
+            var listItemName = document.createElement("span");
+            listItemName.setAttribute("class", "m-display-list-item-name");
+            listItemName.textContent = arrayItem.name;
+            var listItemValue = document.createElement("span");
+            listItemValue.setAttribute("class", "m-display-list-item-value");
+            listItemValue.textContent = arrayItem.current;
+            listItem.appendChild(listItemName);
+            listItem.appendChild(listItemValue);
+            element.appendChild(listItem);
+          });
+        };
+        if (contentFound > 0) {
+          if (head) {
+            all_element.push(head);
+          };
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      },
+      spells: function(displayObject) {
+        var all_element = [];
+        var element = document.createElement(displayObject.element);
+        element.setAttribute("class", "u-list-unstyled");
+        if (displayObject.classname) {
+          displayObject.classname.forEach(function(arrayItem) {
+            helper.addClass(element, arrayItem);
+          });
+        };
+        var contentFound = 0;
+        displayObject.content.forEach(function(arrayItem, index) {
+          var all_spells = helper.getObject({
+            object: sheet.get(),
+            path: arrayItem.path
+          });
+          if (all_spells.length > 0) {
+            all_spells.forEach(function(arrayItem, index) {
+              contentFound++;
+              var listItem = document.createElement("li");
+              listItem.setAttribute("class", "m-display-list-item-spell");
+              var spell = document.createElement("span");
+              spell.setAttribute("class", "m-display-list-item-spell-name");
+              var spellName = document.createElement("span");
+              spellName.textContent = arrayItem.name;
+              var spellCounters = document.createElement("span");
+              spellCounters.setAttribute("class", "m-display-list-item-spell-count");
+              spell.appendChild(spellName);
+              listItem.appendChild(spell);
+              listItem.appendChild(spellCounters);
+              listItem.setAttribute("data-spell-button-options", "level:#" + displayObject.level + ",index:#" + index);
+              // prepared
+              if (arrayItem.prepared > 0) {
+                // var marks = document.createElement("span");
+                for (var j = 0; j < arrayItem.prepared; j++) {
+                  var preparedIcon = document.createElement("span");
+                  preparedIcon.setAttribute("class", "icon-radio-button-checked");
+                  spellCounters.insertBefore(preparedIcon, spellCounters.firstChild);
+                };
+              };
+              // cast
+              if (arrayItem.cast > 0) {
+                var all_check = spellCounters.querySelectorAll(".icon-radio-button-checked");
+                for (var j = 0; j < arrayItem.cast; j++) {
+                  if (all_check[j]) {
+                    helper.toggleClass(all_check[j], "icon-radio-button-checked");
+                    helper.toggleClass(all_check[j], "icon-radio-button-unchecked");
+                  };
+                };
+              };
+              // active
+              if (arrayItem.active) {
+                var spellActive = document.createElement("span");
+                spellActive.setAttribute("class", "m-display-list-item-spell-active");
+                var activeIcon = document.createElement("span");
+                activeIcon.setAttribute("class", "icon-play-arrow");
+                spellActive.appendChild(activeIcon);
+                spell.insertBefore(spellActive, spell.firstChild);
+              };
+              listItem.addEventListener("click", function() {
+                spells.update(helper.e(".js-spell-block-known-level-" + displayObject.level).querySelectorAll(".js-spell-col")[index].querySelector(".js-spell"), true);
+              }, false);
+              element.appendChild(listItem);
+            });
+          };
+        });
+        if (contentFound > 0) {
+          all_element.push(element);
+        } else {
+          all_element.push(false);
+        };
+        return all_element;
+      }
+    };
+    if (displayObject.type in createElement) {
+      return createElement[displayObject.type](displayObject);
+    } else {
+      return false;
+    };
+  };
+
+  function _render_all_placeholderDisplay() {
+    var all_display = helper.eA(".js-display");
+    all_display.forEach(function(arrayItem) {
+      _render_placeholderDisplay(arrayItem);
+    });
+  };
+
+  function _render_placeholderDisplay(displayElement) {
+    var placeholderDisplay = displayElement.querySelector(".js-placeholder-display");
+    var displayBlock = displayElement.querySelector(".js-display-block");
+    if (displayBlock && placeholderDisplay) {
+      if (displayBlock.hasChildNodes()) {
         helper.addClass(placeholderDisplay, "is-hidden")
       } else {
         helper.removeClass(placeholderDisplay, "is-hidden")
@@ -22694,29 +23839,13 @@ var display = (function() {
     };
   };
 
-  function _get_displayState(options) {
-    var defaultOptions = {
-      all: false
-    };
-    if (options) {
-      defaultOptions = helper.applyOptions(defaultOptions, options);
-    };
-    var fab = helper.e(".js-fab");
-    if (defaultOptions.all) {
-      return (fab.dataset.displayModeAll == "true");
-    } else {
-      return (fab.dataset.displayMode == "true");
-    };
-  };
-
   // exposed methods
   return {
     toggle: toggle,
     bind: bind,
-    update: update,
     render: render,
     clear: clear,
-    state: _get_displayState
+    state: state
   };
 
 })();
@@ -22806,10 +23935,8 @@ var encumbrance = (function() {
     render();
     totalBlock.render();
     textBlock.render();
-    if (display.state()) {
-      display.clear();
-      display.render();
-    };
+    display.clear();
+    display.render();
   };
 
   function store() {
@@ -25186,10 +26313,8 @@ var inputBlock = (function() {
     totalBlock.render();
     textBlock.render();
     sheet.store();
-    if (display.state()) {
-      display.clear();
-      display.render();
-    };
+    display.clear();
+    display.render();
   };
 
   function _focus(element) {
@@ -25594,13 +26719,12 @@ var inputBlock = (function() {
     };
     var modalContent = _render_quickValueModal();
     var modalAction = function() {
-      var defenceSection = helper.e(".js-section-defense");
       _store_data();
       render(inputBlock);
       totalBlock.render();
       textBlock.render();
-      display.clear(defenceSection);
-      display.render(defenceSection);
+      display.clear();
+      display.render();
       sheet.store();
     };
     modal.render({
@@ -25721,7 +26845,6 @@ var inputBlock = (function() {
   };
 
 })();
-
 var inputRangeBlock = (function() {
 
   function _store(input) {
@@ -26209,7 +27332,9 @@ var menu = (function() {
       event.preventDefault();
       display.clear();
       display.render();
-      display.toggle();
+      display.toggle({
+        all: true
+      });
       themeColor.update();
     }, false);
     menuLinkFullscreenMode.addEventListener("click", function(event) {
@@ -30537,6 +31662,45 @@ var repair = (function() {
     return characterObject;
   };
 
+  function _update_520(characterObject) {
+    var _report = {
+      name: characterObject.basics.character.name,
+      repaired: []
+    };
+    // awesome
+    _report.repaired.push("update: awesome version");
+    characterObject.awesomeSheet.version = 5.2;
+    // abilities
+    if (!("string" in characterObject.basics.classes)) {
+      _report.repaired.push("update: classes");
+      var classAndLevel = "";
+      var classes = characterObject.basics.classes.all;
+      if (classes.length > 0) {
+        classes.forEach(function(arrayItem, index) {
+          var classname = arrayItem.classname || "No class";
+          var level = arrayItem.level || "No level";
+          classAndLevel = classAndLevel + classname + " " + level;
+          if (index < (classes.length - 1)) {
+            classAndLevel = classAndLevel + " / ";
+          };
+        });
+      };
+      characterObject.basics.classes.string = classAndLevel;
+    };
+    // consumable
+    if (characterObject.equipment.consumable.all.length > 0) {
+      _report.repaired.push("update: consumable name");
+      characterObject.equipment.consumable.all.forEach(function(arrayItem) {
+        arrayItem.name = arrayItem.item;
+        delete arrayItem.item;
+      });
+    };
+    _log("update complete: 520");
+    _log("report:", _report);
+    _log("-----");
+    return characterObject;
+  };
+
   function _repair(characterObject) {
     // if version is found
     if (typeof characterObject.awesomeSheet == "object" && "version" in characterObject.awesomeSheet) {
@@ -30549,6 +31713,10 @@ var repair = (function() {
         if (characterObject.awesomeSheet.version < 5.1) {
           _log("update: 510");
           characterObject = _update_510(characterObject);
+        };
+        if (characterObject.awesomeSheet.version < 5.2) {
+          _log("update: 520");
+          characterObject = _update_520(characterObject);
         };
       };
     } else {
@@ -30617,10 +31785,8 @@ var selectBlock = (function() {
     sheet.store();
     totalBlock.render();
     textBlock.render();
-    if (display.state()) {
-      display.clear();
-      display.render();
-    };
+    display.clear();
+    display.render();
   };
 
   function _focus(element) {
@@ -30701,7 +31867,6 @@ var selectBlock = (function() {
   };
 
 })();
-
 var sheet = (function() {
 
   var index = (function() {
@@ -30760,15 +31925,20 @@ var sheet = (function() {
 
   function get(options) {
     var defaultOptions = {
-      all: false
+      all: null,
+      index: null
     };
     if (options) {
       defaultOptions = helper.applyOptions(defaultOptions, options);
     };
-    if (defaultOptions.all) {
-      return _all_characters;
+    if (defaultOptions.index != null) {
+      return _all_characters[defaultOptions.index];
     } else {
-      return _all_characters[index.get()];
+      if (defaultOptions.all != null && defaultOptions.all) {
+        return _all_characters;
+      } else {
+        return _all_characters[index.get()];
+      };
     };
   };
 
@@ -30898,10 +32068,10 @@ var sheet = (function() {
   };
 
   function render() {
+    classes.render();
     characterSelect.render();
     stats.render();
     clone.render();
-    classes.render();
     inputBlock.render();
     inputRangeBlock.render();
     selectBlock.render();
@@ -31220,14 +32390,17 @@ var sheet = (function() {
       object: get(),
       path: "basics.character.name"
     });
-    var classLevel = classes.getClassLevel(sheet.get());
+    var classLevel = helper.getObject({
+      object: sheet.get(),
+      path: "basics.classes.string"
+    });
     if (characterName != "") {
       fileName = characterName;
     } else {
       fileName = "New character";
     };
     if (classLevel != "") {
-      fileName = fileName + ", " + classLevel;
+      fileName = fileName + " - " + classLevel;
     };
     prompt.render({
       heading: "Export " + characterName,
@@ -31284,7 +32457,9 @@ var sheet = (function() {
       if (event.ctrlKey && event.altKey && event.keyCode == 68) {
         display.clear();
         display.render();
-        display.toggle();
+        display.toggle({
+          all: true
+        });
         themeColor.update();
       };
       // ctrl+alt+n
@@ -31366,7 +32541,7 @@ var shade = (function() {
       if (defaultOptions.includeHeader) {
         helper.addClass(shade, "m-shade-top");
       };
-      if (display.state({
+      if (display.state.get({
           all: true
         })) {
         helper.addClass(shade, "is-display-mode");
@@ -31428,10 +32603,8 @@ var size = (function() {
     render();
     totalBlock.render();
     textBlock.render();
-    if (display.state()) {
-      display.clear();
-      display.render();
-    };
+    display.clear();
+    display.render();
   };
 
   function render() {
@@ -31484,7 +32657,6 @@ var size = (function() {
   };
 
 })();
-
 var skills = (function() {
 
   var renderTimer = null;
@@ -32470,8 +33642,8 @@ var spells = (function() {
         _store_data(this);
         _update_spellButton(button, true);
         sheet.store();
-        display.clear(helper.e(".js-section-spells"));
-        display.render(helper.e(".js-section-spells"));
+        display.clear();
+        display.render();
       }.bind(modalContent);
 
       modal.render({
@@ -32897,10 +34069,8 @@ var stats = (function() {
     classes.render();
     totalBlock.render();
     textBlock.render();
-    if (display.state()) {
-      display.clear();
-      display.render();
-    };
+    display.clear();
+    display.render();
   };
 
   function bind() {
@@ -33170,10 +34340,8 @@ var textareaBlock = (function() {
     _store(element);
     sheet.store();
     totalBlock.render();
-    if (display.state()) {
-      display.clear();
-      display.render();
-    };
+    display.clear();
+    display.render();
   };
 
   function _focus(element) {
@@ -33265,7 +34433,7 @@ var themeColor = (function() {
 
   function update() {
     var themeMeta = document.getElementsByTagName("meta");
-    if (display.state({
+    if (display.state.get({
         all: true
       })) {
       for (var i = 0; i < themeMeta.length; i++) {
@@ -34128,6 +35296,11 @@ var totalBlock = (function() {
 var update = (function() {
 
   var history = [{
+    version: "5.2.0",
+    list: [
+      "Update Display mode design and module."
+    ]
+  }, {
     version: "5.1.0",
     list: [
       "Added Feats and Traits search."
@@ -34517,5 +35690,9 @@ var wealth = (function() {
   log.render();
   checkUrl.render();
   sheet.load();
+
+  display.toggle({
+    all: true
+  });
 
 })();
