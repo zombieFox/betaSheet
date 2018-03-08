@@ -301,6 +301,15 @@ var display = (function() {
         content: [{
           path: "equipment.item.all",
         }]
+      }, {
+        type: "snippet",
+        element: "p",
+        content: [{
+          path: "equipment.item.weight.current",
+          prefix: "Weight",
+          valueType: "weight",
+          suffix: "lbs"
+        }]
       }],
       encumbrance: [{
         type: "snippet",
@@ -431,14 +440,14 @@ var display = (function() {
         element: "p",
         content: [{
           path: "defense.dr.notes",
-          prefix: "Notes"
+          prefix: "DR Notes"
         }]
       }, {
         type: "block",
         element: "p",
         content: [{
           path: "defense.sr.notes",
-          prefix: "Notes"
+          prefix: "SR Notes"
         }]
       }, {
         type: "block",
@@ -1860,7 +1869,7 @@ var display = (function() {
                   contentFound++;
                   var skillObject = {
                     name: skillNames[key],
-                    current: all_listItem[key].current
+                    current: dataFormat.bonus(all_listItem[key].current)
                   };
                   foundSkills.push(skillObject);
                 };
@@ -1872,7 +1881,7 @@ var display = (function() {
                   contentFound++;
                   var skillObject = {
                     name: arrayItem.name,
-                    current: arrayItem.current
+                    current: dataFormat.bonus(arrayItem.current)
                   };
                   foundSkills.push(skillObject);
                 };
@@ -1891,6 +1900,7 @@ var display = (function() {
             listItemName.textContent = arrayItem.name;
             var listItemValue = document.createElement("span");
             listItemValue.setAttribute("class", "m-display-list-item-value");
+            var value = arrayItem.current
             listItemValue.textContent = arrayItem.current;
             listItem.appendChild(listItemName);
             listItem.appendChild(listItemValue);

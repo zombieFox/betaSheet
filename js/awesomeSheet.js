@@ -22216,6 +22216,15 @@ var display = (function() {
         content: [{
           path: "equipment.item.all",
         }]
+      }, {
+        type: "snippet",
+        element: "p",
+        content: [{
+          path: "equipment.item.weight.current",
+          prefix: "Weight",
+          valueType: "weight",
+          suffix: "lbs"
+        }]
       }],
       encumbrance: [{
         type: "snippet",
@@ -22308,7 +22317,12 @@ var display = (function() {
         }, {
           path: "defense.sr.current",
           prefix: "SR"
-        }, {
+        }]
+      }],
+      saves: [{
+        type: "snippet",
+        element: "h1",
+        content: [{
           path: "defense.saves.fortitude.current",
           prefix: "Fortitude",
           valueType: "bonus"
