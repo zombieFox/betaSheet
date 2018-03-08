@@ -2163,14 +2163,11 @@ label {
     margin: 0;
     display: block;
     -webkit-columns: 10em 2;
-       -moz-columns: 10em 2;
             columns: 10em 2;
     -webkit-column-gap: 2em;
-       -moz-column-gap: 2em;
             column-gap: 2em; }
     .l-section-wrapper > * {
       -webkit-column-break-inside: avoid;
-         page-break-inside: avoid;
               break-inside: avoid; }
   .l-section {
     margin: 0 0 1em;
@@ -6507,7 +6504,7 @@ label {
 .m-display-prefix,
 .m-display-suffix {
   font-size: 0.75em;
-  font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif; }
+  font-family: "Open Sans Italic", Helvetica, Arial, sans-serif; }
   .m-display-prefix:not(:last-child):not(:last-child),
   .m-display-suffix:not(:last-child):not(:last-child) {
     margin-bottom: 0; }
@@ -6652,7 +6649,7 @@ h3 .m-display-value {
 
 .m-display-stat {
   color: #ca0035;
-  font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif; }
+  font-family: "Open Sans Semi Bold", Helvetica, Arial, sans-serif; }
 
 .m-display-stat-name {
   margin-right: 0.5em; }
@@ -6703,7 +6700,7 @@ h3 .m-display-value {
     [class^="m-display-list"] .m-display-list-item .m-display-list-item-prefix,
     [class^="m-display-list"] .m-display-list-item .m-display-list-item-suffix {
       font-size: 0.75em;
-      font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif; }
+      font-family: "Open Sans Italic", Helvetica, Arial, sans-serif; }
     [class*="m-display-list"] .m-display-list-item .m-display-list-item-prefix,
     [class^="m-display-list"] .m-display-list-item .m-display-list-item-prefix {
       color: #ca0035; }
@@ -6913,7 +6910,7 @@ h3 .m-display-value {
   .m-display-list-item-attack-weapon .m-display-list-item-attack-prefix {
     margin: 0;
     font-size: 0.75em;
-    font-family: "Open Sans Semi Bold Italic", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans Italic", Helvetica, Arial, sans-serif;
     color: #ca0035;
     display: inline-block; }
   .m-display-list-item-attack-ammo .m-display-list-item-attack-value,
