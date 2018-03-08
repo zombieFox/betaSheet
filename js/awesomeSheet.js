@@ -21931,17 +21931,12 @@ var display = (function() {
           color: "basics.image.color"
         }]
       }, {
-        wrapper: ["m-display-intro-name"],
+        wrapper: ["m-display-intro-name-class"],
         type: "snippet",
         element: "h1",
         content: [{
           path: "basics.character.name"
-        }]
-      }, {
-        wrapper: ["m-display-intro-class"],
-        type: "snippet",
-        element: "p",
-        content: [{
+        }, {
           path: "basics.classes.string"
         }]
       }],
@@ -23941,7 +23936,6 @@ var display = (function() {
   };
 
 })();
-
 var edit = (function() {
 
   function scroll() {

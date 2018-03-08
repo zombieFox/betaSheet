@@ -1151,7 +1151,7 @@ h1 {
 
 h2 {
   font-size: 1.5em;
-  font-family: "Open Sans Regular", Helvetica, Arial, sans-serif; }
+  font-family: "Open Sans Light", Helvetica, Arial, sans-serif; }
   h2:not(:only-child):not(:last-child) {
     margin-bottom: 0.5em; }
 
@@ -7056,32 +7056,21 @@ h3 .m-display-value {
 
 @media (min-width: 700px) {
   .m-display-intro {
-    display: grid;
-    grid-template-columns: 16em 2fr;
-    grid-template-rows: 8em 8em; }
-    .m-display-intro .m-display-intro-image {
-      grid-row-start: 1;
-      grid-row-end: 9;
-      grid-column-start: 1;
-      grid-column-end: 2; }
-    .m-display-intro .m-display-intro-name {
-      grid-row-start: 1;
-      grid-row-end: 2;
-      grid-column-start: 2;
-      grid-column-end: 3;
-      -webkit-align-self: end;
-          -ms-flex-item-align: end;
-              align-self: end; }
-    .m-display-intro .m-display-intro-class {
-      grid-row-start: 2;
-      grid-row-end: 3;
-      grid-column-start: 2;
-      grid-column-end: 3;
-      -webkit-align-self: start;
-          -ms-flex-item-align: start;
-              align-self: start; }
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative; }
   .m-display-image-wrapper {
-    margin: 0 1em 0 -4em;
+    margin: 0 2em 0 -4em;
     width: 16em;
     height: 16em;
     min-width: 16em;
