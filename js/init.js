@@ -13,6 +13,6 @@
 
   display.toggle({
     all: true
-  });
+  })
 
 })();
