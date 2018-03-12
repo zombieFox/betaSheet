@@ -122,7 +122,7 @@ var display = (function() {
         }, {
           type: "block",
           element: {
-            node: "p"
+            node: "div"
           },
           contentItems: [{
             path: "basics.character.description",
@@ -188,7 +188,9 @@ var display = (function() {
           },
           contentItems: [{
             path: "statistics.abilities.all",
-            listItemKey: "name"
+            listItemKey: "name",
+            pillLink: true,
+            pillType: "abilities"
           }],
         }, {
           type: "block",
@@ -211,7 +213,9 @@ var display = (function() {
           },
           contentItems: [{
             path: "statistics.feats.all",
-            listItemKey: "name"
+            listItemKey: "name",
+            pillLink: true,
+            pillType: "feats"
           }],
         }, {
           type: "block",
@@ -234,7 +238,9 @@ var display = (function() {
           },
           contentItems: [{
             path: "statistics.traits.all",
-            listItemKey: "name"
+            listItemKey: "name",
+            pillLink: true,
+            pillType: "traits"
           }],
         }, {
           type: "block",
@@ -257,7 +263,9 @@ var display = (function() {
           },
           contentItems: [{
             path: "statistics.languages.all",
-            listItemKey: "name"
+            listItemKey: "name",
+            pillLink: true,
+            pillType: "languages"
           }],
         }, {
           type: "block",
@@ -362,32 +370,35 @@ var display = (function() {
             classname: ["u-list-unstyled", "m-display-list-responsive", "m-display-list-stack"]
           },
           contentItems: [{
-            path: "equipment.body_slots.belts",
-            prefix: "Belts"
-          }, {
-            path: "equipment.body_slots.body",
-            prefix: "Body"
-          }, {
-            path: "equipment.body_slots.chest",
-            prefix: "Chest"
-          }, {
-            path: "equipment.body_slots.eyes",
-            prefix: "Eyes"
-          }, {
-            path: "equipment.body_slots.feet",
-            prefix: "Feet"
-          }, {
-            path: "equipment.body_slots.hands",
-            prefix: "Hands"
-          }, {
             path: "equipment.body_slots.head",
             prefix: "Head"
           }, {
             path: "equipment.body_slots.headband",
             prefix: "Headband"
           }, {
+            path: "equipment.body_slots.eyes",
+            prefix: "Eyes"
+          }, {
+            path: "equipment.body_slots.shoulders",
+            prefix: "Shoulders"
+          }, {
             path: "equipment.body_slots.neck",
             prefix: "Neck"
+          }, {
+            path: "equipment.body_slots.chest",
+            prefix: "Chest"
+          }, {
+            path: "equipment.body_slots.body",
+            prefix: "Body"
+          }, {
+            path: "equipment.body_slots.belts",
+            prefix: "Belts"
+          }, {
+            path: "equipment.body_slots.wrist",
+            prefix: "Wrist"
+          }, {
+            path: "equipment.body_slots.hands",
+            prefix: "Hands"
           }, {
             path: "equipment.body_slots.ring_left_hand",
             prefix: "Ring (Left Hand)"
@@ -395,11 +406,8 @@ var display = (function() {
             path: "equipment.body_slots.ring_right_hand",
             prefix: "Ring (Right Hand)"
           }, {
-            path: "equipment.body_slots.shoulders",
-            prefix: "Shoulders"
-          }, {
-            path: "equipment.body_slots.wrist",
-            prefix: "Wrist"
+            path: "equipment.body_slots.feet",
+            prefix: "Feet"
           }]
         }]
       },
@@ -737,6 +745,15 @@ var display = (function() {
           }, {
             path: "spells.stats.bloodline",
             prefix: "Bloodline"
+          }]
+        }, {
+          type: "block",
+          element: {
+            node: "div"
+          },
+          contentItems: [{
+            path: "spells.stats.notes",
+            prefix: "Notes"
           }]
         }]
       },
@@ -1703,9 +1720,12 @@ var display = (function() {
             object: sheet.get(),
             path: arrayItem.path
           });
+          if ("pillLink" in arrayItem) {
+            var pillLink = arrayItem.pillType;
+          };
           var dataKey = arrayItem.listItemKey;
           if (all_listItem.length > 0) {
-            all_listItem.forEach(function(arrayItem) {
+            all_listItem.forEach(function(arrayItem, index) {
               contentFound++;
               var listItem = document.createElement("li");
               listItem.setAttribute("class", "m-display-list-item");
@@ -1713,6 +1733,12 @@ var display = (function() {
               listItemName.setAttribute("class", "m-display-list-item-name");
               listItemName.textContent = arrayItem[dataKey];
               listItem.appendChild(listItemName);
+              if (pillLink) {
+                helper.addClass(listItem, "m-display-list-item-link")
+                listItem.addEventListener("click", function() {
+                  pill.update(helper.e(".js-pill-block-area-" + pillLink).querySelectorAll(".js-pill-item")[index]);
+                }, false);
+              };
               element.appendChild(listItem);
             });
           };
