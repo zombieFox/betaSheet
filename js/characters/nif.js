@@ -169,7 +169,7 @@ var nif = (function() {
           index: false
         }, {
           name: "Dimensional Steps",
-          note: "(Sp<span style=\"font-size: 1em;\">) At 8th level, you can use this ability to teleport up to 30 feet per wizard level per day as a standard action. This teleportation must be used in 5-foot increments and such movement does not provoke an attack of opportunity. You can bring other willing creatures with you, but you must expend an equal amount of distance for each additional creature brought with you.</span>",
+          note: "(Sp) At 8th level, you can use this ability to teleport up to 30 feet per wizard level per day as a standard action. This teleportation must be used in 5-foot increments and such movement does not provoke an attack of opportunity. You can bring other willing creatures with you, but you must expend an equal amount of distance for each additional creature brought with you.",
           index: false
         }, {
           name: "Elven Immunities",
@@ -363,48 +363,59 @@ var nif = (function() {
       item: {
         all: [{
           name: "Flask of Oil",
-          quantity: 5,
-          weight: 5
+          quantity: 2,
+          weight: 1,
+          value: 0.1
         }, {
           name: "Sack",
           quantity: 1,
-          weight: 0.5
+          weight: 0.5,
+          value: 0.1
         }, {
           name: "Waterskin",
           quantity: 1,
-          weight: 4
+          weight: 4,
+          value: 1
         }, {
           name: "Bedroll",
           quantity: 1,
-          weight: 5
+          weight: 5,
+          value: 0.6
         }, {
           name: "Blanket",
           quantity: 1,
-          weight: 3
+          weight: 3,
+          value: 1
         }, {
           name: "Bloodblock",
           quantity: 2,
-          weight: 2
+          weight: "",
+          value: 25
         }, {
           name: "Healer's Kit",
           quantity: 2,
-          weight: 2
+          weight: 1,
+          value: 50
         }, {
-          name: "Rope (silk)",
+          name: "Silk Rope (50ft)",
           quantity: 1,
-          weight: 5
+          weight: 5,
+          value: 10
         }, {
           name: "Mirror",
           quantity: 1,
-          weight: 0.5
+          weight: 0.5,
+          value: 10
         }, {
           name: "Compass",
           quantity: 1,
-          weight: 1
+          weight: 0.5,
+          value: 10
         }, {
           name: "Andorak spell book",
           quantity: 1,
-          weight: 0.5
+          weight: 0.5,
+          value: ""
         }],
         weight: {
           current: ""
@@ -1617,7 +1628,7 @@ var nif = (function() {
         opposition: "Enchantment, Necromancy",
         domains: "",
         bloodline: "",
-        notes: "Conjuration spells +2 DC.<br>+2 on caster level checks to overcome spell resistance."
+        notes: "+2 DC for Conjuration spells.<br>+2 on caster level checks to overcome spell resistance."
       },
       book: {
         level_0: {
@@ -2382,9 +2393,9 @@ var nif = (function() {
     notes: {
       character: {
         all: [{
-          note: "Spells to find:<br>Scorching Ray<br>Lightning Bolt"
+          note: "Spells to find: Scorching Ray, Lightning Bolt"
         }, {
-          note: "Headband of Vast Intelligence.<br>Skills: Use Magic Device, Fly.<br>Languages: Dwarven, Giant, Undercommon."
+          note: "Headband of Vast Intelligence.<br>Skills: Use Magic Device, Fly<br>Languages: Dwarven, Giant, Undercommon"
         }]
       },
       story: {

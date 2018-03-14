@@ -120,12 +120,12 @@ var helper = (function() {
         var key = "\"" + kevValuePair[0] + "\"";
         var value;
         // if the value has + with a space after it
-        if (/\+/.test(kevValuePair[1])) {
+        if (/\+(?=\S)/.test(kevValuePair[1])) {
           // remove first + symbol
           kevValuePair[1] = kevValuePair[1].substr(1, kevValuePair[1].length);
           // split the would be values
           // split on character if not followed by a space
-          var all_value = kevValuePair[1].split(/\+/);
+          var all_value = kevValuePair[1].split(/\+(?=\S)/);
           // if there are multiple values make an array
           value = "["
           for (var q = 0; q < all_value.length; q++) {
@@ -956,7 +956,8 @@ var blank = (function() {
           will: "",
           ranks: "",
           bab: ""
-        }]
+        }],
+        string: ""
       },
       experience: {
         level: "",
@@ -1193,7 +1194,8 @@ var blank = (function() {
             shield: true,
             deflect: true,
             natural: true,
-            size_base: true
+            size_base: true,
+            dodge: false
           }
         },
         touch: {
@@ -1211,7 +1213,10 @@ var blank = (function() {
             deflect: true,
             dodge: true,
             size_base: true,
-            max_dex: true
+            max_dex: true,
+            armor: false,
+            shield: false,
+            natural: false
           }
         },
         stats: {
@@ -1418,13 +1423,13 @@ var blank = (function() {
         }
       },
       attack: {
-        notes: "",
         melee: {
           all: []
         },
         ranged: {
           all: []
-        }
+        },
+        notes: ""
       }
     },
     skills: {
@@ -2913,8 +2918,8 @@ var izlara = (function() {
         all: [{
           name: "Flask of Oil",
           quantity: 4,
-          weight: 4,
-          value: 0.4
+          weight: 1,
+          value: 0.1
         }, {
           name: "Sack",
           quantity: 1,
@@ -2933,13 +2938,13 @@ var izlara = (function() {
         }, {
           name: "Bloodblock",
           quantity: 2,
-          weight: 2,
-          value: 50
+          weight: 1,
+          value: 25
         }, {
           name: "Healer's Kit",
           quantity: 2,
-          weight: 2,
-          value: 100
+          weight: 1,
+          value: 50
         }, {
           name: "Silk Rope (50ft)",
           quantity: 1,
@@ -5969,8 +5974,8 @@ var ravich = (function() {
         all: [{
           name: "Flask of Oil",
           quantity: 2,
-          weight: 2,
-          value: 0.2
+          weight: 1,
+          value: 0.1
         }, {
           name: "Waterskin",
           quantity: 1,
@@ -11424,7 +11429,7 @@ var nif = (function() {
           index: false
         }, {
           name: "Dimensional Steps",
-          note: "(Sp<span style=\"font-size: 1em;\">) At 8th level, you can use this ability to teleport up to 30 feet per wizard level per day as a standard action. This teleportation must be used in 5-foot increments and such movement does not provoke an attack of opportunity. You can bring other willing creatures with you, but you must expend an equal amount of distance for each additional creature brought with you.</span>",
+          note: "(Sp) At 8th level, you can use this ability to teleport up to 30 feet per wizard level per day as a standard action. This teleportation must be used in 5-foot increments and such movement does not provoke an attack of opportunity. You can bring other willing creatures with you, but you must expend an equal amount of distance for each additional creature brought with you.",
           index: false
         }, {
           name: "Elven Immunities",
@@ -11618,48 +11623,59 @@ var nif = (function() {
       item: {
         all: [{
           name: "Flask of Oil",
-          quantity: 5,
-          weight: 5
+          quantity: 2,
+          weight: 1,
+          value: 0.1
         }, {
           name: "Sack",
           quantity: 1,
-          weight: 0.5
+          weight: 0.5,
+          value: 0.1
         }, {
           name: "Waterskin",
           quantity: 1,
-          weight: 4
+          weight: 4,
+          value: 1
         }, {
           name: "Bedroll",
           quantity: 1,
-          weight: 5
+          weight: 5,
+          value: 0.6
         }, {
           name: "Blanket",
           quantity: 1,
-          weight: 3
+          weight: 3,
+          value: 1
         }, {
           name: "Bloodblock",
           quantity: 2,
-          weight: 2
+          weight: "",
+          value: 25
         }, {
           name: "Healer's Kit",
           quantity: 2,
-          weight: 2
+          weight: 1,
+          value: 50
         }, {
-          name: "Rope (silk)",
+          name: "Silk Rope (50ft)",
           quantity: 1,
-          weight: 5
+          weight: 5,
+          value: 10
         }, {
           name: "Mirror",
           quantity: 1,
-          weight: 0.5
+          weight: 0.5,
+          value: 10
         }, {
           name: "Compass",
           quantity: 1,
-          weight: 1
+          weight: 0.5,
+          value: 10
         }, {
           name: "Andorak spell book",
           quantity: 1,
-          weight: 0.5
+          weight: 0.5,
+          value: ""
         }],
         weight: {
           current: ""
@@ -12872,7 +12888,7 @@ var nif = (function() {
         opposition: "Enchantment, Necromancy",
         domains: "",
         bloodline: "",
-        notes: "Conjuration spells +2 DC.<br>+2 on caster level checks to overcome spell resistance."
+        notes: "+2 DC for Conjuration spells.<br>+2 on caster level checks to overcome spell resistance."
       },
       book: {
         level_0: {
@@ -13637,9 +13653,9 @@ var nif = (function() {
     notes: {
       character: {
         all: [{
-          note: "Spells to find:<br>Scorching Ray<br>Lightning Bolt"
+          note: "Spells to find: Scorching Ray, Lightning Bolt"
         }, {
-          note: "Headband of Vast Intelligence.<br>Skills: Use Magic Device, Fly.<br>Languages: Dwarven, Giant, Undercommon."
+          note: "Headband of Vast Intelligence.<br>Skills: Use Magic Device, Fly<br>Languages: Dwarven, Giant, Undercommon"
         }]
       },
       story: {
@@ -14312,8 +14328,10 @@ var orrin = (function() {
     },
     offense: {
       stats: {
-        base_attack: 9,
-        base_attack_bonuses: "+9 / +4",
+        base_attack: {
+          bonus: 9,
+          string: "+9 / +4",
+        },
         melee: {
           misc: "",
           temp: "",
@@ -19321,6 +19339,7 @@ var vos = (function() {
 var hardCodedCharacters = (function() {
 
   var demoCharacters = [
+    blank.data,
     izlara.data,
     ravich.data
   ];
@@ -20179,6 +20198,13 @@ var characterSelect = (function() {
       path: "basics.classes.string"
     });
 
+    if (characterObject.awesomeSheet.demo) {
+      var demoSpan = document.createElement("span");
+      demoSpan.setAttribute("class", "m-character-select-list-item-demo");
+      demoSpan.textContent = "Demo";
+      detailsSpan.appendChild(demoSpan);
+    };
+
     // build module
     detailsSpan.appendChild(nameSpan);
     detailsSpan.appendChild(classLevelSpan);
@@ -20769,11 +20795,6 @@ var clone = (function() {
         '        </div>' +
         '      </div>' +
         '      <div class="m-edit-box-item-medium">' +
-        '        <div class="m-input-block js-input-block" data-input-block-options="path:equipment.item.all[' + cloneIndex + ']quantity,type:integer,clone:true">' +
-        '          <input id="item-quantity-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
-        '        </div>' +
-        '      </div>' +
-        '      <div class="m-edit-box-item-medium">' +
         '        <div class="m-input-block js-input-block" data-input-block-options="path:equipment.item.all[' + cloneIndex + ']weight,type:float,clone:true">' +
         '          <input id="item-weight-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '        </div>' +
@@ -20781,6 +20802,11 @@ var clone = (function() {
         '      <div class="m-edit-box-item-medium">' +
         '        <div class="m-input-block js-input-block" data-input-block-options="path:equipment.item.all[' + cloneIndex + ']value,type:float,clone:true">' +
         '          <input id="item-value-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
+        '        </div>' +
+        '      </div>' +
+        '      <div class="m-edit-box-item-medium">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:equipment.item.all[' + cloneIndex + ']quantity,type:integer,clone:true">' +
+        '          <input id="item-quantity-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
         '    </div>' +
@@ -21847,6 +21873,79 @@ var clone = (function() {
   return {
     bind: bind,
     clear: clear,
+    render: render
+  };
+
+})();
+
+var demo = (function() {
+
+  var _demoState = (function() {
+    var demoState = false;
+    var get = function(state) {
+      return demoState;
+    };
+    var set = function(state) {
+      demoState = state;
+    };
+    // exposed methods
+    return {
+      set: set,
+      get: get
+    };
+  })();
+
+  function _createDemoNotice() {
+    var section = document.createElement("div");
+    section.setAttribute("class", "l-section m-demo js-demo");
+    var card = document.createElement("div");
+    card.setAttribute("class", "m-card");
+    var cardBody = document.createElement("div");
+    cardBody.setAttribute("class", "m-card-body");
+    var demo = document.createElement("div");
+    var heading = document.createElement("h1");
+    heading.setAttribute("class", "m-demo-heading");
+    heading.textContent = "Demo character";
+    var description = document.createElement("p");
+    description.setAttribute("class", "m-demo-description");
+    description.innerHTML = "A <strong>Demo Character</strong> for you to explore. To get started with your own, use the <strong>Character Select</strong> menu or:";
+    var addButton = document.createElement("button");
+    addButton.setAttribute("class", "m-demo-add-new-character button");
+    addButton.textContent = "Add new character";
+    addButton.addEventListener("click", function() {
+      sheet.add();
+    }, false);
+    demo.appendChild(heading);
+    demo.appendChild(description);
+    demo.appendChild(addButton);
+    cardBody.appendChild(demo);
+    card.appendChild(cardBody);
+    section.appendChild(card);
+    return section;
+  };
+
+  function render() {
+    var sectionWrapper = helper.e(".js-section-wrapper");
+    var demoSection = helper.e(".js-demo");
+    var demo = helper.getObject({
+      object: sheet.get(),
+      path: "awesomeSheet.demo"
+    });
+    if (demo) {
+      if (!_demoState.get()) {
+        sectionWrapper.insertBefore(_createDemoNotice(), sectionWrapper.firstChild);
+        _demoState.set(true);
+      };
+    } else {
+      if (_demoState.get()) {
+        demoSection.remove();
+        _demoState.set(false);
+      };
+    };
+  };
+
+  // exposed methods
+  return {
     render: render
   };
 
@@ -23735,6 +23834,7 @@ var display = (function() {
 
   function _toggle_chrome() {
     var header = helper.e(".js-header");
+    var demo = helper.e(".js-demo");
     var nav = helper.e(".js-nav");
     var menuElement = helper.e(".js-menu");
     var menuItem = helper.e(".js-menu-link-display-mode");
@@ -23755,6 +23855,9 @@ var display = (function() {
       helper.addClass(menuElement, "is-display-mode");
       helper.addClass(header, "is-display-mode");
       helper.addClass(characterSelect, "is-display-mode");
+      if (demo) {
+        helper.addClass(demo, "is-display-mode");
+      };
       if (shade) {
         helper.addClass(shade, "is-display-mode");
       };
@@ -23772,6 +23875,9 @@ var display = (function() {
       helper.removeClass(menuElement, "is-display-mode");
       helper.removeClass(header, "is-display-mode");
       helper.removeClass(characterSelect, "is-display-mode");
+      if (demo) {
+        helper.removeClass(demo, "is-display-mode");
+      };
       if (shade) {
         helper.removeClass(shade, "is-display-mode");
       };
@@ -28605,45 +28711,21 @@ var onboarding = (function() {
   };
 
   function render() {
-    if (helper.getObject({
-        object: sheet.get(),
-        path: "awesomeSheet.demo"
-      }) && (helper.read("onboarding") == undefined) || (helper.read("onboarding") == "false")) {
+    if ((helper.read("onboarding") == undefined) || (helper.read("onboarding") == "false")) {
 
       var _render_onboardingModal = function() {
         var onboardingModal = document.createElement("div");
         onboardingModal.setAttribute("class", "m-onboarding");
 
         var para1 = document.createElement("p");
-        var para1Text1 = document.createElement("span");
-        para1Text1.textContent = "Some advice before the next adventure -- ";
-        var strong1 = document.createElement("strong");
-        strong1.setAttribute("class", "m-onboarding-bold");
-        strong1.textContent = "awesomeSheet comes prepared with two example Heros. ";
-        var para1Text2 = document.createElement("span");
-        para1Text2.textContent = "Have a look around and learn what's possible. When you're ready, delete them and make your own.";
-        para1.appendChild(para1Text1);
-        para1.appendChild(strong1);
-        para1.appendChild(para1Text2);
+        para1.innerHTML = "Some advice before the next adventure -- <strong>awesomeSheet</strong> comes prepared with two Demo Characters found in the <strong>Character Select</strong> menu.";
 
         var para2 = document.createElement("p");
-        para2.textContent = "Calistria keeps all knowledge entered here safe with the power of her \"Cache-of-the-Browser\" spell, so be wary not to fall foul of her trickery by clearing the cache and losing your Heros.";
-
-        var strong2 = document.createElement("strong");
-        strong2.setAttribute("class", "m-onboarding-bold");
-        strong2.textContent = "Export";
-        var para3 = document.createElement("p");
-        var para3Text1 = document.createElement("span");
-        var para3Text2 = document.createElement("span");
-        para3Text1.textContent = "Be sure to cast \"Bigby's ";
-        para3Text2.textContent = "\" every now and then to backup your Heros.";
-        para3.appendChild(para3Text1);
-        para3.appendChild(strong2);
-        para3.appendChild(para3Text2);
+        para2.innerHTML = "This webapp saves all information in the local cache. Be sure to <strong>Export and backup</strong> every now and then.";
 
         onboardingModal.appendChild(para1);
         onboardingModal.appendChild(para2);
-        onboardingModal.appendChild(para3);
+
         return onboardingModal;
       };
 
@@ -29057,7 +29139,7 @@ var pill = (function() {
         path: pillBlockOptions.path + "[" + options.index + "]"
       })));
       var snackMessage = {
-        abilities: "Abilities " + helper.truncate(pillObject.name, 40, true) + " removed.",
+        abilities: "Ability " + helper.truncate(pillObject.name, 40, true) + " removed.",
         feats: "Feat " + helper.truncate(pillObject.name, 40, true) + " removed.",
         traits: "Trait " + helper.truncate(pillObject.name, 40, true) + " removed.",
         languages: "Language " + helper.truncate(pillObject.name, 40, true) + " removed."
@@ -29260,7 +29342,7 @@ var pill = (function() {
         };
 
         pillControl.appendChild(_create_editBox({
-          title: snackTitle[pillBlockOptions.type],
+          title: "Notes",
           guides: true,
           boxSize: "m-edit-box-item-max",
           content: [noteTextarea]
@@ -32774,10 +32856,10 @@ var sheet = (function() {
     if (helper.read("allCharacters")) {
       _all_characters = JSON.parse(helper.read("allCharacters"));
     } else {
-      // load demo characters
       _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
-      // load blank character
-      // _all_characters = JSON.parse(JSON.stringify([blank.data]));
+      var newBlank = JSON.parse(JSON.stringify(blank.data));
+      newBlank.awesomeSheet.version = update.version();
+      _all_characters.unshift(newBlank);
     };
     _all_characters.forEach(function(item, index, array) {
       array[index] = repair.render({
@@ -32858,7 +32940,7 @@ var sheet = (function() {
     };
     var name = helper.getObject({
       object: get(),
-      path: "basics.name"
+      path: "basics.character.name"
     });
     if (name == "" || name == undefined) {
       name = "New character";
@@ -32900,6 +32982,7 @@ var sheet = (function() {
     snack.destroy();
     _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
     _all_characters.forEach(function(item, index, array) {
+      item.awesomeSheet.version = update.version();
       array[index] = repair.render({
         object: item,
         debug: true
@@ -32958,6 +33041,7 @@ var sheet = (function() {
     characterImage.render();
     pill.render();
     display.render();
+    demo.render();
   };
 
   function clear() {
@@ -33044,7 +33128,7 @@ var sheet = (function() {
     //   object: get(),
     //   path: "basics.character.name"
     // });
-    var name = get().basics.name || get().basics.character.name || "New character";
+    var name = get().basics.character.name || "New character";
     modal.render({
       heading: "Replace " + name,
       content: _importJsonModal({
@@ -33134,14 +33218,7 @@ var sheet = (function() {
             object: data,
             debug: true
           }));
-          var name = get().basics.name || get().basics.character.name || "New character";
-          // var name = helper.getObject({
-          //   object: get(),
-          //   path: basics.name
-          // }) || helper.getObject({
-          //   object: get(),
-          //   path: basics.character.name
-          // }) || "New character";
+          var name = get().basics.character.name || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " imported and back in the game."
           });
@@ -33178,14 +33255,7 @@ var sheet = (function() {
             object: data,
             debug: true
           }));
-          var name = get().basics.name || get().basics.character.name || "New character";
-          // var name = helper.getObject({
-          //   object: get(),
-          //   path: basics.name
-          // }) || helper.getObject({
-          //   object: get(),
-          //   path: basics.character.name
-          // }) || "New character";
+          var name = get().basics.character.name || "New character";
           snack.render({
             message: helper.truncate(name, 40, true) + " replaced and back in the game."
           });
@@ -33963,7 +34033,7 @@ var spells = (function() {
         }).splice(options.index, 1);
         // snack with undo option
         snack.render({
-          message: helper.truncate(spellObject.name, 40, true) + " removed.",
+          message: "Spell " + helper.truncate(spellObject.name, 40, true) + " removed.",
           button: "Undo",
           action: _restore_lastRemovedSpell,
           destroyDelay: 8000
@@ -35579,34 +35649,47 @@ var totalBlock = (function() {
       };
       return classSkill;
     };
-    var _push_internalValues = function(array, addOrMinus) {
-      if (array) {
-        if (options.cloneSet) {
-          for (var i = 0; i < totalBlockObject.length; i++) {
-            for (var q = 0; q < array.length; q++) {
-              if (totalBlockObject[i][array[q]] && totalBlockObject[i][array[q]] != "" && !isNaN(totalBlockObject[i][array[q]])) {
-                if (addOrMinus == "add") {
-                  toSum.push(totalBlockObject[i][array[q]]);
-                } else if (addOrMinus == "minus") {
-                  toSum.push(-totalBlockObject[i][array[q]]);
-                };
+    var _push_internalValues = function(array, addOrMinus, multiply) {
+
+      var _push_cloneSetValues = function() {
+        for (var i = 0; i < totalBlockObject.length; i++) {
+          for (var q = 0; q < array.length; q++) {
+            if (totalBlockObject[i][array[q]] && totalBlockObject[i][array[q]] != "" && !isNaN(totalBlockObject[i][array[q]])) {
+              var valueToPush = totalBlockObject[i][array[q]];
+              if (multiply != undefined) {
+                valueToPush = valueToPush * totalBlockObject[i][multiply];
               };
-            };
-          };
-        } else {
-          if (array && array.length > 0) {
-            for (var i = 0; i < array.length; i++) {
-              if (totalBlockObject[array[i]] && totalBlockObject[array[i]] != "" && !isNaN(totalBlockObject[array[i]])) {
-                if (addOrMinus == "add") {
-                  toSum.push(totalBlockObject[array[i]]);
-                } else if (addOrMinus == "minus") {
-                  toSum.push(-totalBlockObject[array[i]]);
-                };
+              if (addOrMinus == "minus") {
+                valueToPush = -valueToPush;
               };
+              toSum.push(valueToPush);
             };
           };
         };
       };
+
+      var _push_values = function() {
+        if (array && array.length > 0) {
+          for (var i = 0; i < array.length; i++) {
+            if (totalBlockObject[array[i]] && totalBlockObject[array[i]] != "" && !isNaN(totalBlockObject[array[i]])) {
+              var valueToPush = totalBlockObject[array[i]];
+              if (addOrMinus == "minus") {
+                valueToPush = -valueToPush;
+              };
+              toSum.push(valueToPush);
+            };
+          };
+        };
+      };
+
+      if (array) {
+        if (options.cloneSet) {
+          _push_cloneSetValues();
+        } else {
+          _push_values();
+        };
+      };
+
     };
     var _push_externalValues = function() {
       // loop over bonuses in totalBlockObject
@@ -35782,10 +35865,10 @@ var totalBlock = (function() {
     };
     _get_totalBlockObject();
     _update_missingBonusKey();
-    _push_internalValues(options.addition, "add");
-    _push_internalValues(options.subtraction, "minus");
+    _push_internalValues(options.addition, "add", options.multiply);
+    _push_internalValues(options.subtraction, "minus", options.multiply);
     _push_externalValues();
-    _render_allCheck()
+    _render_allCheck();
     var grandTotal = _reduceSum(toSum);
     // console.log(options.path, toSum, grandTotal);
     _store(grandTotal);
@@ -36169,14 +36252,16 @@ var totalBlock = (function() {
 var update = (function() {
 
   var history = [{
+    version: "5.3.0",
+    list: [
+      "*Update Equipment Items. You may need to review Item quantities.",
+    ]
+  },{
     version: "5.2.0",
     list: [
-      "Update Display mode design and module."
-    ]
-  }, {
-    version: "5.1.0",
-    list: [
-      "Added Feats and Traits search."
+      "Update Display mode design and module.",
+      "*Newly added Feats Traits and Languages will have descriptions.",
+      "Added notes for Abilities."
     ]
   }, {
     version: "5.0.0",

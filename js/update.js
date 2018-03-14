@@ -1,14 +1,16 @@
 var update = (function() {
 
   var history = [{
+    version: "5.3.0",
+    list: [
+      "*Update Equipment Items. You may need to review Item quantities.",
+    ]
+  },{
     version: "5.2.0",
     list: [
-      "Update Display mode design and module."
-    ]
-  }, {
-    version: "5.1.0",
-    list: [
-      "Added Feats and Traits search."
+      "Update Display mode design and module.",
+      "*Newly added Feats Traits and Languages will have descriptions.",
+      "Added notes for Abilities."
     ]
   }, {
     version: "5.0.0",
