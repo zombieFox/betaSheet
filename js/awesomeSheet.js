@@ -20819,7 +20819,7 @@ var clone = (function() {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box m-edit-box-indent m-edit-box-head-small m-edit-box-labels js-total-block" data-total-block-options="path:skills.custom.all[' + cloneIndex + '],addition:+ranks+misc+racial+feat+trait,bonuses:+str+dex+con+int+wis+cha+class_skill+level+half_level+check_penalty+size_stealth+size_fly,clone:true">' +
-        '    <div class="m-edit-box-head">' +
+        '    <div class="m-edit-box-head-row">' +
         '      <div class="m-skill-name m-input-block js-input-block" data-input-block-options="path:skills.custom.all[' + cloneIndex + ']name,clone:true">' +
         '        <input class="m-input-block-field u-full-width u-no-margin js-input-block-field" type="text" tabindex="1" placeholder="Custom skill">' +
         '      </div>' +
@@ -21535,6 +21535,8 @@ var clone = (function() {
       _update_clonePrefix(cloneType);
       _update_cloneSuffix(cloneType);
       _smoothScrollToClones(cloneType);
+      totalBlock.render();
+      textBlock.render();
     } else {
       _render_maxClonesSnack(cloneType);
     };
@@ -21897,6 +21899,11 @@ var demo = (function() {
   function _createDemoNotice() {
     var section = document.createElement("div");
     section.setAttribute("class", "l-section m-demo js-demo");
+    if (display.state.get({
+        all: true
+      })) {
+      helper.addClass(section, "is-display-mode");
+    };
     var card = document.createElement("div");
     card.setAttribute("class", "m-card");
     var cardBody = document.createElement("div");
@@ -21953,7 +21960,6 @@ var demo = (function() {
   };
 
 })();
-
 var data = (function() {
 
   var _all_spellsObject = null;
@@ -24811,69 +24817,6 @@ var display = (function() {
     render: render,
     clear: clear,
     state: state
-  };
-
-})();
-
-var edit = (function() {
-
-  function scroll() {
-    // var body = helper.e("body");
-    // var header = helper.e(".js-header");
-    // var nav = helper.e(".js-nav");
-    // var all_editControls = helper.eA(".js-edit-controls");
-    // var offset;
-    // var headerHeight;
-    // if (body.dataset.headerPinned == "true") {
-    //   headerHeight = 0;
-    // } else {
-    //   headerHeight = parseInt(getComputedStyle(header).height, 10);
-    // };
-    // // if nav is on the left after 900px wide viewport
-    // if (document.documentElement.clientWidth >= 900) {
-    //   offset = headerHeight;
-    // } else {
-    //   offset = parseInt(getComputedStyle(nav).height, 10) + headerHeight;
-    // };
-    //
-    // for (var i = 0; i < all_editControls.length; i++) {
-    //   var pinWatch = helper.e("." + all_editControls[i].dataset.pinWatch);
-    //   var section = helper.getClosest(pinWatch, ".js-section");
-    //   var fillWidth = parseInt(getComputedStyle(all_editControls[i]).width, 10);
-    //   var fillHeight = parseInt(getComputedStyle(all_editControls[i]).height, 10) + parseInt(getComputedStyle(all_editControls[i]).marginTop, 10) + parseInt(getComputedStyle(all_editControls[i]).marginBottom, 10);
-    //
-    //   if (section.dataset.minimise == "false" || !section.dataset.minimise && section.dataset.displayMode == "false" || !section.dataset.displayMode) {
-    //
-    //     if ((pinWatch.getBoundingClientRect().top + fillHeight) <= (offset) && pinWatch.getBoundingClientRect().bottom >= (offset + fillHeight)) {
-    //
-    //       // console.log("top: " + pinWatch.getBoundingClientRect().top, "botton: " + pinWatch.getBoundingClientRect().bottom);
-    //
-    //       helper.addClass(pinWatch, "is-pinned");
-    //       if (!pinWatch.hasAttribute("style")) {
-    //         all_editControls[i].setAttribute("style", "width: " + fillWidth + "px");
-    //         pinWatch.setAttribute("style", "padding-top: " + fillHeight + "px");
-    //       };
-    //
-    //     } else {
-    //
-    //       helper.removeClass(pinWatch, "is-pinned");
-    //       pinWatch.removeAttribute("style");
-    //       all_editControls[i].removeAttribute("style");
-    //
-    //     };
-    //
-    //   } else if (section.dataset.minimise == "true" || section.dataset.minimise && section.dataset.displayMode == "true" || section.dataset.displayMode) {
-    //     helper.removeClass(pinWatch, "is-pinned");
-    //     pinWatch.removeAttribute("style");
-    //     all_editControls[i].removeAttribute("style");
-    //   };
-    //
-    // };
-  };
-
-  // exposed methods
-  return {
-    scroll: scroll
   };
 
 })();
@@ -32858,18 +32801,18 @@ var sheet = (function() {
   function init() {
     if (helper.read("allCharacters")) {
       _all_characters = JSON.parse(helper.read("allCharacters"));
+      _all_characters.forEach(function(item, index, array) {
+        array[index] = repair.render({
+          object: item,
+          debug: true
+        });
+      });
     } else {
       _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
       var newBlank = JSON.parse(JSON.stringify(blank.data));
       newBlank.awesomeSheet.version = update.version();
       _all_characters.unshift(newBlank);
     };
-    _all_characters.forEach(function(item, index, array) {
-      array[index] = repair.render({
-        object: item,
-        debug: true
-      });
-    });
     store();
   };
 
@@ -32984,13 +32927,9 @@ var sheet = (function() {
     prompt.destroy();
     snack.destroy();
     _all_characters = JSON.parse(JSON.stringify(hardCodedCharacters.demo()));
-    _all_characters.forEach(function(item, index, array) {
-      item.awesomeSheet.version = update.version();
-      array[index] = repair.render({
-        object: item,
-        debug: true
-      });
-    });
+    var newBlank = JSON.parse(JSON.stringify(blank.data));
+    newBlank.awesomeSheet.version = update.version();
+    _all_characters.unshift(newBlank);
     index.set(0);
     store();
     clear();
