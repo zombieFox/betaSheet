@@ -233,13 +233,13 @@ var totalBlock = (function() {
           if (key == "level") {
             externalBouns = _checkValue(helper.getObject({
               object: sheet.get(),
-              path: "basics.experience.level"
+              path: "basics.experience.level.current"
             }));
           };
           if (key == "half_level") {
             externalBouns = Math.floor(_checkValue(helper.getObject({
               object: sheet.get(),
-              path: "basics.experience.level"
+              path: "basics.experience.level.current"
             })) / 2);
           };
           if (key == "armor") {
@@ -425,7 +425,7 @@ var totalBlock = (function() {
       var editBoxContent = document.createElement("div");
       editBoxContent.setAttribute("class", "m-edit-box-content m-edit-box-content-margin-small");
       var editBoxGroup = document.createElement("div");
-      editBoxGroup.setAttribute("class", "m-edit-box-item-max m-edit-box-group");
+      editBoxGroup.setAttribute("class", "m-edit-box-item-100 m-edit-box-group");
       for (var i = 0; i < arguments.length; i++) {
         editBoxGroup.appendChild(arguments[i]);
       };
@@ -463,7 +463,7 @@ var totalBlock = (function() {
       } else if (label == "bab") {
         return "Base Attack Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "offense.base_attack.bonus"
+          path: "offense.stats.base_attack.bonus"
         })) + ")";
       } else if (label == "size_base") {
         return "Size Bonus (" + _addPrefix(helper.getObject({
@@ -488,12 +488,12 @@ var totalBlock = (function() {
       } else if (label == "level") {
         return "Level (" + _addPrefix(helper.getObject({
           object: sheet.get(),
-          path: "basics.experience.level"
+          path: "basics.experience.level.current"
         })) + ")";
       } else if (label == "half_level") {
         return "Half Level (" + _addPrefix(Math.floor(helper.getObject({
           object: sheet.get(),
-          path: "basics.experience.level"
+          path: "basics.experience.level.current"
         }) / 2)) + ")";
       } else if (label == "plus_ten") {
         return "Plus 10";
@@ -668,7 +668,7 @@ var totalBlock = (function() {
             var title = _bonusTextLable(key);
             var check = _render_check(key);
             var label = _render_checkLabel(title, key);
-            var editBoxItem1 = _render_editBoxItem("large", label);
+            var editBoxItem1 = _render_editBoxItem("100", label);
             var editBoxItem2 = _render_editBoxItem("check", check);
             var editBox = _render_editBox(editBoxItem1, editBoxItem2);
             totalBlockControls.appendChild(editBox);
