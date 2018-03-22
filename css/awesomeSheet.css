@@ -3177,9 +3177,14 @@ label {
   box-sizing: border-box;
   transition: margin 0.3s ease-in-out; }
 
-.m-edit-box-item-check,
 .m-edit-box-item-modifier,
-.m-edit-box-item-stat,
+.m-edit-box-item-stat {
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  min-width: 4em; }
+
+.m-edit-box-item-check,
 .m-edit-box-item-total {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
@@ -3798,13 +3803,17 @@ label {
     [class^="m-edit-box-group"] [class*="m-edit-box-item"]:first-of-type:last-of-type .m-input-file-block .m-input-file-block-label,
     [class^="m-edit-box-group"] [class^="m-edit-box-item"]:first-of-type:last-of-type .m-input-file-block .m-input-file-block-label {
       border-radius: 5px; }
-  [class*="m-edit-box-group"] .m-edit-box-item-check,
   [class*="m-edit-box-group"] .m-edit-box-item-modifier,
   [class*="m-edit-box-group"] .m-edit-box-item-stat,
+  [class^="m-edit-box-group"] .m-edit-box-item-modifier,
+  [class^="m-edit-box-group"] .m-edit-box-item-stat {
+    -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+    min-width: 4em; }
+  [class*="m-edit-box-group"] .m-edit-box-item-check,
   [class*="m-edit-box-group"] .m-edit-box-item-total,
   [class^="m-edit-box-group"] .m-edit-box-item-check,
-  [class^="m-edit-box-group"] .m-edit-box-item-modifier,
-  [class^="m-edit-box-group"] .m-edit-box-item-stat,
   [class^="m-edit-box-group"] .m-edit-box-item-total {
     -webkit-flex: 0 0 auto;
         -ms-flex: 0 0 auto;
