@@ -1,6 +1,16 @@
 var update = (function() {
 
   var history = [{
+    version: "5.7.0",
+    list: [
+      "Added Include option for each Item in Equipment."
+    ]
+  }, {
+    version: "5.6.0",
+    list: [
+      "Added Equipped states to Attacks."
+    ]
+  }, {
     version: "5.5.0",
     list: [
       "Added Senses to Basics section.",

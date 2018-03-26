@@ -2564,7 +2564,7 @@ var izlara = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5,
+      version: 5.6,
       demo: true
     },
     basics: {
@@ -2959,47 +2959,56 @@ var izlara = (function() {
           name: "Flask of Oil",
           quantity: 4,
           weight: 1,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Sack",
           quantity: 1,
           weight: 0.5,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Waterskin",
           quantity: 1,
           weight: 4,
-          value: 1
+          value: 1,
+          include: true
         }, {
           name: "Bedroll and Blanket",
           quantity: 1,
           weight: 8,
-          value: 0.6
+          value: 0.6,
+          include: true
         }, {
           name: "Bloodblock",
           quantity: 2,
           weight: 1,
-          value: 25
+          value: 25,
+          include: true
         }, {
           name: "Healer's Kit",
           quantity: 2,
           weight: 1,
-          value: 50
+          value: 50,
+          include: true
         }, {
           name: "Silk Rope (50ft)",
           quantity: 1,
           weight: 5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Mirror",
           quantity: 1,
           weight: 1,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Compass",
           quantity: 1,
           weight: 0.5,
-          value: 10
+          value: 10,
+          include: true
         }],
         weight: {
           current: ""
@@ -3342,7 +3351,8 @@ var izlara = (function() {
             attack: "+7",
             damage: "1d4+1",
             critical: "19–20/x2",
-            type: "Slashing/Piercing"
+            type: "Slashing/Piercing",
+            equipped: true
           }]
         },
         ranged: {
@@ -3353,7 +3363,8 @@ var izlara = (function() {
             critical: "x3",
             range: "60ft",
             ammo: "30 normal, 5 silver",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -5700,7 +5711,7 @@ var ravich = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5,
+      version: 5.6,
       demo: true
     },
     basics: {
@@ -6045,32 +6056,38 @@ var ravich = (function() {
           name: "Flask of Oil",
           quantity: 2,
           weight: 1,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Waterskin",
           quantity: 1,
           weight: 4,
-          value: 1
+          value: 1,
+          include: true
         }, {
           name: "Bedroll & Blanket",
           quantity: 1,
           weight: 8,
-          value: 0.6
+          value: 0.6,
+          include: true
         }, {
           name: "Rope (silk)",
           quantity: 1,
           weight: 5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Mirror",
           quantity: 1,
           weight: 0.5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Compass",
           quantity: 1,
           weight: 1,
-          value: 10
+          value: 10,
+          include: true
         }],
         weight: {
           current: ""
@@ -6389,27 +6406,34 @@ var ravich = (function() {
         notes: "Sneak Attack +2d6",
         melee: {
           all: [{
-              weapon: "Rapier +1 Flaming",
-              attack: "+11",
-              damage: "1d6+4, 1d6 fire",
-              critical: "18–20/x2",
-              type: "Piercing"
-            },
-            {
-              weapon: "Short Sword +1",
-              attack: "+10",
-              damage: "1d6+4",
-              critical: "19–20/x2",
-              type: "Piercing"
-            },
-            {
-              weapon: "Rapier +1 Flaming, Short Sword +1",
-              attack: "+9/+8",
-              damage: "1d6+4, 1d6 fire/1d6+4",
-              critical: "18–20/x2, 19–20/x2",
-              type: "Piercing"
-            }
-          ]
+            weapon: "Rapier +1 Flaming",
+            attack: "+11",
+            damage: "1d6+4, 1d6 fire",
+            critical: "18–20/x2",
+            type: "Piercing",
+            equipped: false
+          }, {
+            weapon: "Short Sword +1",
+            attack: "+10",
+            damage: "1d6+4",
+            critical: "19–20/x2",
+            type: "Piercing",
+            equipped: false
+          }, {
+            weapon: "Rapier +1 Flaming, Short Sword +1",
+            attack: "+9/+8",
+            damage: "1d6+4, 1d6 fire/1d6+4",
+            critical: "18–20/x2, 19–20/x2",
+            type: "Piercing",
+            equipped: true
+          }, {
+            weapon: "Dagger",
+            attack: "+9",
+            damage: "1d4+4",
+            critical: "19–20/x2",
+            type: "Piercing & Slashing",
+            equipped: false
+          }]
         },
         ranged: {
           all: [{
@@ -6419,7 +6443,8 @@ var ravich = (function() {
             critical: "x3",
             range: "60ft",
             ammo: "30 normal",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -8085,7 +8110,7 @@ var marika = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -8719,31 +8744,22 @@ var marika = (function() {
             attack: "+16",
             damage: "1d6+3",
             critical: "18–20/x2",
-            type: "Piercing"
-          }, {
-            weapon: "Rapier +2 Powerful Sneak",
-            attack: "+13",
-            damage: "1d6+3",
-            critical: "18–20/x2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }, {
             weapon: "Short Sword +2",
             attack: "+16",
             damage: "1d6+3",
             critical: "19–20/x2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }, {
-            weapon: "Short Sword +2 Powerful Sneak",
-            attack: "+13",
-            damage: "1d6+3",
-            critical: "19–20/x2",
-            type: "Piercing"
-          }, {
-            weapon: "Full Attack Rapier +2 / Short Sword +2",
+            weapon: "Rapier +2 / Short Sword +2",
             attack: "+14/+9/+14/+9",
             damage: "1d6+3",
             critical: "19–20/x2 / 18–20/x2 / 19–20/x2 / 18–20/x2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: true
           }]
         },
         ranged: {
@@ -8754,7 +8770,8 @@ var marika = (function() {
             critical: "x3",
             range: "60 ft",
             ammo: "50",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -9932,7 +9949,7 @@ var nefi = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -10549,49 +10566,57 @@ var nefi = (function() {
             attack: "+21/+16/+11",
             damage: "2d4+12",
             critical: "19-20/x3",
-            type: "Piercing/Slashing"
+            type: "Piercing/Slashing",
+            equipped: true
           }, {
             weapon: "Guisarme +1 Keen Power Attack",
             attack: "+18/+13/+8",
             damage: "2d4+18",
             critical: "19-20/x3",
-            type: "Piercing/Slashing"
+            type: "Piercing/Slashing",
+            equipped: false
           }, {
             weapon: "Guisarme +1 Trip",
             attack: "+24",
             damage: "",
             critical: "",
-            type: "Piercing/Slashing"
+            type: "Piercing/Slashing",
+            equipped: false
           }, {
             weapon: "Greatsword MW",
             attack: "+18/+13/+8",
             damage: "1d10+8",
             critical: "19–20/x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: false
           }, {
             weapon: "Greatsword MW Power Attack",
             attack: "+15/+10/+5",
             damage: "1d10+14",
             critical: "19–20/x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: false
           }, {
             weapon: "Halberd MW",
             attack: "+19/+14/+9",
             damage: "1d8+10",
             critical: "x3",
-            type: "Piercing/Slashing"
+            type: "Piercing/Slashing",
+            equipped: false
           }, {
             weapon: "Halberd MW Power Attack",
             attack: "+16/+10/+5",
             damage: "1d8+16",
             critical: "x3",
-            type: "Piercing/Slashing"
+            type: "Piercing/Slashing",
+            equipped: false
           }, {
             weapon: "Earth Breaker +1 Frost",
             attack: "+17/+12/+7",
             damage: "2d6+8 1d6 (cold)",
             critical: "x3",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }]
         },
         ranged: {
@@ -10602,7 +10627,8 @@ var nefi = (function() {
             critical: "x3",
             range: "100 ft",
             ammo: "50",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -11724,7 +11750,7 @@ var nif = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -12103,57 +12129,68 @@ var nif = (function() {
           name: "Flask of Oil",
           quantity: 2,
           weight: 1,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Sack",
           quantity: 1,
           weight: 0.5,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Waterskin",
           quantity: 1,
           weight: 4,
-          value: 1
+          value: 1,
+          include: true
         }, {
           name: "Bedroll",
           quantity: 1,
           weight: 5,
-          value: 0.6
+          value: 0.6,
+          include: true
         }, {
           name: "Blanket",
           quantity: 1,
           weight: 3,
-          value: 1
+          value: 1,
+          include: true
         }, {
           name: "Bloodblock",
           quantity: 2,
-          weight: "",
-          value: 25
+          weight: 0,
+          value: 25,
+          include: true
         }, {
           name: "Healer's Kit",
           quantity: 2,
           weight: 1,
-          value: 50
+          value: 50,
+          include: true
         }, {
           name: "Silk Rope (50ft)",
           quantity: 1,
           weight: 5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Mirror",
           quantity: 1,
           weight: 0.5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Compass",
           quantity: 1,
           weight: 0.5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Andorak spell book",
           quantity: 1,
           weight: 0.5,
-          value: ""
+          value: 0,
+          include: true
         }],
         weight: {
           current: ""
@@ -12502,11 +12539,12 @@ var nif = (function() {
         notes: "",
         melee: {
           all: [{
-            weapon: "Dagger (Master Work)",
+            weapon: "Dagger MW",
             attack: "+4",
             damage: "1d6+1",
             critical: "19–20/x2",
-            type: "Slashing/Piercing"
+            type: "Slashing/Piercing",
+            equipped: true
           }]
         },
         ranged: {
@@ -12517,7 +12555,8 @@ var nif = (function() {
             critical: "x3",
             range: "60 ft",
             ammo: "50",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -14213,7 +14252,7 @@ var orrin = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -14535,22 +14574,26 @@ var orrin = (function() {
           name: "Flask of Oil",
           quantity: 1,
           weight: 1,
-          value: 2
+          value: 2,
+          include: true
         }, {
           name: "Tanglefoot bag",
           quantity: 2,
           weight: 8,
-          value: 3
+          value: 3,
+          include: true
         }, {
           name: "Flat Bread",
           quantity: 10,
           weight: 2,
-          value: 4
+          value: 4,
+          include: true
         }, {
           name: "Bedrolls",
           quantity: 6,
           weight: 2,
-          value: 1
+          value: 1,
+          include: false
         }],
         weight: {
           current: ""
@@ -14883,61 +14926,71 @@ var orrin = (function() {
             attack: "+12",
             damage: "1d6+3",
             critical: "x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }, {
             weapon: "Mithral Rapier +2",
             attack: "+19",
             damage: "1d6+3",
             critical: "18–20/×2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: true
           }, {
             weapon: "Rapier +1 Shocking",
             attack: "+17",
             damage: "1d6+2 + 1d6 Electrical",
             critical: "18-20/x2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }, {
             weapon: "Short Sword +1",
             attack: "+17",
             damage: "1d6+2",
             critical: "19–20/×2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }, {
             weapon: "Mithral Rapier +2, Short Sword +1",
             attack: "+17/+17/+10/+10",
             damage: "1d6+3, 1d6+2",
             critical: "18–20/×2, 19–20/×2",
-            type: "Piercing, Piercing"
+            type: "Piercing, Piercing",
+            equipped: false
           }, {
             weapon: "Silver Dagger",
             attack: "+16",
             damage: "1d6+1",
             critical: "19–20/×2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }, {
             weapon: "Sap",
             attack: "+16",
             damage: "1d6+1",
             critical: "x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }, {
             weapon: "Punching Dagger +2 Shocking",
             attack: "+18",
             damage: "1d4+3 + 1d6 Electrical",
             critical: "x3",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: true
           }, {
             weapon: "Mithral Rapier +2, Punching Dagger +2 Shocking",
             attack: "+17/+17/+11/+11",
             damage: "1d6+3, 1d4+3 + 1d6 Electrical",
             critical: "18–20/×2, x3",
-            type: "Piercing, Piercing"
+            type: "Piercing, Piercing",
+            equipped: true
           }, {
             weapon: "Rapier +1 Shocking, Punching Dagger +2 Shocking",
             attack: "+16/+16/+11/+11",
             damage: "1d6+2 + 1d6 Electrical, 1d4+3 + 1d6 Electrical",
             critical: "18–20/×2, x3",
-            type: "Piercing, Piercing"
+            type: "Piercing, Piercing",
+            equipped: false
           }]
         },
         ranged: {
@@ -14948,7 +15001,8 @@ var orrin = (function() {
             critical: "x3",
             range: "60 ft",
             ammo: "50",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -16268,7 +16322,7 @@ var ro = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -16937,43 +16991,50 @@ var ro = (function() {
             attack: "+11",
             damage: "1d6+2",
             critical: "18–20/x2",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }, {
             weapon: "Black Blade Scimitar +2",
             attack: "+13",
             damage: "1d6+7",
             critical: "18–20/x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: true
           }, {
             weapon: "Spellstrike",
             attack: "+13",
             damage: "1d6+7",
             critical: "18–20/x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: false
           }, {
             weapon: "Black Blade Scimitar +2/Spell Strike",
             attack: "+11/+11",
             damage: "1d6+7/Spell Effect",
             critical: "18–20/x2, 18–20/x2",
-            type: "Slashing, Slashing"
+            type: "Slashing, Slashing",
+            equipped: false
           }, {
             weapon: "Black Blade Scimitar +3 Keen",
             attack: "+14",
             damage: "1d6+8",
             critical: "15-20x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: false
           }, {
             weapon: "Black Blade Scimitar +3 Keen/Spell Strike Keen",
             attack: "+12/+12",
             damage: "1d6+8/Spell Effect",
             critical: "15-20x2,  15-20x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: false
           }, {
             weapon: "Black Blade Scimitar +3 Arcane Accuracy Keen/Spell Strike Arcane Accuracy Keen",
             attack: "+16/+16",
             damage: "1d6+8/Spell Effect",
             critical: "15-20x2,  15-20x2",
-            type: "Slashing"
+            type: "Slashing",
+            equipped: false
           }]
         },
         ranged: {
@@ -16984,7 +17045,8 @@ var ro = (function() {
             critical: "x3",
             range: "60 ft",
             ammo: "50",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }
@@ -18421,7 +18483,7 @@ var vos = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -18791,31 +18853,45 @@ var vos = (function() {
         all: [{
           name: "Flask Of Oil",
           quantity: 3,
-          weight: ""
+          weight: 1,
+          value: 0.1,
+          include: true
         }, {
           name: "Potion of Cure Light Wounds",
-          quantity: 1,
-          weight: ""
+          quantity: 4,
+          weight: 0.1,
+          value: 50,
+          include: true
         }, {
           name: "Potion of Cure Moderate Wounds",
-          quantity: 1,
-          weight: ""
+          quantity: 3,
+          weight: 0.1,
+          value: 300,
+          include: true
         }, {
-          name: "Potion of Cure Serious Wounds ",
-          quantity: 1,
-          weight: ""
+          name: "Potion of Cure Serious Wounds",
+          quantity: 2,
+          weight: 0.1,
+          value: 750,
+          include: true
         }, {
           name: "Potion of Owls Wisdom",
-          quantity: 1,
-          weight: ""
+          quantity: 4,
+          weight: 0.1,
+          value: 300,
+          include: true
         }, {
           name: "Potion of Stabilise",
           quantity: 1,
-          weight: ""
+          weight: 0.1,
+          value: 25,
+          include: true
         }, {
           name: "Scented Oils",
           quantity: 5,
-          weight: ""
+          weight: 0.1,
+          value: 1,
+          include: true
         }],
         weight: {
           current: ""
@@ -19133,31 +19209,36 @@ var vos = (function() {
             attack: "+11/+11/+8/+8",
             damage: "1d10+4 + 1d6 electricity",
             critical: "20x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: true
           }, {
             weapon: "Grapple",
             attack: "+14",
             damage: "1d10+4",
             critical: "20x2",
-            type: ""
+            type: "",
+            equipped: false
           }, {
             weapon: "Disarm",
             attack: "+14",
             damage: "",
             critical: "",
-            type: ""
+            type: "",
+            equipped: false
           }, {
             weapon: "Stunning Fist",
             attack: "+11",
             damage: "1d10+4 + 1d6 electricity",
             critical: "20x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }, {
             weapon: "Unarmed Strike",
             attack: "+11",
             damage: "1d10+4 + 1d6 electricity",
             critical: "20x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }]
         },
         ranged: {
@@ -21212,15 +21293,16 @@ var characterSelect = (function() {
 })();
 var checkBlock = (function() {
 
-  var storeCheckTimer = null;
-
   function bind(checkBlock) {
     if (checkBlock) {
       _bind_checkBlock(checkBlock);
     } else {
       var all_checkBlock = helper.eA(".js-check-block");
       for (var i = 0; i < all_checkBlock.length; i++) {
-        _bind_checkBlock(all_checkBlock[i]);
+        var options = helper.makeObject(all_checkBlock[i].dataset.checkBlockOptions);
+        if (!options.clone) {
+          _bind_checkBlock(all_checkBlock[i]);
+        };
       };
     };
   };
@@ -21229,15 +21311,13 @@ var checkBlock = (function() {
     var checkBlockInput = checkBlock.querySelector(".js-check-block-input");
     if (checkBlockInput) {
       checkBlockInput.addEventListener("change", function() {
-        clearTimeout(storeCheckTimer);
-        storeCheckTimer = setTimeout(delayUpdate, 300, this);
+        _store(checkBlockInput);
+        wealth.render();
+        totalBlock.render();
+        textBlock.render();
+        sheet.store();
       }, false);
     };
-  };
-
-  function delayUpdate(input) {
-    _store(input);
-    sheet.store();
   };
 
   function _store(input) {
@@ -21853,6 +21933,12 @@ var clone = (function() {
         '          <input id="item-quantity-' + cloneIndex + '" class="m-input-block-field u-full-width u-text-center js-input-block-field" type="number" tabindex="1">' +
         '        </div>' +
         '      </div>' +
+        '      <div class="m-edit-box-item-check">' +
+        '        <div class="m-check-block js-check-block" data-check-block-options="path:equipment.item.all[' + cloneIndex + '].include,clone:true">' +
+        '          <input class="m-check-block-check js-check-block-input" type="checkbox" tabindex="1">' +
+        '          <span class="m-check-block-check-icon"></span>' +
+        '        </div>' +
+        '      </div>' +
         '    </div>' +
         '  </div>' +
         '</div>' +
@@ -21908,8 +21994,8 @@ var clone = (function() {
         '          </div>' +
         '          <div class="m-edit-box-item-check">' +
         '            <div class="m-check-block">' +
-        '              <p class="m-edit-box-label">Class <span class="hidden-xs hidden-sm hidden-md">Skill</span></p>' +
-        '              <input class="m-check-block-check js-total-block-check" data-total-block-check-options="path:skills.custom.all[' + cloneIndex + ']bonuses,type:class_skill,clone:true" type="checkbox" tabindex="1">' +
+        '              <label for="skills-custom-' + cloneIndex + '-class-skill" class="m-check-block-label">Class <span class="hidden-xs hidden-sm hidden-md">Skill</span></label>' +
+        '              <input id="skills-custom-' + cloneIndex + '-class-skill" class="m-check-block-check m-check-block-check-with-label js-total-block-check" data-total-block-check-options="path:skills.custom.all[' + cloneIndex + ']bonuses,type:class_skill,clone:true" type="checkbox" tabindex="1">' +
         '              <span class="m-check-block-check-icon"></span>' +
         '            </div>' +
         '          </div>' +
@@ -21929,10 +22015,19 @@ var clone = (function() {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
-        '    <div class="m-edit-box-item-100">' +
-        '      <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']weapon,clone:true">' +
-        '        <label class="m-input-block-label js-input-block-label" for="attack-melee-weapon-' + cloneIndex + '">Weapon</label>' +
-        '        <input id="attack-melee-weapon-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
+        '    <div class="m-edit-box-item-100 m-edit-box-group">' +
+        '      <div class="m-edit-box-item-100">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.melee.all[' + cloneIndex + ']weapon,clone:true">' +
+        '          <label class="m-input-block-label js-input-block-label" for="attack-melee-weapon-' + cloneIndex + '">Weapon</label>' +
+        '          <input id="attack-melee-weapon-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
+        '        </div>' +
+        '      </div>' +
+        '      <div class="m-edit-box-item-check">' +
+        '        <div class="m-check-block js-check-block" data-check-block-options="path:offense.attack.melee.all[' + cloneIndex + '].equipped,clone:true">' +
+        '          <label for="attack-melee-' + cloneIndex + '-equipped" class="m-check-block-label">Equipped</label>' +
+        '          <input id="attack-melee-' + cloneIndex + '-equipped" class="m-check-block-check m-check-block-check-with-label js-check-block-input" type="checkbox" tabindex="1">' +
+        '          <span class="m-check-block-check-icon"></span>' +
+        '        </div>' +
         '      </div>' +
         '    </div>' +
         '    <div class="m-edit-box-item-12">' +
@@ -21969,10 +22064,19 @@ var clone = (function() {
       cloneString =
         '<div class="m-clone-block-content js-clone-block-content">' +
         '  <div class="m-edit-box-content m-edit-box-content-outline m-edit-box-content-margin-large">' +
-        '    <div class="m-edit-box-item-100">' +
-        '      <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']weapon,clone:true">' +
-        '        <label class="m-input-block-label js-input-block-label" for="attack-ranged-weapon-' + cloneIndex + '">Weapon</label>' +
-        '        <input id="attack-ranged-weapon-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
+        '    <div class="m-edit-box-item-100 m-edit-box-group">' +
+        '      <div class="m-edit-box-item-100">' +
+        '        <div class="m-input-block js-input-block" data-input-block-options="path:offense.attack.ranged.all[' + cloneIndex + ']weapon,clone:true">' +
+        '          <label class="m-input-block-label js-input-block-label" for="attack-ranged-weapon-' + cloneIndex + '">Weapon</label>' +
+        '          <input id="attack-ranged-weapon-' + cloneIndex + '" class="m-input-block-field u-full-width js-input-block-field" type="text" tabindex="1">' +
+        '        </div>' +
+        '      </div>' +
+        '      <div class="m-edit-box-item-check">' +
+        '        <div class="m-check-block js-check-block" data-check-block-options="path:offense.attack.ranged.all[' + cloneIndex + '].equipped,clone:true">' +
+        '          <label for="attack-ranged-' + cloneIndex + '-equipped" class="m-check-block-label">Equipped</label>' +
+        '          <input id="attack-ranged-' + cloneIndex + '-equipped" class="m-check-block-check m-check-block-check-with-label js-check-block-input" type="checkbox" tabindex="1">' +
+        '          <span class="m-check-block-check-icon"></span>' +
+        '        </div>' +
         '      </div>' +
         '    </div>' +
         '    <div class="m-edit-box-item-12">' +
@@ -22313,7 +22417,8 @@ var clone = (function() {
         attack: "",
         damage: "",
         critical: "",
-        type: ""
+        type: "",
+        equipped: false
       };
     };
     if (cloneType == "attack-ranged") {
@@ -22324,7 +22429,8 @@ var clone = (function() {
         critical: "",
         range: "",
         ammo: "",
-        type: ""
+        type: "",
+        equipped: false
       };
     };
     if (cloneType == "consumable") {
@@ -22348,7 +22454,8 @@ var clone = (function() {
         name: "",
         quantity: "",
         weight: "",
-        value: ""
+        value: "",
+        include: true
       };
     };
     if (cloneType == "skill") {
@@ -22551,22 +22658,30 @@ var clone = (function() {
       _bind_classLevelInputBlock(newClone.querySelectorAll(".js-basics-class-level"));
       _bind_tip(newClone.querySelectorAll(".js-tip"));
     };
-    if (cloneType == "consumable" || cloneType == "power" || cloneType == "skill") {
-      _bind_totalBlock(newClone.querySelector(".js-total-block"));
-      _bind_inputBlockIncrement(newClone.querySelectorAll(".js-input-block-increment"));
-    };
-    if (cloneType == "consumable" || cloneType == "power" || cloneType == "skill" || cloneType == "item" || cloneType == "attack-melee" || cloneType == "attack-ranged") {
+    if (cloneType == "consumable" || cloneType == "power") {
       _bind_inputBlock(newClone.querySelectorAll(".js-input-block"));
+      _bind_inputBlockIncrement(newClone.querySelectorAll(".js-input-block-increment"));
+      _bind_totalBlock(newClone.querySelector(".js-total-block"));
     };
     if (cloneType == "skill") {
+      _bind_inputBlock(newClone.querySelectorAll(".js-input-block"));
+      _bind_inputBlockIncrement(newClone.querySelectorAll(".js-input-block-increment"));
+      _bind_totalBlock(newClone.querySelector(".js-total-block"));
       _bind_totalBlockCheck(newClone.querySelectorAll(".js-total-block-check"));
       _bind_totalBlockBonuses(newClone.querySelectorAll(".js-total-block-bonuses"));
+    };
+    if (cloneType == "attack-melee" || cloneType == "attack-ranged") {
+      _bind_inputBlock(newClone.querySelectorAll(".js-input-block"));
+      _bind_checkBlock(newClone.querySelectorAll(".js-check-block"));
     };
     if (cloneType == "note-character" || cloneType == "note-story") {
       _bind_textareaBlock(newClone.querySelectorAll(".js-textarea-block"));
     };
     if (cloneType == "item") {
+      _bind_inputBlock(newClone.querySelectorAll(".js-input-block"));
+      _bind_checkBlock(newClone.querySelectorAll(".js-check-block"));
       _bind_wealth(newClone.querySelectorAll(".js-input-block"));
+      _bind_tip(newClone.querySelectorAll(".js-tip"));
     };
   };
 
@@ -22578,6 +22693,7 @@ var clone = (function() {
       _update_clonePrefix(cloneType);
       _update_cloneSuffix(cloneType);
       _smoothScrollToClones(cloneType);
+      _update_all_clones(cloneType);
       totalBlock.render();
       textBlock.render();
     } else {
@@ -22684,6 +22800,12 @@ var clone = (function() {
         textareaBlock.render(all_textareaBlock[i]);
       };
     };
+    if (cloneType == "item") {
+      var all_checkBlock = target.querySelectorAll(".js-check-block");
+      for (var i = 0; i < all_checkBlock.length; i++) {
+        checkBlock.render(all_checkBlock[i]);
+      };
+    };
   };
 
   function _remove_clone(button, cloneType) {
@@ -22777,6 +22899,12 @@ var clone = (function() {
   function _bind_inputBlock(all_inputBlock) {
     for (var i = 0; i < all_inputBlock.length; i++) {
       inputBlock.bind(all_inputBlock[i]);
+    };
+  };
+
+  function _bind_checkBlock(all_checkBlock) {
+    for (var i = 0; i < all_checkBlock.length; i++) {
+      checkBlock.bind(all_checkBlock[i]);
     };
   };
 
@@ -25460,8 +25588,10 @@ var display = (function() {
                     listItemName.textContent = arrayItem.name;
                     var listItemValue = document.createElement("span");
                     listItemValue.setAttribute("class", "m-display-list-item-value");
-                    listItemValue.textContent = (arrayItem.current || 0) + " / " + (arrayItem.total || 0);
-                    var percentage = parseFloat(((arrayItem.total - arrayItem.used) / arrayItem.total) * 100).toFixed(2);
+                    var current = arrayItem.current || 0;
+                    var total = arrayItem.total || 0;
+                    listItemValue.textContent = current + " / " + total;
+                    var percentage = parseFloat(((total - arrayItem.used) / total) * 100).toFixed(2);
                     if (percentage < 0) {
                       percentage = 0;
                     };
@@ -25494,8 +25624,10 @@ var display = (function() {
                     listItemName.textContent = arrayItem.name;
                     var listItemValue = document.createElement("span");
                     listItemValue.setAttribute("class", "m-display-list-item-value");
-                    listItemValue.textContent = arrayItem.current + " / " + arrayItem.total;
-                    var percentage = parseFloat(((arrayItem.total - arrayItem.used) / arrayItem.total) * 100).toFixed(2);
+                    var current = arrayItem.current || 0;
+                    var total = arrayItem.total || 0;
+                    listItemValue.textContent = current + " / " + total;
+                    var percentage = parseFloat(((total - arrayItem.used) / total) * 100).toFixed(2);
                     if (percentage < 0) {
                       percentage = 0;
                     };
@@ -25564,6 +25696,12 @@ var display = (function() {
                     };
                     var listItem = document.createElement("li");
                     listItem.setAttribute("class", "m-display-list-item-attack");
+                    if (arrayItem.equipped) {
+                      var meleeEquipped = document.createElement("span");
+                      meleeEquipped.setAttribute("class", "m-display-list-item-attack-equipped icon-check");
+                      listItem.appendChild(meleeEquipped);
+                      helper.addClass(listItem, "is-active");
+                    };
                     if ("weapon" in arrayItem && arrayItem.weapon != "") {
                       listItem.appendChild(_createSnippet({
                         prefix: "Weapon",
@@ -33761,6 +33899,57 @@ var repair = (function() {
     return characterObject;
   };
 
+  function _update_560(characterObject) {
+    var _report = {
+      name: characterObject.basics.character.name,
+      repaired: []
+    };
+    // awesome
+    _report.repaired.push("update: awesome version");
+    characterObject.awesomeSheet.version = 5.6;
+    _report.repaired.push("update: attacks");
+    if (characterObject.offense.attack.melee.all.length > 0) {
+      characterObject.offense.attack.melee.all.forEach(function(arrayItem) {
+        if (!("equipped" in arrayItem)) {
+          arrayItem.equipped = false;
+        };
+      });
+    };
+    if (characterObject.offense.attack.ranged.all.length > 0) {
+      characterObject.offense.attack.ranged.all.forEach(function(arrayItem) {
+        if (!("equipped" in arrayItem)) {
+          arrayItem.equipped = false;
+        };
+      });
+    };
+    _log("update complete: 560");
+    _log("report:", _report);
+    _log("------------------------------------------");
+    return characterObject;
+  };
+
+  function _update_570(characterObject) {
+    var _report = {
+      name: characterObject.basics.character.name,
+      repaired: []
+    };
+    // awesome
+    _report.repaired.push("update: awesome version");
+    characterObject.awesomeSheet.version = 5.7;
+    _report.repaired.push("update: items");
+    if (characterObject.equipment.item.all.length > 0) {
+      characterObject.equipment.item.all.forEach(function(arrayItem) {
+        if (!("include" in arrayItem)) {
+          arrayItem.include = true;
+        };
+      });
+    };
+    _log("update complete: 570");
+    _log("report:", _report);
+    _log("------------------------------------------");
+    return characterObject;
+  };
+
   function _repair(characterObject) {
     // if version is found
     if (typeof characterObject.awesomeSheet == "object" && "version" in characterObject.awesomeSheet) {
@@ -33785,6 +33974,12 @@ var repair = (function() {
         };
         if (characterObject.awesomeSheet.version < 5.5) {
           characterObject = _update_550(characterObject);
+        };
+        if (characterObject.awesomeSheet.version < 5.6) {
+          characterObject = _update_560(characterObject);
+        };
+        if (characterObject.awesomeSheet.version < 5.7) {
+          characterObject = _update_570(characterObject);
         };
       };
     } else {
@@ -36241,12 +36436,22 @@ var tabs = (function() {
     var tabRowArea = tabRow.getBoundingClientRect();
     var tabArea = tab.getBoundingClientRect();
     var left = Math.ceil(tab.offsetLeft - (tabRowArea.width / 2) + (tabArea.width / 2), 10);
-    tabRow.scroll({
-      top: 0,
-      left: left,
-      behavior: 'smooth'
-    });
     tabIndicator.setAttribute("style", "width:" + (tabArea.width - 10) + "px;left:" + (tab.offsetLeft + 5) + "px;");
+    if (tabRow.scroll) {
+      tabRow.scroll({
+        top: 0,
+        left: left,
+        behavior: 'smooth'
+      });
+    } else {
+      if (tabArea.left < tabRowArea.left) {
+        var left = tab.offsetLeft;
+        tabRow.scrollLeft = left;
+      } else if (tabArea.right > tabRowArea.right) {
+        var right = Math.ceil(tab.offsetLeft - tabRowArea.width + tabArea.width, 10);
+        tabRow.scrollLeft = right;
+      };
+    };
   };
 
   function _switchTabPanel(tab) {
@@ -36305,6 +36510,7 @@ var tabs = (function() {
   };
 
 })();
+
 var textBlock = (function() {
 
   function clear() {
@@ -36786,16 +36992,18 @@ var totalBlock = (function() {
 
       var _push_cloneSetValues = function() {
         for (var i = 0; i < totalBlockObject.length; i++) {
-          for (var q = 0; q < array.length; q++) {
-            if (totalBlockObject[i][array[q]] && totalBlockObject[i][array[q]] != "" && !isNaN(totalBlockObject[i][array[q]])) {
-              var valueToPush = totalBlockObject[i][array[q]];
-              if (multiply != undefined) {
-                valueToPush = valueToPush * totalBlockObject[i][multiply];
+          if (totalBlockObject[i].include) {
+            for (var q = 0; q < array.length; q++) {
+              if (totalBlockObject[i][array[q]] && totalBlockObject[i][array[q]] != "" && !isNaN(totalBlockObject[i][array[q]])) {
+                var valueToPush = totalBlockObject[i][array[q]];
+                if (multiply != undefined) {
+                  valueToPush = valueToPush * totalBlockObject[i][multiply];
+                };
+                if (addOrMinus == "minus") {
+                  valueToPush = -valueToPush;
+                };
+                toSum.push(valueToPush);
               };
-              if (addOrMinus == "minus") {
-                valueToPush = -valueToPush;
-              };
-              toSum.push(valueToPush);
             };
           };
         };
@@ -37385,6 +37593,16 @@ var totalBlock = (function() {
 var update = (function() {
 
   var history = [{
+    version: "5.7.0",
+    list: [
+      "Added Include option for each Item in Equipment."
+    ]
+  }, {
+    version: "5.6.0",
+    list: [
+      "Added Equipped states to Attacks."
+    ]
+  }, {
     version: "5.5.0",
     list: [
       "Added Senses to Basics section.",
@@ -37689,19 +37907,74 @@ var update = (function() {
 
 var wealth = (function() {
 
-  var renderTimer = null;
+  var _timer_render = null;
 
   function bind() {
     var equipmentWealthIncludeItem = helper.e(".js-equipment-wealth-include-item");
     equipmentWealthIncludeItem.addEventListener("change", function() {
-      renderTimer = setTimeout(function() {
+      clearTimeout(_timer_render);
+      _timer_render = setTimeout(function() {
         render();
         textBlock.render();
       }, 350, this);
     }, false);
   };
 
-  function render() {
+  function _render_wealth() {
+    var _create_goldTotal = function(wealth) {
+      var includeItem = helper.getObject({
+        object: sheet.get(),
+        path: "equipment.wealth.include_item"
+      });
+      var wealthInGp = [];
+      if (includeItem) {
+        wealthInGp.push(helper.getObject({
+          object: sheet.get(),
+          path: "equipment.item.value.current"
+        }));
+      };
+      if ("platinum" in wealth) {
+        var platinum = wealth.platinum * 10;
+        if (!isNaN(platinum) && platinum != "") {
+          wealthInGp.push(platinum);
+        } else {
+          wealthInGp.push(0);
+        };
+      };
+      if ("gold" in wealth) {
+        var gold = wealth.gold;
+        if (!isNaN(gold) && gold != "") {
+          wealthInGp.push(gold);
+        } else {
+          wealthInGp.push(0);
+        };
+      };
+      if ("silver" in wealth) {
+        var silver = wealth.silver / 10;
+        if (!isNaN(silver) && silver != "") {
+          wealthInGp.push(silver);
+        } else {
+          wealthInGp.push(0);
+        };
+      };
+      if ("copper" in wealth) {
+        var copper = wealth.copper / 100;
+        if (!isNaN(copper) && copper != "") {
+          wealthInGp.push(copper);
+        } else {
+          wealthInGp.push(0);
+        };
+      };
+      var grandTotal;
+      if (wealthInGp.length > 0) {
+        grandTotal = wealthInGp.reduce(function(a, b) {
+          return a + b;
+        });
+      } else {
+        grandTotal = 0;
+      };
+      return grandTotal;
+    };
     var total = _create_goldTotal(helper.getObject({
       object: sheet.get(),
       path: "equipment.wealth"
@@ -37714,59 +37987,12 @@ var wealth = (function() {
     sheet.store();
   };
 
-  function _create_goldTotal(wealth) {
-    var includeItem = helper.getObject({
-      object: sheet.get(),
-      path: "equipment.wealth.include_item"
-    });
-    var wealthInGp = [];
-    if (includeItem) {
-      wealthInGp.push(helper.getObject({
-        object: sheet.get(),
-        path: "equipment.item.value.current"
-      }));
-    };
-    if ("platinum" in wealth) {
-      var platinum = wealth.platinum * 10;
-      if (!isNaN(platinum) && platinum != "") {
-        wealthInGp.push(platinum);
-      } else {
-        wealthInGp.push(0);
-      };
-    };
-    if ("gold" in wealth) {
-      var gold = wealth.gold;
-      if (!isNaN(gold) && gold != "") {
-        wealthInGp.push(gold);
-      } else {
-        wealthInGp.push(0);
-      };
-    };
-    if ("silver" in wealth) {
-      var silver = wealth.silver / 10;
-      if (!isNaN(silver) && silver != "") {
-        wealthInGp.push(silver);
-      } else {
-        wealthInGp.push(0);
-      };
-    };
-    if ("copper" in wealth) {
-      var copper = wealth.copper / 100;
-      if (!isNaN(copper) && copper != "") {
-        wealthInGp.push(copper);
-      } else {
-        wealthInGp.push(0);
-      };
-    };
-    var grandTotal;
-    if (wealthInGp.length > 0) {
-      grandTotal = wealthInGp.reduce(function(a, b) {
-        return a + b;
-      });
-    } else {
-      grandTotal = 0;
-    };
-    return grandTotal;
+  function render() {
+    clearTimeout(_timer_render);
+    _timer_render = setTimeout(function() {
+      _render_wealth();
+      textBlock.render();
+    }, 350, this);
   };
 
   // exposed methods

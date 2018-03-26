@@ -3,7 +3,7 @@ var izlara = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5,
+      version: 5.6,
       demo: true
     },
     basics: {
@@ -398,47 +398,56 @@ var izlara = (function() {
           name: "Flask of Oil",
           quantity: 4,
           weight: 1,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Sack",
           quantity: 1,
           weight: 0.5,
-          value: 0.1
+          value: 0.1,
+          include: true
         }, {
           name: "Waterskin",
           quantity: 1,
           weight: 4,
-          value: 1
+          value: 1,
+          include: true
         }, {
           name: "Bedroll and Blanket",
           quantity: 1,
           weight: 8,
-          value: 0.6
+          value: 0.6,
+          include: true
         }, {
           name: "Bloodblock",
           quantity: 2,
           weight: 1,
-          value: 25
+          value: 25,
+          include: true
         }, {
           name: "Healer's Kit",
           quantity: 2,
           weight: 1,
-          value: 50
+          value: 50,
+          include: true
         }, {
           name: "Silk Rope (50ft)",
           quantity: 1,
           weight: 5,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Mirror",
           quantity: 1,
           weight: 1,
-          value: 10
+          value: 10,
+          include: true
         }, {
           name: "Compass",
           quantity: 1,
           weight: 0.5,
-          value: 10
+          value: 10,
+          include: true
         }],
         weight: {
           current: ""
@@ -781,7 +790,8 @@ var izlara = (function() {
             attack: "+7",
             damage: "1d4+1",
             critical: "19–20/x2",
-            type: "Slashing/Piercing"
+            type: "Slashing/Piercing",
+            equipped: true
           }]
         },
         ranged: {
@@ -792,7 +802,8 @@ var izlara = (function() {
             critical: "x3",
             range: "60ft",
             ammo: "30 normal, 5 silver",
-            type: "Piercing"
+            type: "Piercing",
+            equipped: false
           }]
         }
       }

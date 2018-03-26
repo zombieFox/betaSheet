@@ -1,14 +1,15 @@
 var checkBlock = (function() {
 
-  var storeCheckTimer = null;
-
   function bind(checkBlock) {
     if (checkBlock) {
       _bind_checkBlock(checkBlock);
     } else {
       var all_checkBlock = helper.eA(".js-check-block");
       for (var i = 0; i < all_checkBlock.length; i++) {
-        _bind_checkBlock(all_checkBlock[i]);
+        var options = helper.makeObject(all_checkBlock[i].dataset.checkBlockOptions);
+        if (!options.clone) {
+          _bind_checkBlock(all_checkBlock[i]);
+        };
       };
     };
   };
@@ -17,15 +18,13 @@ var checkBlock = (function() {
     var checkBlockInput = checkBlock.querySelector(".js-check-block-input");
     if (checkBlockInput) {
       checkBlockInput.addEventListener("change", function() {
-        clearTimeout(storeCheckTimer);
-        storeCheckTimer = setTimeout(delayUpdate, 300, this);
+        _store(checkBlockInput);
+        wealth.render();
+        totalBlock.render();
+        textBlock.render();
+        sheet.store();
       }, false);
     };
-  };
-
-  function delayUpdate(input) {
-    _store(input);
-    sheet.store();
   };
 
   function _store(input) {

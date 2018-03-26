@@ -3,7 +3,7 @@ var vos = (function() {
   var data = {
     awesomeSheet: {
       awesome: true,
-      version: 5.5
+      version: 5.6
     },
     basics: {
       character: {
@@ -373,31 +373,45 @@ var vos = (function() {
         all: [{
           name: "Flask Of Oil",
           quantity: 3,
-          weight: ""
+          weight: 1,
+          value: 0.1,
+          include: true
         }, {
           name: "Potion of Cure Light Wounds",
-          quantity: 1,
-          weight: ""
+          quantity: 4,
+          weight: 0.1,
+          value: 50,
+          include: true
         }, {
           name: "Potion of Cure Moderate Wounds",
-          quantity: 1,
-          weight: ""
+          quantity: 3,
+          weight: 0.1,
+          value: 300,
+          include: true
         }, {
-          name: "Potion of Cure Serious Wounds ",
-          quantity: 1,
-          weight: ""
+          name: "Potion of Cure Serious Wounds",
+          quantity: 2,
+          weight: 0.1,
+          value: 750,
+          include: true
         }, {
           name: "Potion of Owls Wisdom",
-          quantity: 1,
-          weight: ""
+          quantity: 4,
+          weight: 0.1,
+          value: 300,
+          include: true
         }, {
           name: "Potion of Stabilise",
           quantity: 1,
-          weight: ""
+          weight: 0.1,
+          value: 25,
+          include: true
         }, {
           name: "Scented Oils",
           quantity: 5,
-          weight: ""
+          weight: 0.1,
+          value: 1,
+          include: true
         }],
         weight: {
           current: ""
@@ -715,31 +729,36 @@ var vos = (function() {
             attack: "+11/+11/+8/+8",
             damage: "1d10+4 + 1d6 electricity",
             critical: "20x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: true
           }, {
             weapon: "Grapple",
             attack: "+14",
             damage: "1d10+4",
             critical: "20x2",
-            type: ""
+            type: "",
+            equipped: false
           }, {
             weapon: "Disarm",
             attack: "+14",
             damage: "",
             critical: "",
-            type: ""
+            type: "",
+            equipped: false
           }, {
             weapon: "Stunning Fist",
             attack: "+11",
             damage: "1d10+4 + 1d6 electricity",
             critical: "20x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }, {
             weapon: "Unarmed Strike",
             attack: "+11",
             damage: "1d10+4 + 1d6 electricity",
             critical: "20x2",
-            type: "Bludgeoning"
+            type: "Bludgeoning",
+            equipped: false
           }]
         },
         ranged: {
