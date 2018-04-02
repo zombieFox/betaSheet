@@ -1469,6 +1469,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: true,
@@ -1489,6 +1490,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1509,6 +1511,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1529,6 +1532,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: true,
             dex: false,
@@ -1550,6 +1554,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1571,6 +1576,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1591,6 +1597,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1611,6 +1618,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: true,
@@ -1631,6 +1639,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1651,6 +1660,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: true,
@@ -1671,6 +1681,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: true,
@@ -1692,6 +1703,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1712,6 +1724,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1732,6 +1745,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1752,6 +1766,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1772,6 +1787,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1792,6 +1808,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1812,6 +1829,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1832,6 +1850,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1852,6 +1871,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1872,6 +1892,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1892,6 +1913,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1912,6 +1934,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1932,6 +1955,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1952,6 +1976,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -1972,6 +1997,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -1993,6 +2019,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -2014,6 +2041,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -2035,6 +2063,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -2056,6 +2085,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -2076,6 +2106,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: true,
@@ -2096,6 +2127,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -2116,6 +2148,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: true,
@@ -2136,6 +2169,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -2156,6 +2190,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: true,
@@ -2177,6 +2212,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: false,
             dex: false,
@@ -2197,6 +2233,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: false,
           bonuses: {
             str: true,
             dex: false,
@@ -2217,6 +2254,7 @@ var blank = (function() {
           feat: "",
           trait: "",
           current: "",
+          trained: true,
           bonuses: {
             str: false,
             dex: false,
@@ -21517,9 +21555,9 @@ var classes = (function() {
         total = total + classTotal;
       });
       if (classLevel > 0) {
-        total = total + (stats.getMod("con") * classLevel);
+        total = total + (stats.get.mod("con") * classLevel);
       } else {
-        total = total + stats.getMod("con");
+        total = total + stats.get.mod("con");
       };
       helper.setObject({
         object: sheet.get(),
@@ -21549,9 +21587,9 @@ var classes = (function() {
         total = total + classTotal;
       });
       if (classLevel > 0) {
-        total = total + (stats.getMod("int") * classLevel);
+        total = total + (stats.get.mod("int") * classLevel);
       } else {
-        total = total + stats.getMod("int");
+        total = total + stats.get.mod("int");
       };
       helper.setObject({
         object: sheet.get(),
@@ -21628,6 +21666,7 @@ var classes = (function() {
   };
 
 })();
+
 var clone = (function() {
 
   function render() {
@@ -22788,19 +22827,39 @@ var clone = (function() {
       };
       classes.render();
     };
-    if (cloneType == "consumable" || cloneType == "power" || cloneType == "item" || cloneType == "skill" || cloneType == "attack-melee" || cloneType == "attack-ranged") {
+    if (cloneType == "consumable" || cloneType == "power") {
       var all_inputBlocks = target.querySelectorAll(".js-input-block");
       for (var i = 0; i < all_inputBlocks.length; i++) {
         inputBlock.render(all_inputBlocks[i]);
       };
     };
-    if (cloneType == "note-story" || cloneType == "note-character") {
+    if (cloneType == "skill") {
+      var all_inputBlocks = target.querySelectorAll(".js-input-block");
+      for (var i = 0; i < all_inputBlocks.length; i++) {
+        inputBlock.render(all_inputBlocks[i]);
+      };
+    };
+    if (cloneType == "attack-melee" || cloneType == "attack-ranged") {
+      var all_inputBlocks = target.querySelectorAll(".js-input-block");
+      for (var i = 0; i < all_inputBlocks.length; i++) {
+        inputBlock.render(all_inputBlocks[i]);
+      };
+      var all_checkBlock = target.querySelectorAll(".js-check-block");
+      for (var i = 0; i < all_checkBlock.length; i++) {
+        checkBlock.render(all_checkBlock[i]);
+      };
+    };
+    if (cloneType == "note-character" || cloneType == "note-story") {
       var all_textareaBlock = target.querySelectorAll(".js-textarea-block");
       for (var i = 0; i < all_textareaBlock.length; i++) {
         textareaBlock.render(all_textareaBlock[i]);
       };
     };
     if (cloneType == "item") {
+      var all_inputBlocks = target.querySelectorAll(".js-input-block");
+      for (var i = 0; i < all_inputBlocks.length; i++) {
+        inputBlock.render(all_inputBlocks[i]);
+      };
       var all_checkBlock = target.querySelectorAll(".js-check-block");
       for (var i = 0; i < all_checkBlock.length; i++) {
         checkBlock.render(all_checkBlock[i]);
@@ -25856,7 +25915,7 @@ var display = (function() {
                 use_magic_device: "Use Magic Device"
               };
               for (var key in all_listItem) {
-                if (all_listItem[key].ranks != "") {
+                if (all_listItem[key].ranks != "" || !all_listItem[key].trained) {
                   contentFound++;
                   var skillObject = {};
                   skillObject.name = skillNames[key];
@@ -25875,7 +25934,7 @@ var display = (function() {
                 if (all_listItem.ranks != "") {
                   contentFound++;
                   var skillObject = {
-                    name: arrayItem.name,
+                    name: arrayItem.name || "Custom Skill",
                     current: dataFormat.bonus(arrayItem.current)
                   };
                   foundSkills.push(skillObject);
@@ -26063,7 +26122,7 @@ var encumbrance = (function() {
   };
 
   function _render_encumbrance() {
-    var str = stats.getScore("str");
+    var str = stats.get.score("str");
     var encumbranceStr = helper.getObject({
       object: sheet.get(),
       path: "equipment.encumbrance.str"
@@ -33950,6 +34009,59 @@ var repair = (function() {
     return characterObject;
   };
 
+  function _update_580(characterObject) {
+    var _report = {
+      name: characterObject.basics.character.name,
+      repaired: []
+    };
+    // awesome
+    _report.repaired.push("update: awesome version");
+    characterObject.awesomeSheet.version = 5.8;
+    _report.repaired.push("update: Trained Skills");
+    characterObject.skills.default.acrobatics.trained = false;
+    characterObject.skills.default.appraise.trained = false;
+    characterObject.skills.default.bluff.trained = false;
+    characterObject.skills.default.climb.trained = false;
+    characterObject.skills.default.craft_1.trained = false;
+    characterObject.skills.default.craft_2.trained = false;
+    characterObject.skills.default.diplomacy.trained = false;
+    characterObject.skills.default.disable_device.trained = true;
+    characterObject.skills.default.disguise.trained = false;
+    characterObject.skills.default.escape_artist.trained = false;
+    characterObject.skills.default.fly.trained = false;
+    characterObject.skills.default.handle_animal.trained = true;
+    characterObject.skills.default.heal.trained = false;
+    characterObject.skills.default.intimidate.trained = false;
+    characterObject.skills.default.knowledge_arcana.trained = true;
+    characterObject.skills.default.knowledge_dungeoneering.trained = true;
+    characterObject.skills.default.knowledge_engineering.trained = true;
+    characterObject.skills.default.knowledge_geography.trained = true;
+    characterObject.skills.default.knowledge_history.trained = true;
+    characterObject.skills.default.knowledge_local.trained = true;
+    characterObject.skills.default.knowledge_nature.trained = true;
+    characterObject.skills.default.knowledge_nobility.trained = true;
+    characterObject.skills.default.knowledge_planes.trained = true;
+    characterObject.skills.default.knowledge_religion.trained = true;
+    characterObject.skills.default.linguistics.trained = true;
+    characterObject.skills.default.perception.trained = false;
+    characterObject.skills.default.perform_1.trained = false;
+    characterObject.skills.default.perform_2.trained = false;
+    characterObject.skills.default.profession_1.trained = true;
+    characterObject.skills.default.profession_2.trained = true;
+    characterObject.skills.default.ride.trained = false;
+    characterObject.skills.default.sense_motive.trained = false;
+    characterObject.skills.default.sleight_of_hand.trained = true;
+    characterObject.skills.default.spellcraft.trained = true;
+    characterObject.skills.default.stealth.trained = false;
+    characterObject.skills.default.survival.trained = false;
+    characterObject.skills.default.swim.trained = false;
+    characterObject.skills.default.use_magic_device.trained = true;
+    _log("update complete: 580");
+    _log("report:", _report);
+    _log("------------------------------------------");
+    return characterObject;
+  };
+
   function _repair(characterObject) {
     // if version is found
     if (typeof characterObject.awesomeSheet == "object" && "version" in characterObject.awesomeSheet) {
@@ -33980,6 +34092,9 @@ var repair = (function() {
         };
         if (characterObject.awesomeSheet.version < 5.7) {
           characterObject = _update_570(characterObject);
+        };
+        if (characterObject.awesomeSheet.version < 5.8) {
+          characterObject = _update_580(characterObject);
         };
       };
     } else {
@@ -36338,36 +36453,41 @@ var stats = (function() {
     };
   };
 
-  function get_score(key) {
-    var value = 0;
-    var score = helper.getObject({
-      object: sheet.get(),
-      path: "statistics.stats." + key + ".current"
-    });
-    if (score != "" || !isNaN(score)) {
-      value = score;
+  var get = (function() {
+    var score = function(key) {
+      var value = 0;
+      var score = helper.getObject({
+        object: sheet.get(),
+        path: "statistics.stats." + key.toLowerCase() + ".current"
+      });
+      if (score != "" || !isNaN(score)) {
+        value = score;
+      };
+      return value;
     };
-    return value;
-  };
-
-  function get_mod(key) {
-    var value = 0;
-    var mod = helper.getObject({
-      object: sheet.get(),
-      path: "statistics.stats." + key + ".modifier"
-    });
-    if (mod != "" || !isNaN(mod)) {
-      value = mod;
+    var mod = function(key) {
+      var value = 0;
+      var mod = helper.getObject({
+        object: sheet.get(),
+        path: "statistics.stats." + key.toLowerCase() + ".modifier"
+      });
+      if (mod != "" || !isNaN(mod)) {
+        value = mod;
+      };
+      return value;
     };
-    return value;
-  };
+    // exposed methods
+    return {
+      score: score,
+      mod: mod
+    };
+  })();
 
   // exposed methods
   return {
     render: render,
     bind: bind,
-    getMod: get_mod,
-    getScore: get_score,
+    get: get
   };
 
 })();
@@ -37040,7 +37160,7 @@ var totalBlock = (function() {
         if (totalBlockObject.bonuses[key] && key != "max_dex") {
           var externalBouns;
           if (key == "str") {
-            externalBouns = _checkValue(stats.getMod("str"));
+            externalBouns = _checkValue(stats.get.mod("str"));
           };
           if (key == "dex") {
             // if max dex is true
@@ -37051,29 +37171,29 @@ var totalBlock = (function() {
                 }) != "" && helper.getObject({
                   object: sheet.get(),
                   path: "equipment.armor.max_dex"
-                }) < _checkValue(stats.getMod("dex"))) {
+                }) < _checkValue(stats.get.mod("dex"))) {
                 externalBouns = helper.getObject({
                   object: sheet.get(),
                   path: "equipment.armor.max_dex"
                 });
               } else {
-                externalBouns = _checkValue(stats.getMod("dex"));
+                externalBouns = _checkValue(stats.get.mod("dex"));
               };
             } else {
-              externalBouns = _checkValue(stats.getMod("dex"));
+              externalBouns = _checkValue(stats.get.mod("dex"));
             };
           };
           if (key == "con") {
-            externalBouns = _checkValue(stats.getMod("con"));
+            externalBouns = _checkValue(stats.get.mod("con"));
           };
           if (key == "int") {
-            externalBouns = _checkValue(stats.getMod("int"));
+            externalBouns = _checkValue(stats.get.mod("int"));
           };
           if (key == "wis") {
-            externalBouns = _checkValue(stats.getMod("wis"));
+            externalBouns = _checkValue(stats.get.mod("wis"));
           };
           if (key == "cha") {
-            externalBouns = _checkValue(stats.getMod("cha"));
+            externalBouns = _checkValue(stats.get.mod("cha"));
           };
           if (key == "bab") {
             externalBouns = _checkValue(helper.getObject({
@@ -37324,17 +37444,17 @@ var totalBlock = (function() {
         return newData;
       };
       if (label == "str") {
-        return "STR Bonus (" + _addPrefix(stats.getMod("str")) + ")";
+        return "STR Bonus (" + _addPrefix(stats.get.mod("str")) + ")";
       } else if (label == "dex") {
-        return "DEX Bonus (" + _addPrefix(stats.getMod("dex")) + ")";
+        return "DEX Bonus (" + _addPrefix(stats.get.mod("dex")) + ")";
       } else if (label == "con") {
-        return "CON Bonus (" + _addPrefix(stats.getMod("con")) + ")";
+        return "CON Bonus (" + _addPrefix(stats.get.mod("con")) + ")";
       } else if (label == "int") {
-        return "INT Bonus (" + _addPrefix(stats.getMod("int")) + ")";
+        return "INT Bonus (" + _addPrefix(stats.get.mod("int")) + ")";
       } else if (label == "wis") {
-        return "WIS Bonus (" + _addPrefix(stats.getMod("wis")) + ")";
+        return "WIS Bonus (" + _addPrefix(stats.get.mod("wis")) + ")";
       } else if (label == "cha") {
-        return "CHA Bonus (" + _addPrefix(stats.getMod("cha")) + ")";
+        return "CHA Bonus (" + _addPrefix(stats.get.mod("cha")) + ")";
       } else if (label == "bab") {
         return "Base Attack Bonus (" + _addPrefix(helper.getObject({
           object: sheet.get(),
@@ -37593,6 +37713,11 @@ var totalBlock = (function() {
 var update = (function() {
 
   var history = [{
+    version: "5.8.0",
+    list: [
+      "Added support for Untrained Skills. Skills which may be used Untrained or with Skill Ranks will be shown in Display Mode."
+    ]
+  }, {
     version: "5.7.0",
     list: [
       "Added Include option for each Item in Equipment."
