@@ -2156,12 +2156,14 @@ label {
 
 @media (min-width: 550px) {
   .l-section {
-    margin: 1em auto 0;
+    margin: 0 auto;
+    padding-top: 1em;
     width: calc(100% - 2em); } }
 
 @media (min-width: 700px) {
   .l-section {
-    margin: 2em auto 0;
+    margin: 0 auto;
+    padding-top: 2em;
     width: calc(100% - 4em); } }
 
 @media (min-width: 900px) {
@@ -5709,11 +5711,11 @@ label {
 
 .m-tab-indicator {
   background-color: #ffffff;
-  width: 1em;
+  width: 10em;
   height: 8px;
   position: absolute;
   bottom: -3px;
-  left: 0;
+  left: calc(50% - 5em);
   z-index: 2;
   pointer-events: none;
   border-radius: 2px 2px 0 0;
