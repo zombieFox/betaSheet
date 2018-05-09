@@ -2514,6 +2514,10 @@ label {
   .m-demo .m-card {
     border-width: 2px; } }
 
+@media print {
+  .m-demo {
+    display: none; } }
+
 .m-auto-suggest {
   position: relative;
   z-index: 1;
@@ -5711,11 +5715,11 @@ label {
 
 .m-tab-indicator {
   background-color: #ffffff;
-  width: 10em;
+  width: 2em;
   height: 8px;
   position: absolute;
   bottom: -3px;
-  left: calc(50% - 5em);
+  left: calc(50% - 1em);
   z-index: 2;
   pointer-events: none;
   border-radius: 2px 2px 0 0;
@@ -7543,7 +7547,9 @@ h3 .m-display-value {
     -webkit-column-break-inside: avoid;
             break-inside: avoid; }
   .m-display-image-wrapper {
-    box-shadow: none; }
+    box-shadow: none;
+    margin: 0 auto 1em;
+    border: 1px solid #000000; }
   [class*="m-display-list"] .m-display-list-item,
   [class^="m-display-list"] .m-display-list-item {
     padding: 0; }
@@ -7553,7 +7559,12 @@ h3 .m-display-value {
   .m-display-list-spell .m-display-list-item-spell {
     padding: 0; }
   .m-display-list-attack .m-display-list-item-attack {
-    padding: 0; } }
+    padding: 0; }
+  .m-display-list-item-attack-equipped {
+    background-color: transparent;
+    border-width: 1px;
+    border-color: #adadad;
+    color: #000000; } }
 
 .m-placeholder {
   background-color: #fafafa;
